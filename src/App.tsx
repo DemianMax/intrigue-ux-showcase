@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -11,6 +10,7 @@ import ProjectCaseFintechSimplifica from "./pages/ProjectCaseFintechSimplifica";
 const queryClient = new QueryClient();
 
 const App = () => (
+  // Roteamento reduzido: só Index e NotFound, pois Home agora é one-page
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
@@ -18,8 +18,6 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/projects/fintech-simplifica" element={<ProjectCaseFintechSimplifica />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
