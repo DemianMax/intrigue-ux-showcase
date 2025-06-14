@@ -68,9 +68,9 @@ const Index = () => {
         y: 0
       }} transition={{
         duration: 0.8
-      }} className="text-4xl sm:text-5xl md:text-6xl font-playfair font-bold text-center text-brand-dark leading-tight">
+      }} className="text-4xl sm:text-5xl font-playfair font-bold text-center text-brand-dark leading-tight my-0 md:text-6xl">
           {"UX: encontrar respostas ou fazer as perguntas certas?"}
-          <motion.span className="block h-1 w-16 mx-auto mt-2 rounded-full bg-brand-accent" initial={{
+          <motion.span initial={{
           scaleX: 0
         }} animate={{
           scaleX: 1
@@ -80,7 +80,7 @@ const Index = () => {
           type: "spring"
         }} style={{
           transformOrigin: "left"
-        }} />
+        }} className="block h-1 w-16 mx-auto mt-2 rounded-full bg-brand-accent my-[30px]" />
         </motion.h1>
         <AnimatePresence>
           <motion.p initial={{
@@ -114,7 +114,7 @@ const Index = () => {
         delay: 0.2,
         duration: 0.5
       }} className="w-28 h-28 rounded-full border-4 border-brand-accent shadow-lg mb-3 object-cover" src="/lovable-uploads/1f92fddb-352c-44f3-a639-ab30f54cd665.jpg" />
-        <h2 className="font-playfair text-2xl text-brand-dark font-bold mb-2">Muito prazer, sou [Seu Nome]</h2>
+        <h2 className="font-playfair text-2xl text-brand-dark font-bold mb-2">Muito prazer, sou Max Demian</h2>
         <p className="text-lg text-brand-dark text-center">
           Designer apaixonado por criar experiências <span className="font-bold text-brand-accent">intuitivas e envolventes</span>.
           Entrego mais do que telas bonitas: pesquiso, facilito, crio soluções visuais e estratégias focadas nas pessoas.<br />
@@ -124,7 +124,7 @@ const Index = () => {
 
       {/* Projetos */}
       <section ref={projectsRef} className="w-full max-w-6xl mx-auto px-4 py-12" id="projetos">
-        <h3 className="text-3xl font-playfair font-bold text-brand-dark mb-10 text-center">Projetos Selecionados</h3>
+        <h3 className="text-3xl font-playfair font-bold text-brand-dark mb-10 text-center">Um pouco de UX e UI</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map(project => <motion.div key={project.id} initial={{
           opacity: 0,
