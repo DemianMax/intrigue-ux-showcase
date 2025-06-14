@@ -7,6 +7,7 @@ const projects = [{
   title: "Fintech Simplifica",
   role: "UX Lead & UI Designer",
   short: "Redesenhei o onboarding para triplicar a conversão de usuários em serviços financeiros.",
+  hashtags: ["#onboarding", "#fintech", "#mobile"],
   image: "/placeholder.svg",
   caseStudy: {
     challenge: "Usuários enfrentavam frustração e abandono ao tentar abrir conta; processos longos e confusos bloqueavam conversão.",
@@ -126,18 +127,25 @@ const Index = () => {
       <section ref={projectsRef} className="w-full max-w-6xl mx-auto px-4 py-12" id="projetos">
         <h3 className="text-3xl font-playfair font-bold text-brand-dark mb-10 text-center">Um pouco de UX e UI</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map(project => <motion.div key={project.id} initial={{
-          opacity: 0,
-          y: 30
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} viewport={{
-          once: true
-        }} transition={{
-          duration: 0.6,
-          delay: 0.1
-        }} className="relative bg-card rounded-2xl shadow-md flex flex-col items-center p-5 group">
+          {projects.map(project => (
+            <motion.div key={project.id} 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="relative bg-card rounded-2xl shadow-md flex flex-col items-center p-5 group">
+              {/* Hashtags dos projetos */}
+              <div className="flex flex-wrap gap-2 mb-2">
+                {project.hashtags && project.hashtags.map((tag, idx) => (
+                  <span
+                    key={idx}
+                    className="text-[0.85rem] font-semibold text-brand-accent bg-brand-accent/10 rounded-full px-2 py-0.5 tracking-tight"
+                    style={{ fontFamily: 'Inter, sans-serif', letterSpacing: '0.01em' }}
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
               <img src={project.image} alt={`Thumbnail do projeto ${project.title}`} className="w-full h-40 object-cover rounded-xl border border-border mb-5 transition group-hover:scale-105" />
               <h4 className="font-playfair text-xl font-semibold text-brand-dark mb-1">{project.title}</h4>
               <div className="text-brand-accent font-semibold text-sm mb-1">{project.role}</div>
@@ -181,7 +189,8 @@ const Index = () => {
                   </div>
                 </DialogContent>
               </Dialog>
-            </motion.div>)}
+            </motion.div>
+          ))}
         </div>
       </section>
 
