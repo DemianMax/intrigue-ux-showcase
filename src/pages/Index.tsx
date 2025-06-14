@@ -102,7 +102,7 @@ const Index = () => {
       {/* Sobre Mim */}
       <section ref={aboutRef} className="w-full max-w-4xl mx-auto px-5 py-20 flex flex-col items-center gap-5" id="sobre">
         <motion.img
-          src="/placeholder.svg"
+          src="/lovable-uploads/00b6d85a-1c9d-4ff3-9e87-35129b65ec78.png"
           alt="Foto de perfil profissional"
           className="w-28 h-28 object-cover rounded-full border-4 border-brand-accent shadow-lg mb-3"
           initial={{ scale: 0.7, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.2, duration: 0.5 }}
