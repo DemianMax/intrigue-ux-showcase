@@ -32,6 +32,9 @@ const PortfolioSection = () => {
     queryFn: fetchPortfolioItems,
   });
 
+  // Pegue apenas os 6 primeiros itens para exibir na grade
+  const previewItems = portfolioItems ? portfolioItems.slice(0, 6) : [];
+
   return (
     <section
       id="portfolio"
@@ -50,9 +53,9 @@ const PortfolioSection = () => {
           <span className="text-destructive">Falha ao carregar portfólio.</span>
         </div>
       ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5 w-full">
-          {portfolioItems && portfolioItems.length > 0 ? (
-            portfolioItems.map((item) => (
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-5 w-full">
+          {previewItems && previewItems.length > 0 ? (
+            previewItems.map((item) => (
               <a
                 key={item.id}
                 href={item.link}
@@ -90,3 +93,4 @@ const PortfolioSection = () => {
 };
 
 export default PortfolioSection;
+
