@@ -2,10 +2,6 @@
 import {
   Figma,
   Framer,
-  Photoshop,
-  Illustrator,
-  AfterEffects,
-  Sketch,
   Pencil,
   Play,
   Headphones,
@@ -13,17 +9,22 @@ import {
   LayoutDashboard,
   Text,
   Square,
+  Image,     // substituto para Photoshop
+  PenSquare, // substituto para Illustrator
+  Film,      // substituto para After Effects
+  PenLine    // substituto para Sketch
 } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { Separator } from "@/components/ui/separator";
 
+// Substitutos adequados disponíveis no Lucide
 const softwares = [
   { name: "Figma", icon: Figma },
   { name: "Framer", icon: Framer },
-  { name: "Photoshop", icon: Photoshop },
-  { name: "Illustrator", icon: Illustrator },
-  { name: "After Effects", icon: AfterEffects },
-  { name: "Sketch", icon: Sketch },
+  { name: "Photoshop", icon: Image },
+  { name: "Illustrator", icon: PenSquare },
+  { name: "After Effects", icon: Film },
+  { name: "Sketch", icon: PenLine },
 ];
 
 const habilidades = [
