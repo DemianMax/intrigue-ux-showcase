@@ -1,3 +1,4 @@
+
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import React from "react";
@@ -40,7 +41,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
       delay: 0.7,
       duration: 0.7
     }} className="max-w-xl text-2xl text-brand-dark/80 font-inter font-light text-left">
-        {"Eu projeto para provocar reflexão — experiências que conectam intenção, usabilidade e desejo."}
+        {"Eu projeto o invisível para experiências que conectam."}
       </motion.p>
     </AnimatePresence>
     <motion.button onClick={onScrollToAbout} className="absolute left-1/2 -translate-x-1/2 bottom-10 animate-bounce bg-brand-accent/10 hover:bg-brand-accent/20 rounded-full p-2 transition outline-none ring-0 ring-brand-accent/50" aria-label="Role para baixo">
