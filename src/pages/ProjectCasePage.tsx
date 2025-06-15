@@ -10,6 +10,9 @@ import { Project } from '@/types/project';
 import { Skeleton } from '@/components/ui/skeleton';
 
 const fetchProjectById = async (projectId: string): Promise<Project | null> => {
+  if (!supabase) {
+    return null;
+  }
   const { data, error } = await supabase
     .from('projects')
     .select('*')
@@ -36,13 +39,31 @@ const ProjectCasePage = () => {
   const { data: project, isLoading, isError } = useQuery<Project | null>({
     queryKey: ['project', projectId],
     queryFn: () => fetchProjectById(projectId!),
-    enabled: !!projectId,
+    enabled: !!projectId && !!supabase,
   });
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   
+  if (!supabase) {
+    return (
+       <div className="bg-background min-h-screen py-10 px-5 lg:px-32 flex flex-col items-center justify-center">
+         <div className="text-center p-6 bg-amber-50 border border-amber-200 text-amber-700 rounded-lg max-w-md w-full">
+           <h2 className="text-2xl font-playfair font-bold mb-2">Supabase não configurado</h2>
+           <p className="mb-4">Por favor, configure a integração com o Supabase para carregar os detalhes do projeto.</p>
+           <button
+             className="flex items-center mx-auto px-5 py-2 rounded-full bg-brand-accent text-white font-semibold shadow hover:bg-brand-dark/90 transition"
+             onClick={() => navigate("/")}
+           >
+             <ChevronRight size={18} className="rotate-180 mr-1" />
+             Voltar
+           </button>
+         </div>
+       </div>
+    );
+  }
+
   if (isLoading) {
     return (
       <div className="bg-background min-h-screen py-10 px-5 lg:px-32 flex flex-col items-start">

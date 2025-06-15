@@ -8,6 +8,9 @@ import { Project } from "@/types/project";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const fetchProjects = async (): Promise<Project[]> => {
+  if (!supabase) {
+    return [];
+  }
   const { data, error } = await supabase
     .from('projects')
     .select('*')
@@ -24,7 +27,8 @@ const ProjectsGrid: React.FC = () => {
   const { t } = useLanguage();
   const { data: projects, isLoading, isError } = useQuery<Project[]>({
     queryKey: ['projects'],
-    queryFn: fetchProjects
+    queryFn: fetchProjects,
+    enabled: !!supabase,
   });
 
   return (
@@ -46,15 +50,29 @@ const ProjectsGrid: React.FC = () => {
           ))}
         </div>
       )}
+      
+      {!supabase && (
+         <div className="text-center p-4 bg-amber-50 border border-amber-200 text-amber-700 rounded-lg">
+           Por favor, configure a integração com o Supabase para carregar os projetos.
+         </div>
+      )}
 
       {isError && <p className="text-center text-red-500">Falha ao carregar projetos.</p>}
       
-      {!isLoading && !isError && (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {projects?.map(project => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
-        </div>
+      {!isLoading && !isError && supabase && (
+        <>
+          {projects && projects.length > 0 ? (
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {projects.map(project => (
+                <ProjectCard key={project.id} project={project} />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center p-4 bg-sky-50 border border-sky-200 text-sky-700 rounded-lg">
+                Nenhum projeto encontrado. Adicione projetos no seu painel Supabase.
+            </div>
+          )}
+        </>
       )}
     </section>
   );
