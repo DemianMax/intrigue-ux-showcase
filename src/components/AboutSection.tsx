@@ -10,7 +10,7 @@ const AboutSection = React.forwardRef<HTMLDivElement>((props, ref) => <section r
   }} transition={{
     delay: 0.2,
     duration: 0.5
-  }} src="/lovable-uploads/b5362a7a-ef6f-46c7-ac27-99fa2fcde1f1.jpg" className="w-44 h-80  border-2 border-brand-accent shadow-lg mb-3 object-cover" />
+  }} src="/lovable-uploads/b5362a7a-ef6f-46c7-ac27-99fa2fcde1f1.jpg" className="w-44 h-80  round border-2 border-brand-accent shadow-lg mb-3 object-cover" />
     <h2 className="font-playfair text-2xl text-brand-dark font-bold mb-2">Muito prazer, sou Max Demian</h2>
     <p className="text-lg text-brand-dark text-center">
       Designer apaixonado por criar experiências <span className="font-bold text-brand-accent">intuitivas e envolventes</span>.
