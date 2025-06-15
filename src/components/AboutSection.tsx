@@ -1,4 +1,3 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 const AboutSection = React.forwardRef<HTMLDivElement>((props, ref) => <section ref={ref} className="w-full max-w-6xl mx-auto px-5 py-20" id="sobre">
@@ -23,7 +22,7 @@ const AboutSection = React.forwardRef<HTMLDivElement>((props, ref) => <section r
         <p className="text-lg text-brand-dark leading-relaxed">
           Designer apaixonado por criar experiências <span className="font-bold text-brand-accent">intuitivas e envolventes</span>.
           Entrego mais do que telas bonitas: pesquiso, facilito, crio soluções visuais e estratégias focadas nas pessoas.<br /><br />
-          Minhas habilidades em ilustração/infografia <span className="text-brand-accent font-medium">tornam complexo em simples visível</span>, potencializando meus projetos de UX.
+          Minhas habilidades em ilustração/infografia <span className="text-brand-accent font-medium">tornam o complexo em simples visível</span>, potencializando meus projetos de UX.
         </p>
       </div>
     </div>

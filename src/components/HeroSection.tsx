@@ -15,7 +15,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
     y: 0
   }} transition={{
     duration: 0.8
-  }} className="text-4xl sm:text-5xl font-playfair font-bold text-center text-brand-dark leading-tight my-0 md:text-6xl px-[10px]">
+  }} className="text-4xl sm:text-5xl font-playfair font-bold text-brand-dark leading-tight my-0 px-[10px] text-left md:text-7xl">
       {"UX: encontrar respostas ou fazer as perguntas certas?"}
       <motion.span initial={{
       scaleX: 0
@@ -39,7 +39,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
     }} transition={{
       delay: 0.7,
       duration: 0.7
-    }} className="max-w-xl text-2xl text-brand-dark/80 text-center font-inter font-light">
+    }} className="max-w-xl text-2xl text-brand-dark/80 font-inter font-light text-left">
         {"Eu projeto para provocar reflexão — experiências que conectam intenção, usabilidade e desejo."}
       </motion.p>
     </AnimatePresence>
