@@ -1,4 +1,3 @@
-
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import React from "react";
@@ -7,7 +6,7 @@ interface HeroSectionProps {
 }
 const HeroSection: React.FC<HeroSectionProps> = ({
   onScrollToAbout
-}) => <section className="min-h-[100dvh] flex flex-col justify-center items-center gap-8 relative pt-24 sm:pt-28">
+}) => <section className="min-h-[100dvh] flex flex-col justify-center items-center gap-8 relative pt-24 sm:pt-28 px-[20px]">
     <motion.h1 initial={{
     opacity: 0,
     y: 24
