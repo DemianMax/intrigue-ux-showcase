@@ -30,6 +30,8 @@ export const translations = {
     caseStudyResults: 'Resultados & Aprendizados',
     caseStudyNextSteps: 'Próximos passos:',
     caseStudyClose: 'Fechar',
+    projectProblem: 'Problema',
+    projectSolution: 'Solução',
   },
   en: {
     navHome: 'Home',
@@ -61,5 +63,7 @@ export const translations = {
     caseStudyResults: 'Results & Learnings',
     caseStudyNextSteps: 'Next steps:',
     caseStudyClose: 'Close',
+    projectProblem: 'Problem',
+    projectSolution: 'Solution',
   }
 };

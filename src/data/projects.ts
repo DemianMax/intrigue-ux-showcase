@@ -3,7 +3,8 @@ export interface Project {
   id: string;
   title: string;
   role: string;
-  short: string;
+  problem: string;
+  solution: string;
   hashtags?: string[];
   image: string;
   caseStudy: {
@@ -22,7 +23,8 @@ export const projects: Project[] = [
     id: "fintech-simplifica",
     title: "Fintech Simplifica",
     role: "UX Lead & UI Designer",
-    short: "Redesenhei o onboarding para triplicar a conversão de usuários em serviços financeiros.",
+    problem: "Processo de onboarding longo e confuso, resultando em alta taxa de abandono de usuários.",
+    solution: "Redesenhei o fluxo de cadastro, o que triplicou a conversão de novos usuários em serviços financeiros.",
     hashtags: ["#onboarding", "#fintech", "#mobile"],
     image: "/placeholder.svg",
     caseStudy: {
@@ -47,7 +49,8 @@ export const projects: Project[] = [
     id: "app-delivery-ui",
     title: "App Delivery UI",
     role: "UI Designer",
-    short: "Interface redesenhada focando clareza de fluxo e feedback visual instantâneo ao usuário.",
+    problem: "A interface anterior gerava dúvidas e solicitações excessivas no suporte ao cliente.",
+    solution: "Redesenhei a interface com foco na clareza do fluxo, o que reduziu em 38% os tickets de suporte.",
     hashtags: ["#delivery", "#ui", "#designsystem"],
     image: "/placeholder.svg",
     caseStudy: {
@@ -72,7 +75,8 @@ export const projects: Project[] = [
     id: "ecommerce-dashboard",
     title: "E-commerce Dashboard",
     role: "UX/UI Designer",
-    short: "Novo dashboard para gerenciamento de vendas com dados visuais e navegação simplificada.",
+    problem: "Diretores e gerentes tinham dificuldade em encontrar KPIs essenciais de forma rápida para tomada de decisão.",
+    solution: "Criei um novo dashboard focado em visualização de dados e navegação simplificada, agilizando as decisões.",
     hashtags: ["#dashboard", "#ecommerce", "#uxresearch"],
     image: "/placeholder.svg",
     caseStudy: {
@@ -97,7 +101,8 @@ export const projects: Project[] = [
     id: "landingpage-campanha",
     title: "Landing Page Campanha",
     role: "UX Designer",
-    short: "Landing com experiência persuasiva para campanha de inscrição — foco: storytelling visual.",
+    problem: "A página da campanha de marketing possuía uma taxa de conversão abaixo da meta esperada.",
+    solution: "Desenvolvi uma landing page com foco em storytelling visual, que aumentou a conversão em 24%.",
     hashtags: ["#landingpage", "#storytelling", "#a11y"],
     image: "/placeholder.svg",
     caseStudy: {

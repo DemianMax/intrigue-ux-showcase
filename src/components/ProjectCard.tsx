@@ -20,35 +20,41 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, openCase, setOpenCas
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay: 0.1 }}
-      className="relative bg-card rounded-2xl shadow-md flex flex-col items-center p-4 group"
-      style={{ minHeight: 420, maxWidth: 210 }}
+      className="relative bg-card rounded-2xl shadow-md flex flex-col group overflow-hidden"
     >
       <img
         src={project.image}
         alt={`Thumbnail do projeto ${project.title}`}
-        className="w-full h-24 object-cover rounded-xl border border-border mb-4 transition group-hover:scale-105"
-        style={{ maxWidth: "140px" }}
+        className="w-full h-40 object-cover transition duration-300 group-hover:scale-105"
       />
-      <h4 className="font-playfair text-lg font-semibold text-brand-dark mb-1 mt-1 text-center">{project.title}</h4>
-      <div className="text-brand-accent font-semibold text-xs mb-1">{project.role}</div>
-      <p className="text-sm text-brand-dark/70 mb-2 text-center">{project.short}</p>
-      <div className="flex flex-wrap justify-center gap-2 mb-3">
-        {project.hashtags?.map((tag, idx) => (
-          <span
-            key={idx}
-            className="text-xs font-semibold text-brand-accent bg-brand-accent/10 rounded-full px-2 py-0.5 tracking-tight"
-            style={{ fontFamily: 'Inter, sans-serif', letterSpacing: '0.01em' }}
-          >
-            {tag}
-          </span>
-        ))}
+      <div className="p-4 flex flex-col flex-grow">
+        <h4 className="font-playfair text-lg font-semibold text-brand-dark mb-1">{project.title}</h4>
+        <div className="text-brand-accent font-semibold text-xs mb-3">{project.role}</div>
+
+        <div className="text-sm text-brand-dark/70 mb-4 space-y-2">
+          <p><strong className="font-semibold text-brand-dark">{t('projectProblem')}:</strong> {project.problem}</p>
+          <p><strong className="font-semibold text-brand-dark">{t('projectSolution')}:</strong> {project.solution}</p>
+        </div>
+        
+        <div className="flex flex-wrap gap-2 mb-4">
+          {project.hashtags?.map((tag, idx) => (
+            <span
+              key={idx}
+              className="text-xs font-semibold text-brand-accent bg-brand-accent/10 rounded-full px-2 py-0.5 tracking-tight"
+              style={{ fontFamily: 'Inter, sans-serif', letterSpacing: '0.01em' }}
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+        <button
+          className="mt-auto px-5 py-2 rounded-full bg-brand-accent text-white font-semibold shadow hover:bg-brand-dark/90 transition"
+          onClick={() => setOpenCase(project.id)}
+        >
+          {t('projectCaseStudyButton')}
+        </button>
       </div>
-      <button
-        className="mt-auto px-5 py-2 rounded-full bg-brand-accent text-white font-semibold shadow hover:bg-brand-dark/90 transition"
-        onClick={() => setOpenCase(project.id)}
-      >
-        {t('projectCaseStudyButton')}
-      </button>
+      
       {/* Dialog para Case Study */}
       <Dialog open={openCase === project.id} onOpenChange={open => setOpenCase(open ? project.id : null)}>
         <DialogContent className="max-w-2xl rounded-2xl shadow-2xl p-0 overflow-hidden border-0">
