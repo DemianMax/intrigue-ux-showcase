@@ -46,7 +46,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
         }} transition={{
           delay: 0.7,
           duration: 0.7
-        }} className="max-w-xl text-2xl text-brand-dark/80 font-inter font-light text-left">
+        }} className="text-2xl text-brand-dark/80 font-inter font-light text-left">
             {t('heroSubtitle')}
           </motion.p>
         </AnimatePresence>
