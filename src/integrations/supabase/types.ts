@@ -13,14 +13,14 @@ export type Database = {
         Row: {
           challenge: string | null
           created_at: string
-          hashtags: string[] | null
+          hashtags_text: string | null
           id: string
           image: string
           next_steps: string | null
           problem: string
-          process_images: string[] | null
-          process_legends: string[] | null
-          results: string[] | null
+          process_images_text: string | null
+          process_legends_text: string | null
+          results_text: string | null
           role: string
           solution: string
           solution_image: string | null
@@ -31,14 +31,14 @@ export type Database = {
         Insert: {
           challenge?: string | null
           created_at?: string
-          hashtags?: string[] | null
+          hashtags_text?: string | null
           id?: string
           image: string
           next_steps?: string | null
           problem: string
-          process_images?: string[] | null
-          process_legends?: string[] | null
-          results?: string[] | null
+          process_images_text?: string | null
+          process_legends_text?: string | null
+          results_text?: string | null
           role: string
           solution: string
           solution_image?: string | null
@@ -49,14 +49,14 @@ export type Database = {
         Update: {
           challenge?: string | null
           created_at?: string
-          hashtags?: string[] | null
+          hashtags_text?: string | null
           id?: string
           image?: string
           next_steps?: string | null
           problem?: string
-          process_images?: string[] | null
-          process_legends?: string[] | null
-          results?: string[] | null
+          process_images_text?: string | null
+          process_legends_text?: string | null
+          results_text?: string | null
           role?: string
           solution?: string
           solution_image?: string | null

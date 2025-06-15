@@ -8,9 +8,16 @@ import { useNavigate } from "react-router-dom";
 interface ProjectCardProps {
   project: Project;
 }
+
 const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   const { t } = useLanguage();
   const navigate = useNavigate();
+
+  // Função para converter texto separado por vírgulas em array
+  const parseTextToArray = (text: string | null): string[] => {
+    if (!text) return [];
+    return text.split(',').map(item => item.trim()).filter(item => item.length > 0);
+  };
 
   return (
     <motion.div
@@ -36,7 +43,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         </div>
         
         <div className="flex flex-wrap gap-2 mb-4">
-          {project.hashtags?.map((tag, idx) => (
+          {parseTextToArray(project.hashtags_text).map((tag, idx) => (
             <span
               key={idx}
               className="text-xs font-semibold text-brand-accent bg-brand-accent/10 rounded-full px-2 py-0.5 tracking-tight"

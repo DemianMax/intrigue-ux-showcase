@@ -7,24 +7,22 @@ export type Json =
   | { [key: string]: Json | undefined }
   | Json[];
 
-// A interface CaseStudy não é mais necessária, pois seus campos foram migrados para a interface Project.
-
 export interface Project {
   id: string;
   title: string;
   role: string;
   problem: string;
   solution:string;
-  hashtags: string[] | null;
+  hashtags_text: string | null;
   image: string;
   created_at: string;
   // Campos que antes estavam em 'caseStudy', agora opcionais
   challenge: string | null;
-  process_images: string[] | null;
-  process_legends: string[] | null;
+  process_images_text: string | null;
+  process_legends_text: string | null;
   solution_image: string | null;
   solution_legend: string | null;
   ui_note: string | null;
-  results: string[] | null;
+  results_text: string | null;
   next_steps: string | null;
 }

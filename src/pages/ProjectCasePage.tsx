@@ -39,6 +39,12 @@ const ProjectCasePage = () => {
     enabled: !!projectId,
   });
 
+  // Função para converter texto separado por vírgulas em array
+  const parseTextToArray = (text: string | null): string[] => {
+    if (!text) return [];
+    return text.split(',').map(item => item.trim()).filter(item => item.length > 0);
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -65,6 +71,10 @@ const ProjectCasePage = () => {
   if (isError || !project) {
     return <NotFound />;
   }
+
+  const processImages = parseTextToArray(project.process_images_text);
+  const processLegends = parseTextToArray(project.process_legends_text);
+  const results = parseTextToArray(project.results_text);
 
   return (
     <div className="bg-background min-h-screen py-10 px-5 lg:px-32 flex flex-col items-start">
@@ -95,15 +105,15 @@ const ProjectCasePage = () => {
             </p>
           </section>
         )}
-        {project.process_images && project.process_legends && (
+        {processImages.length > 0 && (
           <section className="mb-12">
             <h3 className="text-2xl font-playfair text-brand-dark mb-5 text-left">{t('caseStudyProcess')}</h3>
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {project.process_images.map((img, index) => (
+              {processImages.map((img, index) => (
                 <div key={index} className="bg-card rounded-xl shadow-md p-4 flex flex-col items-center">
-                  <img src={img} alt={project.process_legends?.[index] ?? `Process image ${index + 1}`} className="w-full h-40 object-cover rounded-md mb-3 border border-border" />
+                  <img src={img} alt={processLegends[index] ?? `Process image ${index + 1}`} className="w-full h-40 object-cover rounded-md mb-3 border border-border" />
                   <div className="text-sm text-brand-dark/80 font-inter text-center">
-                    {project.process_legends?.[index]}
+                    {processLegends[index] ?? `Processo ${index + 1}`}
                   </div>
                 </div>
               ))}
@@ -120,13 +130,13 @@ const ProjectCasePage = () => {
             </div>
           </section>
         )}
-        {(project.results || project.next_steps) && (
+        {(results.length > 0 || project.next_steps) && (
           <section>
-            {project.results && (
+            {results.length > 0 && (
               <>
                 <h3 className="text-2xl font-playfair text-brand-dark mb-2 text-left">{t('caseStudyResults')}</h3>
                 <ul className="mb-4 ml-6 list-disc text-brand-dark/80 font-inter text-left">
-                  {project.results.map((res, idx) => <li key={idx}>{res}</li>)}
+                  {results.map((res, idx) => <li key={idx}>{res}</li>)}
                 </ul>
               </>
             )}
