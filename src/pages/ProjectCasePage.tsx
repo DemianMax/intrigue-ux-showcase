@@ -1,4 +1,3 @@
-
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import NotFound from './NotFound';
@@ -6,7 +5,7 @@ import { ChevronRight } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
-import { Project } from '@/types/project';
+import { Project, CaseStudy } from '@/types/project';
 import { Skeleton } from '@/components/ui/skeleton';
 
 const fetchProjectById = async (projectId: string): Promise<Project | null> => {
@@ -66,6 +65,8 @@ const ProjectCasePage = () => {
     return <NotFound />;
   }
 
+  const caseStudy = project.caseStudy as CaseStudy;
+
   return (
     <div className="bg-background min-h-screen py-10 px-5 lg:px-32 flex flex-col items-start">
       <div className="self-start mb-8 w-full max-w-4xl mx-auto">
@@ -90,13 +91,13 @@ const ProjectCasePage = () => {
         <section className="mb-12">
           <h3 className="text-2xl font-playfair text-brand-dark mb-2 text-left">{t('caseStudyChallenge')}</h3>
           <p className="text-lg text-brand-dark/70 font-inter mb-4 text-left">
-            {project.caseStudy.challenge}
+            {caseStudy.challenge}
           </p>
         </section>
         <section className="mb-12">
           <h3 className="text-2xl font-playfair text-brand-dark mb-5 text-left">{t('caseStudyProcess')}</h3>
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {project.caseStudy.process.map(step => (
+            {caseStudy.process.map(step => (
               <div key={step.legend} className="bg-card rounded-xl shadow-md p-4 flex flex-col items-center">
                 <img src={step.img} alt={step.legend} className="w-full h-40 object-cover rounded-md mb-3 border border-border" />
                 <div className="text-sm text-brand-dark/80 font-inter text-center">
@@ -109,20 +110,20 @@ const ProjectCasePage = () => {
         <section className="mb-12">
           <h3 className="text-2xl font-playfair text-brand-dark mb-2 text-left">{t('caseStudySolution')}</h3>
           <div className="flex flex-col items-center">
-            <img src={project.caseStudy.solutionImg} alt={project.caseStudy.solutionLegend} className="w-full max-w-2xl h-auto object-cover rounded-2xl mb-3 border border-border" />
-            <div className="text-sm text-brand-dark/80 font-inter mb-2 text-center">{project.caseStudy.solutionLegend}</div>
+            <img src={caseStudy.solutionImg} alt={caseStudy.solutionLegend} className="w-full max-w-2xl h-auto object-cover rounded-2xl mb-3 border border-border" />
+            <div className="text-sm text-brand-dark/80 font-inter mb-2 text-center">{caseStudy.solutionLegend}</div>
             <div className="text-base text-brand-dark/70 font-inter text-center mt-4">
-              {project.caseStudy.uiNote}
+              {caseStudy.uiNote}
             </div>
           </div>
         </section>
         <section>
           <h3 className="text-2xl font-playfair text-brand-dark mb-2 text-left">{t('caseStudyResults')}</h3>
           <ul className="mb-4 ml-6 list-disc text-brand-dark/80 font-inter text-left">
-            {project.caseStudy.results.map((res, idx) => <li key={idx}>{res}</li>)}
+            {caseStudy.results.map((res, idx) => <li key={idx}>{res}</li>)}
           </ul>
           <div className="text-base text-brand-dark/70 font-inter mb-3 text-left">
-            <strong>{t('caseStudyNextSteps')}</strong> {project.caseStudy.next}
+            <strong>{t('caseStudyNextSteps')}</strong> {caseStudy.next}
           </div>
         </section>
       </div>
