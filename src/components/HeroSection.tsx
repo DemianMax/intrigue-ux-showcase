@@ -1,3 +1,4 @@
+
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import React from "react";
@@ -16,7 +17,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
   }} transition={{
     duration: 0.8
   }} className="text-4xl sm:text-5xl font-playfair font-bold text-brand-dark leading-tight my-0 text-left md:text-7xl px-0">
-      {"UX: encontrar respostas ou fazer as perguntas certas?"}
+      <span className="text-brand-accent">UX</span>{": encontrar respostas ou fazer as perguntas certas?"}
       <motion.span initial={{
       scaleX: 0
     }} animate={{
