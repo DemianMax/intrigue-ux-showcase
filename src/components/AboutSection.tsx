@@ -1,32 +1,22 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-
-const AboutSection = React.forwardRef<HTMLDivElement>((props, ref) => (
-  <section ref={ref} className="w-full max-w-6xl mx-auto px-5 py-20" id="sobre">
+const AboutSection = React.forwardRef<HTMLDivElement>((props, ref) => <section ref={ref} className="w-full max-w-6xl mx-auto px-5 py-20" id="sobre">
     <div className="flex flex-col md:flex-row items-center gap-10">
       {/* Foto à esquerda */}
       <div className="flex-shrink-0">
-        <motion.img
-          alt="Foto de perfil profissional"
-          initial={{
-            scale: 0.7,
-            opacity: 0,
-          }}
-          animate={{
-            scale: 1,
-            opacity: 1,
-          }}
-          transition={{
-            delay: 0.2,
-            duration: 0.5,
-          }}
-          src="/lovable-uploads/b5362a7a-ef6f-46c7-ac27-99fa2fcde1f1.jpg"
-          className="w-40 h-40 rounded-full border-4 border-brand-accent shadow-lg object-cover"
-        />
+        <motion.img alt="Foto de perfil profissional" initial={{
+        scale: 0.7,
+        opacity: 0
+      }} animate={{
+        scale: 1,
+        opacity: 1
+      }} transition={{
+        delay: 0.2,
+        duration: 0.5
+      }} src="/lovable-uploads/b5362a7a-ef6f-46c7-ac27-99fa2fcde1f1.jpg" className="w-40 h-80 rounded-full border-4 border-brand-accent shadow-lg object-cover" />
       </div>
 
       {/* Texto à direita */}
@@ -50,16 +40,12 @@ const AboutSection = React.forwardRef<HTMLDivElement>((props, ref) => (
           , potencializando meus projetos de UX.
         </p>
         <Link to="/curriculo">
-          <Button
-            size="lg"
-            className="bg-brand-accent hover:bg-brand-accent/90 text-white font-semibold"
-          >
+          <Button size="lg" className="bg-brand-accent hover:bg-brand-accent/90 text-white font-semibold">
             Veja meu currículo
             <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
         </Link>
       </div>
     </div>
-  </section>
-));
+  </section>);
 export default AboutSection;
