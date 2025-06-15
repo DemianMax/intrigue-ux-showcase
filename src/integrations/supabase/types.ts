@@ -11,37 +11,58 @@ export type Database = {
     Tables: {
       projects: {
         Row: {
-          caseStudy: Json
+          challenge: string
           created_at: string
           hashtags: string[] | null
           id: string
           image: string
+          next_steps: string
           problem: string
+          process_images: string[]
+          process_legends: string[]
+          results: string[]
           role: string
           solution: string
+          solution_image: string
+          solution_legend: string
           title: string
+          ui_note: string
         }
         Insert: {
-          caseStudy: Json
+          challenge: string
           created_at?: string
           hashtags?: string[] | null
           id?: string
           image: string
+          next_steps: string
           problem: string
+          process_images: string[]
+          process_legends: string[]
+          results: string[]
           role: string
           solution: string
+          solution_image: string
+          solution_legend: string
           title: string
+          ui_note: string
         }
         Update: {
-          caseStudy?: Json
+          challenge?: string
           created_at?: string
           hashtags?: string[] | null
           id?: string
           image?: string
+          next_steps?: string
           problem?: string
+          process_images?: string[]
+          process_legends?: string[]
+          results?: string[]
           role?: string
           solution?: string
+          solution_image?: string
+          solution_legend?: string
           title?: string
+          ui_note?: string
         }
         Relationships: []
       }
