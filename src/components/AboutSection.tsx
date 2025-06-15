@@ -27,7 +27,7 @@ const AboutSection = React.forwardRef<HTMLDivElement>((props, ref) => (
       </div>
       
       {/* Texto à direita */}
-      <div className="flex-1 text-right">
+      <div className="flex-1 text-left">
         <h2 className="font-playfair text-3xl text-brand-dark font-bold mb-6">Muito prazer, sou Max Demian</h2>
         <p className="text-lg text-brand-dark leading-relaxed">
           Designer apaixonado por criar experiências <span className="font-bold text-brand-accent">intuitivas e envolventes</span>.
