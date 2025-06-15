@@ -9,10 +9,10 @@ import {
   LayoutDashboard,
   Text,
   Square,
-  Image,     // substituto para Photoshop
+  Image, // substituto para Photoshop
   PenSquare, // substituto para Illustrator
-  Film,      // substituto para After Effects
-  PenLine    // substituto para Sketch
+  Film, // substituto para After Effects
+  PenLine // substituto para Sketch
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 
@@ -60,7 +60,7 @@ export default function TechnicalSkillsSection() {
           {softwares.map(({ name, icon: Icon }) => (
             <div key={name} className="flex flex-col items-center w-20">
               <Icon size={36} className="text-brand-accent mb-1" />
-              <span className="text-sm text-muted-foreground">{name}</span>
+              <span className="text-sm text-muted-foreground text-center">{name}</span>
             </div>
           ))}
         </div>
@@ -73,11 +73,11 @@ export default function TechnicalSkillsSection() {
       {/* Parte 2: Habilidades */}
       <div>
         <h3 className="text-xl font-semibold mb-3 text-brand-dark">Habilidades</h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-4 py-2">
           {habilidades.map(({ name, icon: Icon }) => (
-            <div key={name} className="flex items-center gap-3">
-              <Icon size={28} className="text-brand-accent shrink-0" />
-              <span className="font-medium text-sm">{name}</span>
+            <div key={name} className="flex flex-col items-center w-20">
+              <Icon size={36} className="text-brand-accent mb-1" />
+              <span className="text-sm text-muted-foreground text-center">{name}</span>
             </div>
           ))}
         </div>
@@ -90,11 +90,11 @@ export default function TechnicalSkillsSection() {
       {/* Parte 3: Conhecimentos */}
       <div>
         <h3 className="text-xl font-semibold mb-3 text-brand-dark">Conhecimentos</h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-4 py-2">
           {conhecimentos.map(({ name, icon: Icon }) => (
-            <div key={name} className="flex items-center gap-3">
-              <Icon size={28} className="text-brand-accent shrink-0" />
-              <span className="font-medium text-sm">{name}</span>
+            <div key={name} className="flex flex-col items-center w-32">
+              <Icon size={36} className="text-brand-accent mb-1" />
+              <span className="text-sm text-muted-foreground text-center">{name}</span>
             </div>
           ))}
         </div>
@@ -102,4 +102,3 @@ export default function TechnicalSkillsSection() {
     </section>
   );
 }
-
