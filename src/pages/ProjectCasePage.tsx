@@ -141,6 +141,11 @@ const ProjectCasePage = () => {
               <li className="cursor-pointer hover:text-brand-accent transition" onClick={handleScrollToTop}>{t('navAbout')}</li>
               <li className="cursor-pointer hover:text-brand-accent transition" onClick={handleScrollToTop}>{t('navProjects')}</li>
               <li className="cursor-pointer hover:text-brand-accent transition" onClick={handleScrollToTop}>{t('navContact')}</li>
+              <li>
+                <a href="/resume" className="cursor-pointer hover:text-brand-accent transition font-semibold text-base">
+                  Currículo
+                </a>
+              </li>
             </ul>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -175,6 +180,11 @@ const ProjectCasePage = () => {
                   <li className="cursor-pointer hover:text-brand-accent transition" onClick={handleScrollToTop}>{t('navAbout')}</li>
                   <li className="cursor-pointer hover:text-brand-accent transition" onClick={handleScrollToTop}>{t('navProjects')}</li>
                   <li className="cursor-pointer hover:text-brand-accent transition" onClick={handleScrollToTop}>{t('navContact')}</li>
+                  <li>
+                    <a href="/resume" className="cursor-pointer hover:text-brand-accent transition font-semibold text-lg" onClick={() => setIsSheetOpen(false)}>
+                      Currículo
+                    </a>
+                  </li>
                 </ul>
                 <div className="border-t border-border mt-8 pt-6">
                    <h3 className="px-2 py-1.5 text-sm font-semibold text-muted-foreground">{t('selectLanguage')}</h3>
