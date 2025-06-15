@@ -1,53 +1,37 @@
 
 import React from "react";
 import { Button } from "@/components/ui/button";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 
-const portfolioItems = [
-  {
-    img: "/public/lovable-uploads/photo-1488590528505-98d2b5aba04b",
-    alt: "Laptop workspace designer",
-    link: "https://www.behance.net/maxdemian/project1",
-  },
-  {
-    img: "/public/lovable-uploads/photo-1461749280684-dccba630e2f6",
-    alt: "Java code on monitor",
-    link: "https://www.behance.net/maxdemian/project2",
-  },
-  {
-    img: "/public/lovable-uploads/photo-1486312338219-ce68d2c6f44d",
-    alt: "Person using MacBook Pro",
-    link: "https://www.behance.net/maxdemian/project3",
-  },
-  {
-    img: "/public/lovable-uploads/photo-1581091226825-a6a2a5aee158",
-    alt: "Woman using laptop",
-    link: "https://www.behance.net/maxdemian/project4",
-  },
-  {
-    img: "/public/lovable-uploads/photo-1487058792275-0ad4aaf24ca7",
-    alt: "Monitor with code",
-    link: "https://www.behance.net/maxdemian/project5",
-  },
-  {
-    img: "/public/lovable-uploads/photo-1498050108023-c5249f4df085",
-    alt: "MacBook with code",
-    link: "https://www.behance.net/maxdemian/project6",
-  },
-  {
-    img: "/public/lovable-uploads/1f92fddb-352c-44f3-a639-ab30f54cd665.jpg",
-    alt: "Design mockup",
-    link: "https://www.behance.net/maxdemian/project7",
-  },
-  {
-    img: "/public/lovable-uploads/b5362a7a-ef6f-46c7-ac27-99fa2fcde1f1.jpg",
-    alt: "Brand identity",
-    link: "https://www.behance.net/maxdemian/project8",
-  },
-];
+type PortfolioItem = {
+  id: string;
+  img: string;
+  alt: string;
+  link: string;
+};
 
 const behanceLink = "https://www.behance.net/maxdemian/";
 
+async function fetchPortfolioItems(): Promise<PortfolioItem[]> {
+  const { data, error } = await supabase
+    .from("portfolio_items")
+    .select("id, img, alt, link")
+    .order("created_at", { ascending: true });
+
+  if (error) {
+    console.error(error);
+    throw new Error("Falha ao carregar portfólio.");
+  }
+  return data ?? [];
+}
+
 const PortfolioSection = () => {
+  const { data: portfolioItems, isLoading, error } = useQuery({
+    queryKey: ["portfolio_items"],
+    queryFn: fetchPortfolioItems,
+  });
+
   return (
     <section
       id="portfolio"
@@ -56,25 +40,43 @@ const PortfolioSection = () => {
       <h2 className="text-3xl md:text-4xl font-bold font-playfair text-brand-dark mb-8 text-center">
         Portfólio
       </h2>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5 w-full">
-        {portfolioItems.map((item, idx) => (
-          <a
-            key={idx}
-            href={item.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block rounded-lg overflow-hidden shadow group"
-            aria-label={item.alt}
-          >
-            <img
-              src={item.img}
-              alt={item.alt}
-              className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-200"
-              loading="lazy"
-            />
-          </a>
-        ))}
-      </div>
+
+      {isLoading ? (
+        <div className="w-full py-20 flex justify-center items-center">
+          <span className="text-muted-foreground text-lg">Carregando...</span>
+        </div>
+      ) : error ? (
+        <div className="w-full py-20 flex justify-center items-center">
+          <span className="text-destructive">Falha ao carregar portfólio.</span>
+        </div>
+      ) : (
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5 w-full">
+          {portfolioItems && portfolioItems.length > 0 ? (
+            portfolioItems.map((item) => (
+              <a
+                key={item.id}
+                href={item.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block rounded-lg overflow-hidden shadow group"
+                aria-label={item.alt}
+              >
+                <img
+                  src={item.img}
+                  alt={item.alt}
+                  className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-200"
+                  loading="lazy"
+                />
+              </a>
+            ))
+          ) : (
+            <div className="col-span-full text-center text-muted-foreground py-8">
+              Nenhum item de portfólio cadastrado.
+            </div>
+          )}
+        </div>
+      )}
+
       <Button
         asChild
         className="mt-10 px-8 py-4 rounded-full text-lg font-semibold bg-brand-accent text-white hover:bg-orange-600 transition-all shadow hover:scale-105"

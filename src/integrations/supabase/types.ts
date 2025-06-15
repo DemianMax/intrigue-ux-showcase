@@ -42,6 +42,30 @@ export type Database = {
         }
         Relationships: []
       }
+      portfolio_items: {
+        Row: {
+          alt: string
+          created_at: string
+          id: string
+          img: string
+          link: string
+        }
+        Insert: {
+          alt: string
+          created_at?: string
+          id?: string
+          img: string
+          link: string
+        }
+        Update: {
+          alt?: string
+          created_at?: string
+          id?: string
+          img?: string
+          link?: string
+        }
+        Relationships: []
+      }
       projects: {
         Row: {
           challenge: string | null
