@@ -23,7 +23,8 @@ async function fetchHabilidadesTecnicas(): Promise<HabilidadeTecnica[]> {
     return [];
   }
   
-  return data || [];
+  // Type assertion para garantir que os dados estão no formato correto
+  return (data || []) as HabilidadeTecnica[];
 }
 
 export function useHabilidadesTecnicas() {
