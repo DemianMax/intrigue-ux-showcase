@@ -42,6 +42,39 @@ export type Database = {
         }
         Relationships: []
       }
+      habilidades_tecnicas: {
+        Row: {
+          ativo: boolean | null
+          categoria: string
+          created_at: string | null
+          icone: string
+          id: string
+          nome: string
+          ordem: number | null
+          updated_at: string | null
+        }
+        Insert: {
+          ativo?: boolean | null
+          categoria: string
+          created_at?: string | null
+          icone: string
+          id?: string
+          nome: string
+          ordem?: number | null
+          updated_at?: string | null
+        }
+        Update: {
+          ativo?: boolean | null
+          categoria?: string
+          created_at?: string | null
+          icone?: string
+          id?: string
+          nome?: string
+          ordem?: number | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       portfolio_items: {
         Row: {
           alt: string
