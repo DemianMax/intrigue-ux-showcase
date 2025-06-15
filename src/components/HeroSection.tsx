@@ -15,7 +15,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
     y: 0
   }} transition={{
     duration: 0.8
-  }} className="text-4xl sm:text-5xl font-playfair font-bold text-brand-dark leading-tight my-0 px-[10px] text-left md:text-7xl">
+  }} className="text-4xl sm:text-5xl font-playfair font-bold text-brand-dark leading-tight my-0 text-left md:text-7xl px-0">
       {"UX: encontrar respostas ou fazer as perguntas certas?"}
       <motion.span initial={{
       scaleX: 0
