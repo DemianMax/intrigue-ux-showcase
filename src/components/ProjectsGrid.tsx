@@ -3,14 +3,11 @@ import React from "react";
 import ProjectCard from "./ProjectCard";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useQuery } from "@tanstack/react-query";
-import { supabase } from "@/lib/supabase";
+import { supabase } from "@/integrations/supabase/client";
 import { Project } from "@/types/project";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const fetchProjects = async (): Promise<Project[]> => {
-  if (!supabase) {
-    return [];
-  }
   const { data, error } = await supabase
     .from('projects')
     .select('*')
@@ -28,7 +25,6 @@ const ProjectsGrid: React.FC = () => {
   const { data: projects, isLoading, isError } = useQuery<Project[]>({
     queryKey: ['projects'],
     queryFn: fetchProjects,
-    enabled: !!supabase,
   });
 
   return (
@@ -51,15 +47,9 @@ const ProjectsGrid: React.FC = () => {
         </div>
       )}
       
-      {!supabase && (
-         <div className="text-center p-4 bg-amber-50 border border-amber-200 text-amber-700 rounded-lg">
-           Por favor, configure a integração com o Supabase para carregar os projetos.
-         </div>
-      )}
-
       {isError && <p className="text-center text-red-500">Falha ao carregar projetos.</p>}
       
-      {!isLoading && !isError && supabase && (
+      {!isLoading && !isError && (
         <>
           {projects && projects.length > 0 ? (
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
