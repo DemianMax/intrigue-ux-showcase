@@ -1,4 +1,3 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 
@@ -18,7 +17,7 @@ const AboutSection = React.forwardRef<HTMLDivElement>((props, ref) => (
         delay: 0.2,
         duration: 0.5
       }}
-      className="w-28 h-28 rounded-full border-4 border-brand-accent shadow-lg mb-3 object-cover"
+      className="w-40 h-40 rounded-full border-2 border-brand-accent shadow-lg mb-3 object-cover"
       src="/lovable-uploads/00b6d85a-1c9d-4ff3-9e87-35129b65ec78.png"
     />
     <h2 className="font-playfair text-2xl text-brand-dark font-bold mb-2">Muito prazer, sou Max Demian</h2>
