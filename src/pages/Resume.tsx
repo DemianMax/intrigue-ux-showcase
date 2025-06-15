@@ -1,4 +1,3 @@
-
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -33,13 +32,29 @@ const fetchCurriculo = async (): Promise<Curriculo | null> => {
   if (error) throw new Error("Erro ao buscar currículo.");
   if (!data) return null;
 
-  // Supabase retorna jsonb como objeto padrão
+  // Parse experiencias to type Experiencia[] only if valid
+  let experiencias: Experiencia[] = [];
+  if (Array.isArray(data.experiencias)) {
+    // If the object properties match, assign directly (trusting backend shape)
+    experiencias = data.experiencias as Experiencia[];
+  } else if (typeof data.experiencias === "string") {
+    // If for some reason stored as string, try to parse
+    try {
+      const parsed = JSON.parse(data.experiencias);
+      if (Array.isArray(parsed)) {
+        experiencias = parsed as Experiencia[];
+      }
+    } catch {}
+  }
+
   return {
-    ...data,
-    experiencias: Array.isArray(data.experiencias)
-      ? data.experiencias
-      : [],
-  } as Curriculo;
+    id: data.id,
+    nome: data.nome,
+    titulo: data.titulo,
+    resumo: data.resumo,
+    resumo_profissional: data.resumo_profissional,
+    experiencias: experiencias,
+  };
 };
 
 const Resume = () => {
@@ -144,4 +159,3 @@ const Resume = () => {
 };
 
 export default Resume;
-
