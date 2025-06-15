@@ -1,7 +1,8 @@
+
 import React from "react";
 import { motion } from "framer-motion";
 const AboutSection = React.forwardRef<HTMLDivElement>((props, ref) => <section ref={ref} className="w-full max-w-6xl mx-auto px-5 py-20" id="sobre">
-    <div className="flex flex-col lg:flex-row items-center gap-10">
+    <div className="flex flex-row items-start md:items-center gap-6 md:gap-10">
       {/* Foto à esquerda */}
       <div className="flex-shrink-0">
         <motion.img alt="Foto de perfil profissional" initial={{
@@ -13,7 +14,7 @@ const AboutSection = React.forwardRef<HTMLDivElement>((props, ref) => <section r
       }} transition={{
         delay: 0.2,
         duration: 0.5
-      }} src="/lovable-uploads/b5362a7a-ef6f-46c7-ac27-99fa2fcde1f1.jpg" className="w-44 h-96 rounded-full border-2 border-brand-accent shadow-lg object-cover" />
+      }} src="/lovable-uploads/b5362a7a-ef6f-46c7-ac27-99fa2fcde1f1.jpg" className="w-28 h-56 sm:w-32 sm:h-64 lg:w-44 lg:h-96 rounded-full border-2 border-brand-accent shadow-lg object-cover" />
       </div>
       
       {/* Texto à direita */}
