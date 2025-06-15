@@ -65,7 +65,7 @@ const ProjectCasePage = () => {
     return <NotFound />;
   }
 
-  const caseStudy = project.caseStudy as CaseStudy;
+  const caseStudy = project.caseStudy as unknown as CaseStudy;
 
   return (
     <div className="bg-background min-h-screen py-10 px-5 lg:px-32 flex flex-col items-start">
