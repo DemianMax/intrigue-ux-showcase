@@ -142,7 +142,7 @@ const ProjectCasePage = () => {
               <li className="cursor-pointer hover:text-brand-accent transition" onClick={handleScrollToTop}>{t('navProjects')}</li>
               <li className="cursor-pointer hover:text-brand-accent transition" onClick={handleScrollToTop}>{t('navContact')}</li>
               <li>
-                <a href="/resume" className="cursor-pointer hover:text-brand-accent transition font-semibold text-base">
+                <a href="/curriculo" className="cursor-pointer hover:text-brand-accent transition font-semibold text-base">
                   Currículo
                 </a>
               </li>
@@ -181,7 +181,7 @@ const ProjectCasePage = () => {
                   <li className="cursor-pointer hover:text-brand-accent transition" onClick={handleScrollToTop}>{t('navProjects')}</li>
                   <li className="cursor-pointer hover:text-brand-accent transition" onClick={handleScrollToTop}>{t('navContact')}</li>
                   <li>
-                    <a href="/resume" className="cursor-pointer hover:text-brand-accent transition font-semibold text-lg" onClick={() => setIsSheetOpen(false)}>
+                    <a href="/curriculo" className="cursor-pointer hover:text-brand-accent transition font-semibold text-lg" onClick={() => setIsSheetOpen(false)}>
                       Currículo
                     </a>
                   </li>

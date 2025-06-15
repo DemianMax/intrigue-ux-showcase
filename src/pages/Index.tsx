@@ -1,4 +1,3 @@
-
 import { useRef, useState } from "react";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
@@ -57,7 +56,7 @@ const Index = () => {
               <li className="cursor-pointer hover:text-brand-accent transition" onClick={() => handleScrollTo(projectsRef)}>{t('navProjects')}</li>
               <li className="cursor-pointer hover:text-brand-accent transition" onClick={() => handleScrollTo(contactRef)}>{t('navContact')}</li>
               <li>
-                <a href="/resume" className="cursor-pointer hover:text-brand-accent transition font-semibold text-base">
+                <a href="/curriculo" className="cursor-pointer hover:text-brand-accent transition font-semibold text-base">
                   Currículo
                 </a>
               </li>
@@ -96,7 +95,7 @@ const Index = () => {
                   <li className="cursor-pointer hover:text-brand-accent transition" onClick={() => handleScrollTo(projectsRef)}>{t('navProjects')}</li>
                   <li className="cursor-pointer hover:text-brand-accent transition" onClick={() => handleScrollTo(contactRef)}>{t('navContact')}</li>
                   <li>
-                    <a href="/resume" className="cursor-pointer hover:text-brand-accent transition font-semibold text-lg" onClick={() => setIsSheetOpen(false)}>
+                    <a href="/curriculo" className="cursor-pointer hover:text-brand-accent transition font-semibold text-lg" onClick={() => setIsSheetOpen(false)}>
                       Currículo
                     </a>
                   </li>
