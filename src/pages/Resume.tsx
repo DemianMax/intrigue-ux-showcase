@@ -123,11 +123,6 @@ const Resume = () => {
           </div>
         </section>
 
-        {/* Sessão Habilidades Técnicas */}
-        <section className="mb-12">
-          <TechnicalSkillsSection />
-        </section>
-
         {/* Experiência Completa */}
         <section>
           <h3 className="text-2xl font-playfair font-bold text-brand-accent mb-6">
@@ -158,6 +153,11 @@ const Resume = () => {
               ))
             )}
           </div>
+        </section>
+
+        {/* Sessão Habilidades Técnicas */}
+        <section className="mb-12">
+          <TechnicalSkillsSection />
         </section>
       </main>
     </div>
