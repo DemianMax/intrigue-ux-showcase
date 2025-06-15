@@ -123,6 +123,39 @@ export type Database = {
         }
         Relationships: []
       }
+      sobre: {
+        Row: {
+          ativo: boolean | null
+          created_at: string | null
+          destaque: string | null
+          id: string
+          imagem_perfil: string | null
+          resumo: string | null
+          titulo: string
+          updated_at: string | null
+        }
+        Insert: {
+          ativo?: boolean | null
+          created_at?: string | null
+          destaque?: string | null
+          id?: string
+          imagem_perfil?: string | null
+          resumo?: string | null
+          titulo: string
+          updated_at?: string | null
+        }
+        Update: {
+          ativo?: boolean | null
+          created_at?: string | null
+          destaque?: string | null
+          id?: string
+          imagem_perfil?: string | null
+          resumo?: string | null
+          titulo?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
