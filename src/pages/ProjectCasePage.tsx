@@ -1,23 +1,68 @@
 
 import { useParams, useNavigate } from 'react-router-dom';
-import { projects } from '@/data/projects';
 import { useEffect } from 'react';
 import NotFound from './NotFound';
 import { ChevronRight } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useQuery } from '@tanstack/react-query';
+import { supabase } from '@/lib/supabase';
+import { Project } from '@/types/project';
+import { Skeleton } from '@/components/ui/skeleton';
+
+const fetchProjectById = async (projectId: string): Promise<Project | null> => {
+  const { data, error } = await supabase
+    .from('projects')
+    .select('*')
+    .eq('id', projectId)
+    .single();
+
+  if (error) {
+    if (error.code === 'PGRST116') {
+      console.warn(`Project with id ${projectId} not found.`);
+      return null;
+    }
+    console.error('Error fetching project:', error);
+    throw new Error('Could not fetch project');
+  }
+
+  return data;
+};
 
 const ProjectCasePage = () => {
   const { projectId } = useParams<{ projectId: string }>();
   const navigate = useNavigate();
   const { t } = useLanguage();
   
-  const project = projects.find(p => p.id === projectId);
+  const { data: project, isLoading, isError } = useQuery<Project | null>({
+    queryKey: ['project', projectId],
+    queryFn: () => fetchProjectById(projectId!),
+    enabled: !!projectId,
+  });
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  
+  if (isLoading) {
+    return (
+      <div className="bg-background min-h-screen py-10 px-5 lg:px-32 flex flex-col items-start">
+        <div className="self-start mb-8 w-full max-w-4xl mx-auto">
+          <Skeleton className="h-8 w-24" />
+        </div>
+        <div className="max-w-4xl w-full mx-auto space-y-4">
+          <Skeleton className="h-14 w-3/4 mb-2" />
+          <Skeleton className="h-6 w-1/4" />
+          <Skeleton className="h-8 w-full mb-4" />
+          <Skeleton className="h-6 w-1/3 mb-2" />
+          <Skeleton className="h-24 w-full mb-4" />
+          <Skeleton className="h-6 w-1/3 mb-2" />
+          <Skeleton className="h-40 w-full" />
+        </div>
+      </div>
+    );
+  }
 
-  if (!project) {
+  if (isError || !project) {
     return <NotFound />;
   }
 
