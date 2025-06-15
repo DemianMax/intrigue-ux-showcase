@@ -6,7 +6,7 @@ import ProjectsGrid from "@/components/ProjectsGrid";
 import FooterSection from "@/components/FooterSection";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, Languages } from "lucide-react";
-import { LanguageProvider, useLanguage } from "@/contexts/LanguageContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 
-const IndexPageContent = () => {
+const Index = () => {
   const aboutRef = useRef<HTMLDivElement>(null);
   const projectsRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
@@ -111,11 +111,5 @@ const IndexPageContent = () => {
     </div>
   );
 };
-
-const Index = () => (
-  <LanguageProvider>
-    <IndexPageContent />
-  </LanguageProvider>
-);
 
 export default Index;

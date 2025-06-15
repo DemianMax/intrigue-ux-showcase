@@ -26,15 +26,15 @@ export const projects: Project[] = [
     problem: "Processo de onboarding longo e confuso, resultando em alta taxa de abandono de usuários.",
     solution: "Redesenhei o fluxo de cadastro, o que triplicou a conversão de novos usuários em serviços financeiros.",
     hashtags: ["#onboarding", "#fintech", "#mobile"],
-    image: "/placeholder.svg",
+    image: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?q=80&w=800&h=600&fit=crop",
     caseStudy: {
       challenge: "Usuários enfrentavam frustração e abandono ao tentar abrir conta; processos longos e confusos bloqueavam conversão.",
       process: [
-        { img: "/placeholder.svg", legend: "Mapeamento de fricções reais — ouvindo usuários." },
-        { img: "/placeholder.svg", legend: "Jornada redesenhada: simplificando os pontos de atrito." },
-        { img: "/placeholder.svg", legend: "Protótipo iterado e testado para onboarding eficiente." }
+        { img: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?q=80&w=800&h=600&fit=crop", legend: "Mapeamento de fricções reais — ouvindo usuários." },
+        { img: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=800&h=600&fit=crop", legend: "Jornada redesenhada: simplificando os pontos de atrito." },
+        { img: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?q=80&w=800&h=600&fit=crop", legend: "Protótipo iterado e testado para onboarding eficiente." }
       ],
-      solutionImg: "/placeholder.svg",
+      solutionImg: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&h=600&fit=crop",
       solutionLegend: "Novo onboarding: simples, informativo e inclusivo.",
       uiNote: "Essa arquitetura simplificou o fluxo de abertura de conta: menos etapas, copy clara e feedback visual imediato. A paleta evoca confiança e acessibilidade.",
       results: [
@@ -52,15 +52,15 @@ export const projects: Project[] = [
     problem: "A interface anterior gerava dúvidas e solicitações excessivas no suporte ao cliente.",
     solution: "Redesenhei a interface com foco na clareza do fluxo, o que reduziu em 38% os tickets de suporte.",
     hashtags: ["#delivery", "#ui", "#designsystem"],
-    image: "/placeholder.svg",
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&h=600&fit=crop",
     caseStudy: {
       challenge: "A interface anterior gerava dúvidas e solicitações no suporte. Precisávamos simplificar e clarear o fluxo de pedidos.",
       process: [
-        { img: "/placeholder.svg", legend: "Pesquisa de experiência do usuário e pontos de frustração." },
-        { img: "/placeholder.svg", legend: "Wireframes para novo fluxo sem ambiguidade." },
-        { img: "/placeholder.svg", legend: "Prototipação de telas mobile e validação." }
+        { img: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=800&h=600&fit=crop", legend: "Pesquisa de experiência do usuário e pontos de frustração." },
+        { img: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?q=80&w=800&h=600&fit=crop", legend: "Wireframes para novo fluxo sem ambiguidade." },
+        { img: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?q=80&w=800&h=600&fit=crop", legend: "Prototipação de telas mobile e validação." }
       ],
-      solutionImg: "/placeholder.svg",
+      solutionImg: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?q=80&w=800&h=600&fit=crop",
       solutionLegend: "Interface enxuta e explicativa, evitando erros e demandas por suporte.",
       uiNote: "Optei por uso consistente de cores e componentes reutilizáveis. Tipografia limpa eleva legibilidade.",
       results: [
@@ -78,15 +78,15 @@ export const projects: Project[] = [
     problem: "Diretores e gerentes tinham dificuldade em encontrar KPIs essenciais de forma rápida para tomada de decisão.",
     solution: "Criei um novo dashboard focado em visualização de dados e navegação simplificada, agilizando as decisões.",
     hashtags: ["#dashboard", "#ecommerce", "#uxresearch"],
-    image: "/placeholder.svg",
+    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=800&h=600&fit=crop",
     caseStudy: {
       challenge: "Diretores tinham dificuldade em encontrar KPIs essenciais rapidamente.",
       process: [
-        { img: "/placeholder.svg", legend: "Entrevistas com stakeholders para mapear necessidades." },
-        { img: "/placeholder.svg", legend: "Wireframes e refinamento da arquitetura de informação." },
-        { img: "/placeholder.svg", legend: "Validação da solução com usuários-chave." }
+        { img: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&h=600&fit=crop", legend: "Entrevistas com stakeholders para mapear necessidades." },
+        { img: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=800&h=600&fit=crop", legend: "Wireframes e refinamento da arquitetura de informação." },
+        { img: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?q=80&w=800&h=600&fit=crop", legend: "Validação da solução com usuários-chave." }
       ],
-      solutionImg: "/placeholder.svg",
+      solutionImg: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?q=80&w=800&h=600&fit=crop",
       solutionLegend: "Painéis modulares que destacam métricas críticas e facilitam decisões rápidas.",
       uiNote: "Utilização de componentes visuais consistentes e cores para hierarquia da informação.",
       results: [
@@ -104,15 +104,15 @@ export const projects: Project[] = [
     problem: "A página da campanha de marketing possuía uma taxa de conversão abaixo da meta esperada.",
     solution: "Desenvolvi uma landing page com foco em storytelling visual, que aumentou a conversão em 24%.",
     hashtags: ["#landingpage", "#storytelling", "#a11y"],
-    image: "/placeholder.svg",
+    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&h=600&fit=crop",
     caseStudy: {
       challenge: "Conversão da campanha estava abaixo do ideal, dificuldade em comunicar o diferencial.",
       process: [
-        { img: "/placeholder.svg", legend: "Mapeamento de argumentos persuasivos juntos ao marketing." },
-        { img: "/placeholder.svg", legend: "Testes de diferentes retóricas visuais e botões." },
-        { img: "/placeholder.svg", legend: "Ajustes após análise de mapas de calor." }
+        { img: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?q=80&w=800&h=600&fit=crop", legend: "Mapeamento de argumentos persuasivos juntos ao marketing." },
+        { img: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?q=80&w=800&h=600&fit=crop", legend: "Testes de diferentes retóricas visuais e botões." },
+        { img: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=800&h=600&fit=crop", legend: "Ajustes após análise de mapas de calor." }
       ],
-      solutionImg: "/placeholder.svg",
+      solutionImg: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?q=80&w=800&h=600&fit=crop",
       solutionLegend: "Fluxo visual que conta uma história e leva ao CTA sem distrações.",
       uiNote: "Priorizei contraste, hierarquia e acessibilidade para todos.",
       results: [
