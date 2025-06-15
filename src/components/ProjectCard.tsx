@@ -1,25 +1,8 @@
-
 import React from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogClose } from "@/components/ui/dialog";
 import { motion } from "framer-motion";
+import { Project } from "@/data/projects";
 
-interface Project {
-  id: string;
-  title: string;
-  role: string;
-  short: string;
-  hashtags?: string[];
-  image: string;
-  caseStudy: {
-    challenge: string;
-    process: { img: string; legend: string }[];
-    solutionImg: string;
-    solutionLegend: string;
-    uiNote: string;
-    results: string[];
-    next: string;
-  };
-}
 interface ProjectCardProps {
   project: Project;
   openCase: string | null;
