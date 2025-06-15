@@ -1,3 +1,4 @@
+
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import NotFound from './NotFound';
@@ -86,44 +87,56 @@ const ProjectCasePage = () => {
         <div className="text-xl text-brand-dark/70 font-inter mb-8 text-left">
           {project.solution}
         </div>
-        <section className="mb-12">
-          <h3 className="text-2xl font-playfair text-brand-dark mb-2 text-left">{t('caseStudyChallenge')}</h3>
-          <p className="text-lg text-brand-dark/70 font-inter mb-4 text-left">
-            {project.challenge}
-          </p>
-        </section>
-        <section className="mb-12">
-          <h3 className="text-2xl font-playfair text-brand-dark mb-5 text-left">{t('caseStudyProcess')}</h3>
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {project.process_images.map((img, index) => (
-              <div key={index} className="bg-card rounded-xl shadow-md p-4 flex flex-col items-center">
-                <img src={img} alt={project.process_legends[index]} className="w-full h-40 object-cover rounded-md mb-3 border border-border" />
-                <div className="text-sm text-brand-dark/80 font-inter text-center">
-                  {project.process_legends[index]}
+        {project.challenge && (
+          <section className="mb-12">
+            <h3 className="text-2xl font-playfair text-brand-dark mb-2 text-left">{t('caseStudyChallenge')}</h3>
+            <p className="text-lg text-brand-dark/70 font-inter mb-4 text-left">
+              {project.challenge}
+            </p>
+          </section>
+        )}
+        {project.process_images && project.process_legends && (
+          <section className="mb-12">
+            <h3 className="text-2xl font-playfair text-brand-dark mb-5 text-left">{t('caseStudyProcess')}</h3>
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {project.process_images.map((img, index) => (
+                <div key={index} className="bg-card rounded-xl shadow-md p-4 flex flex-col items-center">
+                  <img src={img} alt={project.process_legends?.[index] ?? `Process image ${index + 1}`} className="w-full h-40 object-cover rounded-md mb-3 border border-border" />
+                  <div className="text-sm text-brand-dark/80 font-inter text-center">
+                    {project.process_legends?.[index]}
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </section>
-        <section className="mb-12">
-          <h3 className="text-2xl font-playfair text-brand-dark mb-2 text-left">{t('caseStudySolution')}</h3>
-          <div className="flex flex-col items-center">
-            <img src={project.solution_image} alt={project.solution_legend} className="w-full max-w-2xl h-auto object-cover rounded-2xl mb-3 border border-border" />
-            <div className="text-sm text-brand-dark/80 font-inter mb-2 text-center">{project.solution_legend}</div>
-            <div className="text-base text-brand-dark/70 font-inter text-center mt-4">
-              {project.ui_note}
+              ))}
             </div>
-          </div>
-        </section>
-        <section>
-          <h3 className="text-2xl font-playfair text-brand-dark mb-2 text-left">{t('caseStudyResults')}</h3>
-          <ul className="mb-4 ml-6 list-disc text-brand-dark/80 font-inter text-left">
-            {project.results.map((res, idx) => <li key={idx}>{res}</li>)}
-          </ul>
-          <div className="text-base text-brand-dark/70 font-inter mb-3 text-left">
-            <strong>{t('caseStudyNextSteps')}</strong> {project.next_steps}
-          </div>
-        </section>
+          </section>
+        )}
+        {project.solution_image && (
+          <section className="mb-12">
+            <h3 className="text-2xl font-playfair text-brand-dark mb-2 text-left">{t('caseStudySolution')}</h3>
+            <div className="flex flex-col items-center">
+              <img src={project.solution_image} alt={project.solution_legend ?? 'Solution image'} className="w-full max-w-2xl h-auto object-cover rounded-2xl mb-3 border border-border" />
+              {project.solution_legend && <div className="text-sm text-brand-dark/80 font-inter mb-2 text-center">{project.solution_legend}</div>}
+              {project.ui_note && <div className="text-base text-brand-dark/70 font-inter text-center mt-4">{project.ui_note}</div>}
+            </div>
+          </section>
+        )}
+        {(project.results || project.next_steps) && (
+          <section>
+            {project.results && (
+              <>
+                <h3 className="text-2xl font-playfair text-brand-dark mb-2 text-left">{t('caseStudyResults')}</h3>
+                <ul className="mb-4 ml-6 list-disc text-brand-dark/80 font-inter text-left">
+                  {project.results.map((res, idx) => <li key={idx}>{res}</li>)}
+                </ul>
+              </>
+            )}
+            {project.next_steps && (
+              <div className="text-base text-brand-dark/70 font-inter mb-3 text-left">
+                <strong>{t('caseStudyNextSteps')}</strong> {project.next_steps}
+              </div>
+            )}
+          </section>
+        )}
       </div>
     </div>
   );

@@ -14,17 +14,17 @@ export interface Project {
   title: string;
   role: string;
   problem: string;
-  solution: string;
+  solution:string;
   hashtags: string[] | null;
   image: string;
   created_at: string;
-  // Campos que antes estavam em 'caseStudy'
-  challenge: string;
-  process_images: string[];
-  process_legends: string[];
-  solution_image: string;
-  solution_legend: string;
-  ui_note: string;
-  results: string[];
-  next_steps: string;
+  // Campos que antes estavam em 'caseStudy', agora opcionais
+  challenge: string | null;
+  process_images: string[] | null;
+  process_legends: string[] | null;
+  solution_image: string | null;
+  solution_legend: string | null;
+  ui_note: string | null;
+  results: string[] | null;
+  next_steps: string | null;
 }

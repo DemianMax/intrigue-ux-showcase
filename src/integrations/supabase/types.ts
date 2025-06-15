@@ -11,58 +11,58 @@ export type Database = {
     Tables: {
       projects: {
         Row: {
-          challenge: string
+          challenge: string | null
           created_at: string
           hashtags: string[] | null
           id: string
           image: string
-          next_steps: string
+          next_steps: string | null
           problem: string
-          process_images: string[]
-          process_legends: string[]
-          results: string[]
+          process_images: string[] | null
+          process_legends: string[] | null
+          results: string[] | null
           role: string
           solution: string
-          solution_image: string
-          solution_legend: string
+          solution_image: string | null
+          solution_legend: string | null
           title: string
-          ui_note: string
+          ui_note: string | null
         }
         Insert: {
-          challenge: string
+          challenge?: string | null
           created_at?: string
           hashtags?: string[] | null
           id?: string
           image: string
-          next_steps: string
+          next_steps?: string | null
           problem: string
-          process_images: string[]
-          process_legends: string[]
-          results: string[]
+          process_images?: string[] | null
+          process_legends?: string[] | null
+          results?: string[] | null
           role: string
           solution: string
-          solution_image: string
-          solution_legend: string
+          solution_image?: string | null
+          solution_legend?: string | null
           title: string
-          ui_note: string
+          ui_note?: string | null
         }
         Update: {
-          challenge?: string
+          challenge?: string | null
           created_at?: string
           hashtags?: string[] | null
           id?: string
           image?: string
-          next_steps?: string
+          next_steps?: string | null
           problem?: string
-          process_images?: string[]
-          process_legends?: string[]
-          results?: string[]
+          process_images?: string[] | null
+          process_legends?: string[] | null
+          results?: string[] | null
           role?: string
           solution?: string
-          solution_image?: string
-          solution_legend?: string
+          solution_image?: string | null
+          solution_legend?: string | null
           title?: string
-          ui_note?: string
+          ui_note?: string | null
         }
         Relationships: []
       }
