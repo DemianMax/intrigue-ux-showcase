@@ -3,6 +3,7 @@ import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
 import ProjectsGrid from "@/components/ProjectsGrid";
 import FooterSection from "@/components/FooterSection";
+import PortfolioSection from "@/components/PortfolioSection";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, Languages } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -116,6 +117,7 @@ const Index = () => {
       <HeroSection onScrollToAbout={() => handleScrollTo(aboutRef)} />
       <div ref={aboutRef}><AboutSection /></div>
       <div ref={projectsRef}><ProjectsGrid /></div>
+      <PortfolioSection />
       <div ref={contactRef}><FooterSection /></div>
     </div>
   );
