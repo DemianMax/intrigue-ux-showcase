@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Download } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
+import TechnicalSkillsSection from "@/components/TechnicalSkillsSection";
 
 // Tipagem para os dados do curriculo
 type Experiencia = {
@@ -120,6 +121,11 @@ const Resume = () => {
               <span className="md:col-span-2">{curriculo?.resumo_profissional}</span>
             )}
           </div>
+        </section>
+
+        {/* Sessão Habilidades Técnicas */}
+        <section className="mb-12">
+          <TechnicalSkillsSection />
         </section>
 
         {/* Experiência Completa */}
