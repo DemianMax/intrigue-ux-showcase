@@ -25,6 +25,6 @@ export interface Project {
   solution: string;
   hashtags: string[] | null;
   image: string;
-  caseStudy: Json;
+  caseStudy: CaseStudy;
   created_at: string;
 }

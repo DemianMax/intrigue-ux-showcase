@@ -24,7 +24,7 @@ const fetchProjectById = async (projectId: string): Promise<Project | null> => {
     throw new Error('Could not fetch project');
   }
 
-  return data as Project | null;
+  return data as unknown as Project | null;
 };
 
 const ProjectCasePage = () => {
@@ -65,7 +65,7 @@ const ProjectCasePage = () => {
     return <NotFound />;
   }
 
-  const caseStudy = project.caseStudy as unknown as CaseStudy;
+  const caseStudy = project.caseStudy;
 
   return (
     <div className="bg-background min-h-screen py-10 px-5 lg:px-32 flex flex-col items-start">
