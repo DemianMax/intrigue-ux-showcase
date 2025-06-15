@@ -27,7 +27,7 @@ const AboutSection = React.forwardRef<HTMLDivElement>((props, ref) => {
         </div>
 
         {/* Texto à direita */}
-        <div className="flex-1 text-left">
+        <div className="flex-1 text-center md:text-left">
           <h2 className="font-playfair text-3xl text-brand-dark font-bold mb-6">
             {t('aboutGreeting')}
           </h2>

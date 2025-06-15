@@ -25,9 +25,9 @@ const Resume = () => {
       </header>
 
       <main className="max-w-4xl mx-auto p-6 md:p-10">
-        <section className="mb-12">
+        <section className="mb-12 text-center md:text-left">
             <h2 className="text-3xl font-playfair font-bold text-brand-dark border-b-2 border-brand-accent inline-block pb-2 mb-6">Currículo</h2>
-            <p className="text-lg leading-relaxed max-w-3xl">
+            <p className="text-lg leading-relaxed max-w-3xl mx-auto md:mx-0">
                 Designer de produto com foco em UX/UI, apaixonado por transformar problemas complexos em soluções simples, intuitivas e visualmente atraentes. Experiência em todo o ciclo de vida do produto, desde a pesquisa e ideação até o design de interface e testes de usabilidade.
             </p>
         </section>

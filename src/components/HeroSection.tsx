@@ -12,7 +12,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
 }) => {
   const { t } = useLanguage();
   return (
-    <section className="min-h-[100dvh] flex flex-col justify-center items-start gap-8 relative pt-24 sm:pt-28 px-[20px] max-w-6xl mx-auto w-full">
+    <section className="min-h-[100dvh] flex flex-col justify-center items-center gap-8 relative pt-24 sm:pt-28 px-[20px]">
       <motion.h1 initial={{
       opacity: 0,
       y: 24
@@ -33,7 +33,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
         type: "spring"
       }} style={{
         transformOrigin: "left"
-      }} className="block h-1 w-16 mx-0 mt-2 rounded-full bg-brand-accent my-[26px]" />
+      }} className="block h-1 w-16 mx-auto mt-2 rounded-full bg-brand-accent my-[26px]" />
       </motion.h1>
       <AnimatePresence>
         <motion.p initial={{

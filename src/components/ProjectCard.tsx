@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogClose } from "@/components/ui/dialog";
 import { motion } from "framer-motion";
@@ -69,13 +70,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, openCase, setOpenCas
               {project.caseStudy.process.map((step, idx) => (
                 <div key={idx} className="flex flex-col items-center">
                   <img src={step.img} alt={step.legend} className="w-full h-32 object-cover rounded-md mb-2 border" />
-                  <span className="text-xs text-brand-dark/80">{step.legend}</span>
+                  <span className="text-xs text-brand-dark/80 text-center">{step.legend}</span>
                 </div>
               ))}
             </div>
             <h5 className="text-lg font-bold text-brand-accent mb-2 mt-4">{t('caseStudySolution')}</h5>
             <img src={project.caseStudy.solutionImg} alt={project.caseStudy.solutionLegend} className="w-full max-w-lg mx-auto rounded-xl mb-2 border" />
-            <span className="block text-sm mb-5">{project.caseStudy.solutionLegend}</span>
+            <span className="block text-sm mb-5 text-center">{project.caseStudy.solutionLegend}</span>
             <p className="mb-4">{project.caseStudy.uiNote}</p>
             <h5 className="text-lg font-bold text-brand-accent mb-2 mt-4">{t('caseStudyResults')}</h5>
             <ul className="mb-3 ml-6 list-disc text-brand-dark/80">

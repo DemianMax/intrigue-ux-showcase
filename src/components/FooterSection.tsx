@@ -7,7 +7,7 @@ const FooterSection = React.forwardRef<HTMLDivElement>((props, ref) => {
   const { t } = useLanguage();
 
   return (
-    <footer ref={ref} className="w-full bg-brand-dark py-14 px-6 flex flex-col items-start mt-10" id="contato">
+    <footer ref={ref} className="w-full bg-brand-dark py-14 px-6 flex flex-col items-center mt-10" id="contato">
       <h4 className="text-2xl font-playfair text-white font-bold mb-2">{t('footerTitle')}</h4>
       <div className="flex flex-col md:flex-row md:items-center gap-3 text-lg">
         <div className="flex items-center gap-2 text-white/90">

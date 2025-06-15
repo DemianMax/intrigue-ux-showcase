@@ -60,7 +60,7 @@ const ProjectCaseFintechSimplifica = () => {
             {images.slice(0, 3).map(img => (
               <div key={img.alt} className="bg-card rounded-xl shadow-md p-4 flex flex-col items-center">
                 <img src={img.src} alt={img.alt} className="w-full h-40 object-cover rounded-md mb-3 border border-border" />
-                <div className="text-sm text-brand-dark/80 font-inter w-full">
+                <div className="text-sm text-brand-dark/80 font-inter text-center">
                   {img.legend}
                 </div>
               </div>
@@ -71,8 +71,8 @@ const ProjectCaseFintechSimplifica = () => {
           <h3 className="text-2xl font-playfair text-brand-dark mb-2">Solução Final (UI)</h3>
           <div className="flex flex-col items-center">
             <img src={images[3].src} alt={images[3].alt} className="w-full max-w-xl h-60 object-cover rounded-2xl mb-3 border border-border" />
-            <div className="text-sm text-brand-dark/80 font-inter mb-2 w-full">{images[3].legend}</div>
-            <div className="text-base text-brand-dark/70 font-inter mt-4 w-full">
+            <div className="text-sm text-brand-dark/80 font-inter mb-2 text-center">{images[3].legend}</div>
+            <div className="text-base text-brand-dark/70 font-inter text-center mt-4">
               Essa arquitetura simplificou o fluxo de abertura de conta: menos etapas, copy clara e feedback visual imediato. A paleta evoca confiança e acessibilidade.
             </div>
           </div>
