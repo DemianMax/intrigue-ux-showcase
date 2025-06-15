@@ -15,6 +15,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   const aboutRef = useRef<HTMLDivElement>(null);
@@ -58,9 +59,12 @@ const Index = () => {
               <li className="cursor-pointer hover:text-brand-accent transition" onClick={() => handleScrollTo(projectsRef)}>{t('navProjects')}</li>
               <li className="cursor-pointer hover:text-brand-accent transition" onClick={() => handleScrollTo(contactRef)}>{t('navContact')}</li>
               <li>
-                <a href="/curriculo" className="cursor-pointer hover:text-brand-accent transition font-semibold text-base">
+                <Link
+                  to="/curriculo"
+                  className="cursor-pointer hover:text-brand-accent transition font-semibold text-base"
+                >
                   Currículo
-                </a>
+                </Link>
               </li>
             </ul>
             <DropdownMenu>
@@ -97,9 +101,13 @@ const Index = () => {
                   <li className="cursor-pointer hover:text-brand-accent transition" onClick={() => handleScrollTo(projectsRef)}>{t('navProjects')}</li>
                   <li className="cursor-pointer hover:text-brand-accent transition" onClick={() => handleScrollTo(contactRef)}>{t('navContact')}</li>
                   <li>
-                    <a href="/curriculo" className="cursor-pointer hover:text-brand-accent transition font-semibold text-lg" onClick={() => setIsSheetOpen(false)}>
+                    <Link
+                      to="/curriculo"
+                      className="cursor-pointer hover:text-brand-accent transition font-semibold text-lg"
+                      onClick={() => setIsSheetOpen(false)}
+                    >
                       Currículo
-                    </a>
+                    </Link>
                   </li>
                 </ul>
                 <div className="border-t border-border mt-8 pt-6">
