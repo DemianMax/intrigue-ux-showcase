@@ -1,4 +1,3 @@
-
 export const translations = {
   pt: {
     navHome: 'Início',
@@ -23,7 +22,7 @@ export const translations = {
     heroSubtitle: 'Eu projeto o invisível para experiências que conectam.',
     ariaScrollDown: 'Role para baixo',
     projectsTitle: 'Um pouco de UX e UI',
-    projectCaseStudyButton: 'Ver Case Study',
+    projectCaseStudyButton: 'Veja +',
     caseStudyChallenge: 'O Desafio',
     caseStudyProcess: 'Processo UX',
     caseStudySolution: 'Solução Final',
@@ -56,7 +55,7 @@ export const translations = {
     heroSubtitle: 'I design the invisible for experiences that connect.',
     ariaScrollDown: 'Scroll down',
     projectsTitle: 'A bit of UX and UI',
-    projectCaseStudyButton: 'View Case Study',
+    projectCaseStudyButton: 'View More',
     caseStudyChallenge: 'The Challenge',
     caseStudyProcess: 'UX Process',
     caseStudySolution: 'Final Solution',
