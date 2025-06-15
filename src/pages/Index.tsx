@@ -2,33 +2,107 @@ import { useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Mail, Linkedin, ExternalLink } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogClose } from "@/components/ui/dialog";
-const projects = [{
-  id: "fintech-simplifica",
-  title: "Fintech Simplifica",
-  role: "UX Lead & UI Designer",
-  short: "Redesenhei o onboarding para triplicar a conversão de usuários em serviços financeiros.",
-  hashtags: ["#onboarding", "#fintech", "#mobile"],
-  image: "/placeholder.svg",
-  caseStudy: {
-    challenge: "Usuários enfrentavam frustração e abandono ao tentar abrir conta; processos longos e confusos bloqueavam conversão.",
-    process: [{
-      img: "/placeholder.svg",
-      legend: "Mapeamento de fricções reais — ouvindo usuários."
-    }, {
-      img: "/placeholder.svg",
-      legend: "Jornada redesenhada: simplificando os pontos de atrito."
-    }, {
-      img: "/placeholder.svg",
-      legend: "Protótipo iterado e testado para onboarding eficiente."
-    }],
-    solutionImg: "/placeholder.svg",
-    solutionLegend: "Novo onboarding: simples, informativo e inclusivo.",
-    uiNote: "Essa arquitetura simplificou o fluxo de abertura de conta: menos etapas, copy clara e feedback visual imediato. A paleta evoca confiança e acessibilidade.",
-    results: ["Abandono na abertura de conta caiu de 62% para 21%", "Usuários relataram 2x mais clareza no processo", "Aprendi que o simples pode ser marcante — pesquisa e iteração fazem toda a diferença."],
-    next: "Hoje faria protótipos ainda mais ‘mágicos’, incluindo onboarding progressivo."
-  }
-}
-// Adicione outros projetos aqui com o mesmo formato se desejar expandir
+const projects = [
+  {
+    id: "fintech-simplifica",
+    title: "Fintech Simplifica",
+    role: "UX Lead & UI Designer",
+    short: "Redesenhei o onboarding para triplicar a conversão de usuários em serviços financeiros.",
+    hashtags: ["#onboarding", "#fintech", "#mobile"],
+    image: "/placeholder.svg",
+    caseStudy: {
+      challenge: "Usuários enfrentavam frustração e abandono ao tentar abrir conta; processos longos e confusos bloqueavam conversão.",
+      process: [
+        { img: "/placeholder.svg", legend: "Mapeamento de fricções reais — ouvindo usuários." },
+        { img: "/placeholder.svg", legend: "Jornada redesenhada: simplificando os pontos de atrito." },
+        { img: "/placeholder.svg", legend: "Protótipo iterado e testado para onboarding eficiente." }
+      ],
+      solutionImg: "/placeholder.svg",
+      solutionLegend: "Novo onboarding: simples, informativo e inclusivo.",
+      uiNote: "Essa arquitetura simplificou o fluxo de abertura de conta: menos etapas, copy clara e feedback visual imediato. A paleta evoca confiança e acessibilidade.",
+      results: [
+        "Abandono na abertura de conta caiu de 62% para 21%",
+        "Usuários relataram 2x mais clareza no processo",
+        "Aprendi que o simples pode ser marcante — pesquisa e iteração fazem toda a diferença."
+      ],
+      next: "Hoje faria protótipos ainda mais ‘mágicos’, incluindo onboarding progressivo."
+    }
+  },
+  {
+    id: "app-delivery-ui",
+    title: "App Delivery UI",
+    role: "UI Designer",
+    short: "Interface redesenhada focando clareza de fluxo e feedback visual instantâneo ao usuário.",
+    hashtags: ["#delivery", "#ui", "#designsystem"],
+    image: "/placeholder.svg",
+    caseStudy: {
+      challenge: "A interface anterior gerava dúvidas e solicitações no suporte. Precisávamos simplificar e clarear o fluxo de pedidos.",
+      process: [
+        { img: "/placeholder.svg", legend: "Pesquisa de experiência do usuário e pontos de frustração." },
+        { img: "/placeholder.svg", legend: "Wireframes para novo fluxo sem ambiguidade." },
+        { img: "/placeholder.svg", legend: "Prototipação de telas mobile e validação." }
+      ],
+      solutionImg: "/placeholder.svg",
+      solutionLegend: "Interface enxuta e explicativa, evitando erros e demandas por suporte.",
+      uiNote: "Optei por uso consistente de cores e componentes reutilizáveis. Tipografia limpa eleva legibilidade.",
+      results: [
+        "Redução de 38% nos tickets de suporte.",
+        "Usuários avaliaram mais intuitivo no pós-teste.",
+        "Comprovação do valor de protótipos mesmo para pequenos fluxos."
+      ],
+      next: "Faria testes A/B para micro animações explicativas."
+    }
+  },
+  {
+    id: "ecommerce-dashboard",
+    title: "E-commerce Dashboard",
+    role: "UX/UI Designer",
+    short: "Novo dashboard para gerenciamento de vendas com dados visuais e navegação simplificada.",
+    hashtags: ["#dashboard", "#ecommerce", "#uxresearch"],
+    image: "/placeholder.svg",
+    caseStudy: {
+      challenge: "Diretores tinham dificuldade em encontrar KPIs essenciais rapidamente.",
+      process: [
+        { img: "/placeholder.svg", legend: "Entrevistas com stakeholders para mapear necessidades." },
+        { img: "/placeholder.svg", legend: "Wireframes e refinamento da arquitetura de informação." },
+        { img: "/placeholder.svg", legend: "Validação da solução com usuários-chave." }
+      ],
+      solutionImg: "/placeholder.svg",
+      solutionLegend: "Painéis modulares que destacam métricas críticas e facilitam decisões rápidas.",
+      uiNote: "Utilização de componentes visuais consistentes e cores para hierarquia da informação.",
+      results: [
+        "Tomada de decisão 30% mais rápida.",
+        "Feedback positivo das áreas comerciais.",
+        "Aprendi o poder do co-design na definição de dashboards."
+      ],
+      next: "Exploraria integrações com assistentes de voz ou bots de insights."
+    }
+  },
+  {
+    id: "landingpage-campanha",
+    title: "Landing Page Campanha",
+    role: "UX Designer",
+    short: "Landing com experiência persuasiva para campanha de inscrição — foco: storytelling visual.",
+    hashtags: ["#landingpage", "#storytelling", "#a11y"],
+    image: "/placeholder.svg",
+    caseStudy: {
+      challenge: "Conversão da campanha estava abaixo do ideal, dificuldade em comunicar o diferencial.",
+      process: [
+        { img: "/placeholder.svg", legend: "Mapeamento de argumentos persuasivos juntos ao marketing." },
+        { img: "/placeholder.svg", legend: "Testes de diferentes retóricas visuais e botões." },
+        { img: "/placeholder.svg", legend: "Ajustes após análise de mapas de calor." }
+      ],
+      solutionImg: "/placeholder.svg",
+      solutionLegend: "Fluxo visual que conta uma história e leva ao CTA sem distrações.",
+      uiNote: "Priorizei contraste, hierarquia e acessibilidade para todos.",
+      results: [
+        "Conversão cresceu 24%.",
+        "Usuários elogiaram clareza e navegação.",
+        "Entendi como pequenas mudanças de texto impactam grandes resultados."
+      ],
+      next: "Aprofundaria testes com usuários PcDs e SEO técnico."
+    }
+  },
 ];
 const Index = () => {
   // Para navegação âncora suave
@@ -124,33 +198,40 @@ const Index = () => {
       </section>
 
       {/* Projetos */}
-      <section ref={projectsRef} className="w-full max-w-6xl mx-auto px-4 py-12" id="projetos">
+      <section ref={projectsRef} className="w-full max-w-6xl mx-auto px-2 py-12" id="projetos">
         <h3 className="text-3xl font-playfair font-bold text-brand-dark mb-10 text-center">Um pouco de UX e UI</h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {projects.map(project => (
-            <motion.div key={project.id} 
+            <motion.div key={project.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="relative bg-card rounded-2xl shadow-md flex flex-col items-center p-5 group">
-              {/* Hashtags dos projetos */}
-              <div className="flex flex-wrap gap-2 mb-2">
+              className="relative bg-card rounded-2xl shadow-md flex flex-col items-center p-4 group"
+              style={{ minHeight: 420 }}
+            >
+              <img
+                src={project.image}
+                alt={`Thumbnail do projeto ${project.title}`}
+                className="w-full h-28 object-cover rounded-xl border border-border mb-4 transition group-hover:scale-105"
+                style={{ maxWidth: "180px" }}
+              />
+              <h4 className="font-playfair text-lg font-semibold text-brand-dark mb-1 mt-1 text-center">{project.title}</h4>
+              <div className="text-brand-accent font-semibold text-xs mb-1">{project.role}</div>
+              <p className="text-sm text-brand-dark/70 mb-2 text-center">{project.short}</p>
+              {/* Hashtags dos projetos abaixo da descrição */}
+              <div className="flex flex-wrap justify-center gap-2 mb-3">
                 {project.hashtags && project.hashtags.map((tag, idx) => (
                   <span
                     key={idx}
-                    className="text-[0.85rem] font-semibold text-brand-accent bg-brand-accent/10 rounded-full px-2 py-0.5 tracking-tight"
+                    className="text-xs font-semibold text-brand-accent bg-brand-accent/10 rounded-full px-2 py-0.5 tracking-tight"
                     style={{ fontFamily: 'Inter, sans-serif', letterSpacing: '0.01em' }}
                   >
                     {tag}
                   </span>
                 ))}
               </div>
-              <img src={project.image} alt={`Thumbnail do projeto ${project.title}`} className="w-full h-40 object-cover rounded-xl border border-border mb-5 transition group-hover:scale-105" />
-              <h4 className="font-playfair text-xl font-semibold text-brand-dark mb-1">{project.title}</h4>
-              <div className="text-brand-accent font-semibold text-sm mb-1">{project.role}</div>
-              <p className="text-base text-brand-dark/70 mb-4 text-center">{project.short}</p>
-              <button className="mt-auto px-6 py-2 rounded-full bg-brand-accent text-white font-semibold shadow hover:bg-brand-dark/90 transition" onClick={() => setOpenCase(project.id)}>
+              <button className="mt-auto px-5 py-2 rounded-full bg-brand-accent text-white font-semibold shadow hover:bg-brand-dark/90 transition" onClick={() => setOpenCase(project.id)}>
                 Ver Case Study
               </button>
               {/* Dialog para Case Study */}
