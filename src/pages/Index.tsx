@@ -4,6 +4,7 @@ import AboutSection from "@/components/AboutSection";
 import ProjectsGrid from "@/components/ProjectsGrid";
 import FooterSection from "@/components/FooterSection";
 import PortfolioSection from "@/components/PortfolioSection";
+import TechnicalSkillsSection from "@/components/TechnicalSkillsSection";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, Languages } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -118,6 +119,7 @@ const Index = () => {
       <div ref={aboutRef}><AboutSection /></div>
       <div ref={projectsRef}><ProjectsGrid /></div>
       <PortfolioSection />
+      <TechnicalSkillsSection />
       <div ref={contactRef}><FooterSection /></div>
     </div>
   );
