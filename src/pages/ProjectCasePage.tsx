@@ -39,10 +39,25 @@ const ProjectCasePage = () => {
     enabled: !!projectId,
   });
 
-  // Função para converter texto separado por vírgulas em array
+  // Função melhorada para converter texto separado por vírgulas ou quebras de linha em array
   const parseTextToArray = (text: string | null): string[] => {
     if (!text) return [];
-    return text.split(',').map(item => item.trim()).filter(item => item.length > 0);
+    
+    // Remove espaços extras e divide por vírgulas ou quebras de linha
+    return text
+      .split(/[,\n]/)
+      .map(item => item.trim())
+      .filter(item => item.length > 0)
+      .filter(item => {
+        // Verifica se é uma URL válida ou pelo menos contém um formato de arquivo de imagem
+        try {
+          new URL(item);
+          return true;
+        } catch {
+          // Se não for URL válida, verifica se termina com extensão de imagem
+          return /\.(jpg|jpeg|png|gif|webp|svg)$/i.test(item);
+        }
+      });
   };
 
   useEffect(() => {
@@ -75,6 +90,9 @@ const ProjectCasePage = () => {
   const processImages = parseTextToArray(project.process_images_text);
   const processLegends = parseTextToArray(project.process_legends_text);
   const results = parseTextToArray(project.results_text);
+
+  console.log('Process images:', processImages);
+  console.log('Process legends:', processLegends);
 
   return (
     <div className="bg-background min-h-screen py-10 px-5 lg:px-32 flex flex-col items-start">
@@ -110,8 +128,16 @@ const ProjectCasePage = () => {
             <h3 className="text-2xl font-playfair text-brand-dark mb-5 text-left">{t('caseStudyProcess')}</h3>
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {processImages.map((img, index) => (
-                <div key={index} className="bg-card rounded-xl shadow-md p-4 flex flex-col items-center">
-                  <img src={img} alt={processLegends[index] ?? `Process image ${index + 1}`} className="w-full h-40 object-cover rounded-md mb-3 border border-border" />
+                <div key={`process-${index}`} className="bg-card rounded-xl shadow-md p-4 flex flex-col items-center">
+                  <img 
+                    src={img} 
+                    alt={processLegends[index] ?? `Process image ${index + 1}`} 
+                    className="w-full h-40 object-cover rounded-md mb-3 border border-border"
+                    onError={(e) => {
+                      console.error('Error loading image:', img);
+                      e.currentTarget.style.display = 'none';
+                    }}
+                  />
                   <div className="text-sm text-brand-dark/80 font-inter text-center">
                     {processLegends[index] ?? `Processo ${index + 1}`}
                   </div>
@@ -124,7 +150,15 @@ const ProjectCasePage = () => {
           <section className="mb-12">
             <h3 className="text-2xl font-playfair text-brand-dark mb-2 text-left">{t('caseStudySolution')}</h3>
             <div className="flex flex-col items-center">
-              <img src={project.solution_image} alt={project.solution_legend ?? 'Solution image'} className="w-full max-w-2xl h-auto object-cover rounded-2xl mb-3 border border-border" />
+              <img 
+                src={project.solution_image} 
+                alt={project.solution_legend ?? 'Solution image'} 
+                className="w-full max-w-2xl h-auto object-cover rounded-2xl mb-3 border border-border"
+                onError={(e) => {
+                  console.error('Error loading solution image:', project.solution_image);
+                  e.currentTarget.style.display = 'none';
+                }}
+              />
               {project.solution_legend && <div className="text-sm text-brand-dark/80 font-inter mb-2 text-center">{project.solution_legend}</div>}
               {project.ui_note && <div className="text-base text-brand-dark/70 font-inter text-center mt-4">{project.ui_note}</div>}
             </div>
@@ -136,7 +170,7 @@ const ProjectCasePage = () => {
               <>
                 <h3 className="text-2xl font-playfair text-brand-dark mb-2 text-left">{t('caseStudyResults')}</h3>
                 <ul className="mb-4 ml-6 list-disc text-brand-dark/80 font-inter text-left">
-                  {results.map((res, idx) => <li key={idx}>{res}</li>)}
+                  {results.map((res, idx) => <li key={`result-${idx}`}>{res}</li>)}
                 </ul>
               </>
             )}
