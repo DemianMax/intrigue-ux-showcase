@@ -17,7 +17,7 @@ const fetchProjects = async (): Promise<Project[]> => {
     console.error('Error fetching projects:', error);
     throw new Error('Could not fetch projects');
   }
-  return data || [];
+  return (data as Project[]) || [];
 };
 
 const ProjectsGrid: React.FC = () => {

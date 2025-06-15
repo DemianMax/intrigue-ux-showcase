@@ -25,7 +25,7 @@ const fetchProjectById = async (projectId: string): Promise<Project | null> => {
     throw new Error('Could not fetch project');
   }
 
-  return data;
+  return data as Project | null;
 };
 
 const ProjectCasePage = () => {

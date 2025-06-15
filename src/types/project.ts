@@ -5,7 +5,7 @@ export interface Project {
   role: string;
   problem: string;
   solution: string;
-  hashtags?: string[];
+  hashtags: string[] | null;
   image: string;
   caseStudy: {
     challenge: string;
