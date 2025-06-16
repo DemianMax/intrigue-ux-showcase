@@ -28,19 +28,24 @@ const ProjectsGrid: React.FC = () => {
   });
 
   return (
-    <section className="w-full max-w-6xl mx-auto px-2 py-12" id="projetos">
-      <h3 className="text-3xl font-playfair font-bold text-brand-dark mb-10 text-left">{t('projectsTitle')}</h3>
+    <section className="w-full max-w-6xl mx-auto px-4 py-16" id="projetos">
+      <h3 className="text-3xl font-playfair font-bold text-brand-dark mb-16 text-center">{t('projectsTitle')}</h3>
       
       {isLoading && (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {Array.from({ length: 4 }).map((_, i) => (
-            <div key={i} className="flex flex-col space-y-3 bg-card rounded-2xl shadow-md overflow-hidden p-4">
-              <Skeleton className="h-40 w-full rounded-lg" />
-              <div className="space-y-2 pt-2">
-                <Skeleton className="h-5 w-3/4" />
-                <Skeleton className="h-4 w-1/4" />
-                <Skeleton className="h-4 w-5/6 mt-4" />
-                <Skeleton className="h-4 w-4/6" />
+        <div className="space-y-16">
+          {Array.from({ length: 3 }).map((_, i) => (
+            <div key={i} className="flex flex-col lg:flex-row gap-8 items-center">
+              <Skeleton className="w-full lg:w-1/2 h-64 rounded-2xl" />
+              <div className="w-full lg:w-1/2 space-y-4">
+                <Skeleton className="h-8 w-3/4" />
+                <Skeleton className="h-4 w-1/2" />
+                <Skeleton className="h-20 w-full" />
+                <div className="flex gap-2">
+                  <Skeleton className="h-6 w-16" />
+                  <Skeleton className="h-6 w-20" />
+                  <Skeleton className="h-6 w-14" />
+                </div>
+                <Skeleton className="h-10 w-32" />
               </div>
             </div>
           ))}
@@ -52,14 +57,18 @@ const ProjectsGrid: React.FC = () => {
       {!isLoading && !isError && (
         <>
           {projects && projects.length > 0 ? (
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {projects.map(project => (
-                <ProjectCard key={project.id} project={project} />
+            <div className="space-y-20">
+              {projects.map((project, index) => (
+                <ProjectCard 
+                  key={project.id} 
+                  project={project} 
+                  index={index}
+                />
               ))}
             </div>
           ) : (
-            <div className="text-center p-4 bg-sky-50 border border-sky-200 text-sky-700 rounded-lg">
-                Nenhum projeto encontrado. Adicione projetos no seu painel Supabase.
+            <div className="text-center p-8 bg-sky-50 border border-sky-200 text-sky-700 rounded-2xl">
+              Nenhum projeto encontrado. Adicione projetos no seu painel Supabase.
             </div>
           )}
         </>
@@ -67,4 +76,5 @@ const ProjectsGrid: React.FC = () => {
     </section>
   );
 };
+
 export default ProjectsGrid;

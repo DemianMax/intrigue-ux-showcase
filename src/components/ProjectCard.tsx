@@ -7,9 +7,10 @@ import { useNavigate } from "react-router-dom";
 
 interface ProjectCardProps {
   project: Project;
+  index: number;
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
+const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
   const { t } = useLanguage();
   const navigate = useNavigate();
 
@@ -19,49 +20,108 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
     return text.split(',').map(item => item.trim()).filter(item => item.length > 0);
   };
 
+  // Alternar layout: par = imagem à esquerda, ímpar = imagem à direita
+  const isImageLeft = index % 2 === 0;
+
   return (
     <motion.div
-      key={project.id}
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: 0.1 }}
-      className="relative bg-card rounded-2xl shadow-md flex flex-col group overflow-hidden"
+      transition={{ duration: 0.8, delay: index * 0.2 }}
+      className={`flex flex-col ${isImageLeft ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-8 lg:gap-12 items-center group`}
     >
-      <img
-        src={project.image}
-        alt={`Thumbnail do projeto ${project.title}`}
-        className="w-full h-40 object-cover transition duration-300 group-hover:scale-105"
-      />
-      <div className="p-4 flex flex-col flex-grow text-left">
-        <h4 className="font-playfair text-lg font-semibold text-brand-dark mb-1">{project.title}</h4>
-        <div className="text-brand-accent font-semibold text-xs mb-3">{project.role}</div>
-
-        <div className="text-sm text-brand-dark/70 mb-4 space-y-2">
-          <p><strong className="font-semibold text-brand-dark">{t('projectProblem')}:</strong> {project.problem}</p>
-          <p><strong className="font-semibold text-brand-dark">{t('projectSolution')}:</strong> {project.solution}</p>
+      {/* Imagem do projeto */}
+      <motion.div
+        whileHover={{ scale: 1.05 }}
+        transition={{ duration: 0.3 }}
+        className="w-full lg:w-1/2 relative"
+      >
+        <div className="relative overflow-hidden rounded-2xl shadow-2xl">
+          <img
+            src={project.image}
+            alt={`Projeto ${project.title}`}
+            className="w-full h-64 lg:h-80 object-cover transition-transform duration-500 group-hover:scale-110"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </div>
+      </motion.div>
+
+      {/* Conteúdo do projeto */}
+      <div className="w-full lg:w-1/2 space-y-6">
+        <div className="space-y-3">
+          <motion.h4 
+            initial={{ opacity: 0, x: isImageLeft ? 20 : -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="text-2xl lg:text-3xl font-playfair font-bold text-brand-dark"
+          >
+            {project.title}
+          </motion.h4>
+          
+          <motion.div 
+            initial={{ opacity: 0, x: isImageLeft ? 20 : -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="text-brand-accent font-semibold text-lg"
+          >
+            {project.role}
+          </motion.div>
+        </div>
+
+        <motion.div 
+          initial={{ opacity: 0, x: isImageLeft ? 20 : -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="space-y-4 text-brand-dark/80"
+        >
+          <div>
+            <h5 className="font-semibold text-brand-dark mb-2">{t('projectProblem')}:</h5>
+            <p className="leading-relaxed">{project.problem}</p>
+          </div>
+          
+          <div>
+            <h5 className="font-semibold text-brand-dark mb-2">{t('projectSolution')}:</h5>
+            <p className="leading-relaxed">{project.solution}</p>
+          </div>
+        </motion.div>
         
-        <div className="flex flex-wrap gap-2 mb-4">
+        <motion.div 
+          initial={{ opacity: 0, x: isImageLeft ? 20 : -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="flex flex-wrap gap-2"
+        >
           {parseTextToArray(project.hashtags_text).map((tag, idx) => (
             <span
               key={idx}
-              className="text-xs font-semibold text-brand-accent bg-brand-accent/10 rounded-full px-2 py-0.5 tracking-tight"
-              style={{ fontFamily: 'Inter, sans-serif', letterSpacing: '0.01em' }}
+              className="text-sm font-medium text-brand-accent bg-brand-accent/10 rounded-full px-3 py-1 border border-brand-accent/20"
             >
               {tag}
             </span>
           ))}
-        </div>
-        <button
-          className="mt-auto px-5 py-2 rounded-full bg-brand-accent text-white font-semibold shadow hover:bg-brand-dark/90 transition"
-          onClick={() => navigate(`/projeto/${project.id}`)}
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, x: isImageLeft ? 20 : -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.7 }}
         >
-          {t('projectCaseStudyButton')}
-        </button>
+          <button
+            className="px-8 py-3 rounded-full bg-brand-accent text-white font-semibold shadow-lg hover:bg-brand-dark/90 hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+            onClick={() => navigate(`/projeto/${project.id}`)}
+          >
+            {t('projectCaseStudyButton')}
+          </button>
+        </motion.div>
       </div>
     </motion.div>
-  )
+  );
 };
 
 export default ProjectCard;
