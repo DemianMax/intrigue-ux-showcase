@@ -20,7 +20,10 @@ CREATE POLICY "Public read habilidades_tecnicas"
   FOR SELECT
   USING (true);
 
--- Inserir os dados que já estão no código atual
+-- Limpar dados existentes e inserir novos dados com mapeamento correto
+DELETE FROM public.habilidades_tecnicas;
+
+-- Inserir os dados atualizados
 -- Softwares
 INSERT INTO public.habilidades_tecnicas (categoria, nome, icone, ordem) VALUES
 ('software', 'Figma', 'Figma', 1),
@@ -34,7 +37,7 @@ INSERT INTO public.habilidades_tecnicas (categoria, nome, icone, ordem) VALUES
 INSERT INTO public.habilidades_tecnicas (categoria, nome, icone, ordem) VALUES
 ('habilidade', 'Ilustração', 'Pencil', 1),
 ('habilidade', 'Animação', 'Play', 2),
-('habilidade', 'Edição de vídeo', 'Play', 3),
+('habilidade', 'Edição de vídeo', 'Film', 3),
 ('habilidade', 'Edição de áudio', 'Headphones', 4);
 
 -- Conhecimentos
