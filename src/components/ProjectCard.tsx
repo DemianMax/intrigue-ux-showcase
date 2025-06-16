@@ -33,17 +33,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
     >
       {/* Imagem do projeto */}
       <motion.div
-        whileHover={{ scale: 1.05 }}
-        transition={{ duration: 0.3 }}
         className="w-full lg:w-1/2 relative"
       >
         <div className="relative overflow-hidden rounded-2xl shadow-2xl">
           <img
             src={project.image}
             alt={`Projeto ${project.title}`}
-            className="w-full h-64 lg:h-80 object-cover transition-transform duration-500 group-hover:scale-110"
+            className="w-full h-64 lg:h-80 object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </div>
       </motion.div>
 
@@ -55,7 +52,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-2xl lg:text-3xl font-playfair font-bold text-brand-dark"
+            className="text-xl lg:text-2xl font-playfair font-semibold text-brand-dark"
           >
             {project.title}
           </motion.h4>
@@ -65,7 +62,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-brand-accent font-semibold text-lg"
+            className="text-brand-accent font-semibold text-base"
           >
             {project.role}
           </motion.div>
@@ -76,7 +73,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="space-y-4 text-brand-dark/80"
+          className="space-y-4 text-gray-700"
         >
           <div>
             <h5 className="font-semibold text-brand-dark mb-2">{t('projectProblem')}:</h5>

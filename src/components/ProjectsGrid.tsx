@@ -29,7 +29,7 @@ const ProjectsGrid: React.FC = () => {
 
   return (
     <section className="w-full max-w-6xl mx-auto px-4 py-16" id="projetos">
-      <h3 className="text-3xl font-playfair font-bold text-brand-dark mb-16 text-center">{t('projectsTitle')}</h3>
+      <h3 className="text-4xl font-playfair font-bold text-brand-dark mb-16 text-center">{t('projectsTitle')}</h3>
       
       {isLoading && (
         <div className="space-y-16">
