@@ -14,7 +14,7 @@ function renderHabilidadeItem(habilidade: HabilidadeTecnica, widthClass: string 
   };
   
   return (
-    <div key={habilidade.id} className={`flex flex-col items-start ${widthClass}`}>
+    <div key={habilidade.id} className={`flex flex-col items-center ${widthClass}`}>
       <img 
         src={getIconUrl(habilidade.icone)} 
         alt={habilidade.nome}
@@ -32,7 +32,7 @@ function renderHabilidadeItem(habilidade: HabilidadeTecnica, widthClass: string 
 
 function renderLoadingSkeletons(count: number, widthClass: string = "w-20") {
   return Array.from({ length: count }, (_, i) => (
-    <div key={i} className={`flex flex-col items-start ${widthClass}`}>
+    <div key={i} className={`flex flex-col items-center ${widthClass}`}>
       <Skeleton className="h-9 w-9 mb-1" />
       <Skeleton className="h-4 w-16" />
     </div>
