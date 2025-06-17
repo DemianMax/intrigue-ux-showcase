@@ -20,8 +20,8 @@ export interface Project {
   challenge: string | null;
   process_images_text: string | null;
   process_legends_text: string | null;
-  solution_image: string | null;
-  solution_legend: string | null;
+  solution_images_text: string | null;
+  solution_images_legends_text: string | null;
   ui_note: string | null;
   results_text: string | null;
   next_steps: string | null;

@@ -116,8 +116,8 @@ export type Database = {
           results_text: string | null
           role: string
           solution: string
-          solution_image: string | null
-          solution_legend: string | null
+          solution_images_legends_text: string | null
+          solution_images_text: string | null
           title: string
           ui_note: string | null
         }
@@ -134,8 +134,8 @@ export type Database = {
           results_text?: string | null
           role: string
           solution: string
-          solution_image?: string | null
-          solution_legend?: string | null
+          solution_images_legends_text?: string | null
+          solution_images_text?: string | null
           title: string
           ui_note?: string | null
         }
@@ -152,8 +152,8 @@ export type Database = {
           results_text?: string | null
           role?: string
           solution?: string
-          solution_image?: string | null
-          solution_legend?: string | null
+          solution_images_legends_text?: string | null
+          solution_images_text?: string | null
           title?: string
           ui_note?: string | null
         }

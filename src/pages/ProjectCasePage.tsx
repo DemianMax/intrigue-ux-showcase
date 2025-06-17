@@ -68,6 +68,16 @@ const ProjectCasePage = () => {
       });
   };
 
+  // Função para converter texto separado por vírgulas em array (para legendas)
+  const parseLegendsToArray = (text: string | null): string[] => {
+    if (!text) return [];
+    
+    return text
+      .split(',')
+      .map(item => item.trim())
+      .filter(item => item.length > 0);
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -116,11 +126,15 @@ const ProjectCasePage = () => {
   }
 
   const processImages = parseTextToArray(project.process_images_text);
-  const processLegends = parseTextToArray(project.process_legends_text);
-  const results = parseTextToArray(project.results_text);
+  const processLegends = parseLegendsToArray(project.process_legends_text);
+  const solutionImages = parseTextToArray(project.solution_images_text);
+  const solutionLegends = parseLegendsToArray(project.solution_images_legends_text);
+  const results = parseLegendsToArray(project.results_text);
 
   console.log('Process images:', processImages);
   console.log('Process legends:', processLegends);
+  console.log('Solution images:', solutionImages);
+  console.log('Solution legends:', solutionLegends);
 
   return (
     <div className="bg-background min-h-screen relative font-inter">
@@ -251,21 +265,33 @@ const ProjectCasePage = () => {
               </div>
             </section>
           )}
-          {project.solution_image && (
+          {solutionImages.length > 0 && (
             <section className="mb-12">
-              <h3 className="text-2xl font-playfair text-brand-dark mb-2 text-left">{t('caseStudySolution')}</h3>
-              <div className="flex flex-col items-center">
-                <img 
-                  src={project.solution_image} 
-                  alt={project.solution_legend ?? 'Solution image'} 
-                  className="w-full max-w-2xl h-auto object-cover rounded-2xl mb-3 border border-border"
-                  onError={(e) => {
-                    console.error('Error loading solution image:', project.solution_image);
-                    e.currentTarget.style.display = 'none';
-                  }}
-                />
-                {project.solution_legend && <div className="text-sm text-brand-dark/80 font-inter mb-2 text-center">{project.solution_legend}</div>}
-                {project.ui_note && <div className="text-base text-brand-dark/70 font-inter text-center mt-4">{project.ui_note}</div>}
+              <h3 className="text-2xl font-playfair text-brand-dark mb-5 text-left">{t('caseStudySolution')}</h3>
+              <div className="space-y-8">
+                {solutionImages.map((img, index) => (
+                  <div key={`solution-${index}`} className="flex flex-col items-center">
+                    <img 
+                      src={img} 
+                      alt={solutionLegends[index] ?? `Solution image ${index + 1}`} 
+                      className="w-full max-w-2xl h-auto object-cover rounded-2xl mb-3 border border-border"
+                      onError={(e) => {
+                        console.error('Error loading solution image:', img);
+                        e.currentTarget.style.display = 'none';
+                      }}
+                    />
+                    {solutionLegends[index] && (
+                      <div className="text-sm text-brand-dark/80 font-inter mb-2 text-center">
+                        {solutionLegends[index]}
+                      </div>
+                    )}
+                  </div>
+                ))}
+                {project.ui_note && (
+                  <div className="text-base text-brand-dark/70 font-inter text-center mt-4">
+                    {project.ui_note}
+                  </div>
+                )}
               </div>
             </section>
           )}
