@@ -1,3 +1,4 @@
+
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -13,6 +14,14 @@ type Experiencia = {
   periodo: string;
   descricao: string[];
 };
+
+type Educacao = {
+  instituicao: string;
+  curso: string;
+  periodo: string;
+  descricao: string;
+};
+
 type Curriculo = {
   id: string;
   nome: string;
@@ -20,6 +29,7 @@ type Curriculo = {
   resumo: string;
   resumo_profissional: string;
   experiencias: Experiencia[];
+  educacao: Educacao[];
 };
 
 const fetchCurriculo = async (): Promise<Curriculo | null> => {
@@ -48,6 +58,19 @@ const fetchCurriculo = async (): Promise<Curriculo | null> => {
     } catch {}
   }
 
+  // Parse educacao to type Educacao[] only if valid
+  let educacao: Educacao[] = [];
+  if (Array.isArray(data.educacao)) {
+    educacao = data.educacao as Educacao[];
+  } else if (typeof data.educacao === "string") {
+    try {
+      const parsed = JSON.parse(data.educacao);
+      if (Array.isArray(parsed)) {
+        educacao = parsed as Educacao[];
+      }
+    } catch {}
+  }
+
   return {
     id: data.id,
     nome: data.nome,
@@ -55,6 +78,7 @@ const fetchCurriculo = async (): Promise<Curriculo | null> => {
     resumo: data.resumo,
     resumo_profissional: data.resumo_profissional,
     experiencias: experiencias,
+    educacao: educacao,
   };
 };
 
@@ -124,7 +148,7 @@ const Resume = () => {
         </section>
 
         {/* Experiência Completa */}
-        <section>
+        <section className="mb-12">
           <h3 className="text-2xl font-playfair font-bold text-brand-accent mb-6">
             Experiência Completa
           </h3>
@@ -149,6 +173,34 @@ const Resume = () => {
                       <li key={i}>{item}</li>
                     ))}
                   </ul>
+                </div>
+              ))
+            )}
+          </div>
+        </section>
+
+        {/* Educação */}
+        <section className="mb-12">
+          <h3 className="text-2xl font-playfair font-bold text-brand-accent mb-6">
+            Educação
+          </h3>
+
+          <div className="border-l-2 border-brand-accent/50 pl-6 relative space-y-10">
+            {isLoading ? (
+              <>
+                <Skeleton className="h-8 w-48 mb-2" />
+                <Skeleton className="h-5 w-32 mb-2" />
+                <Skeleton className="h-10 w-full mb-5" />
+              </>
+            ) : (
+              curriculo?.educacao?.map((edu, idx) => (
+                <div className="relative" key={idx}>
+                  <div className="absolute -left-[34px] top-1 w-4 h-4 bg-brand-accent rounded-full border-4 border-background"></div>
+                  <h4 className="font-bold text-xl text-brand-dark">{edu.curso}</h4>
+                  <p className="text-sm text-brand-dark/70 mb-2">
+                    {edu.instituicao} | {edu.periodo}
+                  </p>
+                  <p className="text-brand-dark/90">{edu.descricao}</p>
                 </div>
               ))
             )}
