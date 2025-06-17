@@ -12,4 +12,12 @@ export default function AboutSection() {
         </p>
 
         <Link to="/curriculo">
-          <Button size="lg" className="bg-brand-accent hover:bg-bran
+          <Button size="lg" className="bg-brand-accent hover:bg-brand-accent/90 text-white font-semibold">
+            {t('aboutButton')}
+            <ArrowRight className="ml-2 h-5 w-5" />
+          </Button>
+        </Link>
+      </div>
+    </section>
+  );
+}
