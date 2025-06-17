@@ -3,33 +3,27 @@ import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useHabilidadesTecnicas, type HabilidadeTecnica } from "@/hooks/useHabilidadesTecnicas";
 
-// Mapeamento dos nomes dos ícones para os caminhos dos SVGs
-const iconMap: Record<string, string> = {
-  Figma: "/icons/figma.svg",
-  Framer: "/icons/framer.svg",
-  Image: "/icons/photoshop.svg",
-  PenSquare: "/icons/illustrator.svg",
-  Film: "/icons/after-effects.svg",
-  PenLine: "/icons/sketch.svg",
-  Pencil: "/icons/illustration.svg",
-  Play: "/icons/animation.svg",
-  Headphones: "/icons/audio-editing.svg",
-  LayoutDashboard: "/icons/design-thinking.svg",
-  PenTool: "/icons/user-experience.svg",
-  Text: "/icons/ux-writing.svg",
-  Square: "/icons/responsive-design.svg"
-};
-
 function renderHabilidadeItem(habilidade: HabilidadeTecnica, widthClass: string = "w-20") {
-  const iconSrc = iconMap[habilidade.icone] || "/icons/responsive-design.svg";
+  // Se o ícone for uma URL completa, use diretamente. Senão, use um ícone padrão do Heroicons
+  const getIconUrl = (icone: string) => {
+    if (icone.startsWith('http') || icone.startsWith('https')) {
+      return icone;
+    }
+    // Usar Heroicons como fallback - ícone de código genérico
+    return `https://heroicons.com/24/outline/${icone}.svg`;
+  };
   
   return (
     <div key={habilidade.id} className={`flex flex-col items-center ${widthClass}`}>
       <img 
-        src={iconSrc} 
+        src={getIconUrl(habilidade.icone)} 
         alt={habilidade.nome}
         className="w-9 h-9 mb-1"
         style={{ filter: 'brightness(0) saturate(100%) invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(97%)' }}
+        onError={(e) => {
+          // Fallback para um ícone genérico se a imagem falhar
+          e.currentTarget.src = 'https://heroicons.com/24/outline/code-bracket.svg';
+        }}
       />
       <span className="text-sm text-muted-foreground text-center">{habilidade.nome}</span>
     </div>

@@ -20,35 +20,35 @@ CREATE POLICY "Public read habilidades_tecnicas"
   FOR SELECT
   USING (true);
 
--- Limpar dados existentes e inserir novos dados com mapeamento correto
+-- Limpar dados existentes e inserir novos dados com URLs de ícones gratuitos
 DELETE FROM public.habilidades_tecnicas;
 
--- Inserir os dados atualizados
+-- Inserir os dados atualizados com URLs do Simple Icons (gratuito)
 -- Softwares
 INSERT INTO public.habilidades_tecnicas (categoria, nome, icone, ordem) VALUES
-('software', 'Figma', 'Figma', 1),
-('software', 'Framer', 'Framer', 2),
-('software', 'Photoshop', 'Image', 3),
-('software', 'Illustrator', 'PenSquare', 4),
-('software', 'After Effects', 'Film', 5),
-('software', 'Sketch', 'PenLine', 6);
+('software', 'Figma', 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/figma.svg', 1),
+('software', 'Framer', 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/framer.svg', 2),
+('software', 'Photoshop', 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/adobephotoshop.svg', 3),
+('software', 'Illustrator', 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/adobeillustrator.svg', 4),
+('software', 'After Effects', 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/adobeaftereffects.svg', 5),
+('software', 'Sketch', 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/sketch.svg', 6);
 
--- Habilidades
+-- Habilidades - usando ícones do Heroicons via jsDelivr
 INSERT INTO public.habilidades_tecnicas (categoria, nome, icone, ordem) VALUES
-('habilidade', 'Ilustração', 'Pencil', 1),
-('habilidade', 'Animação', 'Play', 2),
-('habilidade', 'Edição de vídeo', 'Film', 3),
-('habilidade', 'Edição de áudio', 'Headphones', 4);
+('habilidade', 'Ilustração', 'https://heroicons.com/24/outline/paint-brush.svg', 1),
+('habilidade', 'Animação', 'https://heroicons.com/24/outline/play.svg', 2),
+('habilidade', 'Edição de vídeo', 'https://heroicons.com/24/outline/film.svg', 3),
+('habilidade', 'Edição de áudio', 'https://heroicons.com/24/outline/speaker-wave.svg', 4);
 
--- Conhecimentos
+-- Conhecimentos - usando ícones do Heroicons
 INSERT INTO public.habilidades_tecnicas (categoria, nome, icone, ordem) VALUES
-('conhecimento', 'Design Thinking', 'LayoutDashboard', 1),
-('conhecimento', 'User Experience', 'PenTool', 2),
-('conhecimento', 'UX Writing', 'Text', 3),
-('conhecimento', 'UX Research', 'PenTool', 4),
-('conhecimento', 'Prototipação', 'LayoutDashboard', 5),
-('conhecimento', 'Design Responsivo', 'Square', 6),
-('conhecimento', 'Design Gráfico', 'Pencil', 7),
-('conhecimento', 'Sistemas B2B e B2C', 'LayoutDashboard', 8),
-('conhecimento', 'Projetos Ágeis com Scrum', 'Square', 9),
-('conhecimento', 'Vibe code', 'PenTool', 10);
+('conhecimento', 'Design Thinking', 'https://heroicons.com/24/outline/light-bulb.svg', 1),
+('conhecimento', 'User Experience', 'https://heroicons.com/24/outline/user.svg', 2),
+('conhecimento', 'UX Writing', 'https://heroicons.com/24/outline/pencil-square.svg', 3),
+('conhecimento', 'UX Research', 'https://heroicons.com/24/outline/magnifying-glass.svg', 4),
+('conhecimento', 'Prototipação', 'https://heroicons.com/24/outline/squares-2x2.svg', 5),
+('conhecimento', 'Design Responsivo', 'https://heroicons.com/24/outline/device-phone-mobile.svg', 6),
+('conhecimento', 'Design Gráfico', 'https://heroicons.com/24/outline/photo.svg', 7),
+('conhecimento', 'Sistemas B2B e B2C', 'https://heroicons.com/24/outline/building-office.svg', 8),
+('conhecimento', 'Projetos Ágeis com Scrum', 'https://heroicons.com/24/outline/arrow-path.svg', 9),
+('conhecimento', 'Vibe code', 'https://heroicons.com/24/outline/code-bracket.svg', 10);
