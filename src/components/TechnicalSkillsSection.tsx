@@ -10,7 +10,7 @@ function renderHabilidadeItem(habilidade: HabilidadeTecnica, widthClass: string 
       return icone;
     }
     // Usar Heroicons como fallback - ícone de código genérico
-    return `https://heroicons.com/24/outline/${pen}.svg`;
+    return `https://heroicons.com/24/outline/${icone}.svg`;
   };
   
   return (
@@ -55,7 +55,7 @@ export default function TechnicalSkillsSection() {
       {/* Parte 1: Softwares */}
       <div>
         <h3 className="text-xl font-semibold mb-3 text-brand-dark">Softwares</h3>
-        <div className="flex flex-wrap justify-start items-center gap-x-8 gap-y-4 py-2">
+        <div className="flex flex-wrap justify-center items-start gap-x-8 gap-y-4 py-2">
           {isLoading ? 
             renderLoadingSkeletons(6, "w-20") : 
             softwares.map(software => renderHabilidadeItem(software, "w-20"))
@@ -70,7 +70,7 @@ export default function TechnicalSkillsSection() {
       {/* Parte 2: Habilidades */}
       <div>
         <h3 className="text-xl font-semibold mb-3 text-brand-dark">Habilidades</h3>
-        <div className="flex flex-wrap justify-start items-center gap-x-8 gap-y-4 py-2">
+        <div className="flex flex-wrap justify-center items-start gap-x-8 gap-y-4 py-2">
           {isLoading ? 
             renderLoadingSkeletons(4, "w-20") : 
             habilidadesItems.map(habilidade => renderHabilidadeItem(habilidade, "w-20"))
@@ -85,7 +85,7 @@ export default function TechnicalSkillsSection() {
       {/* Parte 3: Conhecimentos */}
       <div>
         <h3 className="text-xl font-semibold mb-3 text-brand-dark">Conhecimentos</h3>
-        <div className="flex flex-wrap justify-start items-center gap-x-8 gap-y-4 py-2">
+        <div className="flex flex-wrap justify-center items-start gap-x-8 gap-y-4 py-2">
           {isLoading ? 
             renderLoadingSkeletons(10, "w-32") : 
             conhecimentos.map(conhecimento => renderHabilidadeItem(conhecimento, "w-32"))
