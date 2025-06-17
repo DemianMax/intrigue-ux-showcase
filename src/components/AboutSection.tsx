@@ -52,12 +52,15 @@ const AboutSection = React.forwardRef<HTMLDivElement>((props, ref) => {
               </>
             )}
           </p>
-          <Link to="/curriculo">
-            <Button size="lg" className="bg-brand-accent hover:bg-brand-accent/90 text-white font-semibold">
-              {t('aboutButton')}
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-          </Link>
+          <a
+  href="/Curriculo-Max-Demian.pdf"
+  download
+  className="inline-flex items-center justify-center gap-2 h-10 px-4 py-2 bg-brand-accent hover:bg-brand-accent/90 text-white font-semibold rounded-md"
+>
+  Baixar Currículo
+  <ArrowRight className="ml-2 h-5 w-5" />
+</a>
+
         </div>
       </div>
       {isLoading && <div className="text-muted-foreground text-center mt-4">Carregando informações...</div>}
