@@ -101,7 +101,7 @@ const Resume = () => {
           <h1 className="hidden sm:block text-2xl font-playfair font-bold">
             {isLoading ? <Skeleton className="h-8 w-36" /> : curriculo?.nome}
           </h1>
-          <a href="/Curriculo-Max-Demian.pdf">
+          <a href="/Curriculo-Max-Demian.pdf" target="_blank" rel="noopener noreferrer">
             <Button
               variant="default"
               className="bg-brand-accent hover:bg-brand-accent/90 text-white"
