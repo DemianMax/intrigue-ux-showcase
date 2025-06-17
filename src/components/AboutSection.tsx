@@ -52,7 +52,7 @@ const AboutSection = React.forwardRef<HTMLDivElement>((props, ref) => {
           </p>
           <a
             href="https://maxdemian.vercel.app/curriculo"
-            target="_blank"
+            target="_self"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-2 h-10 px-4 py-2 bg-brand-accent hover:bg-brand-accent/90 text-white font-semibold rounded-md"
           >
