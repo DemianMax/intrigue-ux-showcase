@@ -38,6 +38,9 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onScrollToAbout }) => {
             className="text-xl sm:text-2xl text-brand-dark/80 font-inter font-light leading-relaxed"
           >
             {t("heroSubtitle")}
+             <p className="text-xl sm:text-1xl text-brand-dark/80 font-inter font-light leading-relaxed mt-2">
+      {t('heroSubtitleLine2')}
+    </p>
           </motion.p>
         </AnimatePresence>
       </div>
