@@ -1,4 +1,5 @@
 
+import BackToTopButton from "@/components/BackToTopButton";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -25,6 +26,7 @@ const App = () => (
             <Route path="/projeto/:projectId" element={<ProjectCasePage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
+          <BackToTopButton />
         </BrowserRouter>
       </TooltipProvider>
     </LanguageProvider>
