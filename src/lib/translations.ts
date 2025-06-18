@@ -6,7 +6,7 @@ export const translations = {
     navContact: 'Contato',
     openMenu: 'Abrir menu',
     aboutGreeting: 'Muito prazer, sou Max Demian',
-    aboutParagraph1: 'Designer apaixonado por criar experiências ',
+    aboutParagraph1: 'UX Designer com 20 anos de experiência criando experiências digitais intuitivas, centradas no usuário e com resultados reais.',
     aboutParagraph1Highlight: 'intuitivas e envolventes',
     aboutParagraph1Cont: '. Entrego mais do que telas bonitas: pesquiso, facilito, crio soluções visuais e estratégias focadas nas pessoas.',
     aboutParagraph2: 'Minhas habilidades em ilustração/infografia ',
