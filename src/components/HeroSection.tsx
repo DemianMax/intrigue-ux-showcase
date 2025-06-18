@@ -31,18 +31,28 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onScrollToAbout }) => {
         </motion.h1>
 
         <AnimatePresence>
-          <motion.p
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7, duration: 0.7 }}
-            className="text-xl sm:text-2xl text-brand-dark/80 font-inter font-light leading-relaxed"
-          >
-            {t("heroSubtitle")}
-             <p className="text-xl sm:text-1xl text-brand-dark/80 font-inter font-light leading-relaxed mt-2">
+  <motion.div
+    initial={{ opacity: 0, y: 14 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 0.7, duration: 0.7 }}
+    className="flex flex-col items-start"
+  >
+    <p className="text-xl sm:text-2xl text-brand-dark/80 font-inter font-light leading-relaxed">
+      {t('heroSubtitle')}
+    </p>
+    <p className="text-xl sm:text-2xl text-brand-dark/80 font-inter font-light leading-relaxed mt-4">
       {t('heroSubtitleLine2')}
     </p>
-          </motion.p>
-        </AnimatePresence>
+
+    <motion.div
+      initial={{ scaleX: 0 }}
+      animate={{ scaleX: 1 }}
+      transition={{ delay: 1, duration: 0.6, type: "spring" }}
+      style={{ transformOrigin: "left" }}
+      className="mt-6 h-1 w-32 bg-brand-accent/80 rounded-full"
+    />
+  </motion.div>
+</AnimatePresence>
       </div>
 
       <motion.button
