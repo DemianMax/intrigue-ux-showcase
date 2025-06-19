@@ -7,10 +7,11 @@ import { motion } from "framer-motion";
 // Função para normalizar o nome e bater com a chave do translations
 function normalizeKey(str: string) {
   return str
-    .normalize("NFD") // remove acentos
-    .replace(/[\u0300-\u036f]/g, "") // remove caracteres especiais
-    .toLowerCase() // minúscula
-    .replace(/\s+/g, ""); // remove espaços
+    .trim() // <-- ESSENCIAL: remove espaços extras que estavam causando o problema
+    .normalize("NFD") 
+    .replace(/[\u0300-\u036f]/g, "") 
+    .toLowerCase()
+    .replace(/\s+/g, "");
 }
 
 function renderHabilidadeItem(habilidade: HabilidadeTecnica, widthClass: string = "w-20", t: any) {
@@ -69,7 +70,6 @@ export default function TechnicalSkillsSection() {
         {t('skillsTitle')}
       </h2>
 
-      {/* Softwares */}
       <div>
         <h3 className="text-xl font-semibold mb-3 text-brand-dark">{t('skillsSoftwares')}</h3>
         <div className="flex flex-wrap justify-center items-start gap-x-8 gap-y-4 py-2">
@@ -84,7 +84,6 @@ export default function TechnicalSkillsSection() {
         <Separator />
       </div>
 
-      {/* Habilidades */}
       <div>
         <h3 className="text-xl font-semibold mb-3 text-brand-dark">{t('skillsAbilities')}</h3>
         <div className="flex flex-wrap justify-center items-start gap-x-8 gap-y-4 py-2">
@@ -99,7 +98,6 @@ export default function TechnicalSkillsSection() {
         <Separator />
       </div>
 
-      {/* Conhecimentos */}
       <div>
         <h3 className="text-xl font-semibold mb-3 text-brand-dark">{t('skillsKnowledge')}</h3>
         <div className="flex flex-wrap justify-center items-start gap-x-8 gap-y-4 py-2">
