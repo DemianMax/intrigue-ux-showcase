@@ -7,7 +7,10 @@ export const translations = {
     openMenu: 'Abrir menu',
     aboutGreeting: 'Muito prazer, sou Max Demian',
 
-    // NOVAS LINHAS PARA O ABOUT
+    technicalSkillsTitle: 'Habilidades Técnicas',
+    technicalSkillsSoftwares: 'Softwares',
+    technicalSkillsSkills: 'Habilidades',
+    technicalSkillsKnowledge: 'Conhecimentos',
     aboutIntro: 'Designer apaixonado por criar experiências intuitivas e envolventes.',
     aboutIntroLine2: 'Busco traduzir necessidades em soluções simples e funcionais.',
 
@@ -45,7 +48,10 @@ export const translations = {
     openMenu: 'Open menu',
     aboutGreeting: "It's a pleasure, I'm Max Demian",
 
-    // NOVAS LINHAS PARA O ABOUT
+    technicalSkillsTitle: 'Technical Skills',
+    technicalSkillsSoftwares: 'Softwares',
+    technicalSkillsSkills: 'Skills',
+    technicalSkillsKnowledge: 'Knowledge',
     aboutIntro: 'Designer passionate about creating intuitive and engaging experiences.',
     aboutIntroLine2: 'I seek to translate needs into simple and functional solutions.',
 
