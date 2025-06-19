@@ -22,7 +22,7 @@ function renderHabilidadeItem(habilidade: HabilidadeTecnica, widthClass: string 
   };
 
   const normalizedKey = normalizeKey(habilidade.nome);
-  const label = t(`skillTranslations.${normalizedKey}`) || habilidade.nome;
+  const label = t(`skills.${normalizedKey}`) || habilidade.nome;
 
   return (
     <motion.div 
@@ -41,9 +41,7 @@ function renderHabilidadeItem(habilidade: HabilidadeTecnica, widthClass: string 
           e.currentTarget.src = 'https://heroicons.com/24/outline/code-bracket.svg';
         }}
       />
-    <span className="text-sm text-muted-foreground text-center">
-  {t(`skills.${habilidade.nome}`) ?? habilidade.nome}
-</span>
+      <span className="text-sm text-muted-foreground text-center">{label}</span>
     </motion.div>
   );
 }
@@ -71,6 +69,7 @@ export default function TechnicalSkillsSection() {
         {t('skillsTitle')}
       </h2>
 
+      {/* Softwares */}
       <div>
         <h3 className="text-xl font-semibold mb-3 text-brand-dark">{t('skillsSoftwares')}</h3>
         <div className="flex flex-wrap justify-center items-start gap-x-8 gap-y-4 py-2">
@@ -85,6 +84,7 @@ export default function TechnicalSkillsSection() {
         <Separator />
       </div>
 
+      {/* Habilidades */}
       <div>
         <h3 className="text-xl font-semibold mb-3 text-brand-dark">{t('skillsAbilities')}</h3>
         <div className="flex flex-wrap justify-center items-start gap-x-8 gap-y-4 py-2">
@@ -99,6 +99,7 @@ export default function TechnicalSkillsSection() {
         <Separator />
       </div>
 
+      {/* Conhecimentos */}
       <div>
         <h3 className="text-xl font-semibold mb-3 text-brand-dark">{t('skillsKnowledge')}</h3>
         <div className="flex flex-wrap justify-center items-start gap-x-8 gap-y-4 py-2">
