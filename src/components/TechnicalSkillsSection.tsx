@@ -4,6 +4,15 @@ import { useHabilidadesTecnicas, type HabilidadeTecnica } from "@/hooks/useHabil
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
 
+// Função para normalizar o nome e bater com a chave do translations
+function normalizeKey(str: string) {
+  return str
+    .normalize("NFD") // remove acentos
+    .replace(/[\u0300-\u036f]/g, "") // remove caracteres especiais
+    .toLowerCase() // minúscula
+    .replace(/\s+/g, ""); // remove espaços
+}
+
 function renderHabilidadeItem(habilidade: HabilidadeTecnica, widthClass: string = "w-20", t: any) {
   const getIconUrl = (icone: string) => {
     if (icone.startsWith('http') || icone.startsWith('https')) {
@@ -11,6 +20,9 @@ function renderHabilidadeItem(habilidade: HabilidadeTecnica, widthClass: string 
     }
     return `https://heroicons.com/24/outline/${icone}.svg`;
   };
+
+  const normalizedKey = normalizeKey(habilidade.nome);
+  const label = t(`skillTranslations.${normalizedKey}`) || habilidade.nome;
 
   return (
     <motion.div 
@@ -30,7 +42,7 @@ function renderHabilidadeItem(habilidade: HabilidadeTecnica, widthClass: string 
         }}
       />
       <span className="text-sm text-muted-foreground text-center">
-        {t(`skillTranslations.${habilidade.nome}`) || habilidade.nome}
+        {label}
       </span>
     </motion.div>
   );
@@ -61,41 +73,4 @@ export default function TechnicalSkillsSection() {
 
       <div>
         <h3 className="text-xl font-semibold mb-3 text-brand-dark">{t('skillsSoftwares')}</h3>
-        <div className="flex flex-wrap justify-center items-start gap-x-8 gap-y-4 py-2">
-          {isLoading 
-            ? renderLoadingSkeletons(6, "w-20") 
-            : softwares.map(software => renderHabilidadeItem(software, "w-20", t))
-          }
-        </div>
-      </div>
-
-      <div className="my-8">
-        <Separator />
-      </div>
-
-      <div>
-        <h3 className="text-xl font-semibold mb-3 text-brand-dark">{t('skillsAbilities')}</h3>
-        <div className="flex flex-wrap justify-center items-start gap-x-8 gap-y-4 py-2">
-          {isLoading 
-            ? renderLoadingSkeletons(4, "w-20") 
-            : habilidadesItems.map(habilidade => renderHabilidadeItem(habilidade, "w-20", t))
-          }
-        </div>
-      </div>
-
-      <div className="my-8">
-        <Separator />
-      </div>
-
-      <div>
-        <h3 className="text-xl font-semibold mb-3 text-brand-dark">{t('skillsKnowledge')}</h3>
-        <div className="flex flex-wrap justify-center items-start gap-x-8 gap-y-4 py-2">
-          {isLoading 
-            ? renderLoadingSkeletons(10, "w-32") 
-            : conhecimentos.map(conhecimento => renderHabilidadeItem(conhecimento, "w-32", t))
-          }
-        </div>
-      </div>
-    </section>
-  );
-}
+        <di
