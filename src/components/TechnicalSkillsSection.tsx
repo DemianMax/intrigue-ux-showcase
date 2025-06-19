@@ -73,4 +73,41 @@ export default function TechnicalSkillsSection() {
 
       <div>
         <h3 className="text-xl font-semibold mb-3 text-brand-dark">{t('skillsSoftwares')}</h3>
-        <di
+        <div className="flex flex-wrap justify-center items-start gap-x-8 gap-y-4 py-2">
+          {isLoading 
+            ? renderLoadingSkeletons(6, "w-20") 
+            : softwares.map(software => renderHabilidadeItem(software, "w-20", t))
+          }
+        </div>
+      </div>
+
+      <div className="my-8">
+        <Separator />
+      </div>
+
+      <div>
+        <h3 className="text-xl font-semibold mb-3 text-brand-dark">{t('skillsAbilities')}</h3>
+        <div className="flex flex-wrap justify-center items-start gap-x-8 gap-y-4 py-2">
+          {isLoading 
+            ? renderLoadingSkeletons(4, "w-20") 
+            : habilidadesItems.map(habilidade => renderHabilidadeItem(habilidade, "w-20", t))
+          }
+        </div>
+      </div>
+
+      <div className="my-8">
+        <Separator />
+      </div>
+
+      <div>
+        <h3 className="text-xl font-semibold mb-3 text-brand-dark">{t('skillsKnowledge')}</h3>
+        <div className="flex flex-wrap justify-center items-start gap-x-8 gap-y-4 py-2">
+          {isLoading 
+            ? renderLoadingSkeletons(10, "w-32") 
+            : conhecimentos.map(conhecimento => renderHabilidadeItem(conhecimento, "w-32", t))
+          }
+        </div>
+      </div>
+    </section>
+  );
+}
