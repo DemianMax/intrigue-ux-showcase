@@ -41,9 +41,9 @@ function renderHabilidadeItem(habilidade: HabilidadeTecnica, widthClass: string 
           e.currentTarget.src = 'https://heroicons.com/24/outline/code-bracket.svg';
         }}
       />
-      <span className="text-sm text-muted-foreground text-center">
-        {label}
-      </span>
+    <span className="text-sm text-muted-foreground text-center">
+  {t(`skills.${habilidade.nome}`) ?? habilidade.nome}
+</span>
     </motion.div>
   );
 }
