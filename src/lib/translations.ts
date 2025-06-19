@@ -32,13 +32,12 @@ export const translations = {
     projectProblem: 'Problema',
     projectSolution: 'Solução',
 
-    // Novos para habilidades
     skillsTitle: 'Habilidades Técnicas',
     skillsSoftwares: 'Softwares',
     skillsAbilities: 'Habilidades',
     skillsKnowledge: 'Conhecimentos',
 
-    skillTranslations: {
+    skills: {
       miro: 'Miro',
       figma: 'Figma',
       framer: 'Framer',
@@ -57,8 +56,8 @@ export const translations = {
       prototipacao: 'Prototipação',
       designresponsivo: 'Design Responsivo',
       designgrafico: 'Design Gráfico',
-      sistemasb2beb2c: 'Sistemas B2B e B2C',
-      projetosageiscomscrum: 'Projetos Ágeis com Scrum',
+      sistemasb2be2c: 'Sistemas B2B e B2C',
+      projetosageiscomscrum: 'Projetos Ágeis com Scrum'
     }
   },
 
@@ -95,13 +94,12 @@ export const translations = {
     projectProblem: 'Problem',
     projectSolution: 'Solution',
 
-    // Novos para habilidades
     skillsTitle: 'Technical Skills',
     skillsSoftwares: 'Softwares',
     skillsAbilities: 'Skills',
     skillsKnowledge: 'Knowledge',
 
-    skillTranslations: {
+    skills: {
       miro: 'Miro',
       figma: 'Figma',
       framer: 'Framer',
@@ -120,8 +118,8 @@ export const translations = {
       prototipacao: 'Prototyping',
       designresponsivo: 'Responsive Design',
       designgrafico: 'Graphic Design',
-      sistemasb2beb2c: 'B2B and B2C Systems',
-      projetosageiscomscrum: 'Agile Projects with Scrum',
+      sistemasb2be2c: 'B2B & B2C Systems',
+      projetosageiscomscrum: 'Agile Projects with Scrum'
     }
   }
-};
+}
