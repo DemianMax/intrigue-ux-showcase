@@ -1,48 +1,11 @@
 export const translations = {
   pt: {
-
-    skillTranslations: {
-  // Softwares
-  miro: 'Miro',
-  figma: 'Figma',
-  framer: 'Framer',
-  photoshop: 'Photoshop',
-  illustrator: 'Illustrator',
-  aftereffects: 'After Effects',
-
-  // Skills
-  ilustracao: 'Ilustração',
-  animacao: 'Animação',
-  edicaovideo: 'Edição de vídeo',
-  edicaoaudio: 'Edição de áudio',
-  vibecode: 'Vibe code',
-
-  // Knowledge
-  designthinking: 'Design Thinking',
-  userexperience: 'User Experience',
-  uxwriting: 'UX Writing',
-  uxresearch: 'UX Research',
-  prototipacao: 'Prototipação',
-  designresponsivo: 'Design Responsivo',
-  designgrafico: 'Design Gráfico',
-  sistemasb2bb2c: 'Sistemas B2B e B2C',
-  projetosageisscrum: 'Projetos Ágeis com Scrum',
-},
-    
     navHome: 'Início',
     navAbout: 'Sobre',
     navProjects: 'Projetos',
     navContact: 'Contato',
     openMenu: 'Abrir menu',
     aboutGreeting: 'Muito prazer, sou Max Demian',
-
-    technicalSkillsTitle: 'Habilidades Técnicas',
-    technicalSkillsSoftwares: 'Softwares',
-    technicalSkillsSkills: 'Habilidades',
-    technicalSkillsKnowledge: 'Conhecimentos',
-    aboutIntro: 'Designer apaixonado por criar experiências intuitivas e envolventes.',
-    aboutIntroLine2: 'Busco traduzir necessidades em soluções simples e funcionais.',
-
     aboutParagraph1: 'UX Designer com 20 anos de experiência criando experiências digitais intuitivas, ',
     aboutParagraph1Highlight: 'centradas no usuário e com resultados reais.',
     aboutParagraph1Cont: '. Entrego mais do que telas bonitas: pesquiso, facilito, crio soluções visuais e estratégias focadas nas pessoas.',
@@ -68,51 +31,44 @@ export const translations = {
     caseStudyClose: 'Fechar',
     projectProblem: 'Problema',
     projectSolution: 'Solução',
-  },
-  en: {
+
+    // Novos para habilidades
+    skillsTitle: 'Habilidades Técnicas',
+    skillsSoftwares: 'Softwares',
+    skillsAbilities: 'Habilidades',
+    skillsKnowledge: 'Conhecimentos',
 
     skillTranslations: {
-  // Softwares
-  miro: 'Miro',
-  figma: 'Figma',
-  framer: 'Framer',
-  photoshop: 'Photoshop',
-  illustrator: 'Illustrator',
-  aftereffects: 'After Effects',
+      miro: 'Miro',
+      figma: 'Figma',
+      framer: 'Framer',
+      photoshop: 'Photoshop',
+      illustrator: 'Illustrator',
+      aftereffects: 'After Effects',
+      ilustracao: 'Ilustração',
+      animacao: 'Animação',
+      edicaodevideo: 'Edição de vídeo',
+      edicaodeaudio: 'Edição de áudio',
+      vibecode: 'Vibe code',
+      designthinking: 'Design Thinking',
+      userexperience: 'User Experience',
+      uxwriting: 'UX Writing',
+      uxresearch: 'UX Research',
+      prototipacao: 'Prototipação',
+      designresponsivo: 'Design Responsivo',
+      designgrafico: 'Design Gráfico',
+      sistemasb2beb2c: 'Sistemas B2B e B2C',
+      projetosageiscomscrum: 'Projetos Ágeis com Scrum',
+    }
+  },
 
-  // Skills
-  ilustracao: 'Illustration',
-  animacao: 'Animation',
-  edicaovideo: 'Video editing',
-  edicaoaudio: 'Audio editing',
-  vibecode: 'Vibe code',
-
-  // Knowledge
-  designthinking: 'Design Thinking',
-  userexperience: 'User Experience',
-  uxwriting: 'UX Writing',
-  uxresearch: 'UX Research',
-  prototipacao: 'Prototyping',
-  designresponsivo: 'Responsive Design',
-  designgrafico: 'Graphic Design',
-  sistemasb2bb2c: 'B2B and B2C Systems',
-  projetosageisscrum: 'Agile Projects with Scrum',
-},
-    
+  en: {
     navHome: 'Home',
     navAbout: 'About',
     navProjects: 'Projects',
     navContact: 'Contact',
     openMenu: 'Open menu',
     aboutGreeting: "It's a pleasure, I'm Max Demian",
-
-    technicalSkillsTitle: 'Technical Skills',
-    technicalSkillsSoftwares: 'Softwares',
-    technicalSkillsSkills: 'Skills',
-    technicalSkillsKnowledge: 'Knowledge',
-    aboutIntro: 'Designer passionate about creating intuitive and engaging experiences.',
-    aboutIntroLine2: 'I seek to translate needs into simple and functional solutions.',
-
     aboutParagraph1: 'Passionate designer creating ',
     aboutParagraph1Highlight: 'intuitive and engaging',
     aboutParagraph1Cont: ' experiences. I deliver more than beautiful screens: I research, facilitate, create visual solutions and people-focused strategies.',
@@ -138,5 +94,34 @@ export const translations = {
     caseStudyClose: 'Close',
     projectProblem: 'Problem',
     projectSolution: 'Solution',
+
+    // Novos para habilidades
+    skillsTitle: 'Technical Skills',
+    skillsSoftwares: 'Softwares',
+    skillsAbilities: 'Skills',
+    skillsKnowledge: 'Knowledge',
+
+    skillTranslations: {
+      miro: 'Miro',
+      figma: 'Figma',
+      framer: 'Framer',
+      photoshop: 'Photoshop',
+      illustrator: 'Illustrator',
+      aftereffects: 'After Effects',
+      ilustracao: 'Illustration',
+      animacao: 'Animation',
+      edicaodevideo: 'Video Editing',
+      edicaodeaudio: 'Audio Editing',
+      vibecode: 'Vibe code',
+      designthinking: 'Design Thinking',
+      userexperience: 'User Experience',
+      uxwriting: 'UX Writing',
+      uxresearch: 'UX Research',
+      prototipacao: 'Prototyping',
+      designresponsivo: 'Responsive Design',
+      designgrafico: 'Graphic Design',
+      sistemasb2beb2c: 'B2B and B2C Systems',
+      projetosageiscomscrum: 'Agile Projects with Scrum',
+    }
   }
 };
