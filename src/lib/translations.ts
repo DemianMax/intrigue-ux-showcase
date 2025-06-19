@@ -1,5 +1,34 @@
 export const translations = {
   pt: {
+
+    skillTranslations: {
+  // Softwares
+  miro: 'Miro',
+  figma: 'Figma',
+  framer: 'Framer',
+  photoshop: 'Photoshop',
+  illustrator: 'Illustrator',
+  aftereffects: 'After Effects',
+
+  // Skills
+  ilustracao: 'Ilustração',
+  animacao: 'Animação',
+  edicaovideo: 'Edição de vídeo',
+  edicaoaudio: 'Edição de áudio',
+  vibecode: 'Vibe code',
+
+  // Knowledge
+  designthinking: 'Design Thinking',
+  userexperience: 'User Experience',
+  uxwriting: 'UX Writing',
+  uxresearch: 'UX Research',
+  prototipacao: 'Prototipação',
+  designresponsivo: 'Design Responsivo',
+  designgrafico: 'Design Gráfico',
+  sistemasb2bb2c: 'Sistemas B2B e B2C',
+  projetosageisscrum: 'Projetos Ágeis com Scrum',
+},
+    
     navHome: 'Início',
     navAbout: 'Sobre',
     navProjects: 'Projetos',
@@ -41,6 +70,35 @@ export const translations = {
     projectSolution: 'Solução',
   },
   en: {
+
+    skillTranslations: {
+  // Softwares
+  miro: 'Miro',
+  figma: 'Figma',
+  framer: 'Framer',
+  photoshop: 'Photoshop',
+  illustrator: 'Illustrator',
+  aftereffects: 'After Effects',
+
+  // Skills
+  ilustracao: 'Illustration',
+  animacao: 'Animation',
+  edicaovideo: 'Video editing',
+  edicaoaudio: 'Audio editing',
+  vibecode: 'Vibe code',
+
+  // Knowledge
+  designthinking: 'Design Thinking',
+  userexperience: 'User Experience',
+  uxwriting: 'UX Writing',
+  uxresearch: 'UX Research',
+  prototipacao: 'Prototyping',
+  designresponsivo: 'Responsive Design',
+  designgrafico: 'Graphic Design',
+  sistemasb2bb2c: 'B2B and B2C Systems',
+  projetosageisscrum: 'Agile Projects with Scrum',
+},
+    
     navHome: 'Home',
     navAbout: 'About',
     navProjects: 'Projects',
