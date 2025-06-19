@@ -1,18 +1,16 @@
-
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useHabilidadesTecnicas, type HabilidadeTecnica } from "@/hooks/useHabilidadesTecnicas";
+import { useLanguage } from "@/contexts/LanguageContext"; // 👈 importando o hook de idioma
 
 function renderHabilidadeItem(habilidade: HabilidadeTecnica, widthClass: string = "w-20") {
-  // Se o ícone for uma URL completa, use diretamente. Senão, use um ícone padrão do Heroicons
   const getIconUrl = (icone: string) => {
     if (icone.startsWith('http') || icone.startsWith('https')) {
       return icone;
     }
-    // Usar Heroicons como fallback - ícone de código genérico
     return `https://heroicons.com/24/outline/${icone}.svg`;
   };
-  
+
   return (
     <div key={habilidade.id} className={`flex flex-col items-center ${widthClass}`}>
       <img 
@@ -21,7 +19,6 @@ function renderHabilidadeItem(habilidade: HabilidadeTecnica, widthClass: string 
         className="w-9 h-9 mb-1"
         style={{ filter: 'brightness(0) saturate(100%) invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(97%)' }}
         onError={(e) => {
-          // Fallback para um ícone genérico se a imagem falhar
           e.currentTarget.src = 'https://heroicons.com/24/outline/code-bracket.svg';
         }}
       />
@@ -41,6 +38,7 @@ function renderLoadingSkeletons(count: number, widthClass: string = "w-20") {
 
 export default function TechnicalSkillsSection() {
   const { data: habilidades, isLoading } = useHabilidadesTecnicas();
+  const { t } = useLanguage(); // 👈 usando a função t
 
   const softwares = habilidades?.filter(h => h.categoria === 'software') || [];
   const habilidadesItems = habilidades?.filter(h => h.categoria === 'habilidade') || [];
@@ -49,17 +47,13 @@ export default function TechnicalSkillsSection() {
   return (
     <section className="max-w-4xl mx-auto my-16 px-4">
       <h2 className="font-playfair text-3xl font-bold text-brand-dark mb-8 text-center">
-        Habilidades Técnicas
+        {t('technicalSkillsTitle')}
       </h2>
 
-      {/* Parte 1: Softwares */}
       <div>
-        <h3 className="text-xl font-semibold mb-3 text-brand-dark">Softwares</h3>
+        <h3 className="text-xl font-semibold mb-3 text-brand-dark">{t('technicalSkillsSoftwares')}</h3>
         <div className="flex flex-wrap justify-center items-start gap-x-8 gap-y-4 py-2">
-          {isLoading ? 
-            renderLoadingSkeletons(6, "w-20") : 
-            softwares.map(software => renderHabilidadeItem(software, "w-20"))
-          }
+          {isLoading ? renderLoadingSkeletons(6, "w-20") : softwares.map(software => renderHabilidadeItem(software, "w-20"))}
         </div>
       </div>
 
@@ -67,14 +61,10 @@ export default function TechnicalSkillsSection() {
         <Separator />
       </div>
 
-      {/* Parte 2: Habilidades */}
       <div>
-        <h3 className="text-xl font-semibold mb-3 text-brand-dark">Habilidades</h3>
+        <h3 className="text-xl font-semibold mb-3 text-brand-dark">{t('technicalSkillsSkills')}</h3>
         <div className="flex flex-wrap justify-center items-start gap-x-8 gap-y-4 py-2">
-          {isLoading ? 
-            renderLoadingSkeletons(4, "w-20") : 
-            habilidadesItems.map(habilidade => renderHabilidadeItem(habilidade, "w-20"))
-          }
+          {isLoading ? renderLoadingSkeletons(4, "w-20") : habilidadesItems.map(habilidade => renderHabilidadeItem(habilidade, "w-20"))}
         </div>
       </div>
 
@@ -82,14 +72,10 @@ export default function TechnicalSkillsSection() {
         <Separator />
       </div>
 
-      {/* Parte 3: Conhecimentos */}
       <div>
-        <h3 className="text-xl font-semibold mb-3 text-brand-dark">Conhecimentos</h3>
+        <h3 className="text-xl font-semibold mb-3 text-brand-dark">{t('technicalSkillsKnowledge')}</h3>
         <div className="flex flex-wrap justify-center items-start gap-x-8 gap-y-4 py-2">
-          {isLoading ? 
-            renderLoadingSkeletons(10, "w-32") : 
-            conhecimentos.map(conhecimento => renderHabilidadeItem(conhecimento, "w-32"))
-          }
+          {isLoading ? renderLoadingSkeletons(10, "w-32") : conhecimentos.map(conhecimento => renderHabilidadeItem(conhecimento, "w-32"))}
         </div>
       </div>
     </section>
