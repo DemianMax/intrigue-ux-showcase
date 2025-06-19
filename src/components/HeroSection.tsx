@@ -40,10 +40,6 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onScrollToAbout }) => {
     <p className="text-xl sm:text-2xl text-brand-dark/80 font-inter font-light leading-relaxed">
       {t('heroSubtitle')}
     </p>
-    <p className="text-xl sm:text-2xl text-brand-dark/80 font-inter font-light leading-relaxed mt-4">
-      {t('heroSubtitleLine2')}
-    </p>
-
     <motion.div
       initial={{ scaleX: 0 }}
       animate={{ scaleX: 1 }}
