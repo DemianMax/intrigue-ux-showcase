@@ -2,9 +2,13 @@ import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useHabilidadesTecnicas, type HabilidadeTecnica } from "@/hooks/useHabilidadesTecnicas";
 import { useLanguage } from "@/contexts/LanguageContext";
-console.log("Idioma atual:", language);
 import { motion } from "framer-motion";
 
+export default function TechnicalSkillsSection() {
+  const { t, language } = useLanguage();
+  console.log("Idioma atual:", language);
+  
+  const { data: habilidades, isLoading } = useHabilidadesTecnicas();
 // Função para gerar chave normalizada
 function normalizeKey(str: string) {
   return str
