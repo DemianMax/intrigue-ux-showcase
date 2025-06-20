@@ -1,27 +1,35 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-const languages = {
+type LanguageCode = "pt" | "en";
+
+const languages: Record<LanguageCode, { label: string; flag: string }> = {
   pt: { label: "Português", flag: "🇧🇷" },
   en: { label: "English", flag: "🇺🇸" },
 };
 
 export default function LanguageSelector() {
   const { language, setLanguage } = useLanguage();
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const toggleOpen = () => setIsOpen((open) => !open);
+  const toggleOpen = () => setIsOpen(!isOpen);
 
-  const changeLanguage = (lang: "pt" | "en") => {
+  const changeLanguage = (lang: LanguageCode) => {
     setLanguage(lang);
     setIsOpen(false);
   };
 
   return (
     <div className="relative inline-block text-left">
-      <Button variant="ghost" onClick={toggleOpen} aria-haspopup="true" aria-expanded={isOpen}>
+      <Button
+        variant="ghost"
+        onClick={toggleOpen}
+        aria-haspopup="true"
+        aria-expanded={isOpen}
+        type="button"
+      >
         <span className="mr-2 text-lg">{languages[language].flag}</span>
         {languages[language].label}
       </Button>
@@ -41,7 +49,8 @@ export default function LanguageSelector() {
                 className={`flex items-center w-full px-3 py-2 text-sm rounded hover:bg-accent ${
                   language === key ? "bg-accent text-accent-foreground font-semibold" : "text-popover-foreground"
                 }`}
-                onClick={() => changeLanguage(key as "pt" | "en")}
+                onClick={() => changeLanguage(key as LanguageCode)}
+                type="button"
               >
                 <span className="mr-2 text-lg">{flag}</span>
                 {label}
