@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Button } from "@/components/ui/button";
+import { ChevronDown } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 type LanguageCode = "pt" | "en";
@@ -13,48 +13,75 @@ const languages: Record<LanguageCode, { label: string; flag: string }> = {
 export default function LanguageSelector() {
   const { language, setLanguage } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
-  const toggleOpen = () => setIsOpen(!isOpen);
-
-  const changeLanguage = (lang: LanguageCode) => {
-    setLanguage(lang);
+  const closeMenu = useCallback(() => {
     setIsOpen(false);
+    buttonRef.current?.focus();
+  }, []);
+
+  const handleKeyDown = (event: KeyboardEvent) => {
+    if (event.key === "Escape") closeMenu();
+  };
+
+  useEffect(() => {
+    if (isOpen) document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        closeMenu();
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [closeMenu]);
+
+  const handleLanguageChange = (lang: LanguageCode) => {
+    if (lang !== language) setLanguage(lang);
+    closeMenu();
   };
 
   return (
-    <div className="relative inline-block text-left">
-      <Button
-        variant="ghost"
-        onClick={toggleOpen}
+    <div ref={containerRef} className="relative inline-block text-left">
+      <button
+        ref={buttonRef}
+        onClick={() => setIsOpen(!isOpen)}
         aria-haspopup="true"
         aria-expanded={isOpen}
         type="button"
-        className="flex items-center gap-2"
+        className="flex items-center gap-2 px-3 py-2 rounded-full border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 shadow-sm hover:bg-neutral-100 dark:hover:bg-neutral-800 transition text-sm font-medium focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
       >
         <span className="text-xl">{languages[language].flag}</span>
-        <span className="hidden sm:inline text-sm">{languages[language].label}</span>
-      </Button>
+        <span className="hidden sm:inline">{languages[language].label}</span>
+        <ChevronDown className={`h-4 w-4 text-neutral-500 transition-transform ${isOpen ? "rotate-180" : ""}`} />
+      </button>
 
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: -10 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className="absolute right-0 mt-2 w-44 rounded-xl border bg-white dark:bg-zinc-900 p-2 shadow-xl z-50"
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ type: "spring", stiffness: 260, damping: 20 }}
+            className="absolute right-0 mt-2 w-48 rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 shadow-xl backdrop-blur-md z-50 overflow-hidden"
+            role="menu"
+            aria-label="Select Language"
           >
             {Object.entries(languages).map(([key, { label, flag }]) => (
               <button
                 key={key}
-                className={`flex items-center w-full px-3 py-2 text-sm rounded-lg transition 
-                ${
+                className={`flex items-center w-full px-4 py-3 text-sm transition-all text-left ${
                   language === key
-                    ? "bg-accent text-accent-foreground font-semibold"
-                    : "hover:bg-accent/30 text-muted-foreground"
+                    ? "bg-neutral-100 dark:bg-neutral-800 font-semibold"
+                    : "hover:bg-neutral-100 dark:hover:bg-neutral-800"
                 }`}
-                onClick={() => changeLanguage(key as LanguageCode)}
+                onClick={() => handleLanguageChange(key as LanguageCode)}
                 type="button"
+                role="menuitem"
               >
                 <span className="mr-3 text-xl">{flag}</span>
                 {label}
