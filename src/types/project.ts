@@ -12,6 +12,6 @@ export interface Project {
   ui_note?: string;
   results_text?: string;
   next_steps?: string;
-  image?: string; // capa
+  image?: string;
   created_at?: string;
 }
