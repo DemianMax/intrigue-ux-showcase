@@ -1,4 +1,3 @@
-
 import React from "react";
 import ProjectCard from "./ProjectCard";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -29,8 +28,10 @@ const ProjectsGrid: React.FC = () => {
 
   return (
     <section className="w-full max-w-6xl mx-auto px-4 py-20 mb-20" id="projetos">
-      <h3 className="text-4xl font-playfair font-bold text-brand-dark mb-16 text-center">{t('projectsTitle')}</h3>
-      
+      <h3 className="text-4xl font-playfair font-bold text-brand-dark mb-16 text-center">
+        {t('projectsTitle')}
+      </h3>
+
       {isLoading && (
         <div className="space-y-16">
           {Array.from({ length: 3 }).map((_, i) => (
@@ -51,19 +52,17 @@ const ProjectsGrid: React.FC = () => {
           ))}
         </div>
       )}
-      
-      {isError && <p className="text-center text-red-500">Falha ao carregar projetos.</p>}
-      
+
+      {isError && (
+        <p className="text-center text-red-500">Falha ao carregar projetos.</p>
+      )}
+
       {!isLoading && !isError && (
         <>
           {projects && projects.length > 0 ? (
             <div className="space-y-20">
               {projects.map((project, index) => (
-                <ProjectCard 
-                  key={project.id} 
-                  project={project} 
-                  index={index}
-                />
+                <ProjectCard key={project.id} project={project} index={index} />
               ))}
             </div>
           ) : (
