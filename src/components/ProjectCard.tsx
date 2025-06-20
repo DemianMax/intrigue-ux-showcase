@@ -1,4 +1,3 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 import { Project } from "@/types/project";
@@ -11,7 +10,7 @@ interface ProjectCardProps {
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const navigate = useNavigate();
 
   // Função para converter texto separado por vírgulas em array
@@ -20,7 +19,18 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
     return text.split(',').map(item => item.trim()).filter(item => item.length > 0);
   };
 
-  // Alternar layout: par = imagem à esquerda, ímpar = imagem à direita
+  // Função para pegar o campo correto com fallback
+  const getLocalizedField = (fieldBase: string): string => {
+    if (language === 'en') {
+      // tenta o campo em inglês (ex: title_en)
+      const enField = project[`${fieldBase}_en` as keyof Project];
+      if (enField && typeof enField === 'string' && enField.trim().length > 0) return enField;
+    }
+    // se idioma for pt ou campo em inglês não existir, retorna o original
+    const ptField = project[fieldBase as keyof Project];
+    return typeof ptField === 'string' ? ptField : '';
+  };
+
   const isImageLeft = index % 2 === 0;
 
   return (
@@ -38,7 +48,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
         <div className="relative overflow-hidden rounded-2xl shadow-2xl">
           <img
             src={project.image}
-            alt={`Projeto ${project.title}`}
+            alt={`Projeto ${getLocalizedField('title')}`}
             className="w-full h-64 lg:h-80 object-cover"
           />
         </div>
@@ -54,7 +64,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="text-xl lg:text-2xl font-playfair font-semibold text-brand-dark"
           >
-            {project.title}
+            {getLocalizedField('title')}
           </motion.h4>
           
           <motion.div 
@@ -64,7 +74,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="text-brand-accent font-semibold text-base"
           >
-            {project.role}
+            {getLocalizedField('role')}
           </motion.div>
         </div>
 
@@ -77,12 +87,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
         >
           <div>
             <h5 className="font-semibold text-brand-dark mb-2">{t('projectProblem')}:</h5>
-            <p className="leading-relaxed">{project.problem}</p>
+            <p className="leading-relaxed">{getLocalizedField('problem')}</p>
           </div>
           
           <div>
             <h5 className="font-semibold text-brand-dark mb-2">{t('projectSolution')}:</h5>
-            <p className="leading-relaxed">{project.solution}</p>
+            <p className="leading-relaxed">{getLocalizedField('solution')}</p>
           </div>
         </motion.div>
         
@@ -93,7 +103,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="flex flex-wrap gap-2"
         >
-          {parseTextToArray(project.hashtags_text).map((tag, idx) => (
+          {/* Escolhe hashtags conforme idioma */}
+          {parseTextToArray(language === 'en' ? project.hashtags_text_en : project.hashtags_text).map((tag, idx) => (
             <span
               key={idx}
               className="text-sm font-medium text-brand-accent bg-brand-accent/10 rounded-full px-3 py-1 border border-brand-accent/20"
