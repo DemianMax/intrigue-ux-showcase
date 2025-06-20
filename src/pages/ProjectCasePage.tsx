@@ -279,33 +279,54 @@ const ProjectCasePage = () => {
             </section>
           )}
 
-          {processImages.length > 0 && (
-            <section className="mb-12">
-              <h3 className="text-2xl font-playfair text-brand-dark mb-5 text-left">
-                {t("caseStudyProcess")}
-              </h3>
-              <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                {processImages.map((img, index) => (
-                  <div
-                    key={`process-${index}`}
-                    className="bg-card rounded-xl shadow-md p-4 flex flex-col items-center"
-                  >
-                    <img
-                      src={img}
-                      alt={processLegends[index] ?? `Process image ${index + 1}`}
-                      className="w-full h-40 object-cover rounded-md mb-3 border border-border"
-                      onError={(e) => {
-                        e.currentTarget.style.display = "none";
-                      }}
-                    />
-                    <div className="text-sm text-brand-dark/80 font-inter text-center">
-                      {processLegends[index] ?? `Processo ${index + 1}`}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-          )}
+         {(project.process_images_data?.length ?? processImages.length) > 0 && (
+  <section className="mb-12">
+    <h3 className="text-2xl font-playfair text-brand-dark mb-5 text-left">
+      {t("caseStudyProcess")}
+    </h3>
+    <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      {project.process_images_data?.length ? (
+        project.process_images_data.map((item, index) => (
+          <div
+            key={`process-jsonb-${index}`}
+            className="bg-card rounded-xl shadow-md p-4 flex flex-col items-center"
+          >
+            <img
+              src={item.url}
+              alt={item.caption ?? `Process image ${index + 1}`}
+              className="w-full h-40 object-cover rounded-md mb-3 border border-border"
+              onError={(e) => {
+                e.currentTarget.style.display = "none";
+              }}
+            />
+            <div className="text-sm text-brand-dark/80 font-inter text-center">
+              {item.caption ?? `Processo ${index + 1}`}
+            </div>
+          </div>
+        ))
+      ) : (
+        processImages.map((img, index) => (
+          <div
+            key={`process-legacy-${index}`}
+            className="bg-card rounded-xl shadow-md p-4 flex flex-col items-center"
+          >
+            <img
+              src={img}
+              alt={processLegends[index] ?? `Process image ${index + 1}`}
+              className="w-full h-40 object-cover rounded-md mb-3 border border-border"
+              onError={(e) => {
+                e.currentTarget.style.display = "none";
+              }}
+            />
+            <div className="text-sm text-brand-dark/80 font-inter text-center">
+              {processLegends[index] ?? `Processo ${index + 1}`}
+            </div>
+          </div>
+        ))
+      )}
+    </div>
+  </section>
+)}
 
           {solutionImages.length > 0 && (
             <section className="mb-12">
