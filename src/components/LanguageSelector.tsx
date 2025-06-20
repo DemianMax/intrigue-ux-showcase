@@ -1,5 +1,11 @@
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React from "react";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ChevronDown } from "lucide-react";
 
@@ -12,54 +18,37 @@ const languages: Record<LanguageCode, { label: string; flag: string }> = {
 
 export default function LanguageSelector() {
   const { language, setLanguage } = useLanguage();
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleOpen = () => setIsOpen(!isOpen);
-
-  const changeLanguage = (lang: LanguageCode) => {
-    setLanguage(lang);
-    setIsOpen(false);
-  };
 
   return (
-    <div className="relative inline-block text-left">
-      <button
-        onClick={toggleOpen}
-        className="flex items-center gap-2 rounded-full bg-gradient-to-tr from-white to-neutral-100 border border-neutral-200 px-4 py-2 text-sm font-medium shadow-sm hover:shadow-md transition-all focus:outline-none"
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button
+          variant="outline"
+          className="flex items-center gap-2 rounded-full px-4 py-2 shadow-sm bg-white text-sm font-medium transition hover:bg-gray-50"
+        >
+          <span className="text-xl">{languages[language].flag}</span>
+          <ChevronDown className="w-4 h-4 text-gray-500" />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent
+        align="end"
+        className="rounded-xl border bg-white shadow-xl w-44 p-1"
       >
-        <span className="text-xl">{languages[language].flag}</span>
-        <ChevronDown
-          className={`w-4 h-4 text-neutral-500 transition-transform ${isOpen ? "rotate-180" : ""}`}
-        />
-      </button>
-
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: -8 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: -8 }}
-            transition={{ duration: 0.15 }}
-            className="absolute right-0 mt-2 w-44 rounded-xl border border-neutral-200 bg-white p-1 shadow-lg z-50"
+        {Object.entries(languages).map(([key, { label, flag }]) => (
+          <DropdownMenuItem
+            key={key}
+            onClick={() => setLanguage(key as LanguageCode)}
+            className={`flex items-center gap-2 px-3 py-2 rounded-lg transition ${
+              language === key
+                ? "bg-gray-100 font-semibold"
+                : "hover:bg-gray-50"
+            }`}
           >
-            {Object.entries(languages).map(([key, { label, flag }]) => (
-              <button
-                key={key}
-                className={`flex items-center w-full px-3 py-2 text-sm rounded-lg transition-colors ${
-                  language === key
-                    ? "bg-neutral-100 font-semibold"
-                    : "hover:bg-neutral-50"
-                }`}
-                onClick={() => changeLanguage(key as LanguageCode)}
-                type="button"
-              >
-                <span className="mr-2 text-lg">{flag}</span>
-                {label}
-              </button>
-            ))}
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
+            <span className="text-lg">{flag}</span>
+            {label}
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }
