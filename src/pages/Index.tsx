@@ -8,13 +8,6 @@ import TechnicalSkillsSection from "@/components/TechnicalSkillsSection";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, Languages } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
 const Index = () => {
@@ -52,7 +45,7 @@ const Index = () => {
           </div>
           
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-6">
             <ul className="flex items-center gap-7 text-brand-dark font-semibold text-base">
               <li className="cursor-pointer hover:text-brand-accent transition" onClick={handleScrollToTop}>{t('navHome')}</li>
               <li className="cursor-pointer hover:text-brand-accent transition" onClick={() => handleScrollTo(aboutRef)}>{t('navAbout')}</li>
@@ -67,22 +60,33 @@ const Index = () => {
                 </Link>
               </li>
             </ul>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon">
-                  <Languages className="h-5 w-5 text-brand-dark" />
-                  <span className="sr-only">{t('selectLanguage')}</span>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => setLanguage('pt')}>
-                  {t('portuguese')}
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setLanguage('en')}>
-                  {t('english')}
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+
+            {/* Language selector desktop */}
+            <div className="flex items-center gap-6 sm:gap-3 justify-center sm:justify-start px-2">
+              {['pt', 'en'].map((lang) => (
+                <button
+                  key={lang}
+                  onClick={() => setLanguage(lang as 'pt' | 'en')}
+                  className={`
+                    flex items-center gap-2 rounded-full font-semibold
+                    transition-colors
+                    focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-accent
+                    ${
+                      language === lang
+                        ? 'bg-brand-accent text-white shadow-md'
+                        : 'bg-transparent text-brand-dark hover:bg-brand-accent/20'
+                    }
+                    px-4 py-2 sm:px-3 sm:py-1
+                  `}
+                  aria-pressed={language === lang}
+                  aria-label={lang === 'pt' ? t('portuguese') : t('english')}
+                  type="button"
+                >
+                  <span className="text-2xl">{lang === 'pt' ? '🇧🇷' : '🇺🇸'}</span>
+                  <span className="hidden sm:inline">{lang === 'pt' ? t('portuguese') : t('english')}</span>
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* Mobile Menu */}
@@ -110,11 +114,32 @@ const Index = () => {
                     </Link>
                   </li>
                 </ul>
+
                 <div className="border-t border-border mt-8 pt-6">
                    <h3 className="px-2 py-1.5 text-sm font-semibold text-muted-foreground">{t('selectLanguage')}</h3>
-                   <div className="flex flex-col gap-2 mt-2">
-                      <Button variant={language === 'pt' ? 'secondary' : 'ghost'} className="justify-start w-full" onClick={() => { setLanguage('pt'); setIsSheetOpen(false); }}>{t('portuguese')}</Button>
-                      <Button variant={language === 'en' ? 'secondary' : 'ghost'} className="justify-start w-full" onClick={() => { setLanguage('en'); setIsSheetOpen(false); }}>{t('english')}</Button>
+                   <div className="flex flex-col gap-2 mt-2 px-2">
+                      {['pt', 'en'].map((lang) => (
+                        <button
+                          key={lang}
+                          onClick={() => {
+                            setLanguage(lang as 'pt' | 'en');
+                            setIsSheetOpen(false);
+                          }}
+                          className={`justify-start w-full rounded-full font-semibold px-4 py-2 transition-colors
+                            focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-accent
+                            ${
+                              language === lang
+                                ? 'bg-brand-accent text-white shadow-md'
+                                : 'bg-transparent text-brand-dark hover:bg-brand-accent/20'
+                            }`}
+                          type="button"
+                          aria-pressed={language === lang}
+                          aria-label={lang === 'pt' ? t('portuguese') : t('english')}
+                        >
+                          <span className="mr-2 text-2xl">{lang === 'pt' ? '🇧🇷' : '🇺🇸'}</span>
+                          <span>{lang === 'pt' ? t('portuguese') : t('english')}</span>
+                        </button>
+                      ))}
                    </div>
                 </div>
               </SheetContent>
