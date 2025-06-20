@@ -4,22 +4,17 @@ import { useHabilidadesTecnicas, type HabilidadeTecnica } from "@/hooks/useHabil
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
 
-export default function TechnicalSkillsSection() {
-  const { t, language } = useLanguage();
-  console.log("Idioma atual:", language);
-  
-  const { data: habilidades, isLoading } = useHabilidadesTecnicas();
-// Função para gerar chave normalizada
+// Função para normalizar os textos para as chaves de tradução
 function normalizeKey(str: string) {
   return str
-    .normalize("NFD") // remove acentos
-    .replace(/[\u0300-\u036f]/g, "") // remove caracteres especiais
+    .normalize("NFD") // Remove acentos
+    .replace(/[\u0300-\u036f]/g, "") // Remove caracteres especiais
     .toLowerCase()
     .replace(/\s+/g, "")
-    .replace(/[^a-z0-9]/g, ""); // remove caracteres inválidos
+    .replace(/[^a-z0-9]/g, "");
 }
 
-// Componente individual
+// Componente de cada item de habilidade
 function renderHabilidadeItem(
   habilidade: HabilidadeTecnica,
   widthClass: string = "w-20",
@@ -59,7 +54,7 @@ function renderHabilidadeItem(
   );
 }
 
-// Skeletons
+// Skeletons durante carregamento
 function renderLoadingSkeletons(count: number, widthClass: string = "w-20") {
   return Array.from({ length: count }, (_, i) => (
     <div key={i} className={`flex flex-col items-center ${widthClass}`}>
@@ -69,10 +64,10 @@ function renderLoadingSkeletons(count: number, widthClass: string = "w-20") {
   ));
 }
 
-// Componente principal
+// Componente principal da seção
 export default function TechnicalSkillsSection() {
-  const { data: habilidades, isLoading } = useHabilidadesTecnicas();
   const { t } = useLanguage();
+  const { data: habilidades, isLoading } = useHabilidadesTecnicas();
 
   const softwares = habilidades?.filter((h) => h.categoria === "software") || [];
   const habilidadesItems = habilidades?.filter((h) => h.categoria === "habilidade") || [];
