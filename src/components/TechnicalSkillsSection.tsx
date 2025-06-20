@@ -2,6 +2,7 @@ import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useHabilidadesTecnicas, type HabilidadeTecnica } from "@/hooks/useHabilidadesTecnicas";
 import { useLanguage } from "@/contexts/LanguageContext";
+console.log("Idioma atual:", language);
 import { motion } from "framer-motion";
 
 // Função para gerar chave normalizada
