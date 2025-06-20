@@ -6,9 +6,11 @@ import { supabase } from "@/integrations/supabase/client";
 import { Project } from "@/types/project";
 import { Skeleton } from "@/components/ui/skeleton";
 
-const fetchProjects = async (): Promise<Project[]> => {
+const fetchProjects = async (language: string): Promise<Project[]> => {
+  const tableName = language === 'en' ? 'projects_en' : 'projects_pt';
+
   const { data, error } = await supabase
-    .from('projects')
+    .from(tableName)
     .select('*')
     .order('created_at', { ascending: false });
 
@@ -20,18 +22,17 @@ const fetchProjects = async (): Promise<Project[]> => {
 };
 
 const ProjectsGrid: React.FC = () => {
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
+
   const { data: projects, isLoading, isError } = useQuery<Project[]>({
-    queryKey: ['projects'],
-    queryFn: fetchProjects,
+    queryKey: ['projects', language],
+    queryFn: () => fetchProjects(language),
   });
 
   return (
     <section className="w-full max-w-6xl mx-auto px-4 py-20 mb-20" id="projetos">
-      <h3 className="text-4xl font-playfair font-bold text-brand-dark mb-16 text-center">
-        {t('projectsTitle')}
-      </h3>
-
+      <h3 className="text-4xl font-playfair font-bold text-brand-dark mb-16 text-center">{t('projectsTitle')}</h3>
+      
       {isLoading && (
         <div className="space-y-16">
           {Array.from({ length: 3 }).map((_, i) => (
@@ -52,17 +53,19 @@ const ProjectsGrid: React.FC = () => {
           ))}
         </div>
       )}
-
-      {isError && (
-        <p className="text-center text-red-500">Falha ao carregar projetos.</p>
-      )}
-
+      
+      {isError && <p className="text-center text-red-500">Falha ao carregar projetos.</p>}
+      
       {!isLoading && !isError && (
         <>
           {projects && projects.length > 0 ? (
             <div className="space-y-20">
               {projects.map((project, index) => (
-                <ProjectCard key={project.id} project={project} index={index} />
+                <ProjectCard 
+                  key={project.id} 
+                  project={project} 
+                  index={index}
+                />
               ))}
             </div>
           ) : (
