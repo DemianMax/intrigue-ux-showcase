@@ -19,7 +19,7 @@ const Index = () => {
 
   const handleScrollTo = (ref: React.RefObject<HTMLDivElement>) => {
     ref.current?.scrollIntoView({
-      behavior: 'smooth'
+      behavior: "smooth",
     });
     setIsSheetOpen(false);
   };
@@ -27,7 +27,7 @@ const Index = () => {
   const handleScrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth'
+      behavior: "smooth",
     });
     setIsSheetOpen(false);
   };
@@ -43,14 +43,34 @@ const Index = () => {
           >
             Max Demian
           </div>
-          
+
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-6">
             <ul className="flex items-center gap-7 text-brand-dark font-semibold text-base">
-              <li className="cursor-pointer hover:text-brand-accent transition" onClick={handleScrollToTop}>{t('navHome')}</li>
-              <li className="cursor-pointer hover:text-brand-accent transition" onClick={() => handleScrollTo(aboutRef)}>{t('navAbout')}</li>
-              <li className="cursor-pointer hover:text-brand-accent transition" onClick={() => handleScrollTo(projectsRef)}>{t('navProjects')}</li>
-              <li className="cursor-pointer hover:text-brand-accent transition" onClick={() => handleScrollTo(contactRef)}>{t('navContact')}</li>
+              <li
+                className="cursor-pointer hover:text-brand-accent transition"
+                onClick={handleScrollToTop}
+              >
+                {t("navHome")}
+              </li>
+              <li
+                className="cursor-pointer hover:text-brand-accent transition"
+                onClick={() => handleScrollTo(aboutRef)}
+              >
+                {t("navAbout")}
+              </li>
+              <li
+                className="cursor-pointer hover:text-brand-accent transition"
+                onClick={() => handleScrollTo(projectsRef)}
+              >
+                {t("navProjects")}
+              </li>
+              <li
+                className="cursor-pointer hover:text-brand-accent transition"
+                onClick={() => handleScrollTo(contactRef)}
+              >
+                {t("navContact")}
+              </li>
               <li>
                 <Link
                   to="/curriculo"
@@ -61,29 +81,29 @@ const Index = () => {
               </li>
             </ul>
 
-            {/* Language selector desktop */}
-            <div className="flex items-center gap-6 sm:gap-3 justify-center sm:justify-start px-2">
-              {['pt', 'en'].map((lang) => (
+            {/* Language selector desktop compacto */}
+            <div className="flex items-center gap-3 justify-center sm:justify-start px-2">
+              {["pt", "en"].map((lang) => (
                 <button
                   key={lang}
-                  onClick={() => setLanguage(lang as 'pt' | 'en')}
+                  onClick={() => setLanguage(lang as "pt" | "en")}
                   className={`
-                    flex items-center gap-2 rounded-full font-semibold
-                    transition-colors
+                    flex items-center gap-2 rounded-md font-semibold
+                    transition-colors border
                     focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-accent
+                    px-3 py-1 text-sm
                     ${
                       language === lang
-                        ? 'bg-brand-accent text-white shadow-md'
-                        : 'bg-transparent text-brand-dark hover:bg-brand-accent/20'
+                        ? "border-brand-accent text-brand-accent"
+                        : "border-transparent text-brand-dark hover:border-brand-accent hover:text-brand-accent"
                     }
-                    px-4 py-2 sm:px-3 sm:py-1
                   `}
                   aria-pressed={language === lang}
-                  aria-label={lang === 'pt' ? t('portuguese') : t('english')}
+                  aria-label={lang === "pt" ? t("portuguese") : t("english")}
                   type="button"
                 >
-                  <span className="text-2xl">{lang === 'pt' ? '🇧🇷' : '🇺🇸'}</span>
-                  <span className="hidden sm:inline">{lang === 'pt' ? t('portuguese') : t('english')}</span>
+                  <span className="text-xl">{lang === "pt" ? "🇧🇷" : "🇺🇸"}</span>
+                  <span>{lang.toUpperCase()}</span>
                 </button>
               ))}
             </div>
@@ -95,15 +115,35 @@ const Index = () => {
               <SheetTrigger asChild>
                 <button className="p-2 -mr-2">
                   <Menu className="h-6 w-6 text-brand-dark" />
-                  <span className="sr-only">{t('openMenu')}</span>
+                  <span className="sr-only">{t("openMenu")}</span>
                 </button>
               </SheetTrigger>
               <SheetContent side="right">
                 <ul className="flex flex-col items-start gap-7 pt-10 text-brand-dark font-semibold text-lg">
-                  <li className="cursor-pointer hover:text-brand-accent transition" onClick={handleScrollToTop}>{t('navHome')}</li>
-                  <li className="cursor-pointer hover:text-brand-accent transition" onClick={() => handleScrollTo(aboutRef)}>{t('navAbout')}</li>
-                  <li className="cursor-pointer hover:text-brand-accent transition" onClick={() => handleScrollTo(projectsRef)}>{t('navProjects')}</li>
-                  <li className="cursor-pointer hover:text-brand-accent transition" onClick={() => handleScrollTo(contactRef)}>{t('navContact')}</li>
+                  <li
+                    className="cursor-pointer hover:text-brand-accent transition"
+                    onClick={handleScrollToTop}
+                  >
+                    {t("navHome")}
+                  </li>
+                  <li
+                    className="cursor-pointer hover:text-brand-accent transition"
+                    onClick={() => handleScrollTo(aboutRef)}
+                  >
+                    {t("navAbout")}
+                  </li>
+                  <li
+                    className="cursor-pointer hover:text-brand-accent transition"
+                    onClick={() => handleScrollTo(projectsRef)}
+                  >
+                    {t("navProjects")}
+                  </li>
+                  <li
+                    className="cursor-pointer hover:text-brand-accent transition"
+                    onClick={() => handleScrollTo(contactRef)}
+                  >
+                    {t("navContact")}
+                  </li>
                   <li>
                     <Link
                       to="/curriculo"
@@ -116,31 +156,35 @@ const Index = () => {
                 </ul>
 
                 <div className="border-t border-border mt-8 pt-6">
-                   <h3 className="px-2 py-1.5 text-sm font-semibold text-muted-foreground">{t('selectLanguage')}</h3>
-                   <div className="flex flex-col gap-2 mt-2 px-2">
-                      {['pt', 'en'].map((lang) => (
-                        <button
-                          key={lang}
-                          onClick={() => {
-                            setLanguage(lang as 'pt' | 'en');
-                            setIsSheetOpen(false);
-                          }}
-                          className={`justify-start w-full rounded-full font-semibold px-4 py-2 transition-colors
-                            focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-accent
-                            ${
-                              language === lang
-                                ? 'bg-brand-accent text-white shadow-md'
-                                : 'bg-transparent text-brand-dark hover:bg-brand-accent/20'
-                            }`}
-                          type="button"
-                          aria-pressed={language === lang}
-                          aria-label={lang === 'pt' ? t('portuguese') : t('english')}
-                        >
-                          <span className="mr-2 text-2xl">{lang === 'pt' ? '🇧🇷' : '🇺🇸'}</span>
-                          <span>{lang === 'pt' ? t('portuguese') : t('english')}</span>
-                        </button>
-                      ))}
-                   </div>
+                  <h3 className="px-2 py-1.5 text-sm font-semibold text-muted-foreground">
+                    {t("selectLanguage")}
+                  </h3>
+                  <div className="flex flex-col gap-2 mt-2 px-2">
+                    {["pt", "en"].map((lang) => (
+                      <button
+                        key={lang}
+                        onClick={() => {
+                          setLanguage(lang as "pt" | "en");
+                          setIsSheetOpen(false);
+                        }}
+                        className={`justify-start w-full rounded-md font-semibold px-4 py-2 transition-colors border text-left
+                          focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-accent
+                          ${
+                            language === lang
+                              ? "border-brand-accent text-brand-accent"
+                              : "border-transparent text-brand-dark hover:border-brand-accent hover:text-brand-accent"
+                          }`}
+                        type="button"
+                        aria-pressed={language === lang}
+                        aria-label={lang === "pt" ? t("portuguese") : t("english")}
+                      >
+                        <span className="mr-2 text-2xl">
+                          {lang === "pt" ? "🇧🇷" : "🇺🇸"}
+                        </span>
+                        <span>{lang.toUpperCase()}</span>
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </SheetContent>
             </Sheet>
@@ -149,11 +193,17 @@ const Index = () => {
       </nav>
 
       <HeroSection onScrollToAbout={() => handleScrollTo(aboutRef)} />
-      <div ref={aboutRef}><AboutSection /></div>
-      <div ref={projectsRef}><ProjectsGrid /></div>
+      <div ref={aboutRef}>
+        <AboutSection />
+      </div>
+      <div ref={projectsRef}>
+        <ProjectsGrid />
+      </div>
       <PortfolioSection />
       <TechnicalSkillsSection />
-      <div ref={contactRef}><FooterSection /></div>
+      <div ref={contactRef}>
+        <FooterSection />
+      </div>
     </div>
   );
 };
