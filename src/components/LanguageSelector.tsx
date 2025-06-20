@@ -29,9 +29,10 @@ export default function LanguageSelector() {
         aria-haspopup="true"
         aria-expanded={isOpen}
         type="button"
+        className="flex items-center gap-2"
       >
-        <span className="mr-2 text-lg">{languages[language].flag}</span>
-        {languages[language].label}
+        <span className="text-xl">{languages[language].flag}</span>
+        <span className="hidden sm:inline text-sm">{languages[language].label}</span>
       </Button>
 
       <AnimatePresence>
@@ -41,18 +42,21 @@ export default function LanguageSelector() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="absolute right-0 mt-2 w-40 rounded-md border bg-popover p-1 shadow-lg z-50"
+            className="absolute right-0 mt-2 w-44 rounded-xl border bg-white dark:bg-zinc-900 p-2 shadow-xl z-50"
           >
             {Object.entries(languages).map(([key, { label, flag }]) => (
               <button
                 key={key}
-                className={`flex items-center w-full px-3 py-2 text-sm rounded hover:bg-accent ${
-                  language === key ? "bg-accent text-accent-foreground font-semibold" : "text-popover-foreground"
+                className={`flex items-center w-full px-3 py-2 text-sm rounded-lg transition 
+                ${
+                  language === key
+                    ? "bg-accent text-accent-foreground font-semibold"
+                    : "hover:bg-accent/30 text-muted-foreground"
                 }`}
                 onClick={() => changeLanguage(key as LanguageCode)}
                 type="button"
               >
-                <span className="mr-2 text-lg">{flag}</span>
+                <span className="mr-3 text-xl">{flag}</span>
                 {label}
               </button>
             ))}
