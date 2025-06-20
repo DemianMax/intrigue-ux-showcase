@@ -37,11 +37,10 @@ const ProjectCasePage = () => {
   const { t, language, setLanguage } = useLanguage();
   const [isSheetOpen, setIsSheetOpen] = useState(false);
 
-  const { data: project, isLoading, isError } = useQuery<Project | null>({
-    queryKey: ['project', projectId, language],
-    queryFn: () => fetchProjectById(projectId!, language),
-    enabled: !!projectId,
-  });
+import { useProjectById } from "@/hooks/useProjectById";
+
+const { data: project, isLoading, isError } = useProjectById(projectId!);
+
 
   const parseTextToArray = (text: string | null): string[] => {
     if (!text) return [];
