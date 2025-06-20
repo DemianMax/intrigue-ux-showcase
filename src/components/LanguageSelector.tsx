@@ -25,28 +25,30 @@ export default function LanguageSelector() {
     <div className="relative inline-block text-left">
       <button
         onClick={toggleOpen}
-        className="flex items-center gap-2 rounded-full border bg-white px-4 py-2 text-sm font-medium shadow-md transition hover:bg-gray-100 focus:outline-none"
+        className="flex items-center gap-2 rounded-full bg-gradient-to-tr from-white to-neutral-100 border border-neutral-200 px-4 py-2 text-sm font-medium shadow-sm hover:shadow-md transition-all focus:outline-none"
       >
         <span className="text-xl">{languages[language].flag}</span>
-        <ChevronDown className={`w-4 h-4 transition-transform ${isOpen ? "rotate-180" : ""}`} />
+        <ChevronDown
+          className={`w-4 h-4 text-neutral-500 transition-transform ${isOpen ? "rotate-180" : ""}`}
+        />
       </button>
 
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: -10 }}
+            initial={{ opacity: 0, scale: 0.95, y: -8 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className="absolute right-0 mt-2 w-40 rounded-xl border bg-white p-1 shadow-lg z-50"
+            exit={{ opacity: 0, scale: 0.95, y: -8 }}
+            transition={{ duration: 0.15 }}
+            className="absolute right-0 mt-2 w-44 rounded-xl border border-neutral-200 bg-white p-1 shadow-lg z-50"
           >
             {Object.entries(languages).map(([key, { label, flag }]) => (
               <button
                 key={key}
                 className={`flex items-center w-full px-3 py-2 text-sm rounded-lg transition-colors ${
                   language === key
-                    ? "bg-gray-100 font-semibold"
-                    : "hover:bg-gray-50"
+                    ? "bg-neutral-100 font-semibold"
+                    : "hover:bg-neutral-50"
                 }`}
                 onClick={() => changeLanguage(key as LanguageCode)}
                 type="button"
