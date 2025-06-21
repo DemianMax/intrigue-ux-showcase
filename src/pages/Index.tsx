@@ -6,8 +6,8 @@ import FooterSection from "@/components/FooterSection";
 import PortfolioSection from "@/components/PortfolioSection";
 import TechnicalSkillsSection from "@/components/TechnicalSkillsSection";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu } from "lucide-react";
-import { useLanguage } from "@/contexts/Language/LanguageContext"; // Corrigido o caminho do import
+import { Menu, Languages } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "react-router-dom";
 
 const Index = () => {
@@ -33,7 +33,7 @@ const Index = () => {
   };
 
   return (
-    <div className="relative flex flex-col min-h-screen text-zinc-50 font-inter overflow-x-hidden">
+    <div className="flex flex-col min-h-screen bg-background relative font-inter">
       {/* Barra de navegação fixa */}
       <nav className="fixed top-0 left-0 w-full bg-background/80 backdrop-blur z-30 border-b border-border shadow-sm">
         <div className="flex items-center justify-between max-w-6xl mx-auto px-5 py-3">
@@ -192,20 +192,18 @@ const Index = () => {
         </div>
       </nav>
 
-      <main className="relative z-10 pt-[76px]">
-        <HeroSection onScrollToAbout={() => handleScrollTo(aboutRef)} />
-        <div ref={aboutRef}>
-          <AboutSection />
-        </div>
-        <div ref={projectsRef}>
-          <ProjectsGrid />
-        </div>
-        <PortfolioSection />
-        <TechnicalSkillsSection />
-        <div ref={contactRef}>
-          <FooterSection />
-        </div>
-      </main>
+      <HeroSection onScrollToAbout={() => handleScrollTo(aboutRef)} />
+      <div ref={aboutRef}>
+        <AboutSection />
+      </div>
+      <div ref={projectsRef}>
+        <ProjectsGrid />
+      </div>
+      <PortfolioSection />
+      <TechnicalSkillsSection />
+      <div ref={contactRef}>
+        <FooterSection />
+      </div>
     </div>
   );
 };
