@@ -38,35 +38,6 @@ const AboutSection = React.forwardRef<HTMLDivElement>((props, ref) => {
             {t("aboutGreeting")}
           </h2>
 
-          {/* Intro com duas linhas e linha decorativa */}
-          <div className="mb-12">
-            <motion.p
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.6 }}
-              className="text-xl md:text-2xl text-brand-dark font-inter font-light leading-relaxed mb-4"
-            >
-              {t("aboutIntro")}
-            </motion.p>
-
-            <motion.p
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8, duration: 0.6 }}
-              className="text-xl md:text-2xl text-brand-dark font-inter font-light leading-relaxed"
-            >
-              {t("aboutIntroLine2")}
-            </motion.p>
-
-            <motion.div
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ delay: 1.0, duration: 0.6 }}
-              style={{ transformOrigin: "left" }}
-              className="mt-6 h-1 w-32 bg-brand-accent/80 rounded-full mx-auto md:mx-0"
-            />
-          </div>
-
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
