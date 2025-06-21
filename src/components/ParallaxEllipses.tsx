@@ -5,49 +5,65 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 
 interface EllipseProps {
   delay: number;
-  size: string; // Tailwind class like 'w-20 h-20'
-  color: string; // Tailwind class like 'bg-blue-500' or 'bg-opacity-50'
-  position: string; // Tailwind classes for absolute positioning: 'top-10 left-20'
-  speed: number; // Multiplier for parallax effect (e.g., 0.2, 0.5)
+  minSize: number; // Tamanho mínimo em pixels (ex: 40)
+  maxSize: number; // Tamanho máximo em pixels (ex: 120)
+  color: string; // Tailwind class like 'bg-blue-300'
+  initialX: number; // Posição X inicial (em porcentagem: 0-100)
+  initialY: number; // Posição Y inicial (em porcentagem: 0-100)
+  speed: number; // Multiplier for parallax effect (e.g., 0.1, 0.4)
+  opacity: number; // Opacidade final (0.0 a 1.0)
 }
 
-const Ellipse: React.FC<EllipseProps> = ({ delay, size, color, position, speed }) => {
+const Ellipse: React.FC<EllipseProps> = ({ delay, minSize, maxSize, color, initialX, initialY, speed, opacity }) => {
   const { scrollYProgress } = useScroll();
-  // Multiplicador de velocidade para um movimento bem perceptível
-  const y = useTransform(scrollYProgress, [0, 1], [0, -window.innerHeight * speed * 5]); // Aumentei para '5'
+  // Movimento vertical (y) ao rolar para baixo, elipse sobe (chuva invertida)
+  const y = useTransform(scrollYProgress, [0, 1], [0, -window.innerHeight * speed * 2]); // Multiplicador de 2 para suavidade
+
+  // Randomiza um pouco o tamanho dentro do range
+  const size = Math.floor(Math.random() * (maxSize - minSize + 1)) + minSize;
 
   return (
     <motion.div
-      // >>> REMOVIDO TEMPORARIAMENTE: filter blur-3xl <<<
-      // >>> AUMENTADO MUITO a opacidade para teste de visibilidade <<<
-      className={`absolute rounded-full ${size} ${color}`} // Sem blur
-      style={{ y }}
-      initial={{ opacity: 0, scale: 0.2 }}
-      animate={{ opacity: 0.9, scale: 1 }} // Opacidade final: 90% (muito visível)
-      transition={{ duration: 1, delay }} // Duração menor para aparecer mais rápido
+      // Usando style={{ width: size, height: size }} para tamanhos dinâmicos
+      // Aplicando `blur-3xl` novamente para o efeito suave
+      className={`absolute rounded-full ${color} filter blur-3xl pointer-events-none`}
+      style={{
+        width: size,
+        height: size,
+        top: `${initialY}%`,
+        left: `${initialX}%`,
+        y: y, // Aplica a transformação de parallax
+      }}
+      initial={{ opacity: 0, scale: 0.2 }} // Começa menor e invisível
+      animate={{ opacity: opacity, scale: 1 }} // Vai para a opacidade desejada e tamanho original
+      transition={{ duration: 1.5, delay: delay }} // Animação de aparecimento
     ></motion.div>
   );
 };
 
 const ParallaxEllipses: React.FC = () => {
-  // Ajustando para cores PADRÃO do Tailwind e opacidades MUITO ALTAS para garantir visibilidade
-  const ellipses = [
-    { delay: 0.1, size: 'w-20 h-20', color: 'bg-blue-500', position: 'top-[85%] left-[5%]', speed: 0.1 },
-    { delay: 0.3, size: 'w-24 h-24', color: 'bg-purple-500', position: 'top-[10%] right-[15%]', speed: 0.2 },
-    { delay: 0.5, size: 'w-16 h-16', color: 'bg-pink-500', position: 'top-[60%] left-[25%]', speed: 0.15 },
-    { delay: 0.7, size: 'w-28 h-28', color: 'bg-cyan-500', position: 'top-[30%] left-[70%]', speed: 0.25 },
-    { delay: 0.9, size: 'w-22 h-22', color: 'bg-green-500', position: 'top-[75%] right-[20%]', speed: 0.1 },
-    { delay: 1.1, size: 'w-18 h-18', color: 'bg-yellow-500', position: 'top-[5%] left-[40%]', speed: 0.3 },
-    { delay: 1.3, size: 'w-26 h-26', color: 'bg-red-500', position: 'top-[45%] right-[5%]', speed: 0.18 },
-    { delay: 1.5, size: 'w-14 h-14', color: 'bg-orange-500', position: 'top-[20%] left-[10%]', speed: 0.22 },
-    { delay: 1.7, size: 'w-30 h-30', color: 'bg-teal-500', position: 'top-[90%] right-[40%]', speed: 0.13 },
-    { delay: 1.9, size: 'w-12 h-12', color: 'bg-fuchsia-500', position: 'top-[50%] left-[80%]', speed: 0.28 },
-  ];
+  // Ajuste o número de elipses e suas propriedades
+  const numEllipses = 20; // Aumentei o número de elipses para preencher mais
+  const ellipsesData: EllipseProps[] = [];
+
+  for (let i = 0; i < numEllipses; i++) {
+    ellipsesData.push({
+      delay: Math.random() * 2, // Atraso aleatório para aparecerem em momentos diferentes
+      minSize: 30, // Tamanho mínimo (px)
+      maxSize: 100, // Tamanho máximo (px)
+      // Cores suaves para fundo branco, sem opacidade na classe para controlar no JS
+      color: `bg-${['blue', 'purple', 'pink', 'cyan', 'green', 'yellow', 'red', 'orange', 'teal', 'fuchsia'][Math.floor(Math.random() * 10)]}-300`,
+      initialX: Math.random() * 100, // Posição horizontal aleatória (0-100%)
+      initialY: Math.random() * 200 - 50, // Posição vertical aleatória (pode começar acima ou abaixo da tela para mais dispersão)
+      speed: 0.05 + Math.random() * 0.15, // Velocidade de parallax aleatória (entre 0.05 e 0.2)
+      opacity: 0.08 + Math.random() * 0.1, // Opacidade aleatória para sutileza (entre 0.08 e 0.18)
+    });
+  }
 
   return (
-    // Manter o z-0 e absolute inset-0
+    // O container deve cobrir toda a área e ter z-index baixo
     <div className="absolute inset-0 z-0 pointer-events-none">
-      {ellipses.map((ellipse, index) => (
+      {ellipsesData.map((ellipse, index) => (
         <Ellipse key={index} {...ellipse} />
       ))}
     </div>
