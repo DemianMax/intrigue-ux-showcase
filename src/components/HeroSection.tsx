@@ -11,10 +11,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onScrollToAbout }) => {
   const { t } = useLanguage();
 
   return (
-    // >>> REMOVIDO: bg-white <<<
-    // A HeroSection agora vai herdar o background do container pai (Index.tsx),
-    // que será bg-background (branco ou similar). Isso permite que as elipses no fundo sejam visíveis.
-    <section className="min-h-[100dvh] flex flex-col justify-center items-center relative pt-32 sm:pt-40">
+    // Esta section tinha o background branco
+    <section className="min-h-[100dvh] flex flex-col justify-center items-center relative pt-32 sm:pt-40 bg-white">
       <div className="w-full max-w-5xl mx-auto px-6 flex flex-col items-start gap-12">
         <motion.h1
           initial={{ opacity: 0, y: 24 }}
