@@ -1,4 +1,3 @@
-
 import { useRef, useState } from "react";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
@@ -8,11 +7,8 @@ import PortfolioSection from "@/components/PortfolioSection";
 import TechnicalSkillsSection from "@/components/TechnicalSkillsSection";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { useLanguage } from "@/contexts/Language/LanguageContext"; // Corrigido o caminho do import
 import { Link } from "react-router-dom";
-
-// Importe o componente ParallaxEllipses
-import ParallaxEllipses from "@/components/ParallaxEllipses";
 
 const Index = () => {
   const aboutRef = useRef<HTMLDivElement>(null);
@@ -37,12 +33,7 @@ const Index = () => {
   };
 
   return (
-    // Revertendo o background para `bg-background` (que deve ser branco pelo seu tailwind.config.js)
-    // Mantendo `relative` e `overflow-x-hidden`
-    <div className="relative flex flex-col min-h-screen bg-background text-foreground font-inter overflow-x-hidden">
-      {/* Adicione o componente ParallaxEllipses aqui, com z-index baixo para o fundo */}
-      <ParallaxEllipses />
-
+    <div className="relative flex flex-col min-h-screen text-zinc-50 font-inter overflow-x-hidden">
       {/* Barra de navegação fixa */}
       <nav className="fixed top-0 left-0 w-full bg-background/80 backdrop-blur z-30 border-b border-border shadow-sm">
         <div className="flex items-center justify-between max-w-6xl mx-auto px-5 py-3">
@@ -201,7 +192,6 @@ const Index = () => {
         </div>
       </nav>
 
-      {/* Certifique-se de que HeroSection não tem background próprio que a cubra */}
       <main className="relative z-10 pt-[76px]">
         <HeroSection onScrollToAbout={() => handleScrollTo(aboutRef)} />
         <div ref={aboutRef}>
