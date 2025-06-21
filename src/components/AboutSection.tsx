@@ -7,8 +7,12 @@ const AboutSection = React.forwardRef<HTMLDivElement>((props, ref) => {
   const { t } = useLanguage();
 
   return (
-    <section ref={ref} className="w-full max-w-6xl mx-auto px-5 py-20" id="sobre">
-      <div className="flex flex-col md:flex-row items-center gap-10">
+    <section
+      ref={ref}
+      id="sobre"
+      className="w-full max-w-6xl mx-auto px-5 py-20 md:py-32 bg-white"
+    >
+      <div className="flex flex-col md:flex-row items-center gap-16">
         {/* Foto à esquerda com animação */}
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
@@ -30,28 +34,28 @@ const AboutSection = React.forwardRef<HTMLDivElement>((props, ref) => {
           transition={{ delay: 0.5, duration: 0.6 }}
           className="flex-1 text-center md:text-left"
         >
-          <h2 className="font-playfair text-3xl text-brand-dark font-bold mb-6">
-            {t('aboutGreeting')}
+          <h2 className="font-playfair text-4xl md:text-5xl text-brand-dark font-bold mb-10">
+            {t("aboutGreeting")}
           </h2>
 
           {/* Intro com duas linhas e linha decorativa */}
-          <div className="mb-8">
+          <div className="mb-12">
             <motion.p
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.6 }}
-              className="text-xl sm:text-2xl text-brand-dark font-inter font-light leading-relaxed"
+              className="text-xl md:text-2xl text-brand-dark font-inter font-light leading-relaxed mb-4"
             >
-              {t('aboutIntro')}
+              {t("aboutIntro")}
             </motion.p>
 
             <motion.p
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8, duration: 0.6 }}
-              className="text-xl sm:text-2xl text-brand-dark font-inter font-light leading-relaxed mt-2"
+              className="text-xl md:text-2xl text-brand-dark font-inter font-light leading-relaxed"
             >
-              {t('aboutIntroLine2')}
+              {t("aboutIntroLine2")}
             </motion.p>
 
             <motion.div
@@ -59,7 +63,7 @@ const AboutSection = React.forwardRef<HTMLDivElement>((props, ref) => {
               animate={{ scaleX: 1 }}
               transition={{ delay: 1.0, duration: 0.6 }}
               style={{ transformOrigin: "left" }}
-              className="mt-4 h-1 w-32 bg-brand-accent/80 rounded-full"
+              className="mt-6 h-1 w-32 bg-brand-accent/80 rounded-full mx-auto md:mx-0"
             />
           </div>
 
@@ -67,19 +71,20 @@ const AboutSection = React.forwardRef<HTMLDivElement>((props, ref) => {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.2, duration: 0.6 }}
-            className="text-lg text-brand-dark leading-relaxed mb-8"
+            className="text-lg text-brand-dark leading-relaxed mb-12"
           >
-            {t('aboutParagraph1')}
+            {t("aboutParagraph1")}
             <span className="font-bold text-brand-accent">
-              {t('aboutParagraph1Highlight')}
+              {t("aboutParagraph1Highlight")}
             </span>
-            {t('aboutParagraph1Cont')}
-            <br /><br />
-            {t('aboutParagraph2')}
+            {t("aboutParagraph1Cont")}
+            <br />
+            <br />
+            {t("aboutParagraph2")}
             <span className="text-brand-accent font-medium">
-              {t('aboutParagraph2Highlight')}
+              {t("aboutParagraph2Highlight")}
             </span>
-            {t('aboutParagraph2Cont')}
+            {t("aboutParagraph2Cont")}
           </motion.p>
 
           <motion.a
@@ -89,15 +94,15 @@ const AboutSection = React.forwardRef<HTMLDivElement>((props, ref) => {
             href="https://maxdemian.vercel.app/curriculo"
             target="_self"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 h-10 px-4 py-2 bg-brand-accent hover:bg-brand-accent/90 text-white font-semibold rounded-md"
+            className="inline-flex items-center justify-center gap-2 h-12 px-6 py-3 bg-brand-accent hover:bg-brand-accent/90 text-white font-semibold rounded-md transition-all duration-300 ease-in-out"
           >
-            {t('aboutButton')}
+            {t("aboutButton")}
             <ArrowRight className="ml-2 h-5 w-5" />
           </motion.a>
         </motion.div>
       </div>
     </section>
-  )
+  );
 });
 
 export default AboutSection;
