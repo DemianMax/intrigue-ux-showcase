@@ -6,12 +6,12 @@ import FooterSection from "@/components/FooterSection";
 import PortfolioSection from "@/components/PortfolioSection";
 import TechnicalSkillsSection from "@/components/TechnicalSkillsSection";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu } from "lucide-react"; // Languages icon not used directly here
+import { Menu } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "react-router-dom";
 
-// >>> Importe o novo componente ParallaxEllipses aqui <<<
-import ParallaxEllipses from "@/components/ParallaxEllipses"; 
+// Importe o componente ParallaxEllipses
+import ParallaxEllipses from "@/components/ParallaxEllipses";
 
 const Index = () => {
   const aboutRef = useRef<HTMLDivElement>(null);
@@ -36,11 +36,10 @@ const Index = () => {
   };
 
   return (
-    // Adicionado `relative` para que `ParallaxEllipses` com `absolute` se posicione corretamente.
-    // Alterado `bg-background` para uma cor mais escura se desejar um fundo que contraste com as elipses.
-    // Mantido `font-inter` conforme seu código.
-    <div className="relative flex flex-col min-h-screen bg-zinc-950 text-zinc-50 font-inter overflow-x-hidden"> 
-      {/* >>> Adicione o componente ParallaxEllipses aqui, logo no início do div principal <<< */}
+    // Revertendo o background para `bg-background` (que deve ser branco pelo seu tailwind.config.js)
+    // Mantendo `relative` e `overflow-x-hidden`
+    <div className="relative flex flex-col min-h-screen bg-background text-foreground font-inter overflow-x-hidden">
+      {/* Adicione o componente ParallaxEllipses aqui, com z-index baixo para o fundo */}
       <ParallaxEllipses />
 
       {/* Barra de navegação fixa */}
@@ -201,12 +200,8 @@ const Index = () => {
         </div>
       </nav>
 
-      {/* Ajustei a classe para `relative z-10` na section principal que envolve 
-        suas outras seções. Isso garante que todo o conteúdo do site fique 
-        ACIMA das elipses de parallax (`z-0` no ParallaxEllipses).
-        Também adicionei `pt-[76px]` para compensar a altura da barra de navegação fixa.
-      */}
-      <main className="relative z-10 pt-[76px]"> 
+      {/* Certifique-se de que HeroSection não tem background próprio que a cubra */}
+      <main className="relative z-10 pt-[76px]">
         <HeroSection onScrollToAbout={() => handleScrollTo(aboutRef)} />
         <div ref={aboutRef}>
           <AboutSection />
@@ -214,9 +209,6 @@ const Index = () => {
         <div ref={projectsRef}>
           <ProjectsGrid />
         </div>
-        {/* Você tem PortfolioSection e TechnicalSkillsSection fora de refs de scroll. 
-            Mantenho assim, mas se quiser que sejam acessíveis pela navegação, 
-            precisarão de um ref ou id para scroll. */}
         <PortfolioSection />
         <TechnicalSkillsSection />
         <div ref={contactRef}>
