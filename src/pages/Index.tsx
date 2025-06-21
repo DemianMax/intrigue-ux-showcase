@@ -1,3 +1,27 @@
+// ... seu código Index.tsx ...
+
+<main className="relative z-10 pt-[76px]">
+  <HeroSection onScrollToAbout={() => handleScrollTo(aboutRef)} />
+  <div ref={aboutRef}>
+    <AboutSection />
+  </div>
+  {/* Conteúdo temporário para forçar o scroll */}
+  <div className="h-[200vh] w-full bg-gray-100 flex items-center justify-center text-gray-500 text-3xl">
+    ROLA PRA BAIXO PRA VER O PARALLAX! (temporário)
+  </div>
+  {/* Fim do conteúdo temporário */}
+  <div ref={projectsRef}>
+    <ProjectsGrid />
+  </div>
+  <PortfolioSection />
+  <TechnicalSkillsSection />
+  <div ref={contactRef}>
+    <FooterSection />
+  </div>
+</main>
+
+// ... restante do seu código ...
+
 import { useRef, useState } from "react";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
