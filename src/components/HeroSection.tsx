@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import React from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { BackgroundRain } from "./ui/BackgroundRain";
+import { BackgroundRain } from "@/components/ui/BackgroundRain";
 
 interface HeroSectionProps {
   onScrollToAbout: () => void;
@@ -12,11 +12,11 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onScrollToAbout }) => {
   const { t } = useLanguage();
 
   return (
-    <section className="relative min-h-[100dvh] flex flex-col justify-center items-center pt-32 sm:pt-40 bg-white overflow-hidden">
-      {/* Animação da chuva atrás do conteúdo */}
-      <BackgroundRain className="absolute inset-0 -z-10" />
+    <section className="min-h-[100dvh] flex flex-col justify-center items-center relative pt-32 sm:pt-40 bg-white overflow-hidden">
+      {/* Chamada da animação de fundo */}
+      <BackgroundRain />
 
-      <div className="w-full max-w-5xl mx-auto px-6 flex flex-col items-start gap-12">
+      <div className="w-full max-w-5xl mx-auto px-6 flex flex-col items-start gap-12 relative z-10">
         <motion.h1
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
