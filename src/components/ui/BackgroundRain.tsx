@@ -1,56 +1,52 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import { useWindowSize } from "@/hooks/useWindowSize";
 
-export const BackgroundRain: React.FC = () => {
-  const { width, height } = useWindowSize();
+const NUM_BEANS = 30;
 
-  const lines = Array.from({ length: 50 }).map((_, i) => ({
-    x: Math.random() * width,
-    delay: Math.random() * 2,
-  }));
+function randomRange(min: number, max: number) {
+  return Math.random() * (max - min) + min;
+}
+
+export const BackgroundRain: React.FC<{ className?: string }> = ({ className }) => {
+  const beans = Array.from({ length: NUM_BEANS }).map((_, i) => {
+    const x = randomRange(0, 100); // % horizontal position
+    const delay = randomRange(0, 5); // animation delay in seconds
+    const duration = randomRange(1.5, 3); // animation duration in seconds
+    const length = randomRange(8, 15); // length of each bean
+
+    return (
+      <motion.line
+        key={i}
+        x1={`${x}%`}
+        y1={-length}
+        x2={`${x}%`}
+        y2={0}
+        stroke="#888888"
+        strokeWidth={1}
+        strokeLinecap="round"
+        initial={{ y: -length }}
+        animate={{ y: 120 }} // anima do topo até abaixo do container (em px)
+        transition={{
+          repeat: Infinity,
+          repeatType: "loop",
+          ease: "linear",
+          duration,
+          delay,
+        }}
+      />
+    );
+  });
 
   return (
-    <div style={{ 
-      position: "fixed", 
-      top: 0, 
-      left: 0, 
-      width: "100vw", 
-      height: "100vh", 
-      zIndex: -1, 
-      backgroundColor: "white",
-      pointerEvents: "none",
-    }}>
-      <svg
-        width={width}
-        height={height}
-        viewBox={`0 0 ${width} ${height}`}
-        preserveAspectRatio="none"
-      >
-        {lines.map((line, i) => (
-          <motion.line
-            key={i}
-            x1={line.x}
-            y1={height + 100}
-            x2={line.x}
-            y2={height + 50}
-            stroke="#999999"
-            strokeWidth={2}
-            strokeLinecap="round"
-            initial={{ y: 0 }}
-            animate={{ y: -height - 100 }}
-            transition={{
-              repeat: Infinity,
-              repeatType: "loop",
-              ease: "linear",
-              duration: 4,
-              delay: line.delay,
-            }}
-          />
-        ))}
-      </svg>
-    </div>
+    <svg
+      className={className}
+      style={{ position: "absolute", inset: 0, pointerEvents: "none" }}
+      viewBox="0 0 100 120"
+      preserveAspectRatio="none"
+    >
+      {beans}
+    </svg>
   );
 };
 
