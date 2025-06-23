@@ -14,15 +14,15 @@ const BackgroundBeams: React.FC = () => {
           {[...Array(7)].map((_, i) => (
             <rect
               key={i}
-              x={-120 + 180 * i} // espaçamento mais próximo
-              y={200} // posiciona verticalmente mais no meio
-              width={100} // largura menor
-              height={600} // altura menor
+              x={-80 + 120 * i} // reduzido espaçamento e posição inicial
+              y={280} // vertical mais centralizada
+              width={40} // muito menor largura
+              height={200} // altura menor
               fill={`url(#paint${i}_linear_4_216)`}
-              fillOpacity="0.25" // um pouco mais opaco
-              transform={`rotate(30 ${-120 + 180 * i} 200)`} // rota em volta do centro do rect
+              fillOpacity="0.3" // boa visibilidade
+              transform={`rotate(30 ${-80 + 120 * i} 280)`} // mantém rotação
               className="beam-rect"
-              style={{ animationDelay: `${i * 1.5}s` }}
+              style={{ animationDelay: `${i * 1.2}s` }}
             />
           ))}
         </g>
@@ -39,7 +39,7 @@ const BackgroundBeams: React.FC = () => {
           >
             <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
-            <feGaussianBlur stdDeviation="80" result="effect1_foregroundBlur_4_216" /> {/* menos blur */}
+            <feGaussianBlur stdDeviation="40" result="effect1_foregroundBlur_4_216" /> {/* menos blur ainda */}
           </filter>
 
           {[...Array(7)].map((_, i) => (
@@ -49,7 +49,7 @@ const BackgroundBeams: React.FC = () => {
               x1="0"
               y1="0"
               x2="0"
-              y2="600"
+              y2="200"
               gradientUnits="userSpaceOnUse"
             >
               <stop stopColor="#00B7FF" />
@@ -61,16 +61,15 @@ const BackgroundBeams: React.FC = () => {
 
       <style jsx global>{`
         .beam-rect {
-          animation: beamMove 10s linear infinite;
-          transform-origin: center center;
+          animation: beamMove 4s linear infinite; /* mais rápido e linear */
         }
 
         @keyframes beamMove {
           0% {
-            transform: translateX(-150px) rotate(30deg);
+            transform: translateX(-80px) rotate(30deg);
           }
           100% {
-            transform: translateX(150px) rotate(30deg);
+            transform: translateX(80px) rotate(30deg);
           }
         }
       `}</style>
