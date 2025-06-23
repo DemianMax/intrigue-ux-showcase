@@ -14,13 +14,13 @@ const BackgroundBeams: React.FC = () => {
           {[...Array(7)].map((_, i) => (
             <rect
               key={i}
-              x={-240 + 240 * i}
-              y={0}
-              width={240}
-              height={1200}
+              x={-120 + 180 * i} // espaçamento mais próximo
+              y={200} // posiciona verticalmente mais no meio
+              width={100} // largura menor
+              height={600} // altura menor
               fill={`url(#paint${i}_linear_4_216)`}
-              fillOpacity="0.3"
-              transform={`rotate(30 ${-240 + 240 * i} 0)`}
+              fillOpacity="0.25" // um pouco mais opaco
+              transform={`rotate(30 ${-120 + 180 * i} 200)`} // rota em volta do centro do rect
               className="beam-rect"
               style={{ animationDelay: `${i * 1.5}s` }}
             />
@@ -39,7 +39,7 @@ const BackgroundBeams: React.FC = () => {
           >
             <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
-            <feGaussianBlur stdDeviation="120" result="effect1_foregroundBlur_4_216" />
+            <feGaussianBlur stdDeviation="80" result="effect1_foregroundBlur_4_216" /> {/* menos blur */}
           </filter>
 
           {[...Array(7)].map((_, i) => (
@@ -49,7 +49,7 @@ const BackgroundBeams: React.FC = () => {
               x1="0"
               y1="0"
               x2="0"
-              y2="1200"
+              y2="600"
               gradientUnits="userSpaceOnUse"
             >
               <stop stopColor="#00B7FF" />
@@ -62,14 +62,15 @@ const BackgroundBeams: React.FC = () => {
       <style jsx global>{`
         .beam-rect {
           animation: beamMove 10s linear infinite;
+          transform-origin: center center;
         }
 
         @keyframes beamMove {
           0% {
-            transform: translateX(-300px) rotate(30deg);
+            transform: translateX(-150px) rotate(30deg);
           }
           100% {
-            transform: translateX(300px) rotate(30deg);
+            transform: translateX(150px) rotate(30deg);
           }
         }
       `}</style>
