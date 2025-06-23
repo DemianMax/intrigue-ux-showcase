@@ -7,16 +7,20 @@ const BackgroundBeams: React.FC = () => {
 
   useAnimationFrame((t) => {
     if (ref.current) {
-      baseRotation.current = (t / 5000) % 360; // roda bem devagar
+      baseRotation.current = (t / 7000) % 360; // rotação lenta (7s por volta)
       ref.current.style.transform = `rotate(${baseRotation.current}deg)`;
     }
   });
 
   return (
     <div className="absolute inset-0 overflow-hidden bg-white z-0">
-      <div ref={ref} className="relative w-full h-full transition-transform duration-300 ease-linear">
-        <div className="absolute inset-[-30%] bg-gradient-to-tr from-blue-100 via-purple-100 to-pink-100 opacity-15 blur-3xl rotate-45" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-white to-white opacity-40" />
+      <div
+        ref={ref}
+        className="relative w-full h-full transition-transform duration-300 ease-linear"
+      >
+        {/* Cores mais escuras e cinzas */}
+        <div className="absolute inset-[-30%] bg-gradient-to-tr from-gray-700 via-gray-900 to-black opacity-40 blur-3xl rotate-45" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-gray-800 to-gray-900 opacity-30" />
       </div>
     </div>
   );
