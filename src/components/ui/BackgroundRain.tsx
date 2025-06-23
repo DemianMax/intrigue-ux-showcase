@@ -1,8 +1,16 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
+import { useWindowSize } from "@/hooks/useWindowSize";
 
 export const BackgroundRain: React.FC = () => {
+  const { width, height } = useWindowSize();
+
+  const lines = Array.from({ length: 50 }).map((_, i) => ({
+    x: Math.random() * width,
+    delay: Math.random() * 2,
+  }));
+
   return (
     <div style={{ 
       position: "fixed", 
@@ -15,29 +23,29 @@ export const BackgroundRain: React.FC = () => {
       pointerEvents: "none",
     }}>
       <svg
-        width="100%"
-        height="100%"
-        viewBox="0 0 100 100"
+        width={width}
+        height={height}
+        viewBox={`0 0 ${width} ${height}`}
         preserveAspectRatio="none"
       >
-        {[10, 30, 50, 70, 90].map((x, i) => (
+        {lines.map((line, i) => (
           <motion.line
             key={i}
-            x1={x}
-            y1={110}
-            x2={x}
-            y2={90}
-            stroke="#333333"
-            strokeWidth={4}
+            x1={line.x}
+            y1={height + 100}
+            x2={line.x}
+            y2={height + 50}
+            stroke="#999999"
+            strokeWidth={2}
             strokeLinecap="round"
-            initial={{ y: 110 }}
-            animate={{ y: -10 }}
+            initial={{ y: 0 }}
+            animate={{ y: -height - 100 }}
             transition={{
               repeat: Infinity,
               repeatType: "loop",
               ease: "linear",
-              duration: 2,
-              delay: i * 0.5,
+              duration: 4,
+              delay: line.delay,
             }}
           />
         ))}
