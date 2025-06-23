@@ -4,6 +4,12 @@ import React from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { BackgroundRain } from "@/components/ui/BackgroundRain";
 
+...
+
+<section className="relative min-h-[100dvh] bg-white">
+  <BackgroundRain className="absolute inset-0 -z-10" />
+  {/* Conteúdo do Hero aqui */}
+</section>
 interface HeroSectionProps {
   onScrollToAbout: () => void;
 }
