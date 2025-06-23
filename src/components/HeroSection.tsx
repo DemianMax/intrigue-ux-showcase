@@ -2,7 +2,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import React from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import BackgroundBeams from "@/components/BackgroundBeams";
 
 interface HeroSectionProps {
   onScrollToAbout: () => void;
@@ -12,11 +11,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onScrollToAbout }) => {
   const { t } = useLanguage();
 
   return (
-    <section className="min-h-[100dvh] flex flex-col justify-center items-center relative pt-32 sm:pt-40 bg-white overflow-hidden">
-      
-      <BackgroundBeams />
-
-      <div className="w-full max-w-5xl mx-auto px-6 flex flex-col items-start gap-12 z-10">
+    <section className="min-h-[100dvh] flex flex-col justify-center items-center relative pt-32 sm:pt-40 bg-white">
+      <div className="w-full max-w-5xl mx-auto px-6 flex flex-col items-start gap-12">
         <motion.h1
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
@@ -42,7 +38,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onScrollToAbout }) => {
             className="flex flex-col items-start"
           >
             <p className="text-xl sm:text-2xl text-brand-dark/80 font-inter font-light leading-relaxed">
-              {t("heroSubtitle")}
+              {t('heroSubtitle')}
             </p>
             <motion.div
               initial={{ scaleX: 0 }}
@@ -57,7 +53,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onScrollToAbout }) => {
 
       <motion.button
         onClick={onScrollToAbout}
-        className="absolute left-1/2 -translate-x-1/2 bottom-10 animate-bounce bg-brand-accent/10 hover:bg-brand-accent/20 rounded-full p-3 transition outline-none z-10"
+        className="absolute left-1/2 -translate-x-1/2 bottom-10 animate-bounce bg-brand-accent/10 hover:bg-brand-accent/20 rounded-full p-3 transition outline-none"
         aria-label={t("ariaScrollDown")}
       >
         <ChevronDown size={36} className="text-brand-accent" />
