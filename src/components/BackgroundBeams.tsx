@@ -10,70 +10,21 @@ const BackgroundBeams: React.FC = () => {
         viewBox="0 0 1440 960"
         fill="none"
       >
-        <g filter="url(#filter0_f_4_216)">
-          <rect
-            x="-240"
-            y="0"
-            width="240"
-            height="1200"
-            fill="url(#paint0_linear_4_216)"
-            fillOpacity="0.3"
-            transform="rotate(30 -240 0)"
-          />
-          <rect
-            x="0"
-            y="0"
-            width="240"
-            height="1200"
-            fill="url(#paint1_linear_4_216)"
-            fillOpacity="0.3"
-            transform="rotate(30 0 0)"
-          />
-          <rect
-            x="240"
-            y="0"
-            width="240"
-            height="1200"
-            fill="url(#paint2_linear_4_216)"
-            fillOpacity="0.3"
-            transform="rotate(30 240 0)"
-          />
-          <rect
-            x="480"
-            y="0"
-            width="240"
-            height="1200"
-            fill="url(#paint3_linear_4_216)"
-            fillOpacity="0.3"
-            transform="rotate(30 480 0)"
-          />
-          <rect
-            x="720"
-            y="0"
-            width="240"
-            height="1200"
-            fill="url(#paint4_linear_4_216)"
-            fillOpacity="0.3"
-            transform="rotate(30 720 0)"
-          />
-          <rect
-            x="960"
-            y="0"
-            width="240"
-            height="1200"
-            fill="url(#paint5_linear_4_216)"
-            fillOpacity="0.3"
-            transform="rotate(30 960 0)"
-          />
-          <rect
-            x="1200"
-            y="0"
-            width="240"
-            height="1200"
-            fill="url(#paint6_linear_4_216)"
-            fillOpacity="0.3"
-            transform="rotate(30 1200 0)"
-          />
+        <g className="beams" filter="url(#filter0_f_4_216)">
+          {[...Array(7)].map((_, i) => (
+            <rect
+              key={i}
+              x={-240 + 240 * i}
+              y={0}
+              width={240}
+              height={1200}
+              fill={`url(#paint${i}_linear_4_216)`}
+              fillOpacity="0.3"
+              transform={`rotate(30 ${-240 + 240 * i} 0)`}
+              className="beam-rect"
+              style={{ animationDelay: `${i * 1.5}s` }}
+            />
+          ))}
         </g>
 
         <defs>
@@ -87,100 +38,41 @@ const BackgroundBeams: React.FC = () => {
             colorInterpolationFilters="sRGB"
           >
             <feFlood floodOpacity="0" result="BackgroundImageFix" />
-            <feBlend
-              mode="normal"
-              in="SourceGraphic"
-              in2="BackgroundImageFix"
-              result="shape"
-            />
+            <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
             <feGaussianBlur stdDeviation="120" result="effect1_foregroundBlur_4_216" />
           </filter>
 
-          <linearGradient
-            id="paint0_linear_4_216"
-            x1="0"
-            y1="0"
-            x2="0"
-            y2="1200"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop stopColor="#00B7FF" />
-            <stop offset="1" stopColor="#5A2EB8" stopOpacity="0" />
-          </linearGradient>
-
-          <linearGradient
-            id="paint1_linear_4_216"
-            x1="0"
-            y1="0"
-            x2="0"
-            y2="1200"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop stopColor="#00B7FF" />
-            <stop offset="1" stopColor="#5A2EB8" stopOpacity="0" />
-          </linearGradient>
-
-          <linearGradient
-            id="paint2_linear_4_216"
-            x1="0"
-            y1="0"
-            x2="0"
-            y2="1200"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop stopColor="#00B7FF" />
-            <stop offset="1" stopColor="#5A2EB8" stopOpacity="0" />
-          </linearGradient>
-
-          <linearGradient
-            id="paint3_linear_4_216"
-            x1="0"
-            y1="0"
-            x2="0"
-            y2="1200"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop stopColor="#00B7FF" />
-            <stop offset="1" stopColor="#5A2EB8" stopOpacity="0" />
-          </linearGradient>
-
-          <linearGradient
-            id="paint4_linear_4_216"
-            x1="0"
-            y1="0"
-            x2="0"
-            y2="1200"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop stopColor="#00B7FF" />
-            <stop offset="1" stopColor="#5A2EB8" stopOpacity="0" />
-          </linearGradient>
-
-          <linearGradient
-            id="paint5_linear_4_216"
-            x1="0"
-            y1="0"
-            x2="0"
-            y2="1200"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop stopColor="#00B7FF" />
-            <stop offset="1" stopColor="#5A2EB8" stopOpacity="0" />
-          </linearGradient>
-
-          <linearGradient
-            id="paint6_linear_4_216"
-            x1="0"
-            y1="0"
-            x2="0"
-            y2="1200"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop stopColor="#00B7FF" />
-            <stop offset="1" stopColor="#5A2EB8" stopOpacity="0" />
-          </linearGradient>
+          {[...Array(7)].map((_, i) => (
+            <linearGradient
+              key={i}
+              id={`paint${i}_linear_4_216`}
+              x1="0"
+              y1="0"
+              x2="0"
+              y2="1200"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stopColor="#00B7FF" />
+              <stop offset="1" stopColor="#5A2EB8" stopOpacity="0" />
+            </linearGradient>
+          ))}
         </defs>
       </svg>
+
+      <style jsx global>{`
+        .beam-rect {
+          animation: beamMove 10s linear infinite;
+        }
+
+        @keyframes beamMove {
+          0% {
+            transform: translateX(-300px) rotate(30deg);
+          }
+          100% {
+            transform: translateX(300px) rotate(30deg);
+          }
+        }
+      `}</style>
     </div>
   );
 };
