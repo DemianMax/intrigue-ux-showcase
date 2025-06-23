@@ -13,10 +13,9 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onScrollToAbout }) => {
 
   return (
     <section className="min-h-[100dvh] flex flex-col justify-center items-center relative pt-32 sm:pt-40 bg-white overflow-hidden">
-      {/* Chamada da animação de fundo */}
       <BackgroundRain />
 
-      <div className="w-full max-w-5xl mx-auto px-6 flex flex-col items-start gap-12 relative z-10">
+      <div className="w-full max-w-5xl mx-auto px-6 flex flex-col items-start gap-12 z-10 relative">
         <motion.h1
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
