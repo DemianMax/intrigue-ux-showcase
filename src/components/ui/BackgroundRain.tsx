@@ -2,7 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-const NUM_BEANS = 30;
+const NUM_BEANS = 60;
 
 function randomRange(min: number, max: number) {
   return Math.random() * (max - min) + min;
@@ -10,11 +10,11 @@ function randomRange(min: number, max: number) {
 
 export const BackgroundRain: React.FC<{ className?: string }> = ({ className }) => {
   const beans = Array.from({ length: NUM_BEANS }).map((_, i) => {
-    const xStart = randomRange(0, 100); // posição horizontal inicial (%)
-    const delay = randomRange(0, 5); // delay da animação
-    const duration = randomRange(1.5, 3); // duração da animação
-    const length = randomRange(4, 8); // comprimento da linha (px)
-    const xOffset = randomRange(-5, 5); // deslocamento horizontal total na animação (%)
+    const xStart = randomRange(0, 100);
+    const delay = randomRange(0, 3);
+    const duration = randomRange(1, 2);
+    const length = randomRange(5, 10);
+    const xOffset = randomRange(-10, 10);
 
     return (
       <motion.line
@@ -23,10 +23,9 @@ export const BackgroundRain: React.FC<{ className?: string }> = ({ className }) 
         y1={120 + length}
         x2={`${xStart}%`}
         y2={120}
-        stroke="#888888"
-        strokeWidth={0.5}
+        stroke="red"
+        strokeWidth={1.2}
         strokeLinecap="round"
-        filter="url(#blur)"
         initial={{ y: 120 + length, x: 0 }}
         animate={{ y: -length, x: xOffset }}
         transition={{
@@ -43,15 +42,10 @@ export const BackgroundRain: React.FC<{ className?: string }> = ({ className }) 
   return (
     <svg
       className={className}
-      style={{ position: "absolute", inset: 0, pointerEvents: "none" }}
+      style={{ position: "absolute", inset: 0, pointerEvents: "none", backgroundColor: "rgba(0,0,0,0.05)" }}
       viewBox="0 0 100 120"
       preserveAspectRatio="none"
     >
-      <defs>
-        <filter id="blur" x="-20%" y="-20%" width="140%" height="140%">
-          <feGaussianBlur stdDeviation="0.6" />
-        </filter>
-      </defs>
       {beans}
     </svg>
   );
