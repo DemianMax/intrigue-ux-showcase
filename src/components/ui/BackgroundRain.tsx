@@ -20,7 +20,7 @@ export const BackgroundRain: React.FC<{ className?: string }> = ({ className }) 
       <motion.line
         key={i}
         x1={`${xStart}%`}
-        y1={120 + length} // começa um pouco abaixo da área
+        y1={120 + length}
         x2={`${xStart}%`}
         y2={120}
         stroke="#888888"
@@ -42,4 +42,19 @@ export const BackgroundRain: React.FC<{ className?: string }> = ({ className }) 
 
   return (
     <svg
-      clas
+      className={className}
+      style={{ position: "absolute", inset: 0, pointerEvents: "none" }}
+      viewBox="0 0 100 120"
+      preserveAspectRatio="none"
+    >
+      <defs>
+        <filter id="blur" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="0.6" />
+        </filter>
+      </defs>
+      {beans}
+    </svg>
+  );
+};
+
+BackgroundRain.displayName = "BackgroundRain";
