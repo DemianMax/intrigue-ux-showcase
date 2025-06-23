@@ -10,23 +10,25 @@ function randomRange(min: number, max: number) {
 
 export const BackgroundRain: React.FC<{ className?: string }> = ({ className }) => {
   const beans = Array.from({ length: NUM_BEANS }).map((_, i) => {
-    const x = randomRange(0, 100); // % horizontal position
-    const delay = randomRange(0, 5); // animation delay in seconds
-    const duration = randomRange(1.5, 3); // animation duration in seconds
-    const length = randomRange(8, 15); // length of each bean
+    const xStart = randomRange(0, 100); // posição horizontal inicial (%)
+    const delay = randomRange(0, 5); // delay da animação
+    const duration = randomRange(1.5, 3); // duração da animação
+    const length = randomRange(4, 8); // comprimento da linha (px)
+    const xOffset = randomRange(-5, 5); // deslocamento horizontal total na animação (%)
 
     return (
       <motion.line
         key={i}
-        x1={`${x}%`}
-        y1={-length}
-        x2={`${x}%`}
-        y2={0}
+        x1={`${xStart}%`}
+        y1={120 + length} // começa um pouco abaixo da área
+        x2={`${xStart}%`}
+        y2={120}
         stroke="#888888"
-        strokeWidth={1}
+        strokeWidth={0.5}
         strokeLinecap="round"
-        initial={{ y: -length }}
-        animate={{ y: 120 }} // anima do topo até abaixo do container (em px)
+        filter="url(#blur)"
+        initial={{ y: 120 + length, x: 0 }}
+        animate={{ y: -length, x: xOffset }}
         transition={{
           repeat: Infinity,
           repeatType: "loop",
@@ -40,14 +42,4 @@ export const BackgroundRain: React.FC<{ className?: string }> = ({ className }) 
 
   return (
     <svg
-      className={className}
-      style={{ position: "absolute", inset: 0, pointerEvents: "none" }}
-      viewBox="0 0 100 120"
-      preserveAspectRatio="none"
-    >
-      {beans}
-    </svg>
-  );
-};
-
-BackgroundRain.displayName = "BackgroundRain";
+      clas
