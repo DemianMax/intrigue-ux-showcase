@@ -7,7 +7,6 @@ import SingleProjectSection from "../components/SingleProjectSection";
 import FooterSection from "../components/FooterSection";
 import PortfolioSection from "../components/PortfolioSection";
 import TechnicalSkillsSection from "../components/TechnicalSkillsSection";
-// Ajuste os imports acima conforme a estrutura do seu projeto!
 import { useLanguage } from "../contexts/LanguageContext";
 import { useProjectsIndividual } from "../hooks/useProjectsIndividual";
 
@@ -66,7 +65,6 @@ const Index = () => {
             <div className="font-playfair font-bold text-xl text-brand-dark cursor-pointer">
               Max Demian
             </div>
-            {/* Exemplo de menu. Personalize conforme seu projeto: */}
             <ul className="hidden md:flex items-center gap-6 text-brand-dark font-medium text-sm">
               <li className="cursor-pointer hover:text-brand-accent transition">Home</li>
               <li className="cursor-pointer hover:text-brand-accent transition">Sobre</li>
