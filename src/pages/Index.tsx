@@ -1,20 +1,22 @@
 import { useState } from "react";
-import ScrollDepthLayout from "../components/ScrollDepthLayout";
-import DepthHeroSection from "../components/DepthHeroSection";
-import DepthAboutSection from "../components/DepthAboutSection";
-import ProjectsGrid from "../components/ProjectsGrid";
-import SingleProjectSection from "../components/SingleProjectSection";
-import FooterSection from "../components/FooterSection";
-import PortfolioSection from "../components/PortfolioSection";
-import TechnicalSkillsSection from "../components/TechnicalSkillsSection";
-import { useLanguage } from "../contexts/LanguageContext";
-import { useProjectsIndividual } from "../hooks/useProjectsIndividual";
+import ScrollDepthLayout from "@/components/ScrollDepthLayout";
+import DepthHeroSection from "@/components/DepthHeroSection";
+import DepthAboutSection from "@/components/DepthAboutSection";
+import ProjectsGrid from "@/components/ProjectsGrid";
+import SingleProjectSection from "@/components/SingleProjectSection";
+import FooterSection from "@/components/FooterSection";
+import PortfolioSection from "@/components/PortfolioSection";
+import TechnicalSkillsSection from "@/components/TechnicalSkillsSection";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useProjectsIndividual } from "@/hooks/useProjectsIndividual";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   const [currentSection, setCurrentSection] = useState(0);
-  const { t } = useLanguage ? useLanguage() : { t: (s: string) => s };
-  const { data: projects, isLoading, error } = useProjectsIndividual ? useProjectsIndividual() : { data: [], isLoading: false, error: null };
+  const { t } = useLanguage();
+  const { data: projects, isLoading, error } = useProjectsIndividual();
 
+  // Fallbacks de carregamento e erro para evitar sumiço da tela
   if (isLoading) {
     return <div className="flex items-center justify-center h-screen">Carregando projetos...</div>;
   }
@@ -23,12 +25,14 @@ const Index = () => {
     return <div className="flex items-center justify-center h-screen text-red-500">Erro ao carregar projetos.</div>;
   }
 
+  // Cria as seções do site
   const createSections = () => {
     const sections = [
       <DepthHeroSection key="hero" />,
       <DepthAboutSection key="about" />,
     ];
 
+    // Seções de projetos individuais
     if (projects && projects.length > 0) {
       projects.forEach((project, index) => {
         sections.push(
@@ -65,6 +69,7 @@ const Index = () => {
             <div className="font-playfair font-bold text-xl text-brand-dark cursor-pointer">
               Max Demian
             </div>
+            {/* Exemplo de menu. Personalize conforme seu projeto: */}
             <ul className="hidden md:flex items-center gap-6 text-brand-dark font-medium text-sm">
               <li className="cursor-pointer hover:text-brand-accent transition">Home</li>
               <li className="cursor-pointer hover:text-brand-accent transition">Sobre</li>
