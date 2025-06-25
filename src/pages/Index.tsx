@@ -11,15 +11,6 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useProjectsIndividual } from "@/hooks/useProjectsIndividual";
 import { Link } from "react-router-dom";
 
-  const { data: projects, isLoading, error } = useProjectsIndividual();
-
-if (isLoading) {
-  return <div>Carregando projetos...</div>;
-}
-
-if (error) {
-  return <div>Erro ao carregar projetos</div>;
-}
 
 const Index = () => {
   const [currentSection, setCurrentSection] = useState(0);
