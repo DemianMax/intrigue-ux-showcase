@@ -11,13 +11,19 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useProjectsIndividual } from "@/hooks/useProjectsIndividual";
 import { Link } from "react-router-dom";
 
-
 const Index = () => {
   const [currentSection, setCurrentSection] = useState(0);
   const { t } = useLanguage();
-  const { data: projects } = useProjectsIndividual();
+  const { data: projects, isLoading, error } = useProjectsIndividual();
 
+  // Fallbacks de carregamento e erro para evitar sumiço da tela
+  if (isLoading) {
+    return <div className="flex items-center justify-center h-screen">Carregando projetos...</div>;
+  }
 
+  if (error) {
+    return <div className="flex items-center justify-center h-screen text-red-500">Erro ao carregar projetos.</div>;
+  }
 
   // Cria as seções do site
   const createSections = () => {
@@ -63,7 +69,15 @@ const Index = () => {
             <div className="font-playfair font-bold text-xl text-brand-dark cursor-pointer">
               Max Demian
             </div>
-            {/* Adicione aqui o seu menu de navegação */}
+            {/* Exemplo de menu. Personalize conforme seu projeto: */}
+            <ul className="hidden md:flex items-center gap-6 text-brand-dark font-medium text-sm">
+              <li className="cursor-pointer hover:text-brand-accent transition">Home</li>
+              <li className="cursor-pointer hover:text-brand-accent transition">Sobre</li>
+              <li className="cursor-pointer hover:text-brand-accent transition">Projetos</li>
+              <li className="cursor-pointer hover:text-brand-accent transition">Portfólio</li>
+              <li className="cursor-pointer hover:text-brand-accent transition">Skills</li>
+              <li className="cursor-pointer hover:text-brand-accent transition">Contato</li>
+            </ul>
           </div>
         </div>
       </nav>
