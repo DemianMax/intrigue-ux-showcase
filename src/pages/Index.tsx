@@ -16,6 +16,16 @@ const Index = () => {
   const { t } = useLanguage();
   const { data: projects } = useProjectsIndividual();
 
+  const { data: projects, isLoading, error } = useProjectsIndividual();
+
+if (isLoading) {
+  return <div>Carregando projetos...</div>;
+}
+
+if (error) {
+  return <div>Erro ao carregar projetos</div>;
+}
+
   // Cria as seções do site
   const createSections = () => {
     const sections = [
