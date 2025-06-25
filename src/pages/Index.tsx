@@ -22,10 +22,13 @@ const Index = () => {
 
   const scrollToSection = (sectionIndex: number) => {
     setCurrentSection(sectionIndex);
-    //window.scrollTo({
+    
+    /* window.scrollTo({
       top: window.innerHeight * sectionIndex,
       behavior: "smooth",
     });
+    /*
+    
     setIsSheetOpen(false);
   };
 
