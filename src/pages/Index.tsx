@@ -1,20 +1,24 @@
+
 import { useRef, useState } from "react";
 import ScrollDepthLayout from "@/components/ScrollDepthLayout";
 import DepthHeroSection from "@/components/DepthHeroSection";
 import DepthAboutSection from "@/components/DepthAboutSection";
 import ProjectsGrid from "@/components/ProjectsGrid";
+import SingleProjectSection from "@/components/SingleProjectSection";
 import FooterSection from "@/components/FooterSection";
 import PortfolioSection from "@/components/PortfolioSection";
 import TechnicalSkillsSection from "@/components/TechnicalSkillsSection";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useProjectsIndividual } from "@/hooks/useProjectsIndividual";
 import { Link } from "react-router-dom";
 
 const Index = () => {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const [currentSection, setCurrentSection] = useState(0);
   const { t, language, setLanguage } = useLanguage();
+  const { data: projects, isLoading } = useProjectsIndividual();
 
   const scrollToSection = (sectionIndex: number) => {
     setCurrentSection(sectionIndex);
@@ -26,26 +30,46 @@ const Index = () => {
   };
 
   const scrollToNextSection = () => {
-    const nextSection = Math.min(currentSection + 1, 5);
+    const totalSections = 7 + (projects?.length || 0); // hero + about + 3 projects + portfolio + skills + contact
+    const nextSection = Math.min(currentSection + 1, totalSections - 1);
     scrollToSection(nextSection);
   };
 
-  const sections = [
-    <DepthHeroSection key="hero" onScrollNext={scrollToNextSection} />,
-    <DepthAboutSection key="about" />,
-    <div key="projects" className="w-full h-full">
-      <ProjectsGrid />
-    </div>,
-    <div key="portfolio" className="w-full h-full">
-      <PortfolioSection />
-    </div>,
-    <div key="skills" className="w-full h-full">
-      <TechnicalSkillsSection />
-    </div>,
-    <div key="contact" className="w-full h-full">
-      <FooterSection />
-    </div>
-  ];
+  // Criar seções dinamicamente baseadas nos projetos
+  const createSections = () => {
+    const sections = [
+      <DepthHeroSection key="hero" onScrollNext={scrollToNextSection} />,
+      <DepthAboutSection key="about" />,
+    ];
+
+    // Adicionar seções de projetos individuais
+    if (projects && projects.length > 0) {
+      projects.forEach((project, index) => {
+        sections.push(
+          <div key={`project-${project.id}`} className="w-full h-full">
+            <SingleProjectSection project={project} index={index} />
+          </div>
+        );
+      });
+    }
+
+    // Adicionar outras seções
+    sections.push(
+      <div key="portfolio" className="w-full h-full">
+        <PortfolioSection />
+      </div>,
+      <div key="skills" className="w-full h-full">
+        <TechnicalSkillsSection />
+      </div>,
+      <div key="contact" className="w-full h-full">
+        <FooterSection />
+      </div>
+    );
+
+    return sections;
+  };
+
+  const sections = createSections();
 
   return (
     <div className="relative font-inter">
@@ -72,7 +96,7 @@ const Index = () => {
                 <li className="cursor-pointer hover:text-brand-accent transition" onClick={() => scrollToSection(2)}>
                   {t("navProjects")}
                 </li>
-                <li className="cursor-pointer hover:text-brand-accent transition" onClick={() => scrollToSection(5)}>
+                <li className="cursor-pointer hover:text-brand-accent transition" onClick={() => scrollToSection(sections.length - 1)}>
                   {t("navContact")}
                 </li>
                 <li>
@@ -135,7 +159,7 @@ const Index = () => {
                     </li>
                     <li
                       className="cursor-pointer hover:text-brand-accent transition"
-                      onClick={() => scrollToSection(5)}
+                      onClick={() => scrollToSection(sections.length - 1)}
                     >
                       {t("navContact")}
                     </li>
