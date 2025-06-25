@@ -1,3 +1,4 @@
+
 import React from "react";
 
 const BackgroundBeams: React.FC = () => {
@@ -14,13 +15,13 @@ const BackgroundBeams: React.FC = () => {
           {[...Array(7)].map((_, i) => (
             <rect
               key={i}
-              x={-80 + 120 * i} // reduzido espaçamento e posição inicial
-              y={280} // vertical mais centralizada
-              width={40} // muito menor largura
-              height={200} // altura menor
+              x={-80 + 120 * i}
+              y={280}
+              width={40}
+              height={200}
               fill={`url(#paint${i}_linear_4_216)`}
-              fillOpacity="0.3" // boa visibilidade
-              transform={`rotate(30 ${-80 + 120 * i} 280)`} // mantém rotação
+              fillOpacity="0.3"
+              transform={`rotate(30 ${-80 + 120 * i} 280)`}
               className="beam-rect"
               style={{ animationDelay: `${i * 1.2}s` }}
             />
@@ -39,7 +40,7 @@ const BackgroundBeams: React.FC = () => {
           >
             <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
-            <feGaussianBlur stdDeviation="40" result="effect1_foregroundBlur_4_216" /> {/* menos blur ainda */}
+            <feGaussianBlur stdDeviation="40" result="effect1_foregroundBlur_4_216" />
           </filter>
 
           {[...Array(7)].map((_, i) => (
@@ -59,9 +60,9 @@ const BackgroundBeams: React.FC = () => {
         </defs>
       </svg>
 
-      <style jsx global>{`
+      <style>{`
         .beam-rect {
-          animation: beamMove 4s linear infinite; /* mais rápido e linear */
+          animation: beamMove 4s linear infinite;
         }
 
         @keyframes beamMove {

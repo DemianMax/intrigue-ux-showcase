@@ -1,3 +1,4 @@
+
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import NotFound from "./NotFound";
@@ -279,13 +280,15 @@ const ProjectCasePage = () => {
             </section>
           )}
 
-         {(project.process_images_data?.length ?? processImages.length) > 0 && (
+         {(project.process_images_data ? 
+           (Array.isArray(project.process_images_data) ? project.process_images_data.length : 0) : 
+           processImages.length) > 0 && (
   <section className="mb-12">
     <h3 className="text-2xl font-playfair text-brand-dark mb-5 text-left">
       {t("caseStudyProcess")}
     </h3>
     <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-      {project.process_images_data?.length ? (
+      {project.process_images_data && Array.isArray(project.process_images_data) ? (
         project.process_images_data.map((item, index) => (
           <div
             key={`process-jsonb-${index}`}
