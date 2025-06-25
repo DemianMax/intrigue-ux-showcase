@@ -1,7 +1,9 @@
+
 export interface Project {
   id: string;
   title: string;
   role: string;
+  problem: string;
   solution: string;
   challenge?: string;
   hashtags_text?: string;

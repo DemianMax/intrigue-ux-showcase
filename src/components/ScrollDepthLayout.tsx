@@ -22,7 +22,7 @@ const ScrollDepthLayout: React.FC<ScrollDepthLayoutProps> = ({ children }) => {
   );
 
   useEffect(() => {
-    const unsubscribe = sectionProgress.onChange((latest) => {
+    const unsubscribe = sectionProgress.on("change", (latest) => {
       setCurrentSection(Math.round(latest));
     });
     return unsubscribe;
@@ -65,8 +65,10 @@ const ScrollDepthLayout: React.FC<ScrollDepthLayoutProps> = ({ children }) => {
               width: "100%",
               height: "100vh",
               display: "flex",
+              flexDirection: "column",
               alignItems: "center",
-              justifyContent: "center"
+              justifyContent: "center",
+              overflow: "hidden"
             }}
             className="w-full bg-gradient-to-br from-white via-gray-50 to-gray-100"
           >
@@ -78,9 +80,11 @@ const ScrollDepthLayout: React.FC<ScrollDepthLayoutProps> = ({ children }) => {
               }}
               transition={{ duration: 0.8, ease: "easeOut" }}
               style={{ perspective: "1200px" }}
-              className="w-full h-full flex items-center justify-center"
+              className="w-full h-full flex items-center justify-center max-h-screen overflow-y-auto"
             >
-              {child}
+              <div className="w-full max-w-6xl mx-auto px-4 py-8">
+                {child}
+              </div>
             </motion.div>
           </motion.div>
         );

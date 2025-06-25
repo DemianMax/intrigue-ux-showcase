@@ -1,3 +1,4 @@
+
 import React from "react";
 import ProjectCard from "./ProjectCard";
 import { useProjects } from "@/hooks/useProjects";
@@ -9,24 +10,26 @@ const ProjectsGrid: React.FC = () => {
   const { data: projects, isLoading, isError } = useProjects();
 
   return (
-    <section className="w-full max-w-6xl mx-auto px-4 py-20 mb-20" id="projetos">
-      <h3 className="text-4xl font-playfair font-bold text-brand-dark mb-16 text-center">{t('projectsTitle')}</h3>
+    <div className="w-full h-full flex flex-col items-center justify-center py-8" id="projetos">
+      <h3 className="text-4xl font-playfair font-bold text-brand-dark mb-12 text-center">
+        {t('projectsTitle')}
+      </h3>
       
       {isLoading && (
-        <div className="space-y-16">
+        <div className="space-y-8 w-full max-w-4xl">
           {Array.from({ length: 3 }).map((_, i) => (
-            <div key={i} className="flex flex-col lg:flex-row gap-8 items-center">
-              <Skeleton className="w-full lg:w-1/2 h-64 rounded-2xl" />
-              <div className="w-full lg:w-1/2 space-y-4">
-                <Skeleton className="h-8 w-3/4" />
+            <div key={i} className="flex flex-col lg:flex-row gap-6 items-center">
+              <Skeleton className="w-full lg:w-1/2 h-48 rounded-2xl" />
+              <div className="w-full lg:w-1/2 space-y-3">
+                <Skeleton className="h-6 w-3/4" />
                 <Skeleton className="h-4 w-1/2" />
-                <Skeleton className="h-20 w-full" />
+                <Skeleton className="h-16 w-full" />
                 <div className="flex gap-2">
-                  <Skeleton className="h-6 w-16" />
-                  <Skeleton className="h-6 w-20" />
-                  <Skeleton className="h-6 w-14" />
+                  <Skeleton className="h-5 w-12" />
+                  <Skeleton className="h-5 w-16" />
+                  <Skeleton className="h-5 w-10" />
                 </div>
-                <Skeleton className="h-10 w-32" />
+                <Skeleton className="h-8 w-24" />
               </div>
             </div>
           ))}
@@ -38,7 +41,7 @@ const ProjectsGrid: React.FC = () => {
       {!isLoading && !isError && (
         <>
           {projects && projects.length > 0 ? (
-            <div className="space-y-20">
+            <div className="space-y-12 w-full max-w-5xl overflow-y-auto max-h-[70vh]">
               {projects.map((project, index) => (
                 <ProjectCard 
                   key={project.id} 
@@ -48,13 +51,13 @@ const ProjectsGrid: React.FC = () => {
               ))}
             </div>
           ) : (
-            <div className="text-center p-8 bg-sky-50 border border-sky-200 text-sky-700 rounded-2xl">
+            <div className="text-center p-6 bg-sky-50 border border-sky-200 text-sky-700 rounded-2xl max-w-md">
               Nenhum projeto encontrado. Adicione projetos no seu painel Supabase.
             </div>
           )}
         </>
       )}
-    </section>
+    </div>
   );
 };
 

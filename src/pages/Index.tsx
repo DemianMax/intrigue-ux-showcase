@@ -1,4 +1,3 @@
-
 import { useRef, useState } from "react";
 import ScrollDepthLayout from "@/components/ScrollDepthLayout";
 import DepthHeroSection from "@/components/DepthHeroSection";
@@ -17,38 +16,33 @@ const Index = () => {
   const [currentSection, setCurrentSection] = useState(0);
   const { t, language, setLanguage } = useLanguage();
 
-  const scrollToNextSection = () => {
-    setCurrentSection(prev => Math.min(prev + 1, 5));
+  const scrollToSection = (sectionIndex: number) => {
+    setCurrentSection(sectionIndex);
     window.scrollTo({
-      top: window.innerHeight * (currentSection + 1),
-      behavior: "smooth",
-    });
-  };
-
-  const handleScrollToTop = () => {
-    setCurrentSection(0);
-    window.scrollTo({
-      top: 0,
+      top: window.innerHeight * sectionIndex,
       behavior: "smooth",
     });
     setIsSheetOpen(false);
   };
 
+  const scrollToNextSection = () => {
+    const nextSection = Math.min(currentSection + 1, 5);
+    scrollToSection(nextSection);
+  };
+
   const sections = [
     <DepthHeroSection key="hero" onScrollNext={scrollToNextSection} />,
     <DepthAboutSection key="about" />,
-    <div key="projects" className="w-full h-full flex items-center justify-center bg-gradient-to-br from-white via-gray-50 to-purple-50">
-      <div className="w-full max-w-6xl mx-auto">
-        <ProjectsGrid />
-      </div>
+    <div key="projects" className="w-full h-full">
+      <ProjectsGrid />
     </div>,
-    <div key="portfolio" className="w-full h-full flex items-center justify-center bg-gradient-to-br from-purple-50 via-white to-green-50">
+    <div key="portfolio" className="w-full h-full">
       <PortfolioSection />
     </div>,
-    <div key="skills" className="w-full h-full flex items-center justify-center bg-gradient-to-br from-green-50 via-white to-orange-50">
+    <div key="skills" className="w-full h-full">
       <TechnicalSkillsSection />
     </div>,
-    <div key="contact" className="w-full h-full flex items-center justify-center bg-gradient-to-br from-orange-50 via-gray-50 to-brand-dark">
+    <div key="contact" className="w-full h-full">
       <FooterSection />
     </div>
   ];
@@ -61,7 +55,7 @@ const Index = () => {
           <div className="flex items-center justify-between">
             <div
               className="font-playfair font-bold text-xl text-brand-dark cursor-pointer"
-              onClick={handleScrollToTop}
+              onClick={() => scrollToSection(0)}
             >
               Max Demian
             </div>
@@ -69,16 +63,16 @@ const Index = () => {
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center gap-6">
               <ul className="flex items-center gap-6 text-brand-dark font-medium text-sm">
-                <li className="cursor-pointer hover:text-brand-accent transition" onClick={handleScrollToTop}>
+                <li className="cursor-pointer hover:text-brand-accent transition" onClick={() => scrollToSection(0)}>
                   {t("navHome")}
                 </li>
-                <li className="cursor-pointer hover:text-brand-accent transition">
+                <li className="cursor-pointer hover:text-brand-accent transition" onClick={() => scrollToSection(1)}>
                   {t("navAbout")}
                 </li>
-                <li className="cursor-pointer hover:text-brand-accent transition">
+                <li className="cursor-pointer hover:text-brand-accent transition" onClick={() => scrollToSection(2)}>
                   {t("navProjects")}
                 </li>
-                <li className="cursor-pointer hover:text-brand-accent transition">
+                <li className="cursor-pointer hover:text-brand-accent transition" onClick={() => scrollToSection(5)}>
                   {t("navContact")}
                 </li>
                 <li>
@@ -123,25 +117,25 @@ const Index = () => {
                   <ul className="flex flex-col items-start gap-7 pt-10 text-brand-dark font-semibold text-lg">
                     <li
                       className="cursor-pointer hover:text-brand-accent transition"
-                      onClick={handleScrollToTop}
+                      onClick={() => scrollToSection(0)}
                     >
                       {t("navHome")}
                     </li>
                     <li
                       className="cursor-pointer hover:text-brand-accent transition"
-                      onClick={() => handleScrollToTop()}
+                      onClick={() => scrollToSection(1)}
                     >
                       {t("navAbout")}
                     </li>
                     <li
                       className="cursor-pointer hover:text-brand-accent transition"
-                      onClick={() => handleScrollToTop()}
+                      onClick={() => scrollToSection(2)}
                     >
                       {t("navProjects")}
                     </li>
                     <li
                       className="cursor-pointer hover:text-brand-accent transition"
-                      onClick={() => handleScrollToTop()}
+                      onClick={() => scrollToSection(5)}
                     >
                       {t("navContact")}
                     </li>

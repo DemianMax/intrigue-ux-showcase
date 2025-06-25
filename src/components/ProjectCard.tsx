@@ -25,32 +25,32 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 50 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.8, delay: index * 0.2 }}
-      className={`flex flex-col ${isImageLeft ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-8 lg:gap-12 items-center group`}
+      transition={{ duration: 0.6, delay: index * 0.1 }}
+      className={`flex flex-col ${isImageLeft ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-6 lg:gap-8 items-center group`}
     >
       {/* Imagem do projeto */}
       <motion.div className="w-full lg:w-1/2 relative">
-        <div className="relative overflow-hidden rounded-2xl shadow-2xl">
+        <div className="relative overflow-hidden rounded-xl shadow-lg">
           <img
             src={project.image}
             alt={`Projeto ${project.title}`}
-            className="w-full h-64 lg:h-80 object-cover"
+            className="w-full h-48 lg:h-56 object-cover"
           />
         </div>
       </motion.div>
 
       {/* Conteúdo do projeto */}
-      <div className="w-full lg:w-1/2 space-y-6">
-        <div className="space-y-3">
+      <div className="w-full lg:w-1/2 space-y-4">
+        <div className="space-y-2">
           <motion.h4 
             initial={{ opacity: 0, x: isImageLeft ? 20 : -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-xl lg:text-2xl font-playfair font-semibold text-brand-dark"
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-lg lg:text-xl font-playfair font-semibold text-brand-dark"
           >
             {project.title}
           </motion.h4>
@@ -59,8 +59,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
             initial={{ opacity: 0, x: isImageLeft ? 20 : -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-brand-accent font-semibold text-base"
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="text-brand-accent font-semibold text-sm"
           >
             {project.role}
           </motion.div>
@@ -70,17 +70,17 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
           initial={{ opacity: 0, x: isImageLeft ? 20 : -20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="space-y-4 text-gray-700"
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="space-y-3 text-gray-700 text-sm"
         >
           <div>
-            <h5 className="font-semibold text-brand-dark mb-2">{t('projectProblem')}:</h5>
-            <p className="leading-relaxed">{project.problem}</p>
+            <h5 className="font-semibold text-brand-dark mb-1 text-sm">{t('projectProblem')}:</h5>
+            <p className="leading-relaxed line-clamp-2">{project.problem}</p>
           </div>
           
           <div>
-            <h5 className="font-semibold text-brand-dark mb-2">{t('projectSolution')}:</h5>
-            <p className="leading-relaxed">{project.solution}</p>
+            <h5 className="font-semibold text-brand-dark mb-1 text-sm">{t('projectSolution')}:</h5>
+            <p className="leading-relaxed line-clamp-2">{project.solution}</p>
           </div>
         </motion.div>
         
@@ -88,13 +88,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
           initial={{ opacity: 0, x: isImageLeft ? 20 : -20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="flex flex-wrap gap-2"
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="flex flex-wrap gap-1"
         >
-          {parseTextToArray(project.hashtags_text).map((tag, idx) => (
+          {parseTextToArray(project.hashtags_text).slice(0, 4).map((tag, idx) => (
             <span
               key={idx}
-              className="text-sm font-medium text-brand-accent bg-brand-accent/10 rounded-full px-3 py-1 border border-brand-accent/20"
+              className="text-xs font-medium text-brand-accent bg-brand-accent/10 rounded-full px-2 py-1 border border-brand-accent/20"
             >
               {tag}
             </span>
@@ -105,10 +105,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
           initial={{ opacity: 0, x: isImageLeft ? 20 : -20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.7 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
         >
           <button
-            className="px-8 py-3 rounded-full bg-brand-accent text-white font-semibold shadow-lg hover:bg-brand-dark/90 hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+            className="px-6 py-2 rounded-full bg-brand-accent text-white font-semibold shadow-md hover:bg-brand-dark/90 hover:shadow-lg transition-all duration-300 transform hover:scale-105 text-sm"
             onClick={() => navigate(`/projeto/${project.id}`)}
           >
             {t('projectCaseStudyButton')}
