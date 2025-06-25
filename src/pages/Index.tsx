@@ -14,7 +14,13 @@ import { Link } from "react-router-dom";
 const Index = () => {
   const [currentSection, setCurrentSection] = useState(0);
   const { t } = useLanguage();
-  const { data: projects, isLoading, error } = useProjectsIndividual();
+const projects = [
+  { id: 1, title: "Projeto 1", description: "Descrição 1" },
+  { id: 2, title: "Projeto 2", description: "Descrição 2" },
+  { id: 3, title: "Projeto 3", description: "Descrição 3" },
+];
+const isLoading = false;
+const error = null;
 
   // Fallbacks de carregamento e erro para evitar sumiço da tela
   if (isLoading) {
