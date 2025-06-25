@@ -1,96 +1,73 @@
+import { useState } from "react";
+import ScrollDepthLayout from "@/components/ScrollDepthLayout";
+import DepthHeroSection from "@/components/DepthHeroSection";
+import DepthAboutSection from "@/components/DepthAboutSection";
+import ProjectsGrid from "@/components/ProjectsGrid";
+import SingleProjectSection from "@/components/SingleProjectSection";
+import FooterSection from "@/components/FooterSection";
+import PortfolioSection from "@/components/PortfolioSection";
+import TechnicalSkillsSection from "@/components/TechnicalSkillsSection";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useProjectsIndividual } from "@/hooks/useProjectsIndividual";
+import { Link } from "react-router-dom";
 
-import React, { useRef, useEffect, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-
-interface ScrollDepthLayoutProps {
-  children: React.ReactNode[];
-}
-
-const ScrollDepthLayout: React.FC<ScrollDepthLayoutProps> = ({ children }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
+const Index = () => {
   const [currentSection, setCurrentSection] = useState(0);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
-  });
+  const { t } = useLanguage();
+  const { data: projects } = useProjectsIndividual();
 
-  // Transform scroll progress to section transitions
-  const sectionProgress = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [0, children.length - 1]
-  );
+  // Cria as seções do site
+  const createSections = () => {
+    const sections = [
+      <DepthHeroSection key="hero" />,
+      <DepthAboutSection key="about" />,
+    ];
 
-  useEffect(() => {
-    const unsubscribe = sectionProgress.on("change", (latest) => {
-      setCurrentSection(Math.round(latest));
-    });
-    return unsubscribe;
-  }, [sectionProgress]);
+    // Seções de projetos individuais
+    if (projects && projects.length > 0) {
+      projects.forEach((project, index) => {
+        sections.push(
+          <div key={`project-${project.id}`} className="w-full h-full">
+            <SingleProjectSection project={project} index={index} />
+          </div>
+        );
+      });
+    }
+
+    sections.push(
+      <div key="portfolio" className="w-full h-full">
+        <PortfolioSection />
+      </div>,
+      <div key="skills" className="w-full h-full">
+        <TechnicalSkillsSection />
+      </div>,
+      <div key="contact" className="w-full h-full">
+        <FooterSection />
+      </div>
+    );
+
+    return sections;
+  };
+
+  const sections = createSections();
 
   return (
-    <div ref={containerRef} className="relative" style={{ height: `${children.length * 100}vh` }}>
-      {children.map((child, index) => {
-        const sectionStart = index / children.length;
-        const sectionEnd = (index + 1) / children.length;
-        
-        const opacity = useTransform(
-          scrollYProgress,
-          [sectionStart - 0.1, sectionStart, sectionEnd, sectionEnd + 0.1],
-          [0, 1, 1, 0]
-        );
-
-        const scale = useTransform(
-          scrollYProgress,
-          [sectionStart - 0.1, sectionStart, sectionEnd, sectionEnd + 0.1],
-          [0.8, 1, 1, 1.1]
-        );
-
-        const z = useTransform(
-          scrollYProgress,
-          [sectionStart - 0.1, sectionStart, sectionEnd, sectionEnd + 0.1],
-          [-200, 0, 0, 200]
-        );
-
-        return (
-          <motion.div
-            key={index}
-            style={{
-              opacity,
-              scale,
-              z,
-              position: "fixed",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "100vh",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              overflow: "hidden"
-            }}
-            className="w-full bg-gradient-to-br from-white via-gray-50 to-gray-100"
-          >
-            <motion.div
-              initial={{ rotateX: 15, rotateY: 5 }}
-              animate={{ 
-                rotateX: currentSection === index ? 0 : 15,
-                rotateY: currentSection === index ? 0 : 5 
-              }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              style={{ perspective: "1200px" }}
-              className="w-full h-full flex items-center justify-center max-h-screen overflow-y-auto"
-            >
-              <div className="w-full max-w-6xl mx-auto px-4 py-8">
-                {child}
-              </div>
-            </motion.div>
-          </motion.div>
-        );
-      })}
+    <div className="relative font-inter">
+      {/* Menu fixo FORA do ScrollDepthLayout */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm">
+        <div className="max-w-7xl mx-auto px-6 py-4">
+          <div className="flex items-center justify-between">
+            <div className="font-playfair font-bold text-xl text-brand-dark cursor-pointer">
+              Max Demian
+            </div>
+            {/* Adicione aqui o seu menu de navegação */}
+          </div>
+        </div>
+      </nav>
+      {/* Layout de sessões */}
+      <ScrollDepthLayout>{sections}</ScrollDepthLayout>
     </div>
   );
 };
 
-export default ScrollDepthLayout;
+export default Index;
