@@ -1,3 +1,4 @@
+
 import React from "react";
 import { motion } from "framer-motion";
 import { Project } from "@/types/project";
@@ -10,7 +11,7 @@ interface ProjectCardProps {
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
   const navigate = useNavigate();
 
   // Função para converter texto separado por vírgulas em array
@@ -21,12 +22,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
 
   // Alternar layout: par = imagem à esquerda, ímpar = imagem à direita
   const isImageLeft = index % 2 === 0;
-
-  // Escolhe os campos conforme o idioma
-  const title = language === 'en' && project.title_en ? project.title_en : project.title;
-  const role = language === 'en' && project.role_en ? project.role_en : project.role;
-  const problem = language === 'en' && project.problem_en ? project.problem_en : project.problem;
-  const solution = language === 'en' && project.solution_en ? project.solution_en : project.solution;
 
   return (
     <motion.div
@@ -41,7 +36,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
         <div className="relative overflow-hidden rounded-2xl shadow-2xl">
           <img
             src={project.image}
-            alt={`Projeto ${title}`}
+            alt={`Projeto ${project.title}`}
             className="w-full h-64 lg:h-80 object-cover"
           />
         </div>
@@ -57,7 +52,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="text-xl lg:text-2xl font-playfair font-semibold text-brand-dark"
           >
-            {title}
+            {project.title}
           </motion.h4>
           
           <motion.div 
@@ -67,7 +62,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="text-brand-accent font-semibold text-base"
           >
-            {role}
+            {project.role}
           </motion.div>
         </div>
 
@@ -80,12 +75,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
         >
           <div>
             <h5 className="font-semibold text-brand-dark mb-2">{t('projectProblem')}:</h5>
-            <p className="leading-relaxed">{problem}</p>
+            <p className="leading-relaxed">{project.description}</p>
           </div>
           
           <div>
             <h5 className="font-semibold text-brand-dark mb-2">{t('projectSolution')}:</h5>
-            <p className="leading-relaxed">{solution}</p>
+            <p className="leading-relaxed">{project.solution}</p>
           </div>
         </motion.div>
         
