@@ -75,7 +75,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
         >
           <div>
             <h5 className="font-semibold text-brand-dark mb-2">{t('projectProblem')}:</h5>
-            <p className="leading-relaxed">{project.description}</p>
+            <p className="leading-relaxed">{project.problem}</p>
           </div>
           
           <div>

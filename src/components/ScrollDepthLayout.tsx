@@ -29,7 +29,7 @@ const ScrollDepthLayout: React.FC<ScrollDepthLayoutProps> = ({ children }) => {
   }, [sectionProgress]);
 
   return (
-    <div ref={containerRef} className="relative">
+    <div ref={containerRef} className="relative" style={{ height: `${children.length * 100}vh` }}>
       {children.map((child, index) => {
         const sectionStart = index / children.length;
         const sectionEnd = (index + 1) / children.length;
@@ -59,8 +59,10 @@ const ScrollDepthLayout: React.FC<ScrollDepthLayoutProps> = ({ children }) => {
               opacity,
               scale,
               z,
-              position: index === 0 ? "relative" : "sticky",
-              top: index === 0 ? "auto" : 0,
+              position: "fixed",
+              top: 0,
+              left: 0,
+              width: "100%",
               height: "100vh",
               display: "flex",
               alignItems: "center",
