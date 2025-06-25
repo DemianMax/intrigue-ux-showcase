@@ -11,11 +11,6 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useProjectsIndividual } from "@/hooks/useProjectsIndividual";
 import { Link } from "react-router-dom";
 
-const Index = () => {
-  const [currentSection, setCurrentSection] = useState(0);
-  const { t } = useLanguage();
-  const { data: projects } = useProjectsIndividual();
-
   const { data: projects, isLoading, error } = useProjectsIndividual();
 
 if (isLoading) {
@@ -25,6 +20,13 @@ if (isLoading) {
 if (error) {
   return <div>Erro ao carregar projetos</div>;
 }
+
+const Index = () => {
+  const [currentSection, setCurrentSection] = useState(0);
+  const { t } = useLanguage();
+  const { data: projects } = useProjectsIndividual();
+
+
 
   // Cria as seções do site
   const createSections = () => {
