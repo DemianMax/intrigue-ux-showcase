@@ -1,3 +1,4 @@
+
 import React from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
@@ -5,6 +6,11 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 const AboutSection = React.forwardRef<HTMLDivElement>((props, ref) => {
   const { t } = useLanguage();
+
+  // Safety check to ensure t function is available
+  if (!t) {
+    return null;
+  }
 
   return (
     <section

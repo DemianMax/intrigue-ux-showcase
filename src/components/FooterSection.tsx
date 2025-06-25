@@ -1,3 +1,4 @@
+
 import { Mail, Linkedin, ExternalLink } from "lucide-react";
 import React from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -5,6 +6,11 @@ import { motion } from "framer-motion";
 
 const FooterSection = React.forwardRef<HTMLDivElement>((props, ref) => {
   const { t } = useLanguage();
+
+  // Safety check to ensure t function is available
+  if (!t) {
+    return null;
+  }
 
   return (
     <motion.footer

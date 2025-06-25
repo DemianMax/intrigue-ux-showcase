@@ -159,6 +159,126 @@ export type Database = {
         }
         Relationships: []
       }
+      projects_en: {
+        Row: {
+          challenge: string | null
+          created_at: string
+          hashtags_text: string | null
+          id: string
+          image: string
+          next_steps: string | null
+          problem: string
+          process_images_data: Json | null
+          process_images_text: string | null
+          process_legends_text: string | null
+          results_text: string | null
+          role: string
+          solution: string
+          solution_images_legends_text: string | null
+          solution_images_text: string | null
+          title: string
+          ui_note: string | null
+        }
+        Insert: {
+          challenge?: string | null
+          created_at?: string
+          hashtags_text?: string | null
+          id?: string
+          image: string
+          next_steps?: string | null
+          problem: string
+          process_images_data?: Json | null
+          process_images_text?: string | null
+          process_legends_text?: string | null
+          results_text?: string | null
+          role: string
+          solution: string
+          solution_images_legends_text?: string | null
+          solution_images_text?: string | null
+          title: string
+          ui_note?: string | null
+        }
+        Update: {
+          challenge?: string | null
+          created_at?: string
+          hashtags_text?: string | null
+          id?: string
+          image?: string
+          next_steps?: string | null
+          problem?: string
+          process_images_data?: Json | null
+          process_images_text?: string | null
+          process_legends_text?: string | null
+          results_text?: string | null
+          role?: string
+          solution?: string
+          solution_images_legends_text?: string | null
+          solution_images_text?: string | null
+          title?: string
+          ui_note?: string | null
+        }
+        Relationships: []
+      }
+      projects_pt: {
+        Row: {
+          challenge: string | null
+          created_at: string
+          hashtags_text: string | null
+          id: string
+          image: string
+          next_steps: string | null
+          problem: string
+          process_images_data: Json | null
+          process_images_text: string | null
+          process_legends_text: string | null
+          results_text: string | null
+          role: string
+          solution: string
+          solution_images_legends_text: string | null
+          solution_images_text: string | null
+          title: string
+          ui_note: string | null
+        }
+        Insert: {
+          challenge?: string | null
+          created_at?: string
+          hashtags_text?: string | null
+          id?: string
+          image: string
+          next_steps?: string | null
+          problem: string
+          process_images_data?: Json | null
+          process_images_text?: string | null
+          process_legends_text?: string | null
+          results_text?: string | null
+          role: string
+          solution: string
+          solution_images_legends_text?: string | null
+          solution_images_text?: string | null
+          title: string
+          ui_note?: string | null
+        }
+        Update: {
+          challenge?: string | null
+          created_at?: string
+          hashtags_text?: string | null
+          id?: string
+          image?: string
+          next_steps?: string | null
+          problem?: string
+          process_images_data?: Json | null
+          process_images_text?: string | null
+          process_legends_text?: string | null
+          results_text?: string | null
+          role?: string
+          solution?: string
+          solution_images_legends_text?: string | null
+          solution_images_text?: string | null
+          title?: string
+          ui_note?: string | null
+        }
+        Relationships: []
+      }
       sobre: {
         Row: {
           ativo: boolean | null

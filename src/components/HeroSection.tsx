@@ -1,3 +1,4 @@
+
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import React from "react";
@@ -10,6 +11,11 @@ interface HeroSectionProps {
 
 const HeroSection: React.FC<HeroSectionProps> = ({ onScrollToAbout }) => {
   const { t } = useLanguage();
+
+  // Safety check to ensure t function is available
+  if (!t) {
+    return null;
+  }
 
   return (
     <section className="min-h-[100dvh] flex flex-col justify-center items-center relative pt-32 sm:pt-40 bg-white overflow-hidden">
