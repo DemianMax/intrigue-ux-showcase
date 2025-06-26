@@ -3,7 +3,7 @@ import { useState } from "react";
 import ScrollDepthLayout from "@/components/ScrollDepthLayout";
 import DepthHeroSection from "@/components/DepthHeroSection";
 import DepthAboutSection from "@/components/DepthAboutSection";
-import SingleProjectSection from "@/components/SingleProjectSection";
+import FeaturedProjectsSection from "@/components/FeaturedProjectsSection";
 import FooterSection from "@/components/FooterSection";
 import PortfolioSection from "@/components/PortfolioSection";
 import TechnicalSkillsSection from "@/components/TechnicalSkillsSection";
@@ -33,17 +33,16 @@ const Index = () => {
       <DepthAboutSection key="about" />,
     ];
 
+    // Seção de projetos condensada
     if (projects && projects.length > 0) {
-      projects.forEach((project, index) => {
-        sections.push(
-          <div key={`project-${project.id}`} className="w-full h-full bg-gray-50">
-            <SingleProjectSection project={project} index={index} />
-          </div>
-        );
-      });
+      sections.push(
+        <div key="featured-projects" className="w-full h-full">
+          <FeaturedProjectsSection projects={projects} />
+        </div>
+      );
     } else {
       sections.push(
-        <div key="no-projects" className="w-full h-full flex items-center justify-center bg-gray-50">
+        <div key="no-projects" className="w-full h-full flex items-center justify-center bg-gray-200">
           <div className="text-center">
             <h3 className="text-2xl font-playfair text-brand-dark mb-4">Projetos em breve</h3>
             <p className="text-gray-600">Os projetos estão sendo carregados...</p>
@@ -71,7 +70,6 @@ const Index = () => {
 
   return (
     <div className="relative font-inter">
-      {/* Menu fixo */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
