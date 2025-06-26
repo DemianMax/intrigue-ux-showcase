@@ -1,6 +1,6 @@
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -10,11 +10,20 @@ interface DepthHeroSectionProps {
 
 const DepthHeroSection: React.FC<DepthHeroSectionProps> = ({ onScrollNext }) => {
   const { t } = useLanguage();
+  const { scrollYProgress } = useScroll();
+  
+  // Parallax effects
+  const heroY = useTransform(scrollYProgress, [0, 0.3], [0, -150]);
+  const heroScale = useTransform(scrollYProgress, [0, 0.3], [1, 0.8]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
 
   if (!t) return null;
 
   return (
-    <div className="relative w-full h-full flex flex-col justify-center items-center bg-gradient-to-br from-white via-gray-50 to-orange-50 overflow-hidden">
+    <motion.div 
+      className="relative w-full h-full flex flex-col justify-center items-center bg-gradient-to-br from-white via-gray-50 to-orange-50 overflow-hidden"
+      style={{ y: heroY, scale: heroScale, opacity: heroOpacity }}
+    >
       {/* Floating elements for depth */}
       <motion.div
         className="absolute inset-0"
@@ -27,12 +36,15 @@ const DepthHeroSection: React.FC<DepthHeroSectionProps> = ({ onScrollNext }) => 
             key={i}
             className="absolute w-2 h-2 bg-brand-accent/20 rounded-full"
             initial={{
-              x: Math.random() * window.innerWidth,
-              y: Math.random() * window.innerHeight,
+              x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1000),
+              y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 1000),
               scale: 0
             }}
             animate={{
-              y: [Math.random() * window.innerHeight, Math.random() * window.innerHeight],
+              y: [
+                Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 1000), 
+                Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 1000)
+              ],
               scale: [0, 1, 0],
               opacity: [0, 0.6, 0]
             }}
@@ -53,7 +65,7 @@ const DepthHeroSection: React.FC<DepthHeroSectionProps> = ({ onScrollNext }) => 
           style={{ transformStyle: "preserve-3d" }}
         >
           <motion.h1
-            className="text-4xl md:text-6xl font-playfair font-bold text-brand-dark leading-tight mb-6"
+            className="text-3xl md:text-5xl font-playfair font-bold text-brand-dark leading-tight mb-4"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, delay: 0.5 }}
@@ -63,7 +75,7 @@ const DepthHeroSection: React.FC<DepthHeroSectionProps> = ({ onScrollNext }) => 
           </motion.h1>
 
           <motion.p
-            className="text-lg md:text-xl text-brand-dark/80 font-inter font-light mb-8 max-w-2xl mx-auto"
+            className="text-base md:text-lg text-brand-dark/80 font-inter font-light mb-6 max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.8 }}
@@ -91,7 +103,7 @@ const DepthHeroSection: React.FC<DepthHeroSectionProps> = ({ onScrollNext }) => 
       >
         <ChevronDown size={32} className="text-brand-accent" />
       </motion.button>
-    </div>
+    </motion.div>
   );
 };
 
