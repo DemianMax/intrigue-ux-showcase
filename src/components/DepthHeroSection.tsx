@@ -12,10 +12,10 @@ const DepthHeroSection: React.FC<DepthHeroSectionProps> = ({ onScrollNext }) => 
   const { t } = useLanguage();
   const { scrollYProgress } = useScroll();
   
-  // Parallax effects
-  const heroY = useTransform(scrollYProgress, [0, 0.3], [0, -150]);
-  const heroScale = useTransform(scrollYProgress, [0, 0.3], [1, 0.8]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
+  // Parallax effects mais suaves
+  const heroY = useTransform(scrollYProgress, [0, 0.25], [0, -100]);
+  const heroScale = useTransform(scrollYProgress, [0, 0.25], [1, 0.9]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0.3]);
 
   if (!t) return null;
 
@@ -29,9 +29,9 @@ const DepthHeroSection: React.FC<DepthHeroSectionProps> = ({ onScrollNext }) => 
         className="absolute inset-0"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 2 }}
+        transition={{ duration: 1.5 }}
       >
-        {Array.from({ length: 20 }).map((_, i) => (
+        {Array.from({ length: 15 }).map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-2 h-2 bg-brand-accent/20 rounded-full"
@@ -46,10 +46,10 @@ const DepthHeroSection: React.FC<DepthHeroSectionProps> = ({ onScrollNext }) => 
                 Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 1000)
               ],
               scale: [0, 1, 0],
-              opacity: [0, 0.6, 0]
+              opacity: [0, 0.4, 0]
             }}
             transition={{
-              duration: Math.random() * 3 + 2,
+              duration: Math.random() * 4 + 3,
               repeat: Infinity,
               delay: Math.random() * 2
             }}
@@ -59,26 +59,26 @@ const DepthHeroSection: React.FC<DepthHeroSectionProps> = ({ onScrollNext }) => 
 
       <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
         <motion.div
-          initial={{ opacity: 0, y: 50, rotateX: 30 }}
-          animate={{ opacity: 1, y: 0, rotateX: 0 }}
-          transition={{ duration: 1, delay: 0.2 }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
           style={{ transformStyle: "preserve-3d" }}
         >
           <motion.h1
-            className="text-3xl md:text-5xl font-playfair font-bold text-brand-dark leading-tight mb-4"
-            initial={{ opacity: 0, scale: 0.8 }}
+            className="text-3xl md:text-4xl font-playfair font-bold text-brand-dark leading-tight mb-4"
+            initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.2, delay: 0.5 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
           >
             <span className="text-brand-accent block mb-2">UX</span>
             <span className="block">{t("heroTitlePart")}</span>
           </motion.h1>
 
           <motion.p
-            className="text-base md:text-lg text-brand-dark/80 font-inter font-light mb-6 max-w-2xl mx-auto"
-            initial={{ opacity: 0, y: 30 }}
+            className="text-sm md:text-base text-brand-dark/80 font-inter font-light mb-6 max-w-2xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.8 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
           >
             {t("heroSubtitle")}
           </motion.p>
@@ -87,7 +87,7 @@ const DepthHeroSection: React.FC<DepthHeroSectionProps> = ({ onScrollNext }) => 
             className="w-24 h-1 bg-gradient-to-r from-brand-accent to-orange-400 mx-auto rounded-full"
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}
-            transition={{ duration: 1, delay: 1.2 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
           />
         </motion.div>
       </div>
@@ -97,7 +97,7 @@ const DepthHeroSection: React.FC<DepthHeroSectionProps> = ({ onScrollNext }) => 
         className="absolute bottom-10 left-1/2 -translate-x-1/2 bg-brand-accent/20 hover:bg-brand-accent/40 rounded-full p-4 backdrop-blur-sm transition-all duration-300"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 1.5 }}
+        transition={{ duration: 0.6, delay: 0.9 }}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
       >

@@ -35,22 +35,27 @@ const ScrollDepthLayout: React.FC<ScrollDepthLayoutProps> = ({ children }) => {
   return (
     <div className="relative">
       {children.map((section, index) => {
-        // Criar transformações parallax para cada seção
-        const yRange = [index * window.innerHeight, (index + 1) * window.innerHeight];
-        const y = useTransform(scrollYProgress, 
-          [index / children.length, (index + 1) / children.length], 
-          [100, -100]
-        );
+        // Transformações parallax mais suaves e controladas
+        const sectionProgress = [
+          (index - 0.5) / children.length,
+          index / children.length,
+          (index + 0.5) / children.length
+        ];
         
-        const opacity = useTransform(scrollYProgress,
-          [(index - 0.2) / children.length, index / children.length, (index + 0.8) / children.length],
-          [0, 1, 0.3]
-        );
+        const y = useTransform(scrollYProgress, sectionProgress, [50, 0, -50]);
+        
+        const opacity = useTransform(scrollYProgress, [
+          (index - 0.3) / children.length,
+          (index - 0.1) / children.length,
+          (index + 0.1) / children.length,
+          (index + 0.3) / children.length
+        ], [0, 1, 1, 0]);
 
-        const scale = useTransform(scrollYProgress,
-          [(index - 0.1) / children.length, index / children.length, (index + 0.5) / children.length],
-          [0.8, 1, 0.95]
-        );
+        const scale = useTransform(scrollYProgress, [
+          (index - 0.2) / children.length,
+          index / children.length,
+          (index + 0.2) / children.length
+        ], [0.95, 1, 0.95]);
 
         return (
           <motion.div
@@ -59,28 +64,26 @@ const ScrollDepthLayout: React.FC<ScrollDepthLayoutProps> = ({ children }) => {
             style={{ 
               minHeight: "100vh",
               height: "100vh",
-              y: index === currentSection ? 0 : y,
+              y,
               opacity,
               scale
             }}
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.3 }}
+            viewport={{ once: false, amount: 0.4, margin: "-10%" }}
             transition={{ 
-              duration: 0.8, 
-              ease: [0.25, 0.46, 0.45, 0.94],
-              delay: index * 0.1 
+              duration: 0.4, 
+              ease: [0.25, 0.1, 0.25, 1]
             }}
           >
             <motion.div
               className="w-full h-full"
-              initial={{ scale: 0.9, opacity: 0 }}
+              initial={{ scale: 0.98, opacity: 0 }}
               whileInView={{ scale: 1, opacity: 1 }}
-              viewport={{ once: false, amount: 0.2 }}
+              viewport={{ once: false, amount: 0.3 }}
               transition={{ 
-                duration: 1,
-                ease: "easeOut",
-                delay: 0.2
+                duration: 0.5,
+                ease: "easeOut"
               }}
             >
               {section}

@@ -8,10 +8,10 @@ const DepthAboutSection: React.FC = () => {
   const { t } = useLanguage();
   const { scrollYProgress } = useScroll();
   
-  // Parallax effects para diferentes elementos
-  const imageY = useTransform(scrollYProgress, [0.1, 0.5], [100, -100]);
-  const textY = useTransform(scrollYProgress, [0.1, 0.5], [-50, 50]);
-  const backgroundY = useTransform(scrollYProgress, [0.1, 0.5], [0, -200]);
+  // Parallax effects mais controlados
+  const imageY = useTransform(scrollYProgress, [0.15, 0.35], [30, -30]);
+  const textY = useTransform(scrollYProgress, [0.15, 0.35], [-20, 20]);
+  const backgroundY = useTransform(scrollYProgress, [0.15, 0.35], [0, -50]);
 
   if (!t) return null;
 
@@ -21,9 +21,10 @@ const DepthAboutSection: React.FC = () => {
       <motion.div
         className="absolute inset-0 opacity-30"
         style={{ y: backgroundY }}
-        initial={{ scale: 1.2, opacity: 0 }}
+        initial={{ scale: 1.1, opacity: 0 }}
         whileInView={{ scale: 1, opacity: 0.3 }}
-        transition={{ duration: 2 }}
+        transition={{ duration: 1.2 }}
+        viewport={{ once: false, amount: 0.3 }}
       >
         <div className="absolute top-20 left-20 w-64 h-64 bg-gradient-to-br from-brand-accent/20 to-transparent rounded-full blur-3xl" />
         <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-br from-blue-400/20 to-transparent rounded-full blur-3xl" />
@@ -32,15 +33,15 @@ const DepthAboutSection: React.FC = () => {
       <div className="relative z-10 max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
         <motion.div
           style={{ y: imageY }}
-          initial={{ opacity: 0, x: -100, rotateY: -15 }}
-          whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
-          transition={{ duration: 1 }}
-          viewport={{ once: false, amount: 0.3 }}
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: false, amount: 0.4 }}
           className="relative"
         >
           <motion.div
             className="relative"
-            whileHover={{ scale: 1.05, rotateY: 5 }}
+            whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.3 }}
           >
             <img
@@ -54,28 +55,28 @@ const DepthAboutSection: React.FC = () => {
 
         <motion.div
           style={{ y: textY }}
-          initial={{ opacity: 0, x: 100, rotateY: 15 }}
-          whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
-          transition={{ duration: 1, delay: 0.2 }}
-          viewport={{ once: false, amount: 0.3 }}
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          viewport={{ once: false, amount: 0.4 }}
           className="space-y-8"
         >
           <motion.h2
             className="font-playfair text-5xl text-brand-dark font-bold"
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            viewport={{ once: false }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            viewport={{ once: false, amount: 0.4 }}
           >
             {t("aboutGreeting")}
           </motion.h2>
 
           <motion.div
             className="space-y-6 text-lg text-brand-dark/80 leading-relaxed"
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            viewport={{ once: false }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            viewport={{ once: false, amount: 0.4 }}
           >
             <p>
               {t("aboutParagraph1")}
@@ -98,10 +99,10 @@ const DepthAboutSection: React.FC = () => {
             target="_self"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-brand-accent to-orange-400 text-white font-semibold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            viewport={{ once: false }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            viewport={{ once: false, amount: 0.4 }}
             whileHover={{ y: -2 }}
           >
             {t("aboutButton")}
