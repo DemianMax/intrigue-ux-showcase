@@ -1,5 +1,5 @@
 import { useState } from "react";
-import SmoothScrollLayout from "@/components/SmoothScrollLayout";
+import SectionTransitionLayout from "@/components/SectionTransitionLayout";
 import DepthHeroSection from "@/components/DepthHeroSection";
 import DepthAboutSection from "@/components/DepthAboutSection";
 import FeaturedProjectsSection from "@/components/FeaturedProjectsSection";
@@ -87,7 +87,7 @@ const Index = () => {
         </div>
       </nav>
       
-      <SmoothScrollLayout>{sections}</SmoothScrollLayout>
+      <SectionTransitionLayout>{sections}</SectionTransitionLayout>
     </div>
   );
 };
