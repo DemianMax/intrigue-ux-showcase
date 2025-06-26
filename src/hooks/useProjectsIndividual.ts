@@ -5,6 +5,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { Project } from "@/types/project";
 
 const fetchProjects = async (language: string): Promise<Project[]> => {
+  console.log("Fetching projects for language:", language);
+  
   try {
     const tableName = language === "en" ? "projects_en" : "projects_pt";
     const { data, error } = await supabase
@@ -17,7 +19,8 @@ const fetchProjects = async (language: string): Promise<Project[]> => {
       throw new Error(`Could not fetch projects: ${error.message}`);
     }
     
-    return data || [];
+    console.log("Projects fetched successfully:", data);
+    return (data || []) as Project[];
   } catch (error) {
     console.error("Error in fetchProjects:", error);
     return [];
