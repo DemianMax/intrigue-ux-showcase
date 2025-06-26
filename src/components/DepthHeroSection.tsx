@@ -53,17 +53,17 @@ const DepthHeroSection: React.FC<DepthHeroSectionProps> = ({ onScrollNext }) => 
           style={{ transformStyle: "preserve-3d" }}
         >
           <motion.h1
-            className="text-6xl md:text-8xl font-playfair font-bold text-brand-dark leading-tight mb-8"
+            className="text-4xl md:text-6xl font-playfair font-bold text-brand-dark leading-tight mb-6"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, delay: 0.5 }}
           >
-            <span className="text-brand-accent block mb-4">UX</span>
+            <span className="text-brand-accent block mb-2">UX</span>
             <span className="block">{t("heroTitlePart")}</span>
           </motion.h1>
 
           <motion.p
-            className="text-2xl text-brand-dark/80 font-inter font-light mb-12 max-w-3xl mx-auto"
+            className="text-lg md:text-xl text-brand-dark/80 font-inter font-light mb-8 max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.8 }}
@@ -72,7 +72,7 @@ const DepthHeroSection: React.FC<DepthHeroSectionProps> = ({ onScrollNext }) => 
           </motion.p>
 
           <motion.div
-            className="w-32 h-1 bg-gradient-to-r from-brand-accent to-orange-400 mx-auto rounded-full"
+            className="w-24 h-1 bg-gradient-to-r from-brand-accent to-orange-400 mx-auto rounded-full"
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}
             transition={{ duration: 1, delay: 1.2 }}

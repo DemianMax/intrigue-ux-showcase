@@ -32,12 +32,14 @@ const ScrollDepthLayout: React.FC<ScrollDepthLayoutProps> = ({ children }) => {
 
   return (
     <div className="relative">
-      {/* Renderiza todas as seções */}
       {children.map((section, index) => (
         <div
           key={index}
-          className="w-full h-screen flex items-center justify-center relative"
-          style={{ minHeight: "100vh" }}
+          className="w-full flex items-center justify-center relative"
+          style={{ 
+            minHeight: "100vh",
+            height: "100vh"
+          }}
         >
           {section}
         </div>

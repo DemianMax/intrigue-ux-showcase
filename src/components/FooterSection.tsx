@@ -7,7 +7,6 @@ import { motion } from "framer-motion";
 const FooterSection = React.forwardRef<HTMLDivElement>((props, ref) => {
   const { t } = useLanguage();
 
-  // Safety check to ensure t function is available
   if (!t) {
     return null;
   }
@@ -15,7 +14,7 @@ const FooterSection = React.forwardRef<HTMLDivElement>((props, ref) => {
   return (
     <motion.footer
       ref={ref}
-      className="w-full bg-brand-dark border-t border-white/10 py-20 px-6 flex flex-col items-center mt-20"
+      className="w-full h-full bg-brand-dark border-t border-white/10 py-16 px-6 flex flex-col items-center justify-center"
       id="contato"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -59,10 +58,11 @@ const FooterSection = React.forwardRef<HTMLDivElement>((props, ref) => {
         </div>
       </div>
 
-      <p className="mt-14 text-xs text-white/40 text-center">
+      <p className="mt-8 text-xs text-white/40 text-center">
         &copy; {new Date().getFullYear()} Max Demian. {t('footerRights')}
       </p>
     </motion.footer>
   );
 });
+
 export default FooterSection;

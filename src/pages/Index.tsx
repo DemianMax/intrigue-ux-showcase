@@ -15,7 +15,6 @@ const Index = () => {
   const { t } = useLanguage();
   const { data: projects, isLoading, error } = useProjectsIndividual();
 
-  // Fallbacks de carregamento e erro
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-screen bg-white">
@@ -28,24 +27,21 @@ const Index = () => {
     console.error("Erro ao carregar projetos:", error);
   }
 
-  // Cria as seções do site
   const createSections = () => {
     const sections = [
       <DepthHeroSection key="hero" onScrollNext={() => {}} />,
       <DepthAboutSection key="about" />,
     ];
 
-    // Seções de projetos individuais
     if (projects && projects.length > 0) {
       projects.forEach((project, index) => {
         sections.push(
-          <div key={`project-${project.id}`} className="w-full h-full">
+          <div key={`project-${project.id}`} className="w-full h-full bg-gray-50">
             <SingleProjectSection project={project} index={index} />
           </div>
         );
       });
     } else {
-      // Fallback se não houver projetos
       sections.push(
         <div key="no-projects" className="w-full h-full flex items-center justify-center bg-gray-50">
           <div className="text-center">
@@ -94,7 +90,6 @@ const Index = () => {
         </div>
       </nav>
       
-      {/* Layout de seções */}
       <ScrollDepthLayout>{sections}</ScrollDepthLayout>
     </div>
   );
