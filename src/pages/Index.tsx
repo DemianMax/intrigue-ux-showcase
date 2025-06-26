@@ -1,39 +1,37 @@
+
 import { useState } from "react";
 import ScrollDepthLayout from "@/components/ScrollDepthLayout";
 import DepthHeroSection from "@/components/DepthHeroSection";
 import DepthAboutSection from "@/components/DepthAboutSection";
-import ProjectsGrid from "@/components/ProjectsGrid";
 import SingleProjectSection from "@/components/SingleProjectSection";
 import FooterSection from "@/components/FooterSection";
 import PortfolioSection from "@/components/PortfolioSection";
 import TechnicalSkillsSection from "@/components/TechnicalSkillsSection";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useProjectsIndividual } from "@/hooks/useProjectsIndividual";
-import { Link } from "react-router-dom";
 
 const Index = () => {
   const [currentSection, setCurrentSection] = useState(0);
   const { t } = useLanguage();
-const projects = [
-  { id: 1, title: "Projeto 1", description: "Descrição 1" },
-  { id: 2, title: "Projeto 2", description: "Descrição 2" }
-];
-const isLoading = false;
-const error = null;
+  const { data: projects, isLoading, error } = useProjectsIndividual();
 
-  // Fallbacks de carregamento e erro para evitar sumiço da tela
+  // Fallbacks de carregamento e erro
   if (isLoading) {
-    return <div className="flex items-center justify-center h-screen">Carregando projetos...</div>;
+    return (
+      <div className="flex items-center justify-center h-screen bg-white">
+        <div className="text-xl text-gray-600">Carregando...</div>
+      </div>
+    );
   }
 
   if (error) {
-    return <div className="flex items-center justify-center h-screen text-red-500">Erro ao carregar projetos.</div>;
+    console.error("Erro ao carregar projetos:", error);
   }
 
   // Cria as seções do site
   const createSections = () => {
     const sections = [
-      <DepthHeroSection key="hero" />,
+      <DepthHeroSection key="hero" onScrollNext={() => {}} />,
       <DepthAboutSection key="about" />,
     ];
 
@@ -46,6 +44,16 @@ const error = null;
           </div>
         );
       });
+    } else {
+      // Fallback se não houver projetos
+      sections.push(
+        <div key="no-projects" className="w-full h-full flex items-center justify-center bg-gray-50">
+          <div className="text-center">
+            <h3 className="text-2xl font-playfair text-brand-dark mb-4">Projetos em breve</h3>
+            <p className="text-gray-600">Os projetos estão sendo carregados...</p>
+          </div>
+        </div>
+      );
     }
 
     sections.push(
@@ -67,14 +75,13 @@ const error = null;
 
   return (
     <div className="relative font-inter">
-      {/* Menu fixo FORA do ScrollDepthLayout */}
+      {/* Menu fixo */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="font-playfair font-bold text-xl text-brand-dark cursor-pointer">
               Max Demian
             </div>
-            {/* Exemplo de menu. Personalize conforme seu projeto: */}
             <ul className="hidden md:flex items-center gap-6 text-brand-dark font-medium text-sm">
               <li className="cursor-pointer hover:text-brand-accent transition">Home</li>
               <li className="cursor-pointer hover:text-brand-accent transition">Sobre</li>
@@ -86,7 +93,8 @@ const error = null;
           </div>
         </div>
       </nav>
-      {/* Layout de sessões */}
+      
+      {/* Layout de seções */}
       <ScrollDepthLayout>{sections}</ScrollDepthLayout>
     </div>
   );
