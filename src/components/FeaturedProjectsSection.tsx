@@ -1,17 +1,10 @@
+
 import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-
-interface Project {
-  id: string;
-  titulo: string;
-  descricao_curta: string;
-  imagem_capa: string | null;
-  tags: string[];
-  slug: string;
-}
+import { Project } from "@/types/project";
 
 interface FeaturedProjectsSectionProps {
   projects: Project[];
@@ -21,6 +14,12 @@ const FeaturedProjectsSection: React.FC<FeaturedProjectsSectionProps> = ({ proje
   const { t } = useLanguage();
 
   if (!t) return null;
+
+  // Function to convert hashtags text to array
+  const parseHashtagsToArray = (hashtags: string | null): string[] => {
+    if (!hashtags) return [];
+    return hashtags.split(',').map(tag => tag.trim()).filter(tag => tag.length > 0);
+  };
 
   return (
     <section className="w-full bg-gradient-to-br from-brand-green-50 via-white to-brand-blue-50 py-20 px-6">
@@ -57,8 +56,8 @@ const FeaturedProjectsSection: React.FC<FeaturedProjectsSectionProps> = ({ proje
             >
               <div className="relative h-48 overflow-hidden">
                 <img
-                  src={project.imagem_capa || "/placeholder.svg"}
-                  alt={project.titulo}
+                  src={project.image || "/placeholder.svg"}
+                  alt={project.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -66,15 +65,18 @@ const FeaturedProjectsSection: React.FC<FeaturedProjectsSectionProps> = ({ proje
               
               <div className="p-6">
                 <h3 className="font-playfair text-xl font-bold text-brand-dark mb-2 group-hover:text-brand-green-600 transition-colors">
-                  {project.titulo}
+                  {project.title}
                 </h3>
+                <p className="text-gray-600 text-sm mb-2 font-medium text-brand-accent">
+                  {project.role}
+                </p>
                 <p className="text-gray-600 text-sm mb-4 line-clamp-3">
-                  {project.descricao_curta}
+                  {project.problem}
                 </p>
                 
-                {project.tags && project.tags.length > 0 && (
+                {project.hashtags_text && (
                   <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tags.slice(0, 3).map((tag, tagIndex) => (
+                    {parseHashtagsToArray(project.hashtags_text).slice(0, 3).map((tag, tagIndex) => (
                       <span
                         key={tagIndex}
                         className="px-2 py-1 bg-gradient-to-r from-brand-green-100 to-brand-blue-100 text-brand-dark text-xs rounded-full"
@@ -86,7 +88,7 @@ const FeaturedProjectsSection: React.FC<FeaturedProjectsSectionProps> = ({ proje
                 )}
                 
                 <Link
-                  to={`/projeto/${project.slug}`}
+                  to={`/projeto/${project.id}`}
                   className="inline-flex items-center gap-2 text-brand-green-600 hover:text-brand-blue-600 font-medium text-sm transition-colors"
                 >
                   Ver projeto
