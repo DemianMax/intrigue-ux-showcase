@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import SectionTransitionLayout from "@/components/SectionTransitionLayout";
 import DepthHeroSection from "@/components/DepthHeroSection";
@@ -6,6 +7,7 @@ import FeaturedProjectsSection from "@/components/FeaturedProjectsSection";
 import FooterSection from "@/components/FooterSection";
 import PortfolioSection from "@/components/PortfolioSection";
 import TechnicalSkillsSection from "@/components/TechnicalSkillsSection";
+import LanguageSelector from "@/components/LanguageSelector";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useProjectsIndividual } from "@/hooks/useProjectsIndividual";
 
@@ -26,9 +28,16 @@ const Index = () => {
     console.error("Erro ao carregar projetos:", error);
   }
 
+  const scrollToSection = (sectionIndex: number) => {
+    const element = document.getElementById(`section-${sectionIndex}`);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   const createSections = () => {
     const sections = [
-      <DepthHeroSection key="hero" onScrollNext={() => {}} />,
+      <DepthHeroSection key="hero" onScrollNext={() => scrollToSection(1)} />,
       <DepthAboutSection key="about" />,
     ];
 
@@ -72,22 +81,74 @@ const Index = () => {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <div className="font-playfair font-bold text-xl text-brand-dark cursor-pointer">
+            <div 
+              className="font-playfair font-bold text-xl text-brand-dark cursor-pointer hover:text-brand-accent transition"
+              onClick={() => scrollToSection(0)}
+            >
               Max Demian
             </div>
-            <ul className="hidden md:flex items-center gap-6 text-brand-dark font-medium text-sm">
-              <li className="cursor-pointer hover:text-brand-accent transition">Home</li>
-              <li className="cursor-pointer hover:text-brand-accent transition">Sobre</li>
-              <li className="cursor-pointer hover:text-brand-accent transition">Projetos</li>
-              <li className="cursor-pointer hover:text-brand-accent transition">Portfólio</li>
-              <li className="cursor-pointer hover:text-brand-accent transition">Skills</li>
-              <li className="cursor-pointer hover:text-brand-accent transition">Contato</li>
-            </ul>
+            
+            <div className="flex items-center gap-8">
+              <ul className="hidden md:flex items-center gap-6 text-brand-dark font-medium text-sm">
+                <li 
+                  className="cursor-pointer hover:text-brand-accent transition"
+                  onClick={() => scrollToSection(0)}
+                >
+                  {t ? t('navHome') : 'Home'}
+                </li>
+                <li 
+                  className="cursor-pointer hover:text-brand-accent transition"
+                  onClick={() => scrollToSection(1)}
+                >
+                  {t ? t('navAbout') : 'Sobre'}
+                </li>
+                <li 
+                  className="cursor-pointer hover:text-brand-accent transition"
+                  onClick={() => scrollToSection(2)}
+                >
+                  {t ? t('navProjects') : 'Projetos'}
+                </li>
+                <li 
+                  className="cursor-pointer hover:text-brand-accent transition"
+                  onClick={() => scrollToSection(3)}
+                >
+                  Portfólio
+                </li>
+                <li 
+                  className="cursor-pointer hover:text-brand-accent transition"
+                  onClick={() => scrollToSection(4)}
+                >
+                  Skills
+                </li>
+                <li 
+                  className="cursor-pointer hover:text-brand-accent transition"
+                  onClick={() => scrollToSection(5)}
+                >
+                  {t ? t('navContact') : 'Contato'}
+                </li>
+              </ul>
+              
+              <LanguageSelector />
+            </div>
           </div>
         </div>
       </nav>
       
-      <SectionTransitionLayout>{sections}</SectionTransitionLayout>
+      <div className="relative">
+        {sections.map((section, index) => (
+          <div
+            key={index}
+            id={`section-${index}`}
+            className="w-full flex items-center justify-center relative"
+            style={{ 
+              minHeight: "100vh",
+              height: "100vh"
+            }}
+          >
+            {section}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
