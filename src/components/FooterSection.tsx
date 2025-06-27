@@ -14,7 +14,7 @@ const FooterSection = React.forwardRef<HTMLDivElement>((props, ref) => {
   return (
     <motion.footer
       ref={ref}
-      className="w-full bg-gradient-to-br from-brand-dark via-gray-900 to-brand-purple-900 py-20 px-6 flex flex-col items-center justify-center"
+      className="w-full h-full bg-brand-dark py-20 px-6 flex flex-col items-center justify-center"
       id="contato"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -29,13 +29,11 @@ const FooterSection = React.forwardRef<HTMLDivElement>((props, ref) => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <div className="inline-block relative">
-            <h4 className="text-4xl md:text-5xl font-playfair text-white font-bold mb-4">
-              {t('footerTitle')}
-            </h4>
-            <div className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-brand-accent to-brand-pink-500 rounded-full"></div>
-          </div>
-          <p className="text-lg text-white/70 leading-relaxed max-w-2xl mx-auto mt-6">
+          <h4 className="text-4xl md:text-5xl font-playfair text-white font-bold mb-4">
+            {t('footerTitle')}
+          </h4>
+          <div className="w-24 h-1 bg-brand-accent mx-auto rounded-full mb-6"></div>
+          <p className="text-lg text-white/70 leading-relaxed max-w-2xl mx-auto">
             Estou sempre aberto para novos projetos e oportunidades de colaboração
           </p>
         </motion.div>

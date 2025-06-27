@@ -67,44 +67,11 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Paleta customizada expandida
+				// Paleta customizada
 				brand: {
 					DEFAULT: "#2563eb",
 					accent: "#FF6B00",
-					dark: "#111111",
-					// Novas cores
-					blue: {
-						50: "#eff6ff",
-						100: "#dbeafe",
-						500: "#3b82f6",
-						600: "#2563eb",
-						700: "#1d4ed8"
-					},
-					orange: {
-						50: "#fff7ed",
-						100: "#ffedd5",
-						400: "#fb923c",
-						500: "#f97316",
-						600: "#ea580c"
-					},
-					purple: {
-						50: "#faf5ff",
-						100: "#f3e8ff",
-						500: "#a855f7",
-						600: "#9333ea"
-					},
-					green: {
-						50: "#f0fdf4",
-						100: "#dcfce7",
-						500: "#22c55e",
-						600: "#16a34a"
-					},
-					pink: {
-						50: "#fdf2f8",
-						100: "#fce7f3",
-						500: "#ec4899",
-						600: "#db2777"
-					}
+					dark: "#111111"
 				}
 			},
 			borderRadius: {
