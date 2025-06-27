@@ -1,4 +1,3 @@
-
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useHabilidadesTecnicas, type HabilidadeTecnica } from "@/hooks/useHabilidadesTecnicas";
@@ -101,7 +100,7 @@ export default function TechnicalSkillsSection() {
             <h3 className="text-2xl font-semibold mb-8 text-brand-dark text-center">
               {t("skillsSoftwares")}
             </h3>
-            <div className="flex flex-wrap justify-center items-start gap-8">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-8 justify-items-center">
               {isLoading
                 ? renderLoadingSkeletons(6, "w-20")
                 : softwares.map((software) => renderHabilidadeItem(software, "w-20"))}
@@ -120,9 +119,9 @@ export default function TechnicalSkillsSection() {
             <h3 className="text-2xl font-semibold mb-8 text-brand-dark text-center">
               {t("skillsAbilities")}
             </h3>
-            <div className="flex flex-wrap justify-center items-start gap-8">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-8 justify-items-center">
               {isLoading
-                ? renderLoadingSkeletons(4, "w-20")
+                ? renderLoadingSkeletons(6, "w-20")
                 : habilidadesItems.map((item) => renderHabilidadeItem(item, "w-20"))}
             </div>
           </motion.div>
@@ -139,9 +138,9 @@ export default function TechnicalSkillsSection() {
             <h3 className="text-2xl font-semibold mb-8 text-brand-dark text-center">
               {t("skillsKnowledge")}
             </h3>
-            <div className="flex flex-wrap justify-center items-start gap-8">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-8 justify-items-center">
               {isLoading
-                ? renderLoadingSkeletons(10, "w-32")
+                ? renderLoadingSkeletons(6, "w-32")
                 : conhecimentos.map((item) => renderHabilidadeItem(item, "w-32"))}
             </div>
           </motion.div>
