@@ -147,10 +147,10 @@ const Index = () => {
         </div>
 
         {/* Menu lateral mobile */}
-       {mobileMenuOpen && (
+      {mobileMenuOpen && (
   <nav
-    className="fixed inset-0 w-full h-full flex flex-col p-6 z-[9999]"
-    style={{ backgroundColor: "#fff" }}
+    className="fixed inset-0 w-full h-full bg-white flex flex-col p-6 z-[9999]"
+    style={{ height: "100vh", width: "100vw", left: 0, top: 0 }}
   >
     <button
       className="self-end mb-6"
