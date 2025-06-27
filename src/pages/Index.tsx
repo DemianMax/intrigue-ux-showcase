@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import SectionTransitionLayout from "@/components/SectionTransitionLayout";
 import DepthHeroSection from "@/components/DepthHeroSection";
@@ -142,9 +141,9 @@ const Index = () => {
               id={`section-${index}`}
               className="w-full flex items-center justify-center relative"
               style={{ 
-                minHeight: "100vh",
+                minHeight: index === sections.length - 1 ? undefined : "100vh",
                 paddingTop: index === 0 ? "0" : "4rem",
-                paddingBottom: "4rem"
+                paddingBottom: index === sections.length - 1 ? undefined : "4rem"
               }}
             >
               {section}
