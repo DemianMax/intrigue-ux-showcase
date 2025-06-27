@@ -10,9 +10,11 @@ import LanguageSelector from "@/components/LanguageSelector";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useProjectsIndividual } from "@/hooks/useProjectsIndividual";
 import { Separator } from "@/components/ui/separator";
+import { Menu, X } from "lucide-react";
 
 const Index = () => {
   const [currentSection, setCurrentSection] = useState(0);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { t } = useLanguage();
   const { data: projects, isLoading, error } = useProjectsIndividual();
 
@@ -32,6 +34,7 @@ const Index = () => {
     const element = document.getElementById(`section-${sectionIndex}`);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
+      setMobileMenuOpen(false); // fecha menu mobile ao navegar
     }
   };
 
@@ -81,66 +84,117 @@ const Index = () => {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <div 
+            <div
               className="font-playfair font-bold text-xl text-brand-dark cursor-pointer hover:text-brand-accent transition"
               onClick={() => scrollToSection(0)}
             >
               Max Demian
             </div>
-            
+
             <div className="flex items-center gap-8">
+              {/* Menu Desktop */}
               <ul className="hidden md:flex items-center gap-6 text-brand-dark font-medium text-sm">
-                <li 
+                <li
                   className="cursor-pointer hover:text-brand-accent transition"
                   onClick={() => scrollToSection(0)}
                 >
                   {t ? t('navHome') : 'Home'}
                 </li>
-                <li 
+                <li
                   className="cursor-pointer hover:text-brand-accent transition"
                   onClick={() => scrollToSection(1)}
                 >
                   {t ? t('navAbout') : 'Sobre'}
                 </li>
-                <li 
+                <li
                   className="cursor-pointer hover:text-brand-accent transition"
                   onClick={() => scrollToSection(2)}
                 >
                   {t ? t('navProjects') : 'Projetos'}
                 </li>
-                <li 
+                <li
                   className="cursor-pointer hover:text-brand-accent transition"
                   onClick={() => scrollToSection(3)}
                 >
                   Portfólio
                 </li>
-                <li 
+                <li
                   className="cursor-pointer hover:text-brand-accent transition"
                   onClick={() => scrollToSection(4)}
                 >
                   Skills
                 </li>
-                <li 
+                <li
                   className="cursor-pointer hover:text-brand-accent transition"
                   onClick={() => scrollToSection(5)}
                 >
                   {t ? t('navContact') : 'Contato'}
                 </li>
               </ul>
-              
+
+              {/* Hamburger - mobile */}
+              <button
+                className="block md:hidden p-2"
+                onClick={() => setMobileMenuOpen(true)}
+                aria-label="Abrir menu"
+              >
+                <Menu className="w-7 h-7 text-brand-dark" />
+              </button>
+
               <LanguageSelector />
             </div>
           </div>
         </div>
+
+        {/* Menu lateral mobile */}
+        {mobileMenuOpen && (
+          <div className="fixed inset-0 z-50 flex md:hidden">
+            {/* Overlay escuro */}
+            <div
+              className="absolute inset-0 bg-black/40"
+              onClick={() => setMobileMenuOpen(false)}
+            />
+            {/* Menu lateral */}
+            <nav className="relative bg-white w-64 h-full p-6 shadow-lg flex flex-col z-50">
+              <button
+                className="self-end mb-6"
+                onClick={() => setMobileMenuOpen(false)}
+                aria-label="Fechar menu"
+              >
+                <X className="w-7 h-7 text-brand-dark" />
+              </button>
+              <ul className="flex flex-col gap-6 text-brand-dark font-medium text-lg">
+                <li onClick={() => scrollToSection(0)} className="cursor-pointer hover:text-brand-accent transition">
+                  {t ? t('navHome') : 'Home'}
+                </li>
+                <li onClick={() => scrollToSection(1)} className="cursor-pointer hover:text-brand-accent transition">
+                  {t ? t('navAbout') : 'Sobre'}
+                </li>
+                <li onClick={() => scrollToSection(2)} className="cursor-pointer hover:text-brand-accent transition">
+                  {t ? t('navProjects') : 'Projetos'}
+                </li>
+                <li onClick={() => scrollToSection(3)} className="cursor-pointer hover:text-brand-accent transition">
+                  Portfólio
+                </li>
+                <li onClick={() => scrollToSection(4)} className="cursor-pointer hover:text-brand-accent transition">
+                  Skills
+                </li>
+                <li onClick={() => scrollToSection(5)} className="cursor-pointer hover:text-brand-accent transition">
+                  {t ? t('navContact') : 'Contato'}
+                </li>
+              </ul>
+            </nav>
+          </div>
+        )}
       </nav>
-      
+
       <div className="relative">
         {sections.map((section, index) => (
           <div key={index}>
             <div
               id={`section-${index}`}
               className="w-full flex items-center justify-center relative"
-              style={{ 
+              style={{
                 minHeight: index === sections.length - 1 ? undefined : "100vh",
                 paddingTop: index === 0 ? "0" : "4rem",
                 paddingBottom: index === sections.length - 1 ? undefined : "4rem"
@@ -148,7 +202,7 @@ const Index = () => {
             >
               {section}
             </div>
-            
+
             {/* Separador entre seções, exceto na última */}
             {index < sections.length - 1 && (
               <div className="w-full py-8 bg-gray-50/50">
