@@ -149,13 +149,7 @@ const Index = () => {
         {/* Menu lateral mobile */}
        {mobileMenuOpen && (
   <div className="fixed inset-0 z-50 flex md:hidden">
-    {/* Overlay escuro */}
-    <div
-      className="absolute inset-0 bg-black/40"
-      onClick={() => setMobileMenuOpen(false)}
-    />
-    {/* Menu lateral com fundo branco e elevado acima do overlay */}
-    <nav className="relative z-50 bg-white w-64 h-full p-6 shadow-lg flex flex-col">
+    <nav className="fixed inset-0 w-full h-full bg-white flex flex-col p-6 z-50">
       <button
         className="self-end mb-6"
         onClick={() => setMobileMenuOpen(false)}
@@ -163,7 +157,7 @@ const Index = () => {
       >
         <X className="w-7 h-7 text-brand-dark" />
       </button>
-      <ul className="flex flex-col gap-6 text-brand-dark font-medium text-lg">
+      <ul className="flex flex-col gap-6 text-brand-dark font-medium text-lg mt-8">
         <li onClick={() => scrollToSection(0)} className="cursor-pointer hover:text-brand-accent transition">
           {t ? t('navHome') : 'Home'}
         </li>
