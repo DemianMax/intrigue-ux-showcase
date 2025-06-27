@@ -4,6 +4,14 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
+export default function AboutSection() {
+  return (
+    <section className="bg-neutral-900 text-neutral-200 py-16 px-4">
+      {/* ...restante do conteúdo */}
+    </section>
+  );
+}
+
 const AboutSection = React.forwardRef<HTMLDivElement>((props, ref) => {
   const { t } = useLanguage();
 
