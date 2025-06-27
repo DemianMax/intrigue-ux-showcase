@@ -50,11 +50,11 @@ export default function TechnicalSkillsSection() {
         transition={{ duration: 0.4 }}
         whileHover={{ scale: 1.05, y: -2 }}
       >
-        <div className="w-12 h-12 mb-3 flex items-center justify-center bg-gray-50 rounded-xl shadow-sm group-hover:shadow-md transition-all duration-300 group-hover:bg-brand-accent/5">
+        <div className="w-12 h-12 mb-3 flex items-center justify-center bg-white rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:bg-gradient-to-br group-hover:from-brand-orange-400 group-hover:to-brand-pink-500 border-2 border-brand-orange-100">
           <img
             src={getIconUrl(habilidade.icone)}
             alt={habilidade.nome}
-            className="w-8 h-8"
+            className="w-8 h-8 group-hover:brightness-0 group-hover:invert transition-all duration-300"
             style={{
               filter: "brightness(0) saturate(100%) invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(97%)",
             }}
@@ -71,7 +71,7 @@ export default function TechnicalSkillsSection() {
   }
 
   return (
-    <section className="w-full bg-gray-50 py-20 px-6">
+    <section className="w-full bg-gradient-to-br from-brand-orange-50 via-brand-pink-50 to-brand-orange-100 py-20 px-6">
       <div className="max-w-6xl mx-auto">
         {/* Título da seção */}
         <motion.div
@@ -81,11 +81,13 @@ export default function TechnicalSkillsSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="font-playfair text-4xl md:text-5xl font-bold text-brand-dark mb-4">
-            {t("skillsTitle")}
-          </h2>
-          <div className="w-24 h-1 bg-brand-accent mx-auto rounded-full mb-6"></div>
-          <p className="text-lg text-brand-dark/70 leading-relaxed max-w-2xl mx-auto">
+          <div className="inline-block relative">
+            <h2 className="font-playfair text-4xl md:text-5xl font-bold text-brand-dark mb-4">
+              {t("skillsTitle")}
+            </h2>
+            <div className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-brand-orange-500 to-brand-pink-500 rounded-full"></div>
+          </div>
+          <p className="text-lg text-brand-dark/70 leading-relaxed max-w-2xl mx-auto mt-6">
             Ferramentas e conhecimentos que utilizo no meu dia a dia profissional
           </p>
         </motion.div>
@@ -97,6 +99,7 @@ export default function TechnicalSkillsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
+            className="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-lg"
           >
             <h3 className="text-2xl font-semibold mb-8 text-brand-dark text-center">
               {t("skillsSoftwares")}
@@ -108,14 +111,13 @@ export default function TechnicalSkillsSection() {
             </div>
           </motion.div>
 
-          <Separator className="bg-gray-300/50" />
-
           {/* Habilidades */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
+            className="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-lg"
           >
             <h3 className="text-2xl font-semibold mb-8 text-brand-dark text-center">
               {t("skillsAbilities")}
@@ -127,14 +129,13 @@ export default function TechnicalSkillsSection() {
             </div>
           </motion.div>
 
-          <Separator className="bg-gray-300/50" />
-
           {/* Conhecimentos */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
+            className="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-lg"
           >
             <h3 className="text-2xl font-semibold mb-8 text-brand-dark text-center">
               {t("skillsKnowledge")}
