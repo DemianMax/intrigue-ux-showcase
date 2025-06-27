@@ -4,7 +4,13 @@ import { ChevronDown } from "lucide-react";
 import React from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { BackgroundRain } from "@/components/ui/BackgroundRain";
-
+export default function HeroSection() {
+  return (
+    <section className="bg-neutral-950 text-white py-20 px-4">
+      {/* ...restante do conteúdo */}
+    </section>
+  );
+}
 interface HeroSectionProps {
   onScrollToAbout: () => void;
 }
