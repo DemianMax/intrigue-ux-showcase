@@ -148,7 +148,10 @@ const Index = () => {
 
         {/* Menu lateral mobile */}
        {mobileMenuOpen && (
-  <nav className="fixed inset-0 w-full h-full bg-white flex flex-col p-6 z-50">
+  <nav
+    className="fixed inset-0 w-full h-full flex flex-col p-6 z-[9999]"
+    style={{ backgroundColor: "#fff" }}
+  >
     <button
       className="self-end mb-6"
       onClick={() => setMobileMenuOpen(false)}
