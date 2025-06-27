@@ -1,6 +1,6 @@
 
 import React from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -10,20 +10,11 @@ interface DepthHeroSectionProps {
 
 const DepthHeroSection: React.FC<DepthHeroSectionProps> = ({ onScrollNext }) => {
   const { t } = useLanguage();
-  const { scrollYProgress } = useScroll();
-  
-  // Parallax effects mais suaves
-  const heroY = useTransform(scrollYProgress, [0, 0.25], [0, -100]);
-  const heroScale = useTransform(scrollYProgress, [0, 0.25], [1, 0.9]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0.3]);
 
   if (!t) return null;
 
   return (
-    <motion.div 
-      className="relative w-full h-full flex flex-col justify-center items-center bg-gradient-to-br from-white via-gray-50 to-orange-50 overflow-hidden"
-      style={{ y: heroY, scale: heroScale, opacity: heroOpacity }}
-    >
+    <div className="relative w-full h-full flex flex-col justify-center items-center bg-gradient-to-br from-white via-gray-50 to-orange-50 overflow-hidden">
       {/* Floating elements for depth */}
       <motion.div
         className="absolute inset-0"
@@ -62,7 +53,6 @@ const DepthHeroSection: React.FC<DepthHeroSectionProps> = ({ onScrollNext }) => 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          style={{ transformStyle: "preserve-3d" }}
         >
           <motion.h1
             className="text-3xl md:text-4xl font-playfair font-bold text-brand-dark leading-tight mb-4"
@@ -103,7 +93,7 @@ const DepthHeroSection: React.FC<DepthHeroSectionProps> = ({ onScrollNext }) => 
       >
         <ChevronDown size={32} className="text-brand-accent" />
       </motion.button>
-    </motion.div>
+    </div>
   );
 };
 
