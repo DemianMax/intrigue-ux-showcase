@@ -14,7 +14,7 @@ const FooterSection = React.forwardRef<HTMLDivElement>((props, ref) => {
   return (
     <motion.footer
       ref={ref}
-      className="w-full h-full bg-brand-dark py-20 px-6 flex flex-col items-center justify-center"
+      className="w-full h-full bg-brand-dark py-8 px-6 flex flex-col items-center justify-center"
       id="contato"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
