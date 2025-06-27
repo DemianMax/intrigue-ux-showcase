@@ -148,37 +148,35 @@ const Index = () => {
 
         {/* Menu lateral mobile */}
        {mobileMenuOpen && (
-  <div className="fixed inset-0 z-50 flex md:hidden">
-    <nav className="fixed inset-0 w-full h-full bg-white flex flex-col p-6 z-50">
-      <button
-        className="self-end mb-6"
-        onClick={() => setMobileMenuOpen(false)}
-        aria-label="Fechar menu"
-      >
-        <X className="w-7 h-7 text-brand-dark" />
-      </button>
-      <ul className="flex flex-col gap-6 text-brand-dark font-medium text-lg mt-8">
-        <li onClick={() => scrollToSection(0)} className="cursor-pointer hover:text-brand-accent transition">
-          {t ? t('navHome') : 'Home'}
-        </li>
-        <li onClick={() => scrollToSection(1)} className="cursor-pointer hover:text-brand-accent transition">
-          {t ? t('navAbout') : 'Sobre'}
-        </li>
-        <li onClick={() => scrollToSection(2)} className="cursor-pointer hover:text-brand-accent transition">
-          {t ? t('navProjects') : 'Projetos'}
-        </li>
-        <li onClick={() => scrollToSection(3)} className="cursor-pointer hover:text-brand-accent transition">
-          Portfólio
-        </li>
-        <li onClick={() => scrollToSection(4)} className="cursor-pointer hover:text-brand-accent transition">
-          Skills
-        </li>
-        <li onClick={() => scrollToSection(5)} className="cursor-pointer hover:text-brand-accent transition">
-          {t ? t('navContact') : 'Contato'}
-        </li>
-      </ul>
-    </nav>
-  </div>
+  <nav className="fixed inset-0 w-full h-full bg-white flex flex-col p-6 z-50">
+    <button
+      className="self-end mb-6"
+      onClick={() => setMobileMenuOpen(false)}
+      aria-label="Fechar menu"
+    >
+      <X className="w-7 h-7 text-brand-dark" />
+    </button>
+    <ul className="flex flex-col gap-6 text-brand-dark font-medium text-lg mt-8">
+      <li onClick={() => scrollToSection(0)} className="cursor-pointer hover:text-brand-accent transition">
+        {t ? t('navHome') : 'Home'}
+      </li>
+      <li onClick={() => scrollToSection(1)} className="cursor-pointer hover:text-brand-accent transition">
+        {t ? t('navAbout') : 'Sobre'}
+      </li>
+      <li onClick={() => scrollToSection(2)} className="cursor-pointer hover:text-brand-accent transition">
+        {t ? t('navProjects') : 'Projetos'}
+      </li>
+      <li onClick={() => scrollToSection(3)} className="cursor-pointer hover:text-brand-accent transition">
+        Portfólio
+      </li>
+      <li onClick={() => scrollToSection(4)} className="cursor-pointer hover:text-brand-accent transition">
+        Skills
+      </li>
+      <li onClick={() => scrollToSection(5)} className="cursor-pointer hover:text-brand-accent transition">
+        {t ? t('navContact') : 'Contato'}
+      </li>
+    </ul>
+  </nav>
 )}
       </nav>
 
