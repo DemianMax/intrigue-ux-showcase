@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Project } from "@/types/project";
+import { Button } from "@/components/ui/button";
 
 interface FeaturedProjectsSectionProps {
   projects: Project[];
@@ -87,13 +88,12 @@ const FeaturedProjectsSection: React.FC<FeaturedProjectsSectionProps> = ({ proje
                   </div>
                 )}
                 
-                <Link
-                  to={`/projeto/${project.id}`}
-                  className="inline-flex items-center gap-2 text-brand-green-600 hover:text-brand-blue-600 font-medium text-sm transition-colors"
-                >
-                  Ver projeto
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
+                <Button asChild variant="default" size="sm" className="w-full">
+                  <Link to={`/projeto/${project.id}`} className="inline-flex items-center gap-2">
+                    Ver projeto
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </Button>
               </div>
             </motion.div>
           ))}

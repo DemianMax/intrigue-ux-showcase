@@ -43,18 +43,17 @@ export default function TechnicalSkillsSection() {
     return (
       <motion.div
         key={habilidade.id}
-        className={`flex flex-col items-center ${widthClass} group`}
+        className={`flex flex-col items-center ${widthClass}`}
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.4 }}
-        whileHover={{ scale: 1.05, y: -2 }}
       >
-        <div className="w-12 h-12 mb-3 flex items-center justify-center bg-white rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:bg-gradient-to-br group-hover:from-brand-orange-400 group-hover:to-brand-pink-500 border-2 border-brand-orange-100">
+        <div className="w-12 h-12 mb-3 flex items-center justify-center">
           <img
             src={getIconUrl(habilidade.icone)}
             alt={habilidade.nome}
-            className="w-8 h-8 group-hover:brightness-0 group-hover:invert transition-all duration-300"
+            className="w-8 h-8"
             style={{
               filter: "brightness(0) saturate(100%) invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(97%)",
             }}
@@ -63,7 +62,7 @@ export default function TechnicalSkillsSection() {
             }}
           />
         </div>
-        <span className="text-sm text-gray-600 text-center font-medium group-hover:text-brand-dark transition-colors">
+        <span className="text-sm text-gray-600 text-center font-medium">
           {label}
         </span>
       </motion.div>

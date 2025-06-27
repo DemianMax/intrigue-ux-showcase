@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Project } from "@/types/project";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 interface ProjectCardProps {
   project: Project;
@@ -107,12 +108,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.6 }}
         >
-          <button
-            className="px-6 py-2 rounded-full bg-brand-accent text-white font-semibold shadow-md hover:bg-brand-dark/90 hover:shadow-lg transition-all duration-300 transform hover:scale-105 text-sm"
+          <Button 
             onClick={() => navigate(`/projeto/${project.id}`)}
+            variant="default"
+            size="sm"
           >
             {t('projectCaseStudyButton')}
-          </button>
+          </Button>
         </motion.div>
       </div>
     </motion.div>
