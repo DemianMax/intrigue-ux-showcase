@@ -64,17 +64,22 @@ const Index = () => {
 
       <div className="relative">
         {sections.map((section, index) => (
-          <div
-            key={index}
-            id={`section-${index}`}
-            className="w-full flex items-center justify-center relative"
-            style={{
-              minHeight: index === sections.length - 1 ? undefined : "100vh",
-              paddingTop: index === 0 ? "0" : "4rem",
-              paddingBottom: index === sections.length - 1 ? undefined : "4rem"
-            }}
-          >
-            {section}
+          <div key={index}>
+            <div
+              id={`section-${index}`}
+              className="w-full flex items-center justify-center relative"
+              style={{
+                minHeight: index === sections.length - 1 ? undefined : "100vh",
+                paddingTop: index === 0 ? "0" : "4rem",
+                paddingBottom: index === sections.length - 1 ? undefined : "4rem"
+              }}
+            >
+              {section}
+            </div>
+
+            {index < sections.length - 1 && (
+              <div className="w-full py-8 bg-background" />
+            )}
           </div>
         ))}
       </div>
