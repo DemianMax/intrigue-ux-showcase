@@ -14,7 +14,8 @@ const DepthHeroSection: React.FC<DepthHeroSectionProps> = ({ onScrollNext }) => 
   if (!t) return null;
 
   return (
-    <div className="relative w-full h-full flex flex-col justify-center items-center bg-gradient-to-br from-white via-gray-50 to-orange-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden px-6">
+   <div className="relative w-full h-full flex flex-col justify-center items-center bg-gradient-to-b from-[#111827] via-[#111827] to-[#111827]
+ overflow-hidden px-6">
       <div className="relative z-10 max-w-5xl mx-auto text-center py-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
