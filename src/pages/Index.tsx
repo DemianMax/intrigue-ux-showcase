@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import DepthHeroSection from "@/components/DepthHeroSection";
 import DepthAboutSection from "@/components/DepthAboutSection";
@@ -6,18 +7,21 @@ import FooterSection from "@/components/FooterSection";
 import PortfolioSection from "@/components/PortfolioSection";
 import TechnicalSkillsSection from "@/components/TechnicalSkillsSection";
 import LanguageSelector from "@/components/LanguageSelector";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useProjectsIndividual } from "@/hooks/useProjectsIndividual";
 import { Separator } from "@/components/ui/separator";
 import { Menu, X } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const NAV_ITEMS = [
-  { labelKey: "navHome", fallback: "Home" },
-  { labelKey: "navAbout", fallback: "Sobre" },
-  { labelKey: "navProjects", fallback: "Projetos" },
-  { labelKey: null, fallback: "Portfólio" },
-  { labelKey: null, fallback: "Skills" },
-  { labelKey: "navContact", fallback: "Contato" }
+  { labelKey: "navHome", fallback: "Home", href: null },
+  { labelKey: "navAbout", fallback: "Sobre", href: null },
+  { labelKey: "navProjects", fallback: "Projetos", href: null },
+  { labelKey: null, fallback: "Portfólio", href: null },
+  { labelKey: null, fallback: "Skills", href: null },
+  { labelKey: null, fallback: "Currículo", href: "/curriculo" },
+  { labelKey: "navContact", fallback: "Contato", href: null }
 ];
 
 const Index = () => {
@@ -29,7 +33,16 @@ const Index = () => {
     const element = document.getElementById(`section-${sectionIndex}`);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
-      setMobileMenuOpen(false); // fecha menu mobile ao navegar
+      setMobileMenuOpen(false);
+    }
+  };
+
+  const handleNavClick = (item: typeof NAV_ITEMS[0], index: number) => {
+    if (item.href) {
+      // External link, don't scroll
+      return;
+    } else {
+      scrollToSection(index);
     }
   };
 
@@ -42,10 +55,10 @@ const Index = () => {
         <FeaturedProjectsSection projects={projects} />
       </div>
     ) : (
-      <div key="no-projects" className="w-full h-full flex items-center justify-center bg-gray-50">
+      <div key="no-projects" className="w-full h-full flex items-center justify-center bg-gray-50 dark:bg-gray-900">
         <div className="text-center py-20">
-          <h3 className="text-2xl font-playfair text-brand-dark mb-4">Projetos em breve</h3>
-          <p className="text-gray-600">Os projetos estão sendo carregados...</p>
+          <h3 className="text-2xl font-playfair text-brand-dark dark:text-white mb-4">Projetos em breve</h3>
+          <p className="text-gray-600 dark:text-gray-400">Os projetos estão sendo carregados...</p>
         </div>
       </div>
     ),
@@ -62,8 +75,8 @@ const Index = () => {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center h-screen bg-white">
-        <div className="text-xl text-gray-600">Carregando...</div>
+      <div className="flex items-center justify-center h-screen bg-background">
+        <div className="text-xl text-muted-foreground">Carregando...</div>
       </div>
     );
   }
@@ -73,31 +86,41 @@ const Index = () => {
   }
 
   return (
-    <div className="relative font-inter">
+    <div className="relative font-inter bg-background text-foreground">
       <nav 
-        className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm"
+        className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border shadow-sm"
         role="navigation"
         aria-label="Main Navigation"
       >
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div
-              className="font-playfair font-bold text-xl text-brand-dark cursor-pointer hover:text-brand-accent transition"
+              className="font-playfair font-bold text-xl text-brand-dark dark:text-white cursor-pointer hover:text-brand-accent transition"
               onClick={() => scrollToSection(0)}
             >
               Max Demian
             </div>
 
-            <div className="flex items-center gap-8">
+            <div className="flex items-center gap-4">
               {/* Menu Desktop */}
-              <ul className="hidden md:flex items-center gap-6 text-brand-dark font-medium text-sm">
+              <ul className="hidden md:flex items-center gap-6 text-brand-dark dark:text-white font-medium text-sm">
                 {NAV_ITEMS.map((item, idx) => (
-                  <li
-                    key={idx}
-                    className="cursor-pointer hover:text-brand-accent transition"
-                    onClick={() => scrollToSection(idx)}
-                  >
-                    {item.labelKey ? (t ? t(item.labelKey) : item.fallback) : item.fallback}
+                  <li key={idx}>
+                    {item.href ? (
+                      <Link
+                        to={item.href}
+                        className="cursor-pointer hover:text-brand-accent transition"
+                      >
+                        {item.labelKey ? (t ? t(item.labelKey) : item.fallback) : item.fallback}
+                      </Link>
+                    ) : (
+                      <div
+                        className="cursor-pointer hover:text-brand-accent transition"
+                        onClick={() => handleNavClick(item, idx)}
+                      >
+                        {item.labelKey ? (t ? t(item.labelKey) : item.fallback) : item.fallback}
+                      </div>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -108,9 +131,10 @@ const Index = () => {
                 onClick={() => setMobileMenuOpen(true)}
                 aria-label="Abrir menu"
               >
-                <Menu className="w-7 h-7 text-brand-dark" />
+                <Menu className="w-7 h-7 text-brand-dark dark:text-white" />
               </button>
 
+              <ThemeToggle />
               <LanguageSelector />
             </div>
           </div>
@@ -119,7 +143,7 @@ const Index = () => {
         {/* Menu lateral mobile */}
         {mobileMenuOpen && (
           <nav
-            className="fixed inset-0 w-full h-full bg-white flex flex-col p-6 z-[9999]"
+            className="fixed inset-0 w-full h-full bg-background flex flex-col p-6 z-[9999]"
             style={{ height: "100vh", width: "100vw", left: 0, top: 0 }}
             aria-label="Menu Mobile"
           >
@@ -128,16 +152,27 @@ const Index = () => {
               onClick={() => setMobileMenuOpen(false)}
               aria-label="Fechar menu"
             >
-              <X className="w-7 h-7 text-brand-dark" />
+              <X className="w-7 h-7 text-brand-dark dark:text-white" />
             </button>
-            <ul className="flex flex-col gap-6 text-brand-dark font-medium text-lg mt-8">
+            <ul className="flex flex-col gap-6 text-brand-dark dark:text-white font-medium text-lg mt-8">
               {NAV_ITEMS.map((item, idx) => (
-                <li
-                  key={idx}
-                  className="cursor-pointer hover:text-brand-accent transition"
-                  onClick={() => scrollToSection(idx)}
-                >
-                  {item.labelKey ? (t ? t(item.labelKey) : item.fallback) : item.fallback}
+                <li key={idx}>
+                  {item.href ? (
+                    <Link
+                      to={item.href}
+                      className="cursor-pointer hover:text-brand-accent transition"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {item.labelKey ? (t ? t(item.labelKey) : item.fallback) : item.fallback}
+                    </Link>
+                  ) : (
+                    <div
+                      className="cursor-pointer hover:text-brand-accent transition"
+                      onClick={() => handleNavClick(item, idx)}
+                    >
+                      {item.labelKey ? (t ? t(item.labelKey) : item.fallback) : item.fallback}
+                    </div>
+                  )}
                 </li>
               ))}
             </ul>
@@ -162,9 +197,9 @@ const Index = () => {
 
             {/* Separador entre seções, exceto na última */}
             {index < sections.length - 1 && (
-              <div className="w-full py-8 bg-gray-50/50">
+              <div className="w-full py-8 bg-gray-50/50 dark:bg-gray-900/50">
                 <div className="max-w-6xl mx-auto px-6">
-                  <Separator className="bg-gradient-to-r from-transparent via-gray-300 to-transparent" />
+                  <Separator className="bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-600 to-transparent" />
                 </div>
               </div>
             )}

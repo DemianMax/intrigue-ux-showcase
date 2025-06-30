@@ -10,26 +10,29 @@ import NotFound from "./pages/NotFound";
 import ProjectCasePage from "./pages/ProjectCasePage";
 import Resume from "./pages/Resume";
 import { LanguageProvider } from "./contexts/LanguageContext";
+import { ThemeProvider } from "./contexts/ThemeContext";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <LanguageProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/curriculo" element={<Resume />} />
-            <Route path="/projeto/:projectId" element={<ProjectCasePage />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-          <BackToTopButton />
-        </BrowserRouter>
-      </TooltipProvider>
-    </LanguageProvider>
+    <ThemeProvider defaultTheme="light" storageKey="lovable-ui-theme">
+      <LanguageProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/curriculo" element={<Resume />} />
+              <Route path="/projeto/:projectId" element={<ProjectCasePage />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+            <BackToTopButton />
+          </BrowserRouter>
+        </TooltipProvider>
+      </LanguageProvider>
+    </ThemeProvider>
   </QueryClientProvider>
 );
 

@@ -1,4 +1,3 @@
-
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -6,6 +5,8 @@ import { Link } from "react-router-dom";
 import { ArrowLeft, Download } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import TechnicalSkillsSection from "@/components/TechnicalSkillsSection";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import LanguageSelector from "@/components/LanguageSelector";
 
 // Tipagem para os dados do curriculo
 type Experiencia = {
@@ -89,40 +90,47 @@ const Resume = () => {
   });
 
   return (
-    <div className="bg-background text-brand-dark font-inter min-h-screen">
+    <div className="bg-background text-foreground font-inter min-h-screen">
       <header className="sticky top-0 bg-background/95 backdrop-blur z-10">
-        <div className="max-w-4xl mx-auto py-4 px-6 flex justify-between items-center border-b">
-          <Link to="/">
-            <Button variant="ghost">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Voltar
-            </Button>
-          </Link>
-          <h1 className="hidden sm:block text-2xl font-playfair font-bold">
-            {isLoading ? <Skeleton className="h-8 w-36" /> : curriculo?.nome}
-          </h1>
-          <a href="/Curriculo-Max-Demian.pdf" target="_blank" rel="noopener noreferrer">
-            <Button
-              variant="default"
-              className="bg-brand-accent hover:bg-brand-accent/90 text-white"
-            >
-              Baixar PDF
-              <Download className="ml-2 h-4 w-4" />
-            </Button>
-          </a>
+        <div className="max-w-4xl mx-auto py-4 px-6 flex justify-between items-center border-b border-border">
+          <div className="flex items-center gap-4">
+            <Link to="/">
+              <Button variant="ghost">
+                <ArrowLeft className="mr-2 h-4 w-4" />
+                Voltar
+              </Button>
+            </Link>
+            <h1 className="hidden sm:block text-2xl font-playfair font-bold">
+              {isLoading ? <Skeleton className="h-8 w-36" /> : curriculo?.nome}
+            </h1>
+          </div>
+          
+          <div className="flex items-center gap-4">
+            <ThemeToggle />
+            <LanguageSelector />
+            <a href="/Curriculo-Max-Demian.pdf" target="_blank" rel="noopener noreferrer">
+              <Button
+                variant="default"
+                className="bg-brand-accent hover:bg-brand-accent/90 text-white"
+              >
+                Baixar PDF
+                <Download className="ml-2 h-4 w-4" />
+              </Button>
+            </a>
+          </div>
         </div>
       </header>
 
       <main className="max-w-4xl mx-auto p-6 md:p-10">
         {/* Resumo do topo */}
         <section className="mb-12 text-center md:text-left">
-          <h2 className="text-3xl font-playfair font-bold text-brand-dark border-b-2 border-brand-accent inline-block pb-2 mb-6">
+          <h2 className="text-3xl font-playfair font-bold text-brand-dark dark:text-white border-b-2 border-brand-accent inline-block pb-2 mb-6">
             Currículo
           </h2>
           {isLoading ? (
             <Skeleton className="h-5 w-full max-w-3xl mb-2" />
           ) : (
-            <p className="text-lg leading-relaxed max-w-3xl mx-auto md:mx-0">
+            <p className="text-lg leading-relaxed max-w-3xl mx-auto md:mx-0 text-muted-foreground">
               {curriculo?.resumo}
             </p>
           )}
@@ -133,7 +141,7 @@ const Resume = () => {
           <h3 className="text-2xl font-playfair font-bold text-brand-accent mb-6">
             Resumo Profissional
           </h3>
-          <div className="grid md:grid-cols-2 gap-x-8 gap-y-4 bg-secondary/50 p-6 rounded-lg">
+          <div className="grid md:grid-cols-2 gap-x-8 gap-y-4 bg-secondary/50 dark:bg-secondary/20 p-6 rounded-lg">
             {isLoading ? (
               <>
                 <Skeleton className="h-6 w-52 mb-2" />
@@ -142,7 +150,7 @@ const Resume = () => {
                 <Skeleton className="h-6 w-32 mb-2" />
               </>
             ) : (
-              <span className="md:col-span-2">{curriculo?.resumo_profissional}</span>
+              <span className="md:col-span-2 text-muted-foreground">{curriculo?.resumo_profissional}</span>
             )}
           </div>
         </section>
@@ -164,11 +172,11 @@ const Resume = () => {
               curriculo?.experiencias.map((exp, idx) => (
                 <div className="relative" key={idx}>
                   <div className="absolute -left-[34px] top-1 w-4 h-4 bg-brand-accent rounded-full border-4 border-background"></div>
-                  <h4 className="font-bold text-xl text-brand-dark">{exp.cargo}</h4>
-                  <p className="text-sm text-brand-dark/70 mb-2">
+                  <h4 className="font-bold text-xl text-brand-dark dark:text-white">{exp.cargo}</h4>
+                  <p className="text-sm text-muted-foreground mb-2">
                     {exp.empresa} | {exp.periodo}
                   </p>
-                  <ul className="list-disc pl-5 space-y-1 text-brand-dark/90">
+                  <ul className="list-disc pl-5 space-y-1 text-muted-foreground">
                     {exp.descricao.map((item, i) => (
                       <li key={i}>{item}</li>
                     ))}
@@ -196,11 +204,11 @@ const Resume = () => {
               curriculo?.educacao?.map((edu, idx) => (
                 <div className="relative" key={idx}>
                   <div className="absolute -left-[34px] top-1 w-4 h-4 bg-brand-accent rounded-full border-4 border-background"></div>
-                  <h4 className="font-bold text-xl text-brand-dark">{edu.curso}</h4>
-                  <p className="text-sm text-brand-dark/70 mb-2">
+                  <h4 className="font-bold text-xl text-brand-dark dark:text-white">{edu.curso}</h4>
+                  <p className="text-sm text-muted-foreground mb-2">
                     {edu.instituicao} | {edu.periodo}
                   </p>
-                  <p className="text-brand-dark/90">{edu.descricao}</p>
+                  <p className="text-muted-foreground">{edu.descricao}</p>
                 </div>
               ))
             )}
