@@ -5,8 +5,7 @@ import { Link } from "react-router-dom";
 import { ArrowLeft, Download } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import TechnicalSkillsSection from "@/components/TechnicalSkillsSection";
-import { ThemeToggle } from "@/components/ThemeToggle";
-import LanguageSelector from "@/components/LanguageSelector";
+import Navigation from "@/components/Navigation";
 
 // Tipagem para os dados do curriculo
 type Experiencia = {
@@ -91,37 +90,28 @@ const Resume = () => {
 
   return (
     <div className="bg-background text-foreground font-inter min-h-screen">
-      <header className="sticky top-0 bg-background/95 backdrop-blur z-10">
-        <div className="max-w-4xl mx-auto py-4 px-6 flex justify-between items-center border-b border-border">
-          <div className="flex items-center gap-4">
-            <Link to="/">
-              <Button variant="ghost">
-                <ArrowLeft className="mr-2 h-4 w-4" />
-                Voltar
-              </Button>
-            </Link>
-            <h1 className="hidden sm:block text-2xl font-playfair font-bold">
-              {isLoading ? <Skeleton className="h-8 w-36" /> : curriculo?.nome}
-            </h1>
-          </div>
-          
-          <div className="flex items-center gap-4">
-            <ThemeToggle />
-            <LanguageSelector />
-            <a href="/Curriculo-Max-Demian.pdf" target="_blank" rel="noopener noreferrer">
-              <Button
-                variant="default"
-                className="bg-brand-accent hover:bg-brand-accent/90 text-white"
-              >
-                Baixar PDF
-                <Download className="ml-2 h-4 w-4" />
-              </Button>
-            </a>
-          </div>
-        </div>
-      </header>
+      <Navigation />
 
-      <main className="max-w-4xl mx-auto p-6 md:p-10">
+      <main className="max-w-4xl mx-auto p-6 md:p-10 pt-24">
+        <div className="flex justify-between items-center mb-8">
+          <Link to="/">
+            <Button variant="ghost">
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Voltar
+            </Button>
+          </Link>
+          
+          <a href="/Curriculo-Max-Demian.pdf" target="_blank" rel="noopener noreferrer">
+            <Button
+              variant="default"
+              className="bg-brand-accent hover:bg-brand-accent/90 text-white"
+            >
+              Baixar PDF
+              <Download className="ml-2 h-4 w-4" />
+            </Button>
+          </a>
+        </div>
+
         {/* Resumo do topo */}
         <section className="mb-12 text-center md:text-left">
           <h2 className="text-3xl font-playfair font-bold text-brand-dark dark:text-white border-b-2 border-brand-accent inline-block pb-2 mb-6">
