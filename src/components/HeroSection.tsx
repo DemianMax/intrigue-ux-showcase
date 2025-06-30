@@ -4,13 +4,7 @@ import { ChevronDown } from "lucide-react";
 import React from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { BackgroundRain } from "@/components/ui/BackgroundRain";
-export default function HeroSection() {
-  return (
-    <section className="bg-neutral-950 text-white py-20 px-4">
-      {/* ...restante do conteúdo */}
-    </section>
-  );
-}
+
 interface HeroSectionProps {
   onScrollToAbout: () => void;
 }
@@ -24,7 +18,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onScrollToAbout }) => {
   }
 
   return (
-    <section className="min-h-[100dvh] flex flex-col justify-center items-center relative pt-32 sm:pt-40 bg-white overflow-hidden">
+    <section className="min-h-[100dvh] flex flex-col justify-center items-center relative pt-32 sm:pt-40 bg-white dark:bg-gray-900 overflow-hidden">
       <BackgroundRain />
 
       <div className="w-full max-w-5xl mx-auto px-6 flex flex-col items-start gap-12 z-10 relative">
@@ -32,7 +26,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onScrollToAbout }) => {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-4xl sm:text-5xl md:text-7xl font-playfair font-bold text-brand-dark leading-tight"
+          className="text-4xl sm:text-5xl md:text-7xl font-playfair font-bold text-brand-dark dark:text-white leading-tight"
         >
           <span className="text-brand-accent">UX</span>
           {t("heroTitlePart")}
@@ -52,7 +46,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onScrollToAbout }) => {
             transition={{ delay: 0.7, duration: 0.7 }}
             className="flex flex-col items-start"
           >
-            <p className="text-xl sm:text-2xl text-brand-dark/80 font-inter font-light leading-relaxed">
+            <p className="text-xl sm:text-2xl text-brand-dark/80 dark:text-gray-300 font-inter font-light leading-relaxed">
               {t("heroSubtitle")}
             </p>
             <motion.div

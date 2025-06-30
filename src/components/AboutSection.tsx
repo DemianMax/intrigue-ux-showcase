@@ -4,14 +4,6 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-export default function AboutSection() {
-  return (
-    <section className="bg-neutral-900 text-neutral-200 py-16 px-4">
-      {/* ...restante do conteúdo */}
-    </section>
-  );
-}
-
 const AboutSection = React.forwardRef<HTMLDivElement>((props, ref) => {
   const { t } = useLanguage();
 
@@ -24,7 +16,7 @@ const AboutSection = React.forwardRef<HTMLDivElement>((props, ref) => {
     <section
       ref={ref}
       id="sobre"
-      className="w-full max-w-6xl mx-auto px-5 py-20 md:py-32 bg-white"
+      className="w-full max-w-6xl mx-auto px-5 py-20 md:py-32 bg-white dark:bg-gray-900"
     >
       <div className="flex flex-col md:flex-row items-center gap-16">
         {/* Foto à esquerda com animação */}
@@ -48,7 +40,7 @@ const AboutSection = React.forwardRef<HTMLDivElement>((props, ref) => {
           transition={{ delay: 0.5, duration: 0.6 }}
           className="flex-1 text-center md:text-left"
         >
-          <h2 className="font-playfair text-4xl md:text-5xl text-brand-dark font-bold mb-10">
+          <h2 className="font-playfair text-4xl md:text-5xl text-brand-dark dark:text-white font-bold mb-10">
             {t("aboutGreeting")}
           </h2>
 
@@ -56,7 +48,7 @@ const AboutSection = React.forwardRef<HTMLDivElement>((props, ref) => {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.2, duration: 0.6 }}
-            className="text-lg text-brand-dark leading-relaxed mb-12"
+            className="text-lg text-brand-dark dark:text-gray-300 leading-relaxed mb-12"
           >
             {t("aboutParagraph1")}
             <span className="font-bold text-brand-accent">
