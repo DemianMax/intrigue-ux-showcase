@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import DepthHeroSection from "@/components/DepthHeroSection";
 import DepthAboutSection from "@/components/DepthAboutSection";
@@ -9,7 +8,6 @@ import TechnicalSkillsSection from "@/components/TechnicalSkillsSection";
 import Navigation from "@/components/Navigation";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useProjectsIndividual } from "@/hooks/useProjectsIndividual";
-import { Separator } from "@/components/ui/separator";
 
 const Index = () => {
   const { t } = useLanguage();
@@ -22,7 +20,6 @@ const Index = () => {
     }
   };
 
-  // Construção das seções
   const sections = [
     <DepthHeroSection key="hero" onScrollNext={() => scrollToSection(1)} />,
     <DepthAboutSection key="about" />,
@@ -67,27 +64,17 @@ const Index = () => {
 
       <div className="relative">
         {sections.map((section, index) => (
-          <div key={index}>
-            <div
-              id={`section-${index}`}
-              className="w-full flex items-center justify-center relative"
-              style={{
-                minHeight: index === sections.length - 1 ? undefined : "100vh",
-                paddingTop: index === 0 ? "0" : "4rem",
-                paddingBottom: index === sections.length - 1 ? undefined : "4rem"
-              }}
-            >
-              {section}
-            </div>
-
-            {/* Separador entre seções, exceto na última */}
-            {index < sections.length - 1 && (
-              <div className="w-full py-8 bg-gray-50/50 dark:bg-gray-900/50">
-                <div className="max-w-6xl mx-auto px-6">
-                  <Separator className="bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-600 to-transparent" />
-                </div>
-              </div>
-            )}
+          <div
+            key={index}
+            id={`section-${index}`}
+            className="w-full flex items-center justify-center relative"
+            style={{
+              minHeight: index === sections.length - 1 ? undefined : "100vh",
+              paddingTop: index === 0 ? "0" : "4rem",
+              paddingBottom: index === sections.length - 1 ? undefined : "4rem"
+            }}
+          >
+            {section}
           </div>
         ))}
       </div>
