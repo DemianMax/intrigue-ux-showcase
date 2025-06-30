@@ -28,7 +28,7 @@ const Index = () => {
         <FeaturedProjectsSection projects={projects} />
       </div>
     ) : (
-      <div key="no-projects" className="w-full h-full flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+      <div key="no-projects" className="w-full h-full flex items-center justify-center bg-background">
         <div className="text-center py-20">
           <h3 className="text-2xl font-playfair text-brand-dark dark:text-white mb-4">Projetos em breve</h3>
           <p className="text-gray-600 dark:text-gray-400">Os projetos estão sendo carregados...</p>
@@ -64,22 +64,15 @@ const Index = () => {
 
       <div className="relative">
         {sections.map((section, index) => (
-          <div key={index}>
-            <div
-              id={`section-${index}`}
-              className="w-full flex items-center justify-center relative"
-              style={{
-                minHeight: index === sections.length - 1 ? undefined : "100vh",
-                paddingTop: index === 0 ? "0" : "4rem",
-                paddingBottom: index === sections.length - 1 ? undefined : "4rem"
-              }}
-            >
-              {section}
-            </div>
-
-            {index < sections.length - 1 && (
-              <div className="w-full py-8 bg-background" />
-            )}
+          <div
+            key={index}
+            id={`section-${index}`}
+            className="w-full flex items-center justify-center relative"
+            style={{
+              minHeight: index === sections.length - 1 ? undefined : "100vh"
+            }}
+          >
+            {section}
           </div>
         ))}
       </div>
