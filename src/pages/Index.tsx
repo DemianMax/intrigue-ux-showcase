@@ -63,16 +63,19 @@ const Index = () => {
       <Navigation onSectionScroll={scrollToSection} />
 
       <div className="relative">
-        {sections.map((section, index) => (
-          <div
-            key={index}
-            id={`section-${index}`}
-            className="w-full flex items-center justify-center relative"
-            style={{
-              minHeight: index === sections.length - 1 ? undefined : "100vh"
-            }}
-          >
-            {section}
+       {sections.map((section, index) => (
+  <div key={index}>
+    <div
+      id={`section-${index}`}
+      className={`w-full flex items-center justify-center relative ${
+        index === 0 ? "min-h-screen" : ""
+      }`}
+      style={{
+        paddingTop: index === 0 ? "0" : "4rem",
+        paddingBottom: index === sections.length - 1 ? undefined : "4rem"
+      }}
+    >
+      {section}
 
   
 
