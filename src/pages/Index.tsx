@@ -74,18 +74,7 @@ const Index = () => {
           >
             {section}
 
-            
-            <div key={index}
-  id={`section-${index}`}
-  className="w-full flex items-center justify-center relative outline outline-2 outline-red-500"
-  style={{
-    minHeight: index === sections.length - 1 ? undefined : "100vh",
-    paddingTop: index === 0 ? "0" : "4rem",
-    paddingBottom: index === sections.length - 1 ? undefined : "4rem"
-  }}
->
-  {section}
-</div>
+  
 
           </div>
         ))}
