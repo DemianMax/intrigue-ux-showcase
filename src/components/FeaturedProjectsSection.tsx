@@ -19,7 +19,7 @@ const FeaturedProjectsSection: React.FC<FeaturedProjectsSectionProps> = ({ proje
   };
 
   return (
-    <div className="w-full h-full bg-gray-50 flex flex-col items-center justify-center py-20 px-6">
+    <div className="w-full h-full bg-gray-50 dark:bg-gray-800 flex flex-col items-center justify-center py-20 px-6">
       {/* Título da seção */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -28,11 +28,11 @@ const FeaturedProjectsSection: React.FC<FeaturedProjectsSectionProps> = ({ proje
         transition={{ duration: 0.6 }}
         className="text-center mb-16 max-w-4xl"
       >
-        <h2 className="text-4xl md:text-5xl font-playfair font-bold text-brand-dark mb-4">
+        <h2 className="text-4xl md:text-5xl font-playfair font-bold text-brand-dark dark:text-white mb-4">
           Projetos em Destaque
         </h2>
         <div className="w-24 h-1 bg-brand-accent mx-auto rounded-full mb-6"></div>
-        <p className="text-lg text-brand-dark/70 leading-relaxed">
+        <p className="text-lg text-brand-dark/70 dark:text-gray-300 leading-relaxed">
           Conheça alguns dos projetos que desenvolvi, desde a pesquisa até a implementação
         </p>
       </motion.div>
@@ -45,7 +45,7 @@ const FeaturedProjectsSection: React.FC<FeaturedProjectsSectionProps> = ({ proje
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: index * 0.1 }}
-            className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
+            className="bg-white dark:bg-gray-700 rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
           >
             {/* Imagem */}
             <div className="relative overflow-hidden">
@@ -60,7 +60,7 @@ const FeaturedProjectsSection: React.FC<FeaturedProjectsSectionProps> = ({ proje
             {/* Conteúdo */}
             <div className="p-6 space-y-4">
               <div className="space-y-2">
-                <h4 className="text-xl font-playfair font-bold text-brand-dark line-clamp-2">
+                <h4 className="text-xl font-playfair font-bold text-brand-dark dark:text-white line-clamp-2">
                   {project.title}
                 </h4>
                 <div className="text-brand-accent font-semibold text-sm uppercase tracking-wide">
@@ -68,16 +68,16 @@ const FeaturedProjectsSection: React.FC<FeaturedProjectsSectionProps> = ({ proje
                 </div>
               </div>
 
-              <div className="space-y-4 text-gray-700 text-sm">
+              <div className="space-y-4 text-gray-700 dark:text-gray-300 text-sm">
                 <div>
-                  <h5 className="font-semibold text-brand-dark mb-2 text-xs uppercase tracking-wide">
+                  <h5 className="font-semibold text-brand-dark dark:text-white mb-2 text-xs uppercase tracking-wide">
                     {t('projectProblem')}:
                   </h5>
                   <p className="leading-relaxed line-clamp-2">{project.problem}</p>
                 </div>
                 
                 <div>
-                  <h5 className="font-semibold text-brand-dark mb-2 text-xs uppercase tracking-wide">
+                  <h5 className="font-semibold text-brand-dark dark:text-white mb-2 text-xs uppercase tracking-wide">
                     {t('projectSolution')}:
                   </h5>
                   <p className="leading-relaxed line-clamp-2">{project.solution}</p>

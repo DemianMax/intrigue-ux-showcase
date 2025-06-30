@@ -14,7 +14,7 @@ const DepthHeroSection: React.FC<DepthHeroSectionProps> = ({ onScrollNext }) => 
   if (!t) return null;
 
   return (
-    <div className="relative w-full h-full flex flex-col justify-center items-center bg-gradient-to-br from-white via-gray-50 to-orange-50 overflow-hidden px-6">
+    <div className="relative w-full h-full flex flex-col justify-center items-center bg-gradient-to-br from-white via-gray-50 to-orange-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden px-6">
       <div className="relative z-10 max-w-5xl mx-auto text-center py-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -23,7 +23,7 @@ const DepthHeroSection: React.FC<DepthHeroSectionProps> = ({ onScrollNext }) => 
           className="space-y-8"
         >
           <motion.h1
-            className="text-4xl md:text-6xl lg:text-7xl font-playfair font-bold text-brand-dark leading-tight"
+            className="text-4xl md:text-6xl lg:text-7xl font-playfair font-bold text-brand-dark dark:text-white leading-tight"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -33,7 +33,7 @@ const DepthHeroSection: React.FC<DepthHeroSectionProps> = ({ onScrollNext }) => 
           </motion.h1>
 
           <motion.p
-            className="text-lg md:text-xl text-brand-dark/80 font-inter font-light max-w-3xl mx-auto leading-relaxed"
+            className="text-lg md:text-xl text-brand-dark/80 dark:text-gray-300 font-inter font-light max-w-3xl mx-auto leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}

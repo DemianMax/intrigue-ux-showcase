@@ -10,7 +10,7 @@ const DepthAboutSection: React.FC = () => {
   if (!t) return null;
 
   return (
-    <div className="relative w-full h-full flex items-center justify-center bg-white px-6 py-16">
+    <div className="relative w-full h-full flex items-center justify-center bg-white dark:bg-gray-900 px-6 py-16">
       <div className="relative z-10 max-w-7xl mx-auto">
         {/* Título da seção */}
         <motion.div
@@ -20,7 +20,7 @@ const DepthAboutSection: React.FC = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="font-playfair text-4xl md:text-5xl text-brand-dark font-bold mb-4">
+          <h2 className="font-playfair text-4xl md:text-5xl text-brand-dark dark:text-white font-bold mb-4">
             Sobre Mim
           </h2>
           <div className="w-24 h-1 bg-brand-accent mx-auto rounded-full"></div>
@@ -52,7 +52,7 @@ const DepthAboutSection: React.FC = () => {
             className="space-y-8 order-1 md:order-2"
           >
             <motion.h3
-              className="font-playfair text-3xl md:text-4xl text-brand-dark font-bold"
+              className="font-playfair text-3xl md:text-4xl text-brand-dark dark:text-white font-bold"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
@@ -62,7 +62,7 @@ const DepthAboutSection: React.FC = () => {
             </motion.h3>
 
             <motion.div
-              className="space-y-6 text-lg text-brand-dark/80 leading-relaxed"
+              className="space-y-6 text-lg text-brand-dark/80 dark:text-gray-300 leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.5 }}

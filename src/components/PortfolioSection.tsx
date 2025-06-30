@@ -38,7 +38,7 @@ const PortfolioSection = () => {
   return (
     <section
       id="portfolio"
-      className="w-full flex flex-col items-center bg-white py-20 px-6"
+      className="w-full flex flex-col items-center bg-white dark:bg-gray-900 py-20 px-6"
     >
       <div className="max-w-6xl mx-auto w-full">
         {/* Título da seção */}
@@ -49,11 +49,11 @@ const PortfolioSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold font-playfair text-brand-dark mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold font-playfair text-brand-dark dark:text-white mb-4">
             Portfólio
           </h2>
           <div className="w-24 h-1 bg-brand-accent mx-auto rounded-full mb-6"></div>
-          <p className="text-lg text-brand-dark/70 leading-relaxed max-w-2xl mx-auto">
+          <p className="text-lg text-brand-dark/70 dark:text-gray-300 leading-relaxed max-w-2xl mx-auto">
             Uma seleção dos meus trabalhos de design e projetos criativos
           </p>
         </motion.div>
