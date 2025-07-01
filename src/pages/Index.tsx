@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import DepthHeroSection from "@/components/DepthHeroSection";
 import DepthAboutSection from "@/components/DepthAboutSection";
@@ -28,7 +27,7 @@ const Index = () => {
     },
     {
       component: <DepthAboutSection key="about" />,
-      bgClass: "bg-white dark:bg-gray-900"
+      bgClass: "bg-gray-900"
     },
     {
       component: projects && projects.length > 0 ? (
