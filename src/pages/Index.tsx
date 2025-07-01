@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import DepthHeroSection from "@/components/DepthHeroSection";
 import DepthAboutSection from "@/components/DepthAboutSection";
@@ -21,29 +22,53 @@ const Index = () => {
   };
 
   const sections = [
-    <DepthHeroSection key="hero" onScrollNext={() => scrollToSection(1)} />,
-    <DepthAboutSection key="about" />,
-    projects && projects.length > 0 ? (
-      <div key="featured-projects" className="w-full h-full">
-        <FeaturedProjectsSection projects={projects} />
-      </div>
-    ) : (
-      <div key="no-projects" className="w-full h-full flex items-center justify-center bg-background">
-        <div className="text-center py-20">
-          <h3 className="text-2xl font-playfair text-brand-dark dark:text-white mb-4">Projetos em breve</h3>
-          <p className="text-gray-600 dark:text-gray-400">Os projetos estão sendo carregados...</p>
+    {
+      component: <DepthHeroSection key="hero" onScrollNext={() => scrollToSection(1)} />,
+      bgClass: "bg-gradient-to-br from-white via-gray-50 to-orange-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900"
+    },
+    {
+      component: <DepthAboutSection key="about" />,
+      bgClass: "bg-white dark:bg-gray-900"
+    },
+    {
+      component: projects && projects.length > 0 ? (
+        <div key="featured-projects" className="w-full h-full">
+          <FeaturedProjectsSection projects={projects} />
         </div>
-      </div>
-    ),
-    <div key="portfolio" className="w-full h-full">
-      <PortfolioSection />
-    </div>,
-    <div key="skills" className="w-full h-full">
-      <TechnicalSkillsSection />
-    </div>,
-    <div key="contact" className="w-full h-full">
-      <FooterSection />
-    </div>
+      ) : (
+        <div key="no-projects" className="w-full h-full flex items-center justify-center bg-gray-50 dark:bg-gray-800">
+          <div className="text-center py-20">
+            <h3 className="text-2xl font-playfair text-brand-dark dark:text-white mb-4">Projetos em breve</h3>
+            <p className="text-gray-600 dark:text-gray-400">Os projetos estão sendo carregados...</p>
+          </div>
+        </div>
+      ),
+      bgClass: "bg-gray-50 dark:bg-gray-800"
+    },
+    {
+      component: (
+        <div key="portfolio" className="w-full h-full">
+          <PortfolioSection />
+        </div>
+      ),
+      bgClass: "bg-white dark:bg-gray-900"
+    },
+    {
+      component: (
+        <div key="skills" className="w-full h-full">
+          <TechnicalSkillsSection />
+        </div>
+      ),
+      bgClass: "bg-gray-50 dark:bg-gray-800"
+    },
+    {
+      component: (
+        <div key="contact" className="w-full h-full">
+          <FooterSection />
+        </div>
+      ),
+      bgClass: "bg-brand-dark"
+    }
   ];
 
   if (isLoading) {
@@ -69,13 +94,13 @@ const Index = () => {
               id={`section-${index}`}
               className={`w-full flex items-center justify-center relative ${
                 index === 0 ? "min-h-screen" : ""
-              }`}
+              } ${section.bgClass}`}
               style={{
                 paddingTop: index === 0 ? "0" : "4rem",
                 paddingBottom: index === sections.length - 1 ? undefined : "4rem"
               }}
             >
-              {section}
+              {section.component}
             </div>
           </div>
         ))}
