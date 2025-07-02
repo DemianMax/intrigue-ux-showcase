@@ -3,7 +3,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import AnimatedBackground from "./AnimatedBackground";
+import { BackgroundBeams } from "./ui/background-beams";
 
 const DepthAboutSection: React.FC = () => {
   const { t } = useLanguage();
@@ -11,9 +11,9 @@ const DepthAboutSection: React.FC = () => {
   if (!t) return null;
 
   return (
-    <div className="relative w-full h-full flex items-center justify-center overflow-hidden px-6 py-16">
-      {/* Animated Background */}
-      <AnimatedBackground />
+    <div className="relative w-full h-full flex items-center justify-center overflow-hidden px-6 py-16 bg-neutral-950">
+      {/* Background Beams */}
+      <BackgroundBeams />
       
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto">
