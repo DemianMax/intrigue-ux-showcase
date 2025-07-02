@@ -27,7 +27,7 @@ const Index = () => {
     },
     {
       component: <DepthAboutSection key="about" />,
-      bgClass: "bg-gray-900"
+     
     },
     {
       component: projects && projects.length > 0 ? (
