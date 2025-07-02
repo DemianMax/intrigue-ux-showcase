@@ -18,7 +18,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onScrollToAbout }) => {
   }
 
   return (
-    <section className="min-h-[100dvh] flex flex-col justify-center items-center relative pt-32 sm:pt-40 bg-white dark:bg-gray-900 overflow-hidden">
+    <section className="min-h-[100dvh] flex flex-col justify-center items-center relative pt-32 sm:pt-40 bg-white dark:#1E2735 overflow-hidden">
       <BackgroundRain />
 
       <div className="w-full max-w-5xl mx-auto px-6 flex flex-col items-start gap-12 z-10 relative">
