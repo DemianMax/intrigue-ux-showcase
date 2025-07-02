@@ -23,11 +23,11 @@ const Index = () => {
   const sections = [
     {
       component: <DepthHeroSection key="hero" onScrollNext={() => scrollToSection(1)} />,
-      bgClass: "bg-gradient-to-br from-white via-gray-50 to-orange-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900"
+      bgClass: "bg-gradient-to-br from-white via-gray-50 to-orange-50 dark:from-gray-800 dark:via-gray-800 dark:to-gray-800"
     },
     {
       component: <DepthAboutSection key="about" />,
-     
+     // bgClass: "bg-gray-900"
     },
     {
       component: projects && projects.length > 0 ? (
