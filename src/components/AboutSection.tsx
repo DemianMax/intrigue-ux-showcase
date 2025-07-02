@@ -18,7 +18,7 @@ const AboutSection = React.forwardRef<HTMLDivElement>((props, ref) => {
       ref={ref}
       id="sobre"
       // CLASSE ALTERADA AQUI: bg-background para ambos os modos, e text-foreground para o texto
-      className="w-full max-w-6xl mx-auto px-5 py-20 md:py-32 bg-background text-foreground"
+      className="w-full max-w-6xl mx-auto px-5 py-20 md:py-32 text-foreground"
     >
       <div className="flex flex-col md:flex-row items-center gap-16">
         {/* Foto à esquerda com animação */}
