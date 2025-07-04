@@ -47,51 +47,59 @@ export default function TechnicalSkillsSection() {
     return () => window.removeEventListener('resize', updateDimensions);
   }, [updateDimensions]);
 
-  // Generate initial positions avoiding overlap
-  const generateNodePosition = (index: number, total: number, existing: NodePosition[], containerWidth: number, containerHeight: number) => {
+  // Generate positions grouped by category for neural network effect
+  const generateCategoryPositions = (habilidades: HabilidadeTecnica[], containerWidth: number, containerHeight: number) => {
+    const positions: NodePosition[] = [];
     const nodeSize = 80;
-    const padding = 40;
-    const minDistance = 100;
+    const padding = 60;
     
-    let attempts = 0;
-    let position;
+    // Group skills by category
+    const skillsByCategory = habilidades.reduce((acc, skill) => {
+      if (!acc[skill.categoria]) acc[skill.categoria] = [];
+      acc[skill.categoria].push(skill);
+      return acc;
+    }, {} as Record<string, HabilidadeTecnica[]>);
+
+    const categories = Object.keys(skillsByCategory);
+    const categoryColumns = categories.length;
     
-    do {
-      // Use a more predictable distribution pattern
-      const cols = Math.ceil(Math.sqrt(total));
-      const rows = Math.ceil(total / cols);
+    categories.forEach((categoria, categoryIndex) => {
+      const categorySkills = skillsByCategory[categoria];
+      const skillsInCategory = categorySkills.length;
       
-      const col = index % cols;
-      const row = Math.floor(index / cols);
+      // Calculate column position for this category
+      const columnWidth = (containerWidth - padding * 2) / categoryColumns;
+      const columnCenterX = padding + (columnWidth * categoryIndex) + (columnWidth / 2);
       
-      const baseX = (containerWidth / (cols + 1)) * (col + 1);
-      const baseY = (containerHeight / (rows + 1)) * (row + 1);
+      // Distribute skills vertically within the category column
+      const availableHeight = containerHeight - padding * 2;
+      const verticalSpacing = availableHeight / (skillsInCategory + 1);
       
-      // Add some randomness but keep within bounds
-      const randomX = (Math.random() - 0.5) * 60;
-      const randomY = (Math.random() - 0.5) * 60;
-      
-      let x = baseX + randomX;
-      let y = baseY + randomY;
-
-      // Ensure nodes stay within bounds
-      x = Math.max(padding + nodeSize/2, Math.min(containerWidth - nodeSize/2 - padding, x));
-      y = Math.max(padding + nodeSize/2, Math.min(containerHeight - nodeSize/2 - padding, y));
-
-      position = { x, y };
-      attempts++;
-      
-      // Check distance from existing nodes
-      const tooClose = existing.some(existing => {
-        const distance = Math.sqrt(Math.pow(position.x - existing.x, 2) + Math.pow(position.y - existing.y, 2));
-        return distance < minDistance;
+      categorySkills.forEach((skill, skillIndex) => {
+        const baseY = padding + verticalSpacing * (skillIndex + 1);
+        
+        // Add some randomness while keeping skills in their category column
+        const randomX = (Math.random() - 0.5) * (columnWidth * 0.4);
+        const randomY = (Math.random() - 0.5) * 60;
+        
+        let x = columnCenterX + randomX;
+        let y = baseY + randomY;
+        
+        // Ensure nodes stay within bounds
+        x = Math.max(padding + nodeSize/2, Math.min(containerWidth - nodeSize/2 - padding, x));
+        y = Math.max(padding + nodeSize/2, Math.min(containerHeight - nodeSize/2 - padding, y));
+        
+        positions.push({
+          id: skill.id,
+          x,
+          y,
+          skill,
+          ref: React.createRef<HTMLDivElement>()
+        });
       });
-      
-      if (!tooClose || attempts > 20) break;
-      
-    } while (attempts < 20);
+    });
     
-    return position;
+    return positions;
   };
 
   // Generate positions and connections when data loads
@@ -108,62 +116,83 @@ export default function TechnicalSkillsSection() {
 
     console.log("Generating positions for skills:", habilidades.length);
     
-    const positions: NodePosition[] = [];
-    
-    habilidades.forEach((skill, index) => {
-      const position = generateNodePosition(index, habilidades.length, positions, containerDimensions.width, containerDimensions.height);
-      positions.push({
-        id: skill.id,
-        x: position.x,
-        y: position.y,
-        skill,
-        ref: React.createRef<HTMLDivElement>()
-      });
-    });
-
+    const positions = generateCategoryPositions(habilidades, containerDimensions.width, containerDimensions.height);
     console.log("Generated positions:", positions);
     setNodePositions(positions);
 
-    // Generate connections with preference for cross-category links
+    // Generate connections within the same category (neural network style)
     const newConnections: Connection[] = [];
-    positions.forEach((node, i) => {
-      const connectionsPerNode = Math.min(2, positions.length - 1);
-      const availableNodes = positions.filter((_, j) => j !== i);
-      
-      // Separate nodes by category
-      const differentCategory = availableNodes.filter(n => n.skill.categoria !== node.skill.categoria);
-      
-      // Prioritize cross-category connections
-      const targetPool = differentCategory.length > 0 ? differentCategory : availableNodes;
-      
-      // Sort by distance and pick closest ones
-      const sortedByDistance = targetPool
-        .map(targetNode => ({
-          node: targetNode,
-          distance: Math.sqrt(Math.pow(node.x - targetNode.x, 2) + Math.pow(node.y - targetNode.y, 2))
-        }))
-        .sort((a, b) => a.distance - b.distance)
-        .slice(0, Math.min(connectionsPerNode * 2, targetPool.length));
-      
-      // Select connections
-      const selectedConnections = sortedByDistance
-        .slice(0, connectionsPerNode);
+    
+    // Group positions by category
+    const positionsByCategory = positions.reduce((acc, position) => {
+      const category = position.skill.categoria;
+      if (!acc[category]) acc[category] = [];
+      acc[category].push(position);
+      return acc;
+    }, {} as Record<string, NodePosition[]>);
 
-      selectedConnections.forEach(({ node: targetNode }) => {
-        // Avoid duplicate connections
-        const existsReverse = newConnections.some(conn => 
-          conn.from.id === targetNode.id && conn.to.id === node.id
-        );
-        const existsForward = newConnections.some(conn => 
-          conn.from.id === node.id && conn.to.id === targetNode.id
-        );
+    // Create connections within each category
+    Object.values(positionsByCategory).forEach(categoryNodes => {
+      if (categoryNodes.length < 2) return;
+      
+      // Connect each node to 1-2 other nodes in the same category
+      categoryNodes.forEach((node, index) => {
+        const connectionsPerNode = Math.min(2, categoryNodes.length - 1);
+        const availableNodes = categoryNodes.filter((_, i) => i !== index);
         
-        if (!existsReverse && !existsForward) {
-          newConnections.push({ from: node, to: targetNode });
-        }
+        // Sort by distance and connect to closest nodes
+        const sortedByDistance = availableNodes
+          .map(targetNode => ({
+            node: targetNode,
+            distance: Math.sqrt(Math.pow(node.x - targetNode.x, 2) + Math.pow(node.y - targetNode.y, 2))
+          }))
+          .sort((a, b) => a.distance - b.distance)
+          .slice(0, connectionsPerNode);
+
+        sortedByDistance.forEach(({ node: targetNode }) => {
+          // Avoid duplicate connections
+          const existsReverse = newConnections.some(conn => 
+            conn.from.id === targetNode.id && conn.to.id === node.id
+          );
+          const existsForward = newConnections.some(conn => 
+            conn.from.id === node.id && conn.to.id === targetNode.id
+          );
+          
+          if (!existsReverse && !existsForward) {
+            newConnections.push({ from: node, to: targetNode });
+          }
+        });
       });
     });
 
+    // Add some inter-category connections for a more interconnected look
+    const categoryKeys = Object.keys(positionsByCategory);
+    if (categoryKeys.length > 1) {
+      categoryKeys.forEach((category, index) => {
+        const currentCategoryNodes = positionsByCategory[category];
+        const nextCategoryIndex = (index + 1) % categoryKeys.length;
+        const nextCategoryNodes = positionsByCategory[categoryKeys[nextCategoryIndex]];
+        
+        // Connect 1-2 nodes from current category to next category
+        const connectionsToAdd = Math.min(2, Math.min(currentCategoryNodes.length, nextCategoryNodes.length));
+        
+        for (let i = 0; i < connectionsToAdd; i++) {
+          const fromNode = currentCategoryNodes[Math.floor(Math.random() * currentCategoryNodes.length)];
+          const toNode = nextCategoryNodes[Math.floor(Math.random() * nextCategoryNodes.length)];
+          
+          const exists = newConnections.some(conn => 
+            (conn.from.id === fromNode.id && conn.to.id === toNode.id) ||
+            (conn.from.id === toNode.id && conn.to.id === fromNode.id)
+          );
+          
+          if (!exists) {
+            newConnections.push({ from: fromNode, to: toNode });
+          }
+        }
+      });
+    }
+
+    console.log("Generated connections:", newConnections.length);
     setConnections(newConnections);
   }, [habilidades, containerDimensions]);
 
@@ -204,7 +233,6 @@ export default function TechnicalSkillsSection() {
       return `https://heroicons.com/24/outline/${icone}.svg`;
     };
 
-    // Reduced animation ranges to prevent overlap
     const floatDelay = index * 0.2;
     const floatDuration = 6 + (index % 3);
 
@@ -221,8 +249,8 @@ export default function TechnicalSkillsSection() {
         animate={{ 
           opacity: 1, 
           scale: 1,
-          y: [0, -4, 2, 0],
-          x: [0, 2, -2, 0],
+          y: [0, -3, 1, 0],
+          x: [0, 1, -1, 0],
         }}
         transition={{
           opacity: { duration: 0.6, delay: index * 0.1 },
@@ -272,6 +300,11 @@ export default function TechnicalSkillsSection() {
         {connections.map((connection, index) => {
           const { from, to } = connection;
           
+          // Determine if this is an intra-category connection
+          const sameCategory = from.skill.categoria === to.skill.categoria;
+          const strokeWidth = sameCategory ? "2" : "1";
+          const opacity = sameCategory ? "text-foreground/30" : "text-foreground/15";
+          
           return (
             <motion.line
               key={`${from.id}-${to.id}-${index}`}
@@ -280,20 +313,20 @@ export default function TechnicalSkillsSection() {
               x2={to.x}
               y2={to.y}
               stroke="currentColor"
-              strokeWidth="1"
-              className="text-foreground/20"
+              strokeWidth={strokeWidth}
+              className={opacity}
               initial={{ 
                 pathLength: 0,
                 opacity: 0 
               }}
               animate={{ 
                 pathLength: 1,
-                opacity: [0.1, 0.2, 0.1]
+                opacity: sameCategory ? [0.2, 0.4, 0.2] : [0.1, 0.2, 0.1]
               }}
               transition={{
                 pathLength: { duration: 2, delay: index * 0.1 },
                 opacity: {
-                  duration: 4,
+                  duration: sameCategory ? 3 : 4,
                   delay: index * 0.15,
                   repeat: Infinity,
                   ease: "easeInOut"
@@ -334,7 +367,6 @@ export default function TechnicalSkillsSection() {
     );
   }
 
-  // Debug information
   console.log("Current state:", {
     habilidades: habilidades?.length || 0,
     nodePositions: nodePositions.length,
