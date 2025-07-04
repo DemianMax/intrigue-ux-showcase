@@ -47,11 +47,12 @@ export default function TechnicalSkillsSection() {
     return () => window.removeEventListener('resize', updateDimensions);
   }, [updateDimensions]);
 
-  // Generate positions grouped by category for neural network effect
-  const generateCategoryPositions = (habilidades: HabilidadeTecnica[], containerWidth: number, containerHeight: number) => {
+  // Generate positions with horizontal spread and collision detection
+  const generateHorizontalPositions = (habilidades: HabilidadeTecnica[], containerWidth: number, containerHeight: number) => {
     const positions: NodePosition[] = [];
     const nodeSize = 80;
-    const padding = 60;
+    const padding = 40;
+    const minDistance = 100; // Minimum distance between nodes to prevent overlap
     
     // Group skills by category
     const skillsByCategory = habilidades.reduce((acc, skill) => {
@@ -61,33 +62,71 @@ export default function TechnicalSkillsSection() {
     }, {} as Record<string, HabilidadeTecnica[]>);
 
     const categories = Object.keys(skillsByCategory);
-    const categoryColumns = categories.length;
+    const totalSkills = habilidades.length;
     
-    categories.forEach((categoria, categoryIndex) => {
+    // Calculate how many skills per row for optimal horizontal spread
+    const skillsPerRow = Math.ceil(Math.sqrt(totalSkills * (containerWidth / containerHeight)));
+    const rows = Math.ceil(totalSkills / skillsPerRow);
+    
+    const availableWidth = containerWidth - padding * 2;
+    const availableHeight = containerHeight - padding * 2;
+    
+    const horizontalSpacing = availableWidth / skillsPerRow;
+    const verticalSpacing = availableHeight / rows;
+    
+    let skillIndex = 0;
+    
+    categories.forEach((categoria) => {
       const categorySkills = skillsByCategory[categoria];
-      const skillsInCategory = categorySkills.length;
       
-      // Calculate column position for this category
-      const columnWidth = (containerWidth - padding * 2) / categoryColumns;
-      const columnCenterX = padding + (columnWidth * categoryIndex) + (columnWidth / 2);
-      
-      // Distribute skills vertically within the category column
-      const availableHeight = containerHeight - padding * 2;
-      const verticalSpacing = availableHeight / (skillsInCategory + 1);
-      
-      categorySkills.forEach((skill, skillIndex) => {
-        const baseY = padding + verticalSpacing * (skillIndex + 1);
+      categorySkills.forEach((skill) => {
+        const row = Math.floor(skillIndex / skillsPerRow);
+        const col = skillIndex % skillsPerRow;
         
-        // Add some randomness while keeping skills in their category column
-        const randomX = (Math.random() - 0.5) * (columnWidth * 0.4);
-        const randomY = (Math.random() - 0.5) * 60;
+        // Base position with grid layout
+        let baseX = padding + (col * horizontalSpacing) + (horizontalSpacing / 2);
+        let baseY = padding + (row * verticalSpacing) + (verticalSpacing / 2);
         
-        let x = columnCenterX + randomX;
-        let y = baseY + randomY;
+        // Add some randomness while staying within grid bounds
+        const randomOffsetX = (Math.random() - 0.5) * (horizontalSpacing * 0.3);
+        const randomOffsetY = (Math.random() - 0.5) * (verticalSpacing * 0.3);
         
-        // Ensure nodes stay within bounds
+        let x = baseX + randomOffsetX;
+        let y = baseY + randomOffsetY;
+        
+        // Ensure nodes stay within container bounds
         x = Math.max(padding + nodeSize/2, Math.min(containerWidth - nodeSize/2 - padding, x));
         y = Math.max(padding + nodeSize/2, Math.min(containerHeight - nodeSize/2 - padding, y));
+        
+        // Check for collisions with existing positions
+        let attempts = 0;
+        const maxAttempts = 50;
+        
+        while (attempts < maxAttempts) {
+          let hasCollision = false;
+          
+          for (const existingPos of positions) {
+            const distance = Math.sqrt(Math.pow(x - existingPos.x, 2) + Math.pow(y - existingPos.y, 2));
+            if (distance < minDistance) {
+              hasCollision = true;
+              break;
+            }
+          }
+          
+          if (!hasCollision) break;
+          
+          // Try a new position
+          const angle = (Math.random() * 2 * Math.PI);
+          const radius = minDistance + (Math.random() * 30);
+          x = baseX + Math.cos(angle) * radius;
+          y = baseY + Math.sin(angle) * radius;
+          
+          // Keep within bounds
+          x = Math.max(padding + nodeSize/2, Math.min(containerWidth - nodeSize/2 - padding, x));
+          y = Math.max(padding + nodeSize/2, Math.min(containerHeight - nodeSize/2 - padding, y));
+          
+          attempts++;
+        }
         
         positions.push({
           id: skill.id,
@@ -96,9 +135,12 @@ export default function TechnicalSkillsSection() {
           skill,
           ref: React.createRef<HTMLDivElement>()
         });
+        
+        skillIndex++;
       });
     });
     
+    console.log(`Generated ${positions.length} positions with horizontal spread`);
     return positions;
   };
 
@@ -114,9 +156,9 @@ export default function TechnicalSkillsSection() {
       return;
     }
 
-    console.log("Generating positions for skills:", habilidades.length);
+    console.log("Generating horizontal positions for skills:", habilidades.length);
     
-    const positions = generateCategoryPositions(habilidades, containerDimensions.width, containerDimensions.height);
+    const positions = generateHorizontalPositions(habilidades, containerDimensions.width, containerDimensions.height);
     console.log("Generated positions:", positions);
     setNodePositions(positions);
 
@@ -174,7 +216,7 @@ export default function TechnicalSkillsSection() {
         const nextCategoryNodes = positionsByCategory[categoryKeys[nextCategoryIndex]];
         
         // Connect 1-2 nodes from current category to next category
-        const connectionsToAdd = Math.min(2, Math.min(currentCategoryNodes.length, nextCategoryNodes.length));
+        const connectionsToAdd = Math.min(1, Math.min(currentCategoryNodes.length, nextCategoryNodes.length));
         
         for (let i = 0; i < connectionsToAdd; i++) {
           const fromNode = currentCategoryNodes[Math.floor(Math.random() * currentCategoryNodes.length)];
@@ -249,7 +291,7 @@ export default function TechnicalSkillsSection() {
         animate={{ 
           opacity: 1, 
           scale: 1,
-          y: [0, -3, 1, 0],
+          y: [0, -2, 1, 0],
           x: [0, 1, -1, 0],
         }}
         transition={{
@@ -347,7 +389,7 @@ export default function TechnicalSkillsSection() {
 
   if (isLoading) {
     return (
-      <section className="w-full bg-background py-20">
+      <section className="w-full bg-background py-12">
         <div className="max-w-6xl mx-auto px-5">
           <div className="text-center">
             <div className="h-12 w-64 bg-muted animate-pulse rounded mx-auto mb-4"></div>
@@ -360,7 +402,7 @@ export default function TechnicalSkillsSection() {
                 </div>
               ))}
             </div>
-            <div className="h-96 bg-muted animate-pulse rounded"></div>
+            <div className="h-80 bg-muted animate-pulse rounded"></div>
           </div>
         </div>
       </section>
@@ -375,7 +417,7 @@ export default function TechnicalSkillsSection() {
   });
 
   return (
-    <section className="w-full bg-background text-foreground py-20 md:py-32">
+    <section className="w-full bg-background text-foreground py-12 md:py-20">
       <div className="max-w-6xl mx-auto px-5">
         {/* Title */}
         <motion.div
@@ -383,7 +425,7 @@ export default function TechnicalSkillsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
           <h2 className="font-playfair text-3xl md:text-4xl font-bold text-foreground mb-4">
             {t("skillsTitle") || "Minhas Habilidades e Conhecimentos"}
@@ -400,7 +442,7 @@ export default function TechnicalSkillsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex justify-center items-center gap-8 mb-12 flex-wrap"
+          className="flex justify-center items-center gap-8 mb-8 flex-wrap"
         >
           {categories.map((category) => (
             <div key={category.key} className="flex items-center gap-2">
@@ -410,10 +452,10 @@ export default function TechnicalSkillsSection() {
           ))}
         </motion.div>
 
-        {/* Neural Network Visualization */}
+        {/* Neural Network Visualization - Reduced height */}
         <motion.div
           ref={containerRef}
-          className="relative w-full h-[600px] md:h-[700px] bg-background/50 rounded-2xl border border-border/20 overflow-hidden"
+          className="relative w-full h-[400px] md:h-[450px] bg-background/50 rounded-2xl border border-border/20 overflow-hidden"
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
