@@ -48,29 +48,35 @@ export default function TechnicalSkillsSection() {
   }, [updateDimensions]);
 
   // Generate initial positions avoiding overlap
-  const generateNodePosition = (index: number, total: number, existing: NodePosition[]) => {
+  const generateNodePosition = (index: number, total: number, existing: NodePosition[], containerWidth: number, containerHeight: number) => {
     const nodeSize = 80;
-    const padding = 60;
-    const minDistance = 120; // Minimum distance between nodes
+    const padding = 40;
+    const minDistance = 100;
     
     let attempts = 0;
     let position;
     
     do {
-      // Use a spiral-like distribution with randomness
-      const angle = (index / total) * 2 * Math.PI + (Math.random() - 0.5) * 1.2;
-      const radiusBase = Math.min(containerDimensions.width, containerDimensions.height) * 0.25;
-      const radius = radiusBase + (Math.random() * radiusBase * 0.8);
+      // Use a more predictable distribution pattern
+      const cols = Math.ceil(Math.sqrt(total));
+      const rows = Math.ceil(total / cols);
       
-      const centerX = containerDimensions.width / 2;
-      const centerY = containerDimensions.height / 2;
+      const col = index % cols;
+      const row = Math.floor(index / cols);
       
-      let x = centerX + Math.cos(angle) * radius;
-      let y = centerY + Math.sin(angle) * radius;
+      const baseX = (containerWidth / (cols + 1)) * (col + 1);
+      const baseY = (containerHeight / (rows + 1)) * (row + 1);
+      
+      // Add some randomness but keep within bounds
+      const randomX = (Math.random() - 0.5) * 60;
+      const randomY = (Math.random() - 0.5) * 60;
+      
+      let x = baseX + randomX;
+      let y = baseY + randomY;
 
       // Ensure nodes stay within bounds
-      x = Math.max(padding, Math.min(containerDimensions.width - nodeSize - padding, x));
-      y = Math.max(padding, Math.min(containerDimensions.height - nodeSize - padding, y));
+      x = Math.max(padding + nodeSize/2, Math.min(containerWidth - nodeSize/2 - padding, x));
+      y = Math.max(padding + nodeSize/2, Math.min(containerHeight - nodeSize/2 - padding, y));
 
       position = { x, y };
       attempts++;
@@ -81,21 +87,31 @@ export default function TechnicalSkillsSection() {
         return distance < minDistance;
       });
       
-      if (!tooClose || attempts > 50) break;
+      if (!tooClose || attempts > 20) break;
       
-    } while (attempts < 50);
+    } while (attempts < 20);
     
     return position;
   };
 
   // Generate positions and connections when data loads
   useEffect(() => {
-    if (!habilidades || habilidades.length === 0 || containerDimensions.width === 0) return;
+    if (!habilidades || habilidades.length === 0) {
+      console.log("No habilidades data available");
+      return;
+    }
+    
+    if (containerDimensions.width === 0 || containerDimensions.height === 0) {
+      console.log("Container dimensions not ready:", containerDimensions);
+      return;
+    }
 
+    console.log("Generating positions for skills:", habilidades.length);
+    
     const positions: NodePosition[] = [];
     
     habilidades.forEach((skill, index) => {
-      const position = generateNodePosition(index, habilidades.length, positions);
+      const position = generateNodePosition(index, habilidades.length, positions, containerDimensions.width, containerDimensions.height);
       positions.push({
         id: skill.id,
         x: position.x,
@@ -105,22 +121,22 @@ export default function TechnicalSkillsSection() {
       });
     });
 
+    console.log("Generated positions:", positions);
     setNodePositions(positions);
 
     // Generate connections with preference for cross-category links
     const newConnections: Connection[] = [];
     positions.forEach((node, i) => {
-      const connectionsPerNode = Math.floor(Math.random() * 2) + 2; // 2-3 connections per node
+      const connectionsPerNode = Math.min(2, positions.length - 1);
       const availableNodes = positions.filter((_, j) => j !== i);
       
       // Separate nodes by category
-      const sameCategory = availableNodes.filter(n => n.skill.categoria === node.skill.categoria);
       const differentCategory = availableNodes.filter(n => n.skill.categoria !== node.skill.categoria);
       
-      // Prioritize cross-category connections (70% chance)
-      const targetPool = Math.random() > 0.3 && differentCategory.length > 0 ? differentCategory : availableNodes;
+      // Prioritize cross-category connections
+      const targetPool = differentCategory.length > 0 ? differentCategory : availableNodes;
       
-      // Sort by distance and pick closest ones with some randomness
+      // Sort by distance and pick closest ones
       const sortedByDistance = targetPool
         .map(targetNode => ({
           node: targetNode,
@@ -129,9 +145,8 @@ export default function TechnicalSkillsSection() {
         .sort((a, b) => a.distance - b.distance)
         .slice(0, Math.min(connectionsPerNode * 2, targetPool.length));
       
-      // Select connections with some randomness
+      // Select connections
       const selectedConnections = sortedByDistance
-        .sort(() => Math.random() - 0.5)
         .slice(0, connectionsPerNode);
 
       selectedConnections.forEach(({ node: targetNode }) => {
@@ -190,8 +205,8 @@ export default function TechnicalSkillsSection() {
     };
 
     // Reduced animation ranges to prevent overlap
-    const floatDelay = index * 0.3;
-    const floatDuration = 8 + (index % 4);
+    const floatDelay = index * 0.2;
+    const floatDuration = 6 + (index % 3);
 
     return (
       <motion.div
@@ -206,8 +221,8 @@ export default function TechnicalSkillsSection() {
         animate={{ 
           opacity: 1, 
           scale: 1,
-          y: [0, -8, 4, 0], // Reduced range
-          x: [0, 4, -4, 0], // Reduced range
+          y: [0, -4, 2, 0],
+          x: [0, 2, -2, 0],
         }}
         transition={{
           opacity: { duration: 0.6, delay: index * 0.1 },
@@ -219,14 +234,14 @@ export default function TechnicalSkillsSection() {
             ease: "easeInOut"
           },
           x: {
-            duration: floatDuration + 1.5,
-            delay: floatDelay + 0.7,
+            duration: floatDuration + 1,
+            delay: floatDelay + 0.5,
             repeat: Infinity,
             ease: "easeInOut"
           }
         }}
         whileHover={{ 
-          scale: 1.05,
+          scale: 1.1,
           boxShadow: "0 8px 20px rgba(0,0,0,0.15)",
           transition: { duration: 0.2 }
         }}
@@ -247,7 +262,7 @@ export default function TechnicalSkillsSection() {
   };
 
   const renderConnections = () => {
-    if (!containerRef.current) return null;
+    if (!containerRef.current || connections.length === 0) return null;
     
     return (
       <svg
@@ -273,7 +288,7 @@ export default function TechnicalSkillsSection() {
               }}
               animate={{ 
                 pathLength: 1,
-                opacity: [0.1, 0.25, 0.1]
+                opacity: [0.1, 0.2, 0.1]
               }}
               transition={{
                 pathLength: { duration: 2, delay: index * 0.1 },
@@ -318,6 +333,14 @@ export default function TechnicalSkillsSection() {
       </section>
     );
   }
+
+  // Debug information
+  console.log("Current state:", {
+    habilidades: habilidades?.length || 0,
+    nodePositions: nodePositions.length,
+    connections: connections.length,
+    containerDimensions
+  });
 
   return (
     <section className="w-full bg-background text-foreground py-20 md:py-32">
@@ -376,6 +399,13 @@ export default function TechnicalSkillsSection() {
           <div className="absolute inset-0 opacity-5" style={{ zIndex: 0 }}>
             <div className="absolute inset-0 bg-gradient-to-br from-brand-accent/10 via-transparent to-brand-accent/5"></div>
           </div>
+
+          {/* Debug Info */}
+          {habilidades && habilidades.length === 0 && (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <p className="text-foreground/50">Nenhuma habilidade encontrada</p>
+            </div>
+          )}
         </motion.div>
       </div>
     </section>
