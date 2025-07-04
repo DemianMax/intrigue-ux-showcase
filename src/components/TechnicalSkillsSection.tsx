@@ -1,8 +1,7 @@
-
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import { useHabilidadesTecnicas, type HabilidadeTecnica } from "@/hooks/useHabilidadesTecnicas";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
-import { useEffect, useRef, useState, useCallback } from "react";
 
 function normalizeKey(str: string) {
   return str
