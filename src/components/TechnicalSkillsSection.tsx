@@ -2,7 +2,7 @@
 import { useHabilidadesTecnicas, type HabilidadeTecnica } from "@/hooks/useHabilidadesTecnicas";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 
 function normalizeKey(str: string) {
   return str
@@ -18,6 +18,7 @@ interface NodePosition {
   x: number;
   y: number;
   skill: HabilidadeTecnica;
+  ref: React.RefObject<HTMLDivElement>;
 }
 
 interface Connection {
@@ -31,66 +32,126 @@ export default function TechnicalSkillsSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [nodePositions, setNodePositions] = useState<NodePosition[]>([]);
   const [connections, setConnections] = useState<Connection[]>([]);
+  const [containerDimensions, setContainerDimensions] = useState({ width: 0, height: 0 });
 
-  // Generate random positions for nodes when data loads
+  // Update container dimensions on resize
+  const updateDimensions = useCallback(() => {
+    if (containerRef.current) {
+      const rect = containerRef.current.getBoundingClientRect();
+      setContainerDimensions({ width: rect.width, height: rect.height });
+    }
+  }, []);
+
   useEffect(() => {
-    if (!habilidades || habilidades.length === 0 || !containerRef.current) return;
+    updateDimensions();
+    window.addEventListener('resize', updateDimensions);
+    return () => window.removeEventListener('resize', updateDimensions);
+  }, [updateDimensions]);
 
-    const containerRect = containerRef.current.getBoundingClientRect();
-    const nodeSize = 80; // Approximate node size
-    const padding = 50;
-
-    const positions: NodePosition[] = habilidades.map((skill, index) => {
-      // Create a more organic distribution
-      const angle = (index / habilidades.length) * 2 * Math.PI + Math.random() * 0.5;
-      const radius = Math.random() * 200 + 100;
-      const centerX = containerRect.width / 2;
-      const centerY = containerRect.height / 2;
+  // Generate initial positions avoiding overlap
+  const generateNodePosition = (index: number, total: number, existing: NodePosition[]) => {
+    const nodeSize = 80;
+    const padding = 60;
+    const minDistance = 120; // Minimum distance between nodes
+    
+    let attempts = 0;
+    let position;
+    
+    do {
+      // Use a spiral-like distribution with randomness
+      const angle = (index / total) * 2 * Math.PI + (Math.random() - 0.5) * 1.2;
+      const radiusBase = Math.min(containerDimensions.width, containerDimensions.height) * 0.25;
+      const radius = radiusBase + (Math.random() * radiusBase * 0.8);
+      
+      const centerX = containerDimensions.width / 2;
+      const centerY = containerDimensions.height / 2;
       
       let x = centerX + Math.cos(angle) * radius;
       let y = centerY + Math.sin(angle) * radius;
 
       // Ensure nodes stay within bounds
-      x = Math.max(padding, Math.min(containerRect.width - nodeSize - padding, x));
-      y = Math.max(padding, Math.min(containerRect.height - nodeSize - padding, y));
+      x = Math.max(padding, Math.min(containerDimensions.width - nodeSize - padding, x));
+      y = Math.max(padding, Math.min(containerDimensions.height - nodeSize - padding, y));
 
-      return {
+      position = { x, y };
+      attempts++;
+      
+      // Check distance from existing nodes
+      const tooClose = existing.some(existing => {
+        const distance = Math.sqrt(Math.pow(position.x - existing.x, 2) + Math.pow(position.y - existing.y, 2));
+        return distance < minDistance;
+      });
+      
+      if (!tooClose || attempts > 50) break;
+      
+    } while (attempts < 50);
+    
+    return position;
+  };
+
+  // Generate positions and connections when data loads
+  useEffect(() => {
+    if (!habilidades || habilidades.length === 0 || containerDimensions.width === 0) return;
+
+    const positions: NodePosition[] = [];
+    
+    habilidades.forEach((skill, index) => {
+      const position = generateNodePosition(index, habilidades.length, positions);
+      positions.push({
         id: skill.id,
-        x,
-        y,
-        skill
-      };
+        x: position.x,
+        y: position.y,
+        skill,
+        ref: React.createRef<HTMLDivElement>()
+      });
     });
 
     setNodePositions(positions);
 
-    // Generate connections between nearby nodes
+    // Generate connections with preference for cross-category links
     const newConnections: Connection[] = [];
     positions.forEach((node, i) => {
-      // Connect to 2-3 nearby nodes
-      const distances = positions
-        .map((otherNode, j) => ({
-          node: otherNode,
-          distance: Math.sqrt(Math.pow(node.x - otherNode.x, 2) + Math.pow(node.y - otherNode.y, 2)),
-          index: j
+      const connectionsPerNode = Math.floor(Math.random() * 2) + 2; // 2-3 connections per node
+      const availableNodes = positions.filter((_, j) => j !== i);
+      
+      // Separate nodes by category
+      const sameCategory = availableNodes.filter(n => n.skill.categoria === node.skill.categoria);
+      const differentCategory = availableNodes.filter(n => n.skill.categoria !== node.skill.categoria);
+      
+      // Prioritize cross-category connections (70% chance)
+      const targetPool = Math.random() > 0.3 && differentCategory.length > 0 ? differentCategory : availableNodes;
+      
+      // Sort by distance and pick closest ones with some randomness
+      const sortedByDistance = targetPool
+        .map(targetNode => ({
+          node: targetNode,
+          distance: Math.sqrt(Math.pow(node.x - targetNode.x, 2) + Math.pow(node.y - targetNode.y, 2))
         }))
-        .filter((_, j) => j !== i)
         .sort((a, b) => a.distance - b.distance)
-        .slice(0, Math.floor(Math.random() * 2) + 2);
+        .slice(0, Math.min(connectionsPerNode * 2, targetPool.length));
+      
+      // Select connections with some randomness
+      const selectedConnections = sortedByDistance
+        .sort(() => Math.random() - 0.5)
+        .slice(0, connectionsPerNode);
 
-      distances.forEach(({ node: targetNode }) => {
+      selectedConnections.forEach(({ node: targetNode }) => {
         // Avoid duplicate connections
         const existsReverse = newConnections.some(conn => 
           conn.from.id === targetNode.id && conn.to.id === node.id
         );
-        if (!existsReverse) {
+        const existsForward = newConnections.some(conn => 
+          conn.from.id === node.id && conn.to.id === targetNode.id
+        );
+        
+        if (!existsReverse && !existsForward) {
           newConnections.push({ from: node, to: targetNode });
         }
       });
     });
 
     setConnections(newConnections);
-  }, [habilidades]);
+  }, [habilidades, containerDimensions]);
 
   const getCategoryColor = (categoria: string) => {
     switch (categoria) {
@@ -129,12 +190,14 @@ export default function TechnicalSkillsSection() {
       return `https://heroicons.com/24/outline/${icone}.svg`;
     };
 
-    const floatDelay = index * 0.2;
-    const floatDuration = 6 + (index % 3);
+    // Reduced animation ranges to prevent overlap
+    const floatDelay = index * 0.3;
+    const floatDuration = 8 + (index % 4);
 
     return (
       <motion.div
         key={skill.id}
+        ref={position.ref}
         className={`absolute flex flex-col items-center justify-center w-20 h-20 rounded-full border-2 shadow-lg cursor-pointer ${categoryColor}`}
         style={{
           left: position.x - 40,
@@ -144,12 +207,12 @@ export default function TechnicalSkillsSection() {
         animate={{ 
           opacity: 1, 
           scale: 1,
-          y: [0, -10, 5, 0],
-          x: [0, 5, -5, 0],
+          y: [0, -8, 4, 0], // Reduced range
+          x: [0, 4, -4, 0], // Reduced range
         }}
         transition={{
-          opacity: { duration: 0.5, delay: index * 0.1 },
-          scale: { duration: 0.5, delay: index * 0.1 },
+          opacity: { duration: 0.6, delay: index * 0.1 },
+          scale: { duration: 0.6, delay: index * 0.1 },
           y: {
             duration: floatDuration,
             delay: floatDelay,
@@ -157,15 +220,15 @@ export default function TechnicalSkillsSection() {
             ease: "easeInOut"
           },
           x: {
-            duration: floatDuration + 1,
-            delay: floatDelay + 0.5,
+            duration: floatDuration + 1.5,
+            delay: floatDelay + 0.7,
             repeat: Infinity,
             ease: "easeInOut"
           }
         }}
         whileHover={{ 
-          scale: 1.1,
-          boxShadow: "0 10px 25px rgba(0,0,0,0.2)",
+          scale: 1.05,
+          boxShadow: "0 8px 20px rgba(0,0,0,0.15)",
           transition: { duration: 0.2 }
         }}
       >
@@ -185,39 +248,48 @@ export default function TechnicalSkillsSection() {
   };
 
   const renderConnections = () => {
-    return connections.map((connection, index) => {
-      const { from, to } = connection;
-      const length = Math.sqrt(Math.pow(to.x - from.x, 2) + Math.pow(to.y - from.y, 2));
-      const angle = Math.atan2(to.y - from.y, to.x - from.x) * (180 / Math.PI);
-      
-      return (
-        <motion.div
-          key={`${from.id}-${to.id}`}
-          className="absolute h-px bg-foreground/20"
-          style={{
-            left: from.x,
-            top: from.y,
-            width: length,
-            transformOrigin: '0 0',
-            transform: `rotate(${angle}deg)`,
-          }}
-          initial={{ scaleX: 0, opacity: 0 }}
-          animate={{ 
-            scaleX: 1, 
-            opacity: [0.1, 0.3, 0.1],
-          }}
-          transition={{
-            scaleX: { duration: 1, delay: index * 0.1 },
-            opacity: {
-              duration: 3,
-              delay: index * 0.2,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }
-          }}
-        />
-      );
-    });
+    if (!containerRef.current) return null;
+    
+    return (
+      <svg
+        className="absolute inset-0 w-full h-full pointer-events-none"
+        style={{ zIndex: 1 }}
+      >
+        {connections.map((connection, index) => {
+          const { from, to } = connection;
+          
+          return (
+            <motion.line
+              key={`${from.id}-${to.id}-${index}`}
+              x1={from.x}
+              y1={from.y}
+              x2={to.x}
+              y2={to.y}
+              stroke="currentColor"
+              strokeWidth="1"
+              className="text-foreground/20"
+              initial={{ 
+                pathLength: 0,
+                opacity: 0 
+              }}
+              animate={{ 
+                pathLength: 1,
+                opacity: [0.1, 0.25, 0.1]
+              }}
+              transition={{
+                pathLength: { duration: 2, delay: index * 0.1 },
+                opacity: {
+                  duration: 4,
+                  delay: index * 0.15,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }
+              }}
+            />
+          );
+        })}
+      </svg>
+    );
   };
 
   const categories = [
@@ -293,18 +365,16 @@ export default function TechnicalSkillsSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          {/* Connections */}
-          <div className="absolute inset-0">
-            {renderConnections()}
-          </div>
+          {/* Connection Lines */}
+          {renderConnections()}
 
           {/* Skill Nodes */}
-          <div className="absolute inset-0">
+          <div className="absolute inset-0" style={{ zIndex: 2 }}>
             {nodePositions.map((position, index) => renderSkillNode(position, index))}
           </div>
 
           {/* Background Pattern */}
-          <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0 opacity-5" style={{ zIndex: 0 }}>
             <div className="absolute inset-0 bg-gradient-to-br from-brand-accent/10 via-transparent to-brand-accent/5"></div>
           </div>
         </motion.div>
