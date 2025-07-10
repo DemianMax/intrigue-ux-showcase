@@ -24,11 +24,11 @@ const Index = () => {
     
     {
       component: <DepthHeroSection key="hero" onScrollNext={() => scrollToSection(1)} />,
-      bgClass: "bg-background"
+      bgClass: "bg-gradient-to-br from-white via-gray-50 to-orange-50 dark: bg-gradient-to-br from-white via-gray-50 to-orange-50"
     },
     {
       component: <DepthAboutSection key="about" />,
-      bgClass: "bg-background"
+     // bgClass: "bg-gray-900"
     },
     {
       component: projects && projects.length > 0 ? (
@@ -36,14 +36,14 @@ const Index = () => {
           <FeaturedProjectsSection projects={projects} />
         </div>
       ) : (
-        <div key="no-projects" className="w-full h-full flex items-center justify-center bg-background">
+        <div key="no-projects" className="w-full h-full flex items-center justify-center bg-gray-50 dark:bg-gray-800">
           <div className="text-center py-20">
-            <h3 className="text-2xl font-playfair text-foreground mb-4">Projetos em breve</h3>
-            <p className="text-muted-foreground">Os projetos estão sendo carregados...</p>
+            <h3 className="text-2xl font-playfair text-brand-dark dark:text-white mb-4">Projetos em breve</h3>
+            <p className="text-gray-600 dark:text-gray-400">Os projetos estão sendo carregados...</p>
           </div>
         </div>
       ),
-      bgClass: "bg-background"
+      bgClass: "bg-gray-50 dark:bg-gray-800"
     },
     {
       component: (
@@ -51,7 +51,7 @@ const Index = () => {
           <PortfolioSection />
         </div>
       ),
-      bgClass: "bg-background"
+      bgClass: "bg-white dark:bg-gray-900"
     },
     {
       component: (
@@ -59,7 +59,7 @@ const Index = () => {
           <TechnicalSkillsSection />
         </div>
       ),
-      bgClass: "bg-background"
+      bgClass: "bg-gray-50 dark:bg-gray-800"
     },
     {
       component: (
@@ -67,7 +67,7 @@ const Index = () => {
           <FooterSection />
         </div>
       ),
-      bgClass: "bg-background"
+      bgClass: "bg-brand-dark"
     }
   ];
 

@@ -19,7 +19,7 @@ const FeaturedProjectsSection: React.FC<FeaturedProjectsSectionProps> = ({ proje
   };
 
   return (
-    <div className="w-full h-full bg-background flex flex-col items-center justify-center py-20 px-6">
+    <div className="w-full h-full bg-gray-50 dark:bg-gray-800 flex flex-col items-center justify-center py-20 px-6">
       {/* Título da seção */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -28,11 +28,11 @@ const FeaturedProjectsSection: React.FC<FeaturedProjectsSectionProps> = ({ proje
         transition={{ duration: 0.6 }}
         className="text-center mb-16 max-w-4xl"
       >
-        <h2 className="text-4xl md:text-5xl font-playfair font-bold text-foreground mb-4">
+        <h2 className="text-4xl md:text-5xl font-playfair font-bold text-brand-dark dark:text-white mb-4">
           Projetos em Destaque
         </h2>
-        <div className="w-24 h-1 bg-border mx-auto mb-6"></div>
-        <p className="text-lg text-muted-foreground leading-relaxed">
+        <div className="w-24 h-1 bg-brand-accent mx-auto rounded-full mb-6"></div>
+        <p className="text-lg text-brand-dark/70 dark:text-gray-300 leading-relaxed">
           Conheça alguns dos projetos que desenvolvi, desde a pesquisa até a implementação
         </p>
       </motion.div>
@@ -45,51 +45,39 @@ const FeaturedProjectsSection: React.FC<FeaturedProjectsSectionProps> = ({ proje
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: index * 0.1 }}
-            className="bg-transparent border-2 border-border rounded-none overflow-hidden hover:bg-border/5 transition-all duration-300 transform hover:-translate-y-2"
+            className="bg-white dark:bg-gray-700 rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
           >
-            {/* Imagem wireframe style */}
-            <div className="relative overflow-hidden border-b-2 border-border">
-              <div className="w-full h-48 bg-transparent border-border relative">
-                <img
-                  src={project.image}
-                  alt={`Projeto ${project.title}`}
-                  className="w-full h-full object-cover opacity-20 transition-opacity duration-300 hover:opacity-40"
-                />
-                {/* Wireframe overlay */}
-                <div className="absolute inset-0 border border-border">
-                  <div className="absolute top-4 left-4 right-4">
-                    <div className="h-2 bg-border/30 mb-2"></div>
-                    <div className="h-2 bg-border/30 w-3/4"></div>
-                  </div>
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <div className="h-1 bg-border/30 mb-1"></div>
-                    <div className="h-1 bg-border/30 w-2/3"></div>
-                  </div>
-                </div>
-              </div>
+            {/* Imagem */}
+            <div className="relative overflow-hidden">
+              <img
+                src={project.image}
+                alt={`Projeto ${project.title}`}
+                className="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
             </div>
 
             {/* Conteúdo */}
             <div className="p-6 space-y-4">
               <div className="space-y-2">
-                <h4 className="text-xl font-playfair font-bold text-foreground line-clamp-2">
+                <h4 className="text-xl font-playfair font-bold text-brand-dark dark:text-white line-clamp-2">
                   {project.title}
                 </h4>
-                <div className="text-accent-foreground font-semibold text-sm uppercase tracking-wide">
+                <div className="text-brand-accent font-semibold text-sm uppercase tracking-wide">
                   {project.role}
                 </div>
               </div>
 
-              <div className="space-y-4 text-muted-foreground text-sm">
+              <div className="space-y-4 text-gray-700 dark:text-gray-300 text-sm">
                 <div>
-                  <h5 className="font-semibold text-foreground mb-2 text-xs uppercase tracking-wide">
+                  <h5 className="font-semibold text-brand-dark dark:text-white mb-2 text-xs uppercase tracking-wide">
                     {t('projectProblem')}:
                   </h5>
                   <p className="leading-relaxed line-clamp-2">{project.problem}</p>
                 </div>
                 
                 <div>
-                  <h5 className="font-semibold text-foreground mb-2 text-xs uppercase tracking-wide">
+                  <h5 className="font-semibold text-brand-dark dark:text-white mb-2 text-xs uppercase tracking-wide">
                     {t('projectSolution')}:
                   </h5>
                   <p className="leading-relaxed line-clamp-2">{project.solution}</p>
@@ -100,7 +88,7 @@ const FeaturedProjectsSection: React.FC<FeaturedProjectsSectionProps> = ({ proje
                 {parseTextToArray(project.hashtags_text).slice(0, 3).map((tag, idx) => (
                   <span
                     key={idx}
-                    className="text-xs font-medium text-foreground bg-transparent rounded-none px-3 py-1 border border-border"
+                    className="text-xs font-medium text-brand-accent bg-brand-accent/10 rounded-full px-3 py-1 border border-brand-accent/20"
                   >
                     {tag}
                   </span>
@@ -108,7 +96,7 @@ const FeaturedProjectsSection: React.FC<FeaturedProjectsSectionProps> = ({ proje
               </div>
 
               <button
-                className="w-full mt-6 px-4 py-3 rounded-none bg-transparent border-2 border-border text-foreground font-semibold hover:bg-border/10 transition-all duration-300 text-sm transform hover:scale-[1.02]"
+                className="w-full mt-6 px-4 py-3 rounded-xl bg-brand-accent text-white font-semibold hover:bg-orange-600 transition-all duration-300 text-sm shadow-md hover:shadow-lg transform hover:scale-[1.02]"
                 onClick={() => navigate(`/projeto/${project.id}`)}
               >
                 {t('projectCaseStudyButton')}

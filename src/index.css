@@ -7,33 +7,33 @@
 
 @layer base {
   :root {
-    --background: 210 100% 44%; /* Blue background from reference */
-    --foreground: 0 0% 100%; /* White text */
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
 
-    --card: 210 100% 44%; /* Blue card background */
-    --card-foreground: 0 0% 100%; /* White text on cards */
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
 
-    --popover: 210 100% 44%;
-    --popover-foreground: 0 0% 100%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 0 0% 100%; /* White for primary elements */
-    --primary-foreground: 210 100% 44%; /* Blue text on white */
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
 
-    --secondary: 210 80% 50%; /* Lighter blue for secondary */
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
 
-    --muted: 210 60% 60%; /* Muted blue */
-    --muted-foreground: 0 0% 90%; /* Light gray text */
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 0 0% 100%; /* White accent */
-    --accent-foreground: 210 100% 44%; /* Blue text on white */
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive-foreground: 210 40% 98%;
 
-    --border: 0 0% 100%; /* White borders for wireframe look */
-    --input: 210 80% 50%;
-    --ring: 0 0% 100%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
 
     --radius: 0.5rem;
 
@@ -93,27 +93,40 @@
 
   body {
     @apply bg-background text-foreground transition-colors duration-300;
-    /* Grid pattern like the reference image */
+    /* Textura granulada sutil */
     background-image: 
-      linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
-    background-size: 40px 40px;
+      radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0);
+    background-size: 20px 20px;
   }
 
-  /* Grid pattern for dark mode (same for consistency) */
+  /* Textura granulada para modo escuro */
   .dark body {
     background-image: 
-      linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
-    background-size: 40px 40px;
+      radial-gradient(circle at 1px 1px, rgba(255,255,255,0.03) 1px, transparent 0);
+    background-size: 20px 20px;
   }
 
-  /* Remove additional texture for cleaner grid look */
+  /* Textura adicional para criar mais granularidade */
   body::before {
-    display: none;
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.4;
+    z-index: -1;
+    background-image: 
+      radial-gradient(circle at 25% 25%, rgba(0,0,0,0.02) 1px, transparent 1px),
+      radial-gradient(circle at 75% 75%, rgba(0,0,0,0.02) 1px, transparent 1px);
+    background-size: 15px 15px, 25px 25px;
+    pointer-events: none;
   }
 
   .dark body::before {
-    display: none;
+    opacity: 0.2;
+    background-image: 
+      radial-gradient(circle at 25% 25%, rgba(255,255,255,0.02) 1px, transparent 1px),
+      radial-gradient(circle at 75% 75%, rgba(255,255,255,0.02) 1px, transparent 1px);
   }
 }
