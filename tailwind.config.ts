@@ -71,20 +71,7 @@ export default {
 				brand: {
 					DEFAULT: "#2563eb",
 					accent: "#FF6B00",
-					dark: "#111111",
-					// Neural network colors
-					orange: {
-						light: "#fb923c",
-						dark: "#ea580c"
-					},
-					blue: {
-						light: "#60a5fa",
-						dark: "#2563eb"
-					},
-					green: {
-						light: "#4ade80",
-						dark: "#16a34a"
-					}
+					dark: "#111111"
 				}
 			},
 			borderRadius: {
@@ -108,23 +95,11 @@ export default {
 					to: {
 						height: '0'
 					}
-				},
-				// Neural network animations
-				'float-gentle': {
-					'0%, 100%': { transform: 'translateY(0px) translateX(0px)' },
-					'33%': { transform: 'translateY(-10px) translateX(5px)' },
-					'66%': { transform: 'translateY(5px) translateX(-5px)' },
-				},
-				'pulse-connection': {
-					'0%, 100%': { opacity: '0.1' },
-					'50%': { opacity: '0.3' },
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out',
-				'float-gentle': 'float-gentle 6s ease-in-out infinite',
-				'pulse-connection': 'pulse-connection 3s ease-in-out infinite'
+				'accordion-up': 'accordion-up 0.2s ease-out'
 			}
 		}
 	},
