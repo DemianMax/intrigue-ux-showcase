@@ -95,10 +95,6 @@ const Index = () => {
               className={`w-full flex items-center justify-center relative ${
                 index === 0 ? "min-h-screen" : ""
               } ${section.bgClass}`}
-              style={{
-                paddingTop: index === 0 ? "0" : "4rem",
-                paddingBottom: index === sections.length - 1 ? undefined : "4rem"
-              }}
             >
               {section.component}
             </div>
