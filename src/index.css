@@ -37,6 +37,14 @@
 
     --radius: 0.5rem;
 
+    /* New cohesive color scheme */
+    --hero-bg: 220 26% 14%;
+    --about-bg: 210 40% 96.1%;
+    --projects-bg: 216 12% 84%;
+    --portfolio-bg: 240 10% 3.9%;
+    --skills-bg: 210 40% 96.1%;
+    --contact-bg: 222.2 47.4% 11.2%;
+
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 240 5.9% 10%;
@@ -48,7 +56,7 @@
   }
 
   .dark {
-    --background: 222.2 84% 4.9%; /* 🔥 mesmo fundo da seção dark */
+    --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
 
     --card: 222.2 84% 4.9%;
@@ -75,6 +83,14 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
+
+    /* Dark mode section colors */
+    --hero-bg: 220 26% 14%;
+    --about-bg: 217.2 32.6% 17.5%;
+    --projects-bg: 222.2 84% 4.9%;
+    --portfolio-bg: 240 10% 3.9%;
+    --skills-bg: 217.2 32.6% 17.5%;
+    --contact-bg: 222.2 47.4% 11.2%;
 
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;

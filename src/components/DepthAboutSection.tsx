@@ -3,7 +3,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { BackgroundBeams } from "./ui/background-beams";
 
 const DepthAboutSection: React.FC = () => {
   const { t } = useLanguage();
@@ -11,10 +10,7 @@ const DepthAboutSection: React.FC = () => {
   if (!t) return null;
 
   return (
-    <div className="relative w-full h-full flex items-center justify-center overflow-hidden px-6 py-16 bg-neutral-950">
-      {/* Background Beams */}
-      <BackgroundBeams />
-      
+    <div className="relative w-full h-full flex items-center justify-center overflow-hidden px-6 py-16 bg-[hsl(var(--about-bg))]">
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto">
         {/* Título da seção */}
@@ -25,7 +21,7 @@ const DepthAboutSection: React.FC = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="font-playfair text-4xl md:text-5xl text-white font-bold mb-4">
+          <h2 className="font-playfair text-4xl md:text-5xl text-foreground font-bold mb-4">
             Sobre Mim
           </h2>
           <div className="w-24 h-1 bg-brand-accent mx-auto rounded-full"></div>
@@ -43,7 +39,7 @@ const DepthAboutSection: React.FC = () => {
               <img
                 alt="Foto de perfil profissional"
                 src="/lovable-uploads/b5362a7a-ef6f-46c7-ac27-99fa2fcde1f1.jpg"
-                className="w-full h-96 rounded-2xl shadow-2xl object-cover border-2 border-white/10"
+                className="w-full h-96 rounded-2xl shadow-2xl object-cover border-2 border-border"
               />
               <div className="absolute -inset-4 bg-gradient-to-r from-brand-accent/20 to-orange-400/20 rounded-2xl blur-xl -z-10" />
             </div>
@@ -57,7 +53,7 @@ const DepthAboutSection: React.FC = () => {
             className="space-y-8 order-1 md:order-2"
           >
             <motion.h3
-              className="font-playfair text-3xl md:text-4xl text-white font-bold"
+              className="font-playfair text-3xl md:text-4xl text-foreground font-bold"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
@@ -67,7 +63,7 @@ const DepthAboutSection: React.FC = () => {
             </motion.h3>
 
             <motion.div
-              className="space-y-6 text-lg text-gray-200 leading-relaxed"
+              className="space-y-6 text-lg text-muted-foreground leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.5 }}
