@@ -37,7 +37,7 @@ const FeaturedProjectsSection: React.FC<FeaturedProjectsSectionProps> = ({ proje
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl w-full">
+      <div className="flex flex-col gap-8 max-w-7xl w-full">
         {projects.slice(0, 3).map((project, index) => (
           <motion.div
             key={project.id}
@@ -47,60 +47,62 @@ const FeaturedProjectsSection: React.FC<FeaturedProjectsSectionProps> = ({ proje
             transition={{ duration: 0.6, delay: index * 0.1 }}
             className="bg-white dark:bg-gray-700 rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
           >
-            {/* Imagem */}
-            <div className="relative overflow-hidden">
-              <img
-                src={project.image}
-                alt={`Projeto ${project.title}`}
-                className="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-            </div>
-
-            {/* Conteúdo */}
-            <div className="p-6 space-y-4">
-              <div className="space-y-2">
-                <h4 className="text-xl font-playfair font-bold text-brand-dark dark:text-white line-clamp-2">
-                  {project.title}
-                </h4>
-                <div className="text-brand-accent font-semibold text-sm uppercase tracking-wide">
-                  {project.role}
+            <div className="flex flex-col lg:flex-row">
+              {/* Conteúdo */}
+              <div className="w-full lg:w-1/2 p-6 space-y-4">
+                <div className="space-y-2">
+                  <h4 className="text-xl font-playfair font-bold text-brand-dark dark:text-white line-clamp-2">
+                    {project.title}
+                  </h4>
+                  <div className="text-brand-accent font-semibold text-sm uppercase tracking-wide">
+                    {project.role}
+                  </div>
                 </div>
-              </div>
 
-              <div className="space-y-4 text-gray-700 dark:text-gray-300 text-sm">
-                <div>
-                  <h5 className="font-semibold text-brand-dark dark:text-white mb-2 text-xs uppercase tracking-wide">
-                    {t('projectProblem')}:
-                  </h5>
-                  <p className="leading-relaxed line-clamp-2">{project.problem}</p>
+                <div className="space-y-4 text-gray-700 dark:text-gray-300 text-sm">
+                  <div>
+                    <h5 className="font-semibold text-brand-dark dark:text-white mb-2 text-xs uppercase tracking-wide">
+                      {t('projectProblem')}:
+                    </h5>
+                    <p className="leading-relaxed line-clamp-2">{project.problem}</p>
+                  </div>
+                  
+                  <div>
+                    <h5 className="font-semibold text-brand-dark dark:text-white mb-2 text-xs uppercase tracking-wide">
+                      {t('projectSolution')}:
+                    </h5>
+                    <p className="leading-relaxed line-clamp-2">{project.solution}</p>
+                  </div>
                 </div>
                 
-                <div>
-                  <h5 className="font-semibold text-brand-dark dark:text-white mb-2 text-xs uppercase tracking-wide">
-                    {t('projectSolution')}:
-                  </h5>
-                  <p className="leading-relaxed line-clamp-2">{project.solution}</p>
+                <div className="flex flex-wrap gap-2 pt-2">
+                  {parseTextToArray(project.hashtags_text).slice(0, 3).map((tag, idx) => (
+                    <span
+                      key={idx}
+                      className="text-xs font-medium text-brand-accent bg-brand-accent/10 rounded-full px-3 py-1 border border-brand-accent/20"
+                    >
+                      {tag}
+                    </span>
+                  ))}
                 </div>
-              </div>
-              
-              <div className="flex flex-wrap gap-2 pt-2">
-                {parseTextToArray(project.hashtags_text).slice(0, 3).map((tag, idx) => (
-                  <span
-                    key={idx}
-                    className="text-xs font-medium text-brand-accent bg-brand-accent/10 rounded-full px-3 py-1 border border-brand-accent/20"
-                  >
-                    {tag}
-                  </span>
-                ))}
+
+                <button
+                  className="w-full mt-6 px-4 py-3 rounded-xl bg-brand-accent text-white font-semibold hover:bg-orange-600 transition-all duration-300 text-sm shadow-md hover:shadow-lg transform hover:scale-[1.02]"
+                  onClick={() => navigate(`/projeto/${project.id}`)}
+                >
+                  {t('projectCaseStudyButton')}
+                </button>
               </div>
 
-              <button
-                className="w-full mt-6 px-4 py-3 rounded-xl bg-brand-accent text-white font-semibold hover:bg-orange-600 transition-all duration-300 text-sm shadow-md hover:shadow-lg transform hover:scale-[1.02]"
-                onClick={() => navigate(`/projeto/${project.id}`)}
-              >
-                {t('projectCaseStudyButton')}
-              </button>
+              {/* Imagem */}
+              <div className="w-full lg:w-1/2 relative overflow-hidden">
+                <img
+                  src={project.image}
+                  alt={`Projeto ${project.title}`}
+                  className="w-full h-48 lg:h-full object-cover transition-transform duration-300 hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+              </div>
             </div>
           </motion.div>
         ))}
