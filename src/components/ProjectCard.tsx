@@ -29,86 +29,23 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
     >
       {/* Conteúdo do projeto (mantém-se o mesmo) */}
       <div className="w-full lg:w-1/2 space-y-4">
-        <div className="space-y-2">
-          <motion.h4 
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-lg lg:text-xl font-playfair font-semibold text-brand-dark"
-          >
-            {project.title}
-          </motion.h4>
-          
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-brand-accent font-semibold text-sm"
-          >
-            {project.role}
-          </motion.div>
-        </div>
-
-        <motion.div 
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="space-y-3 text-gray-700 text-sm"
-        >
-          <div>
-            <h5 className="font-semibold text-brand-dark mb-1 text-sm">{t('projectProblem')}:</h5>
-            <p className="leading-relaxed line-clamp-2">{project.problem}</p>
-          </div>
-          
-          <div>
-            <h5 className="font-semibold text-brand-dark mb-1 text-sm">{t('projectSolution')}:</h5>
-            <p className="leading-relaxed line-clamp-2">{project.solution}</p>
-          </div>
-        </motion.div>
-        
-        <motion.div 
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="flex flex-wrap gap-1"
-        >
-          {parseTextToArray(project.hashtags_text).slice(0, 4).map((tag, idx) => (
-            <span
-              key={idx}
-              className="text-xs font-medium text-brand-accent bg-brand-accent/10 rounded-full px-2 py-1 border border-brand-accent/20"
-            >
-              {tag}
-            </span>
-          ))}
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-        >
-          <button
-            className="px-6 py-2 rounded-full bg-brand-accent text-white font-semibold shadow-md hover:bg-brand-dark/90 hover:shadow-lg transition-all duration-300 transform hover:scale-105 text-sm"
-            onClick={() => navigate(`/projeto/${project.id}`)}
-          >
-            {t('projectCaseStudyButton')}
-          </button>
-        </motion.div>
+        {/* ... (conteúdo da esquerda) ... */}
       </div>
 
-      {/* Imagem do projeto - ALTERAÇÃO AQUI: height aplicado na div pai */}
-      <motion.div className="w-full lg:w-1/2 relative">
-        <div className="relative overflow-hidden rounded-xl shadow-lg **h-48 lg:h-56**"> {/* <--- ALTURA APLICADA AQUI */}
+      {/* Imagem do projeto - REVISÃO DA ESTRUTURA E CLASSES AQUI */}
+      <motion.div className="w-full lg:w-1/2 relative **h-48 lg:h-56**"> {/* <--- ALTURA APLICADA AQUI, na motion.div */}
+        <div className="relative overflow-hidden rounded-xl shadow-lg w-full h-full"> {/* <--- GARANTINDO W-FULL H-FULL */}
           <img
             src={project.image}
             alt={`Projeto ${project.title}`}
-            className="w-full **h-full** object-cover" {/* <--- Imagem preenche 100% da altura do pai */}
+            className="w-full h-full object-cover" {/* <--- Imagem preenche 100% da largura e altura do pai */}
           />
+          {/* O gradiente que você encontrou no inspect. Deve estar aqui ou ser adicionado. */}
+          {/* Se a classe que você copiou era de uma div que já existia sobre a imagem, ela provavelmente ficaria aqui. */}
+          {/* Por exemplo, se essa div gradiente estava *dentro* do `relative overflow-hidden...`: */}
+          {/* <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div> */}
+          {/* Se você não a tem e ela apareceu no inspect, pode ser algo do seu navegador ou de outra lib. */}
+          {/* Mas se você a quer, garanta que ela esteja aqui. */}
         </div>
       </motion.div>
     </motion.div>
