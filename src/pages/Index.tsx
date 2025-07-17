@@ -89,15 +89,14 @@ const Index = () => {
 
       <div className="relative">
         {sections.map((section, index) => (
-          <div key={index}>
-            <div
-              id={`section-${index}`}
-              className={`w-full flex items-center justify-center relative ${
-                index === 0 ? "min-h-screen" : ""
-              } ${section.bgClass}`}
-            >
-              {section.component}
-            </div>
+          <div
+            key={index}
+            id={`section-${index}`}
+            className={`w-full flex items-center justify-center relative ${
+              index === 0 ? "min-h-screen" : ""
+            } ${section.bgClass}`}
+          >
+            {section.component}
           </div>
         ))}
       </div>
