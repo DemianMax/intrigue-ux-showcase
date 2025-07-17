@@ -51,7 +51,7 @@ const FeaturedProjectsSection: React.FC<FeaturedProjectsSectionProps> = ({ proje
               {/* Conteúdo */}
               <div className="w-full lg:w-1/2 p-6 space-y-4">
                 <div className="space-y-2">
-                  <h4 className="text-xl font-playfair font-bold text-brand-dark dark:text-white line-clamp-2">
+                  <h4 className="text-xl font-playfair font-bold text-brand-dark dark:text-white">
                     {project.title}
                   </h4>
                   <div className="text-brand-accent font-semibold text-sm uppercase tracking-wide">
@@ -64,14 +64,14 @@ const FeaturedProjectsSection: React.FC<FeaturedProjectsSectionProps> = ({ proje
                     <h5 className="font-semibold text-brand-dark dark:text-white mb-2 text-xs uppercase tracking-wide">
                       {t('projectProblem')}:
                     </h5>
-                    <p className="leading-relaxed line-clamp-2">{project.problem}</p>
+                    <p className="leading-relaxed">{project.problem}</p>
                   </div>
                   
                   <div>
                     <h5 className="font-semibold text-brand-dark dark:text-white mb-2 text-xs uppercase tracking-wide">
                       {t('projectSolution')}:
                     </h5>
-                    <p className="leading-relaxed line-clamp-2">{project.solution}</p>
+                    <p className="leading-relaxed">{project.solution}</p>
                   </div>
                 </div>
                 
