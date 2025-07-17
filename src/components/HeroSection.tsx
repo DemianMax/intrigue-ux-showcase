@@ -1,4 +1,3 @@
-
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import React from "react";
@@ -18,7 +17,9 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onScrollToAbout }) => {
   }
 
   return (
-    <section className="min-h-[100dvh] flex flex-col justify-center items-center relative pt-32 sm:pt-40 bg-white dark:#1E2735 overflow-hidden">
+    // Linha alterada aqui: 'dark:bg-[#1E2735]' garante que a cor escura seja aplicada apenas no tema escuro.
+    // 'bg-white' é a cor padrão para o tema claro.
+    <section className="min-h-[100dvh] flex flex-col justify-center items-center relative pt-32 sm:pt-40 bg-white dark:bg-[#1E2735] overflow-hidden">
       <BackgroundRain />
 
       <div className="w-full max-w-5xl mx-auto px-6 flex flex-col items-start gap-12 z-10 relative">
