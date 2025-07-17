@@ -1,4 +1,3 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 import { Project } from "@/types/project";
@@ -28,7 +27,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
       transition={{ duration: 0.6, delay: index * 0.1 }}
       className="flex flex-col lg:flex-row gap-6 lg:gap-8 items-center group"
     >
-      {/* Conteúdo do projeto */}
+      {/* Conteúdo do projeto (mantém-se o mesmo) */}
       <div className="w-full lg:w-1/2 space-y-4">
         <div className="space-y-2">
           <motion.h4 
@@ -102,13 +101,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
         </motion.div>
       </div>
 
-      {/* Imagem do projeto */}
+      {/* Imagem do projeto - ALTERAÇÃO AQUI: height aplicado na div pai */}
       <motion.div className="w-full lg:w-1/2 relative">
-        <div className="relative overflow-hidden rounded-xl shadow-lg">
+        <div className="relative overflow-hidden rounded-xl shadow-lg **h-48 lg:h-56**"> {/* <--- ALTURA APLICADA AQUI */}
           <img
             src={project.image}
             alt={`Projeto ${project.title}`}
-            className="w-full h-48 lg:h-56 object-cover"
+            className="w-full **h-full** object-cover" {/* <--- Imagem preenche 100% da altura do pai */}
           />
         </div>
       </motion.div>
