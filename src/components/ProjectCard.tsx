@@ -20,33 +20,19 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
     return text.split(',').map(item => item.trim()).filter(item => item.length > 0);
   };
 
-  // Alternar layout: par = imagem à esquerda, ímpar = imagem à direita
-  const isImageLeft = index % 2 === 0;
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
-      className={`flex flex-col ${isImageLeft ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-6 lg:gap-8 items-center group`}
+      className="flex flex-col lg:flex-row gap-6 lg:gap-8 items-center group"
     >
-      {/* Imagem do projeto */}
-      <motion.div className="w-full lg:w-1/2 relative">
-        <div className="relative overflow-hidden rounded-xl shadow-lg">
-          <img
-            src={project.image}
-            alt={`Projeto ${project.title}`}
-            className="w-full h-48 lg:h-56 object-cover"
-          />
-        </div>
-      </motion.div>
-
       {/* Conteúdo do projeto */}
       <div className="w-full lg:w-1/2 space-y-4">
         <div className="space-y-2">
           <motion.h4 
-            initial={{ opacity: 0, x: isImageLeft ? 20 : -20 }}
+            initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -56,7 +42,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
           </motion.h4>
           
           <motion.div 
-            initial={{ opacity: 0, x: isImageLeft ? 20 : -20 }}
+            initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
@@ -67,7 +53,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
         </div>
 
         <motion.div 
-          initial={{ opacity: 0, x: isImageLeft ? 20 : -20 }}
+          initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
@@ -85,7 +71,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
         </motion.div>
         
         <motion.div 
-          initial={{ opacity: 0, x: isImageLeft ? 20 : -20 }}
+          initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.5 }}
@@ -102,7 +88,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, x: isImageLeft ? 20 : -20 }}
+          initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.6 }}
@@ -115,6 +101,17 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
           </button>
         </motion.div>
       </div>
+
+      {/* Imagem do projeto */}
+      <motion.div className="w-full lg:w-1/2 relative">
+        <div className="relative overflow-hidden rounded-xl shadow-lg">
+          <img
+            src={project.image}
+            alt={`Projeto ${project.title}`}
+            className="w-full h-48 lg:h-56 object-cover"
+          />
+        </div>
+      </motion.div>
     </motion.div>
   );
 };
