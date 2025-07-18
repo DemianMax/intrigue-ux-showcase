@@ -1,6 +1,5 @@
 import { useState } from "react";
-import DepthHeroSection from "@/components/DepthHeroSection";
-import DepthAboutSection from "@/components/DepthAboutSection";
+import ScrollTransitionWrapper from "@/components/ScrollTransitionWrapper";
 import FeaturedProjectsSection from "@/components/FeaturedProjectsSection";
 import FooterSection from "@/components/FooterSection";
 import PortfolioSection from "@/components/PortfolioSection";
@@ -26,11 +25,8 @@ const Index = () => {
     }
   };
   const sections = [{
-    component: <DepthHeroSection key="hero" onScrollNext={() => scrollToSection(1)} />,
+    component: <ScrollTransitionWrapper key="hero-about" onScrollNext={() => scrollToSection(1)} />,
     bgClass: "bg-[hsl(var(--hero-bg))]"
-  }, {
-    component: <DepthAboutSection key="about" />,
-    bgClass: "bg-[hsl(var(--about-bg))]"
   }, {
     component: projects && projects.length > 0 ? <div key="featured-projects" className="w-full h-full">
           <FeaturedProjectsSection projects={projects} />
