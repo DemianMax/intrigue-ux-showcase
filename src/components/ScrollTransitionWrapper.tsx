@@ -20,17 +20,15 @@ const ScrollTransitionWrapper: React.FC<ScrollTransitionWrapperProps> = ({
     offset: ["start start", "end start"]
   });
 
-  // Hero text animations - moves up and fades out
-  const heroY = useTransform(scrollYProgress, [0, 0.6], [0, -300]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  // Hero text animations - moves up during scroll
+  const heroY = useTransform(scrollYProgress, [0, 0.7], [0, -400]);
 
-  // About text animations - comes down from above
-  const aboutY = useTransform(scrollYProgress, [0.3, 0.8], [-200, 0]);
-  const aboutOpacity = useTransform(scrollYProgress, [0.4, 0.8], [0, 1]);
+  // About text animations - moves up during scroll (starts later, more time on screen)
+  const aboutY = useTransform(scrollYProgress, [0.2, 1], [300, -100]);
 
   // Scroll button animation
   const buttonOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
-  return <div ref={containerRef} className="relative min-h-[200vh]">
+  return <div ref={containerRef} className="relative min-h-[250vh]">
       {/* Main Container */}
       <div className="sticky top-0 w-full h-screen flex items-center overflow-hidden px-6 md:px-12 lg:px-16 bg-[hsl(var(--hero-bg))]">
         
@@ -39,8 +37,7 @@ const ScrollTransitionWrapper: React.FC<ScrollTransitionWrapperProps> = ({
           
           {/* Hero Content */}
           <motion.div className="relative z-10" style={{
-          y: heroY,
-          opacity: heroOpacity
+          y: heroY
         }}>
             <motion.h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-playfair font-bold text-brand-dark dark:text-white leading-tight mb-8" initial={{
             opacity: 0,
@@ -70,10 +67,9 @@ const ScrollTransitionWrapper: React.FC<ScrollTransitionWrapperProps> = ({
             </motion.p>
           </motion.div>
 
-          {/* About Content - appears during scroll */}
+          {/* About Content - moves up during scroll */}
           <motion.div className="relative z-20" style={{
-          y: aboutY,
-          opacity: aboutOpacity
+          y: aboutY
         }}>
             <motion.h3 className="font-playfair text-3xl md:text-4xl lg:text-5xl text-foreground font-bold mb-8 text-right">
               {t("aboutGreeting")}
