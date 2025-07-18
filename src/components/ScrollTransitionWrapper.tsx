@@ -21,10 +21,10 @@ const ScrollTransitionWrapper: React.FC<ScrollTransitionWrapperProps> = ({
   });
 
   // Hero text animations - moves up during scroll
-  const heroY = useTransform(scrollYProgress, [0, 0.7], [0, -400]);
+  const heroY = useTransform(scrollYProgress, [0, 0.7], [100, -300]);
 
-  // About text animations - moves up during scroll (starts later, more time on screen)
-  const aboutY = useTransform(scrollYProgress, [0.2, 1], [300, -100]);
+  // About text animations - moves up during scroll (starts lower, more time on screen)
+  const aboutY = useTransform(scrollYProgress, [0.2, 1], [600, 0]);
 
   // Scroll button animation
   const buttonOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
