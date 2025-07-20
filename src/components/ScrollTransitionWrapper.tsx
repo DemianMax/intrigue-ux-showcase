@@ -20,12 +20,15 @@ const ScrollTransitionWrapper: React.FC<ScrollTransitionWrapperProps> = ({
     offset: ["start start", "end start"]
   });
 
-  // Hero text animations - alinhado com a foto
-  const heroY = useTransform(scrollYProgress, [0, 0.5], [100, -200]); // Começa mais baixo (100px) para alinhar com a foto
+  // Altura padrão alinhada com a foto (centro vertical)
+  const standardHeight = 0; // Altura padrão para ambos os textos se alinharem com a foto
 
-  // About text animations - para na altura da foto por mais tempo
-  const aboutY = useTransform(scrollYProgress, [0.3, 0.5, 0.75, 1], [600, 100, 100, -300]); // Para na altura da foto (100px) por mais tempo
-  const aboutOpacity = useTransform(scrollYProgress, [0.2, 0.3, 0.75, 0.85], [0, 1, 1, 0]);
+  // Hero text animations - alinhado com a foto
+  const heroY = useTransform(scrollYProgress, [0, 0.4], [standardHeight, -300]);
+
+  // About text animations - alinhado na mesma altura da foto
+  const aboutY = useTransform(scrollYProgress, [0.3, 0.5, 0.8, 1], [400, standardHeight, standardHeight, -300]);
+  const aboutOpacity = useTransform(scrollYProgress, [0.25, 0.35, 0.8, 0.9], [0, 1, 1, 0]);
 
   // Scroll button animation
   const buttonOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
