@@ -20,27 +20,16 @@ const ScrollTransitionWrapper: React.FC<ScrollTransitionWrapperProps> = ({
     offset: ["start start", "end start"]
   });
 
-  // Hero text animations - moves up and scales down during scroll
-  // Nova proposta: termina a subida e escala um pouco antes
-  const heroY = useTransform(scrollYProgress, [0, 0.5], [0, -300]); // Ajuste o Y inicial se ele já está 100
-  const heroScale = useTransform(scrollYProgress, [0, 0.5], [1, 0.6]); // Diminui o texto
+  // Hero text animations - apenas sobe, sem escala
+  const heroY = useTransform(scrollYProgress, [0, 0.5], [0, -300]); // Mantido Y inicial em 0 para não desalinhado. Ajuste -300 se precisar que suba mais/menos
 
-  // About text animations - moves up slower, stabilizes, then exits with the whole section
-  // Nova proposta:
-  // 1. Começa a subir quando o Hero já está em movimento (0.2)
-  // 2. Chega à posição 0 (topo da foto) em 0.6
-  // 3. Permanece em 0 até 0.8 (estabilização)
-  // 4. Começa a sair da tela de 0.8 a 1
-  const aboutY = useTransform(scrollYProgress, [0.2, 0.6, 0.8, 1], [600, 0, 0, -300]); // Ajuste o 600 inicial se o About já tem um Y inicial diferente
-  const aboutOpacity = useTransform(scrollYProgress, [0.1, 0.2, 0.7, 0.8], [0, 1, 1, 0]); // Fade in mais suave e depois fade out
-
-  // Image animations (from Hero to About)
-  // A imagem já tem um `initial` e `animate` no JSX, o que a faz aparecer uma vez.
-  // Se ela precisar se mover com o scroll (além da posição fixa), precisaríamos de um useTransform.
-  // Por enquanto, vamos considerar que ela está se posicionando e o texto se alinha a ela.
+  // About text animations - moves up, stabilizes at image top, then exits with the whole section
+  // Ajustado o outputRange final do aboutY para garantir que chegue mais alto/perto do topo da foto
+  const aboutY = useTransform(scrollYProgress, [0.2, 0.6, 0.8, 1], [600, -50, -50, -300]); // Ajustei o "0" para "-50" para subir um pouco mais. O 600 inicial pode ser ajustado se o About não começa fora da tela
+  const aboutOpacity = useTransform(scrollYProgress, [0.1, 0.2, 0.7, 0.8], [0, 1, 1, 0]);
 
   // Scroll button animation
-  const buttonOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]); // Manteve igual
+  const buttonOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
 
   return (
     <div ref={containerRef} className="relative min-h-[250vh]">
@@ -48,12 +37,12 @@ const ScrollTransitionWrapper: React.FC<ScrollTransitionWrapperProps> = ({
       <div className="sticky top-0 w-full h-screen flex items-center overflow-hidden px-6 md:px-12 lg:px-16 bg-[hsl(var(--hero-bg))]">
 
         {/* Left Side - Text Content */}
-        {/* Adicione h-full e flex-col para que o conteúdo preencha a altura e alinhe corretamente */}
+        {/* Mantido h-full e flex-col justify-center para alinhamento vertical */}
         <div className="flex-1 pr-8 md:pr-16 flex flex-col justify-center h-full"> 
           {/* Hero Content */}
           <motion.div className="relative z-10" style={{
             y: heroY,
-            scale: heroScale // Adicione a escala aqui
+            // REMOVIDA A PROPRIEDADE 'scale' AQUI
           }}>
             <motion.h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-playfair font-bold text-brand-dark dark:text-white leading-tight mb-8" initial={{
                 opacity: 0,
@@ -84,10 +73,9 @@ const ScrollTransitionWrapper: React.FC<ScrollTransitionWrapperProps> = ({
           </motion.div>
 
           {/* About Content - moves up during scroll */}
-          {/* Ajuste a posição inicial do About se ele estiver "vindo de muito longe" */}
           <motion.div className="relative z-20" style={{
             y: aboutY,
-            opacity: aboutOpacity // Adicione a opacidade aqui
+            opacity: aboutOpacity
           }}>
             <motion.h3 className="font-playfair text-3xl md:text-4xl lg:text-5xl text-foreground font-bold mb-8 text-right">
               {t("aboutGreeting")}
@@ -120,9 +108,6 @@ const ScrollTransitionWrapper: React.FC<ScrollTransitionWrapperProps> = ({
         </div>
 
         {/* Right Side - User Image (Fixed Position) */}
-        {/* Certifique-se de que a animação da imagem também se sincroniza.
-            Atualmente, ela usa `initial/animate`, que acontece uma vez.
-            Se quiser que ela se mova com o scroll, precisaria de `useTransform` para `x` e/ou `y` e `scale`. */}
         <div className="flex-1 flex justify-center items-center">
           <motion.div className="relative w-80 md:w-96 lg:w-[450px] xl:w-[500px]" initial={{
             opacity: 0,
