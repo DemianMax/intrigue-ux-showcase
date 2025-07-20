@@ -20,13 +20,12 @@ const ScrollTransitionWrapper: React.FC<ScrollTransitionWrapperProps> = ({
     offset: ["start start", "end start"]
   });
 
-  // Hero text animations - apenas sobe, sem escala
-  const heroY = useTransform(scrollYProgress, [0, 0.5], [0, -300]); // Mantido Y inicial em 0 para não desalinhado. Ajuste -300 se precisar que suba mais/menos
+  // Hero text animations - alinhado com a foto
+  const heroY = useTransform(scrollYProgress, [0, 0.5], [100, -200]); // Começa mais baixo (100px) para alinhar com a foto
 
-  // About text animations - moves up, stabilizes at image top, then exits with the whole section
-  // Ajustado o outputRange final do aboutY para garantir que chegue mais alto/perto do topo da foto
-  const aboutY = useTransform(scrollYProgress, [0.2, 0.6, 0.8, 1], [600, -50, -50, -300]); // Ajustei o "0" para "-50" para subir um pouco mais. O 600 inicial pode ser ajustado se o About não começa fora da tela
-  const aboutOpacity = useTransform(scrollYProgress, [0.1, 0.2, 0.7, 0.8], [0, 1, 1, 0]);
+  // About text animations - para na altura da foto por mais tempo
+  const aboutY = useTransform(scrollYProgress, [0.3, 0.5, 0.75, 1], [600, 100, 100, -300]); // Para na altura da foto (100px) por mais tempo
+  const aboutOpacity = useTransform(scrollYProgress, [0.2, 0.3, 0.75, 0.85], [0, 1, 1, 0]);
 
   // Scroll button animation
   const buttonOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
@@ -109,7 +108,7 @@ const ScrollTransitionWrapper: React.FC<ScrollTransitionWrapperProps> = ({
 
         {/* Right Side - User Image (Fixed Position) */}
         <div className="flex-1 flex justify-center items-center">
-          <motion.div className="relative w-80 md:w-96 lg:w-[450px] xl:w-[500px]" initial={{
+          <motion.div className="relative w-64 sm:w-72 md:w-80 lg:w-[400px] xl:w-[450px]" initial={{
             opacity: 0,
             x: 50,
             scale: 0.9
@@ -121,7 +120,7 @@ const ScrollTransitionWrapper: React.FC<ScrollTransitionWrapperProps> = ({
             duration: 0.8,
             delay: 0.6
           }}>
-            <img alt="Max Demian - UX Designer" src="/lovable-uploads/b5362a7a-ef6f-46c7-ac27-99fa2fcde1f1.jpg" className="w-full h-96 md:h-[450px] lg:h-[500px] xl:h-[550px] rounded-2xl shadow-2xl object-cover border-2 border-border" />
+            <img alt="Max Demian - UX Designer" src="/lovable-uploads/b5362a7a-ef6f-46c7-ac27-99fa2fcde1f1.jpg" className="w-full h-80 sm:h-96 md:h-[400px] lg:h-[450px] xl:h-[500px] rounded-2xl shadow-2xl object-cover border-2 border-border" />
             <div className="absolute -inset-4 bg-gradient-to-r from-brand-accent/20 to-orange-400/20 rounded-2xl blur-xl -z-10" />
           </motion.div>
         </div>
