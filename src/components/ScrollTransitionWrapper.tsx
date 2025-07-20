@@ -108,7 +108,7 @@ const ScrollTransitionWrapper: React.FC<ScrollTransitionWrapperProps> = ({
         </div>
 
         {/* Right Side - User Image (Fixed Position) */}
-        <div className="flex-1 flex justify-center items-center">
+        <div className="flex-1 flex justify-center items-center h-full">
           <motion.div className="relative w-64 sm:w-72 md:w-80 lg:w-[400px] xl:w-[450px]" initial={{
           opacity: 0,
           x: 50,
