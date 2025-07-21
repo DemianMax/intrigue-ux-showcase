@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ChevronDown, ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useSobre } = "@/hooks/useSobre";
+import { useSobre } from "@/hooks/useSobre";
 
 interface ScrollTransitionWrapperProps {
   onScrollNext: () => void;
