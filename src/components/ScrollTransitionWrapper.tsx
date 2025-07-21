@@ -106,3 +106,23 @@ const ScrollTransitionWrapper: React.FC<ScrollTransitionWrapperProps> = ({
            }} initial={{
             opacity: 0,
             y: 20
+           }} animate={{
+            opacity: 1,
+            y: 0
+           }} transition={{
+            duration: 0.6,
+            delay: 0.8
+           }} whileHover={{
+            scale: 1.05,
+            y: -2
+           }} whileTap={{
+            scale: 0.95
+           }}>
+          <ChevronDown size={24} className="text-brand-accent" />
+        </motion.button>
+      </div>
+    </div>
+  );
+};
+
+export default ScrollTransitionWrapper;
