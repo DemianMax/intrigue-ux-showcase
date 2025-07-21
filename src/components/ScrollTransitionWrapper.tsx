@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ChevronDown, ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useSobre } from "@/hooks/useSobre";
 
 interface ScrollTransitionWrapperProps {
   onScrollNext: () => void;
@@ -10,11 +11,11 @@ interface ScrollTransitionWrapperProps {
 const ScrollTransitionWrapper: React.FC<ScrollTransitionWrapperProps> = ({
   onScrollNext
 }) => {
-  const {
-    t
-  } = useLanguage();
-  const containerRef = useRef<HTMLHTMLDivElement>(null);
-  if (!t) return null;
+  const { t } = useLanguage();
+  const { data: sobreData, isLoading } = useSobre();
+  const containerRef = useRef<HTMLDivElement>(null);
+  
+  if (!t || isLoading) return null;
   const {
     scrollYProgress
   } = useScroll({
@@ -77,39 +78,31 @@ const ScrollTransitionWrapper: React.FC<ScrollTransitionWrapperProps> = ({
              </motion.p>
            </motion.div>
 
-           {/* About Content - moves up during scroll */}
-           <motion.div className="relative z-20" style={{
-            y: aboutY,
-            opacity: aboutOpacity
-           }}>
-             <motion.h3 className="font-playfair text-3xl lg:text-5xl text-foreground font-bold mb-8 md:text-3xl text-right">
-               {t("aboutGreeting")}
-             </motion.h3>
+            {/* About Content - moves up during scroll */}
+            <motion.div className="relative z-20" style={{
+             y: aboutY,
+             opacity: aboutOpacity
+            }}>
+              <motion.h3 className="font-playfair text-3xl lg:text-5xl text-foreground font-bold mb-8 md:text-3xl text-right">
+                {sobreData?.titulo || t("aboutGreeting")}
+              </motion.h3>
 
-             <div className="space-y-6 text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl">
-               <p>
-                 {t("aboutParagraph1")}
-                 <span className="font-bold text-brand-accent">
-                   {t("aboutParagraph1Highlight")}
-                 </span>
-                 {t("aboutParagraph1Cont")}
-               </p>
-               <p>
-                 {t("aboutParagraph2")}
-                 <span className="text-brand-accent font-medium">
-                   {t("aboutParagraph2Highlight")}
-                 </span>
-                 {t("aboutParagraph2Cont")}
-               </p>
-             </div>
+              <div className="space-y-6 text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl">
+                <p className="font-bold text-brand-accent">
+                  {sobreData?.destaque || t("aboutParagraph1")}
+                </p>
+                <p>
+                  {sobreData?.resumo || t("aboutParagraph2")}
+                </p>
+              </div>
 
-             <motion.a href="https://maxdemian.vercel.app/curriculo" target="_self" rel="noopener noreferrer" className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-brand-accent to-orange-400 text-white font-semibold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 mt-8" whileHover={{
-                y: -2
-              }}>
-               {t("aboutButton")}
-               <ArrowRight className="w-5 h-5" />
-             </motion.a>
-           </motion.div>
+              <motion.a href="https://maxdemian.vercel.app/curriculo" target="_self" rel="noopener noreferrer" className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-brand-accent to-orange-400 text-white font-semibold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 mt-8" whileHover={{
+                 y: -2
+               }}>
+                {t("aboutButton")}
+                <ArrowRight className="w-5 h-5" />
+              </motion.a>
+            </motion.div>
          </div>
 
          {/* Right Side - User Image (Fixed Position) */}
@@ -126,7 +119,7 @@ const ScrollTransitionWrapper: React.FC<ScrollTransitionWrapperProps> = ({
             duration: 0.8,
             delay: 0.6
            }}>
-             <img alt="Max Demian - UX Designer" src="/lovable-uploads/b5362a7a-ef6f-46c7-ac27-99fa2fcde1f1.jpg" className="w-full h-80 sm:h-96 md:h-[400px] lg:h-[450px] xl:h-[500px] rounded-2xl shadow-2xl object-cover border-2 border-border" />
+             <img alt="Max Demian - UX Designer" src={sobreData?.imagem_perfil || "/lovable-uploads/b5362a7a-ef6f-46c7-ac27-99fa2fcde1f1.jpg"} className="w-full h-80 sm:h-96 md:h-[400px] lg:h-[450px] xl:h-[500px] rounded-2xl shadow-2xl object-cover border-2 border-border" />
              <div className="absolute -inset-4 bg-gradient-to-r from-brand-accent/20 to-orange-400/20 rounded-2xl blur-xl -z-10" />
            </motion.div>
          </div>
