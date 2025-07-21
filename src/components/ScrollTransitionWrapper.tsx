@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ChevronDown, ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useSobre } from "@/hooks/useSobre";
+import { useSobre } = "@/hooks/useSobre";
 
 interface ScrollTransitionWrapperProps {
   onScrollNext: () => void;
@@ -15,7 +15,6 @@ const ScrollTransitionWrapper: React.FC<ScrollTransitionWrapperProps> = ({
   const { data: sobreData, isLoading } = useSobre();
   const containerRef = useRef<HTMLDivElement>(null);
   
-  // All hooks must be called before any conditional returns
   const {
     scrollYProgress
   } = useScroll({
@@ -24,17 +23,16 @@ const ScrollTransitionWrapper: React.FC<ScrollTransitionWrapperProps> = ({
   });
   
   // Hero text animations - apenas sobe
-  // Aumenta o tempo que o Hero fica em tela antes de sair completamente
   const heroY = useTransform(scrollYProgress, [0, 0.6], [150, -500]); 
 
-  // About text animations - entra em cena, estabiliza e depois sai
-  // AJUSTES CRUCIAIS AQUI:
-  // AboutY: Começa a subir de uma posição mais alta (200) e atinge o centro (0) mais cedo (0.3).
-  // [0.1, 0.3, 0.8, 1] -> Começa em 10%, chega em 30%, estabiliza até 80%, sai depois.
-  const aboutY = useTransform(scrollYProgress, [0.1, 0.3, 0.8, 1], [200, 0, 0, -600]); 
+  // About text animations - ENTRA MAIS ALTO E SE ESTABILIZA MAIS CIMA
+  // aboutY: Começa a subir de uma posição bem mais alta (0) e atinge o centro (-50) mais cedo (0.3).
+  // Isso fará com que ele apareça mais no topo da viewport.
+  // [0.1, 0.3, 0.8, 1] -> Começa em 10%, chega em 30% (posição central), estabiliza até 80%, sai depois.
+  const aboutY = useTransform(scrollYProgress, [0.1, 0.3, 0.8, 1], [0, -50, -50, -600]); 
   
   // Opacidade do About - ajustada para garantir visibilidade e sincronia
-  // [0.05, 0.25, 0.75, 0.9] -> Começa o fade-in em 5%, atinge opacidade total em 25%, fica opaco até 75%, fade-out em 90%.
+  // [0.05, 0.25, 0.75, 0.9] -> Mantive estes, pois a opacidade parece estar funcionando bem.
   const aboutOpacity = useTransform(scrollYProgress, [0.05, 0.25, 0.75, 0.9], [0, 1, 1, 0]);
 
   // Scroll button animation
@@ -43,24 +41,19 @@ const ScrollTransitionWrapper: React.FC<ScrollTransitionWrapperProps> = ({
   if (!t || isLoading) return null;
 
   return (
-    // MIN-H AJUSTADO: Aumentei para 250vh para dar mais 'fôlego' ao scroll e à transição entre as seções.
-    // Se ainda sentir que está "curto", pode aumentar para 300vh, mas isso deixará o scroll mais "lento".
+    // Mantive min-h-[250vh]. Ajuste entre 150vh e 250vh conforme sua preferência de "velocidade de scroll".
     <div ref={containerRef} className="relative min-h-[250vh]"> 
       {/* Main Container with Background Image */}
       <div 
         className="sticky top-0 w-full h-screen flex items-center overflow-hidden px-6 md:px-12 lg:px-16 bg-[hsl(var(--hero-bg))]"
         style={{
           backgroundImage: sobreData?.imagem_perfil ? `url(${sobreData.imagem_perfil})` : undefined,
-          backgroundSize: 'cover', // Tenta cobrir mantendo proporção, pode cortar bordas
-          backgroundPosition: 'center', // Centraliza a imagem
+          backgroundSize: 'cover', 
+          backgroundPosition: 'center', 
           backgroundRepeat: 'no-repeat'
-          // Se quiser que a imagem NUNCA seja cortada, mas possa deixar espaços vazios, mude para 'contain'
-          // backgroundSize: 'contain',
-          // E adicione: backgroundColor: 'suaCorDeFundo'
         }}
       >
         {/* Overlay for better text readability */}
-        {/* Mantida a opacidade sugerida anteriormente para ver melhor a imagem */}
         <div className="absolute inset-0 bg-black/30 dark:bg-black/50" />
 
         {/* Text Content - Full Width */}
