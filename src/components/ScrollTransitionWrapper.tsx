@@ -24,16 +24,17 @@ const ScrollTransitionWrapper: React.FC<ScrollTransitionWrapperProps> = ({
   });
   
   // Hero text animations - apenas sobe
-  // Ajustado o ponto final para 0.5 para liberar a tela mais cedo para o About.
-  const heroY = useTransform(scrollYProgress, [0, 0.5], [150, -500]); // 150 para começar mais baixo, -500 para subir.
+  // Ajustado o ponto final para 0.4 para liberar a tela mais cedo para o About.
+  const heroY = useTransform(scrollYProgress, [0, 0.4], [150, -500]); // 150 para começar mais baixo, -500 para subir.
 
   // About text animations - entra em cena, estabiliza e depois sai
-  // Ajustados os ranges para uma transição mais fluida e maior permanência em tela.
-  // Começa a aparecer mais cedo (0.3), se estabiliza de 0.5 a 0.8, e sai de 0.8 a 1.
-  const aboutY = useTransform(scrollYProgress, [0.3, 0.5, 0.8, 1], [600, 0, 0, -600]); 
+  // AJUSTES AQUI para garantir que o texto do About apareça e se mantenha visível por mais tempo
+  // Input Range: Começa a aparecer mais cedo (0.2), se estabiliza de 0.4 a 0.8, e sai de 0.8 a 1.
+  const aboutY = useTransform(scrollYProgress, [0.2, 0.4, 0.8, 1], [600, 0, 0, -600]); 
   
-  // Opacidade do About - entra e sai junto com o Y, mas com uma janela um pouco mais suave.
-  const aboutOpacity = useTransform(scrollYProgress, [0.25, 0.4, 0.75, 0.9], [0, 1, 1, 0]); // Ajustado os pontos de fade in/out.
+  // Opacidade do About - AJUSTES AQUI para garantir visibilidade
+  // Input Range: Começa o fade-in em 0.15, atinge opacidade total em 0.3, fica opaco até 0.75, fade-out em 0.9.
+  const aboutOpacity = useTransform(scrollYProgress, [0.15, 0.3, 0.75, 0.9], [0, 1, 1, 0]);
 
   // Scroll button animation
   const buttonOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
@@ -41,23 +42,25 @@ const ScrollTransitionWrapper: React.FC<ScrollTransitionWrapperProps> = ({
   if (!t || isLoading) return null;
 
   return (
-    <div ref={containerRef} className="relative min-h-[250vh]"> {/* Voltei para 250vh para um scroll menos "lento", ajuste se precisar */}
+    // Reduzido para 200vh para um scroll mais ágil. Ajuste entre 150vh e 250vh conforme a sua preferência.
+    <div ref={containerRef} className="relative min-h-[200vh]"> 
       {/* Main Container with Background Image */}
       <div 
         className="sticky top-0 w-full h-screen flex items-center overflow-hidden px-6 md:px-12 lg:px-16 bg-[hsl(var(--hero-bg))]"
         style={{
           backgroundImage: sobreData?.imagem_perfil ? `url(${sobreData.imagem_perfil})` : undefined,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
+          backgroundSize: 'cover', // Garante que a imagem cubra toda a área
+          backgroundPosition: 'center', // Centraliza a imagem
           backgroundRepeat: 'no-repeat'
         }}
       >
         {/* Overlay for better text readability */}
-        <div className="absolute inset-0 bg-black/40 dark:bg-black/60" />
+        {/* Reduzida a opacidade para 30% em light mode e 50% em dark mode para a imagem de fundo ficar mais visível */}
+        <div className="absolute inset-0 bg-black/30 dark:bg-black/50" />
 
         {/* Text Content - Full Width */}
         {/* max-w-4xl mx-auto garante que o texto não fique gigante e esteja centralizado */}
-        <div className="relative z-10 w-full max-w-4xl mx-auto flex flex-col justify-center h-full text-center"> {/* Removido md:text-left para manter sempre centralizado */}
+        <div className="relative z-10 w-full max-w-4xl mx-auto flex flex-col justify-center h-full text-center"> 
           {/* Hero Content */}
           <motion.div className="relative z-10" style={{
             y: heroY
@@ -67,7 +70,7 @@ const ScrollTransitionWrapper: React.FC<ScrollTransitionWrapperProps> = ({
               <span className="block text-right text-3xl">{t("heroTitlePart")}</span>
             </motion.h1>
 
-            <motion.p className="text-lg md:text-xl text-brand-dark/80 dark:text-gray-300 font-inter font-light leading-relaxed max-w-2xl mx-auto"> {/* Mantido mx-auto para centralizar */}
+            <motion.p className="text-lg md:text-xl text-brand-dark/80 dark:text-gray-300 font-inter font-light leading-relaxed max-w-2xl mx-auto"> 
               {t("heroSubtitle")}
             </motion.p>
           </motion.div>
@@ -82,7 +85,7 @@ const ScrollTransitionWrapper: React.FC<ScrollTransitionWrapperProps> = ({
               {sobreData?.titulo || t("aboutGreeting")}
             </motion.h3>
 
-            <div className="space-y-6 text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto"> {/* Mantido mx-auto para centralizar */}
+            <div className="space-y-6 text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto"> 
               <p className="font-bold text-brand-accent">
                 {sobreData?.destaque || t("aboutParagraph1")}
               </p>
