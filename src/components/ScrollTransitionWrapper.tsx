@@ -23,23 +23,17 @@ const ScrollTransitionWrapper: React.FC<ScrollTransitionWrapperProps> = ({
     offset: ["start start", "end start"]
   });
   
-  if (!t || isLoading) return null;
-
-  // Altura padrão alinhada com o centro da foto (mantido como referência)
-  const centerHeight = 0;
-
   // Hero text animations - centralizado verticalmente com a imagem
-  // AJUSTE AQUI: Aumentamos o valor inicial (primeiro 0) para descer o texto do Hero.
-  // Exemplo: se 50 for pouco, tente 100, 150, etc.
-  const heroY = useTransform(scrollYProgress, [0, 1], [150, -500]); // Deixei 50 como exemplo, teste o melhor valor.
+  const heroY = useTransform(scrollYProgress, [0, 1], [150, -500]);
 
   // About text animations - alinhado no centro e sobe mais no final
-  // AJUSTE AQUI: Aumentamos o valor negativo para o texto subir MAIS e atingir o topo da foto.
-  const aboutY = useTransform(scrollYProgress, [0.3, 0.5, 0.8, 1], [600, -50, -50, -600]); // Ajustei de 0 para -50 no meio, você pode refinar com -60, -70, etc.
+  const aboutY = useTransform(scrollYProgress, [0.3, 0.5, 0.8, 1], [600, -50, -50, -600]);
   const aboutOpacity = useTransform(scrollYProgress, [0.25, 0.35, 0.8, 0.9], [0, 1, 1, 0]);
 
   // Scroll button animation
   const buttonOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
+  
+  if (!t || isLoading) return null;
   return <div ref={containerRef} className="relative min-h-[250vh]">
         {/* Main Container with Background Image */}
         <div 
