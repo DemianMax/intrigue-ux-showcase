@@ -24,17 +24,18 @@ const ScrollTransitionWrapper: React.FC<ScrollTransitionWrapperProps> = ({
   });
   
   // Hero text animations - apenas sobe
-  // Ajustado o ponto final para 0.4 para liberar a tela mais cedo para o About.
-  const heroY = useTransform(scrollYProgress, [0, 0.4], [150, -500]); // 150 para começar mais baixo, -500 para subir.
+  // Aumenta o tempo que o Hero fica em tela antes de sair completamente
+  const heroY = useTransform(scrollYProgress, [0, 0.6], [150, -500]); 
 
   // About text animations - entra em cena, estabiliza e depois sai
-  // AJUSTES AQUI para garantir que o texto do About apareça e se mantenha visível por mais tempo
-  // Input Range: Começa a aparecer mais cedo (0.2), se estabiliza de 0.4 a 0.8, e sai de 0.8 a 1.
-  const aboutY = useTransform(scrollYProgress, [0.2, 0.4, 0.8, 1], [600, 0, 0, -600]); 
+  // AJUSTES CRUCIAIS AQUI:
+  // AboutY: Começa a subir de uma posição mais alta (200) e atinge o centro (0) mais cedo (0.3).
+  // [0.1, 0.3, 0.8, 1] -> Começa em 10%, chega em 30%, estabiliza até 80%, sai depois.
+  const aboutY = useTransform(scrollYProgress, [0.1, 0.3, 0.8, 1], [200, 0, 0, -600]); 
   
-  // Opacidade do About - AJUSTES AQUI para garantir visibilidade
-  // Input Range: Começa o fade-in em 0.15, atinge opacidade total em 0.3, fica opaco até 0.75, fade-out em 0.9.
-  const aboutOpacity = useTransform(scrollYProgress, [0.15, 0.3, 0.75, 0.9], [0, 1, 1, 0]);
+  // Opacidade do About - ajustada para garantir visibilidade e sincronia
+  // [0.05, 0.25, 0.75, 0.9] -> Começa o fade-in em 5%, atinge opacidade total em 25%, fica opaco até 75%, fade-out em 90%.
+  const aboutOpacity = useTransform(scrollYProgress, [0.05, 0.25, 0.75, 0.9], [0, 1, 1, 0]);
 
   // Scroll button animation
   const buttonOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
@@ -42,24 +43,27 @@ const ScrollTransitionWrapper: React.FC<ScrollTransitionWrapperProps> = ({
   if (!t || isLoading) return null;
 
   return (
-    // Reduzido para 200vh para um scroll mais ágil. Ajuste entre 150vh e 250vh conforme a sua preferência.
-    <div ref={containerRef} className="relative min-h-[200vh]"> 
+    // MIN-H AJUSTADO: Aumentei para 250vh para dar mais 'fôlego' ao scroll e à transição entre as seções.
+    // Se ainda sentir que está "curto", pode aumentar para 300vh, mas isso deixará o scroll mais "lento".
+    <div ref={containerRef} className="relative min-h-[250vh]"> 
       {/* Main Container with Background Image */}
       <div 
         className="sticky top-0 w-full h-screen flex items-center overflow-hidden px-6 md:px-12 lg:px-16 bg-[hsl(var(--hero-bg))]"
         style={{
           backgroundImage: sobreData?.imagem_perfil ? `url(${sobreData.imagem_perfil})` : undefined,
-          backgroundSize: 'cover', // Garante que a imagem cubra toda a área
+          backgroundSize: 'cover', // Tenta cobrir mantendo proporção, pode cortar bordas
           backgroundPosition: 'center', // Centraliza a imagem
           backgroundRepeat: 'no-repeat'
+          // Se quiser que a imagem NUNCA seja cortada, mas possa deixar espaços vazios, mude para 'contain'
+          // backgroundSize: 'contain',
+          // E adicione: backgroundColor: 'suaCorDeFundo'
         }}
       >
         {/* Overlay for better text readability */}
-        {/* Reduzida a opacidade para 30% em light mode e 50% em dark mode para a imagem de fundo ficar mais visível */}
+        {/* Mantida a opacidade sugerida anteriormente para ver melhor a imagem */}
         <div className="absolute inset-0 bg-black/30 dark:bg-black/50" />
 
         {/* Text Content - Full Width */}
-        {/* max-w-4xl mx-auto garante que o texto não fique gigante e esteja centralizado */}
         <div className="relative z-10 w-full max-w-4xl mx-auto flex flex-col justify-center h-full text-center"> 
           {/* Hero Content */}
           <motion.div className="relative z-10" style={{
@@ -76,8 +80,8 @@ const ScrollTransitionWrapper: React.FC<ScrollTransitionWrapperProps> = ({
           </motion.div>
 
           {/* About Content - moves up during scroll */}
-          {/* Adicionado mt-16 para dar um espaçamento entre hero e about no inicio */}
-          <motion.div className="relative z-20 mt-16" style={{ 
+          {/* Removido o mt-16 para que a animação de 'y' seja a única responsável pelo posicionamento. */}
+          <motion.div className="relative z-20" style={{ 
             y: aboutY,
             opacity: aboutOpacity
           }}>
