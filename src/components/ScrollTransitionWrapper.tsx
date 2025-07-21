@@ -15,13 +15,15 @@ const ScrollTransitionWrapper: React.FC<ScrollTransitionWrapperProps> = ({
   const { data: sobreData, isLoading } = useSobre();
   const containerRef = useRef<HTMLDivElement>(null);
   
-  if (!t || isLoading) return null;
+  // All hooks must be called before any conditional returns
   const {
     scrollYProgress
   } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"]
   });
+  
+  if (!t || isLoading) return null;
 
   // Altura padrão alinhada com o centro da foto (mantido como referência)
   const centerHeight = 0;
