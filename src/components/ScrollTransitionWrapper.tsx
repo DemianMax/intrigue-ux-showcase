@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ChevronDown, ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useSobre } from "@/hooks/useSobre";
 
 interface ScrollTransitionWrapperProps {
   onScrollNext: () => void;
@@ -10,11 +11,11 @@ interface ScrollTransitionWrapperProps {
 const ScrollTransitionWrapper: React.FC<ScrollTransitionWrapperProps> = ({
   onScrollNext
 }) => {
-  const {
-    t
-  } = useLanguage();
-  const containerRef = useRef<HTMLHTMLDivElement>(null);
-  if (!t) return null;
+  const { t } = useLanguage();
+  const { data: sobre, isLoading } = useSobre();
+  const containerRef = useRef<HTMLDivElement>(null);
+  
+  if (!t || isLoading) return null;
   const {
     scrollYProgress
   } = useScroll({
@@ -38,18 +39,24 @@ const ScrollTransitionWrapper: React.FC<ScrollTransitionWrapperProps> = ({
   // Scroll button animation
   const buttonOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
   return <div ref={containerRef} className="relative min-h-[250vh]">
-       {/* Main Container */}
-       <div className="sticky top-0 w-full h-screen flex items-center overflow-hidden px-6 md:px-12 lg:px-16 bg-[hsl(var(--hero-bg))]">
-
-         {/* Left Side - Text Content */}
-         {/* Mantido h-full e flex-col justify-center para alinhamento vertical */}
-         <div className="flex-1 pr-8 md:pr-16 flex flex-col justify-center h-full"> 
+       {/* Main Container with Background Image */}
+       <div 
+         className="sticky top-0 w-full h-screen flex items-center overflow-hidden px-6 md:px-12 lg:px-16 bg-cover bg-center bg-no-repeat relative"
+         style={{
+           backgroundImage: sobre?.imagem_perfil ? `url(${sobre.imagem_perfil})` : undefined
+         }}
+       >
+         {/* Background overlay */}
+         <div className="absolute inset-0 bg-black/40 dark:bg-black/60" />
+         
+         {/* Text Content */}
+         <div className="relative z-10 flex flex-col justify-center h-full max-w-4xl">
            {/* Hero Content */}
            <motion.div className="relative z-10" style={{
             y: heroY
              // REMOVIDA A PROPRIEDADE 'scale' AQUI
            }}>
-             <motion.h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-playfair font-bold text-brand-dark dark:text-white leading-tight mb-8" initial={{
+             <motion.h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-playfair font-bold text-white leading-tight mb-8" initial={{
                 opacity: 0,
                 y: 20
               }} animate={{
@@ -63,7 +70,7 @@ const ScrollTransitionWrapper: React.FC<ScrollTransitionWrapperProps> = ({
                <span className="block text-right text-3xl">{t("heroTitlePart")}</span>
              </motion.h1>
 
-             <motion.p className="text-lg md:text-xl text-brand-dark/80 dark:text-gray-300 font-inter font-light leading-relaxed max-w-2xl" initial={{
+             <motion.p className="text-lg md:text-xl text-white/90 font-inter font-light leading-relaxed max-w-2xl" initial={{
                 opacity: 0,
                 y: 20
               }} animate={{
@@ -82,11 +89,11 @@ const ScrollTransitionWrapper: React.FC<ScrollTransitionWrapperProps> = ({
             y: aboutY,
             opacity: aboutOpacity
            }}>
-             <motion.h3 className="font-playfair text-3xl lg:text-5xl text-foreground font-bold mb-8 md:text-3xl text-right">
-               {t("aboutGreeting")}
-             </motion.h3>
+              <motion.h3 className="font-playfair text-3xl lg:text-5xl text-white font-bold mb-8 md:text-3xl text-right">
+                {t("aboutGreeting")}
+              </motion.h3>
 
-             <div className="space-y-6 text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl">
+              <div className="space-y-6 text-lg md:text-xl text-white/90 leading-relaxed max-w-2xl">
                <p>
                  {t("aboutParagraph1")}
                  <span className="font-bold text-brand-accent">
@@ -110,47 +117,28 @@ const ScrollTransitionWrapper: React.FC<ScrollTransitionWrapperProps> = ({
                <ArrowRight className="w-5 h-5" />
              </motion.a>
            </motion.div>
-         </div>
+          </div>
 
-         {/* Right Side - User Image (Fixed Position) */}
-         <div className="flex-1 flex justify-center items-center h-full">
-           <motion.div className="relative w-64 sm:w-72 md:w-80 lg:w-[400px] xl:w-[450px]" initial={{
-            opacity: 0,
-            x: 50,
-            scale: 0.9
-           }} animate={{
-            opacity: 1,
-            x: 0,
-            scale: 1
-           }} transition={{
-            duration: 0.8,
-            delay: 0.6
-           }}>
-             <img alt="Max Demian - UX Designer" src="/lovable-uploads/b5362a7a-ef6f-46c7-ac27-99fa2fcde1f1.jpg" className="w-full h-80 sm:h-96 md:h-[400px] lg:h-[450px] xl:h-[500px] rounded-2xl shadow-2xl object-cover border-2 border-border" />
-             <div className="absolute -inset-4 bg-gradient-to-r from-brand-accent/20 to-orange-400/20 rounded-2xl blur-xl -z-10" />
-           </motion.div>
-         </div>
-
-         {/* Scroll Button */}
-         <motion.button onClick={onScrollNext} className="absolute bottom-12 left-1/2 -translate-x-1/2 bg-brand-accent/20 hover:bg-brand-accent/40 rounded-full p-4 backdrop-blur-sm transition-all duration-300 shadow-lg z-30" style={{
-            opacity: buttonOpacity
-           }} initial={{
-            opacity: 0,
-            y: 20
-           }} animate={{
-            opacity: 1,
-            y: 0
-           }} transition={{
-            duration: 0.6,
-            delay: 0.8
-           }} whileHover={{
-            scale: 1.05,
-            y: -2
-           }} whileTap={{
-            scale: 0.95
-           }}>
-           <ChevronDown size={24} className="text-brand-accent" />
-         </motion.button>
+          {/* Scroll Button */}
+          <motion.button onClick={onScrollNext} className="absolute bottom-12 left-1/2 -translate-x-1/2 bg-brand-accent/20 hover:bg-brand-accent/40 rounded-full p-4 backdrop-blur-sm transition-all duration-300 shadow-lg z-30" style={{
+             opacity: buttonOpacity
+            }} initial={{
+             opacity: 0,
+             y: 20
+            }} animate={{
+             opacity: 1,
+             y: 0
+            }} transition={{
+             duration: 0.6,
+             delay: 0.8
+            }} whileHover={{
+             scale: 1.05,
+             y: -2
+            }} whileTap={{
+             scale: 0.95
+            }}>
+            <ChevronDown size={24} className="text-brand-accent" />
+          </motion.button>
        </div>
      </div>;
 };
