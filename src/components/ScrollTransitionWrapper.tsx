@@ -24,10 +24,10 @@ const ScrollTransitionWrapper: React.FC<ScrollTransitionWrapperProps> = ({
   const centerHeight = 0; // Centro vertical para alinhamento com a imagem
 
   // Hero text animations - centralizado verticalmente com a imagem
-  const heroY = useTransform(scrollYProgress, [0, 0.4], [centerHeight, -300]);
+  const heroY = useTransform(scrollYProgress, [0, 1], [centerHeight, -500]);
 
   // About text animations - alinhado no centro e sobe mais no final
-  const aboutY = useTransform(scrollYProgress, [0.3, 0.5, 0.8, 1], [400, centerHeight, centerHeight, -400]);
+  const aboutY = useTransform(scrollYProgress, [0.3, 0.5, 0.8, 1], [600, centerHeight, centerHeight, -600]);
   const aboutOpacity = useTransform(scrollYProgress, [0.25, 0.35, 0.8, 0.9], [0, 1, 1, 0]);
 
   // Scroll button animation
