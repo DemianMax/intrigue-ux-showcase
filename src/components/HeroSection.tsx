@@ -17,17 +17,16 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onScrollToAbout }) => {
   }
 
   return (
-    // Linha alterada aqui: 'dark:bg-[#1E2735]' garante que a cor escura seja aplicada apenas no tema escuro.
-    // 'bg-white' é a cor padrão para o tema claro.
     <section className="min-h-[100dvh] flex flex-col justify-center items-center relative pt-32 sm:pt-40 bg-white dark:bg-[#1E2735] overflow-hidden">
       <BackgroundRain />
 
-      <div className="w-full max-w-5xl mx-auto px-6 flex flex-col items-start gap-12 z-10 relative">
+      <div className="w-full max-w-5xl mx-auto px-6 flex flex-col items-end gap-12 z-10 relative">
         <motion.h1
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-4xl sm:text-5xl md:text-7xl font-playfair font-bold text-brand-dark dark:text-white leading-tight"
+          // Ajustes: Reduzimos o tamanho base para 3xl, mantendo 4xl em sm e 7xl em md
+          className="text-3xl sm:text-4xl md:text-7xl font-playfair font-bold text-brand-dark dark:text-white leading-tight text-right"
         >
           <span className="text-brand-accent">UX</span>
           {t("heroTitlePart")}
@@ -36,7 +35,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onScrollToAbout }) => {
             animate={{ scaleX: 1 }}
             transition={{ delay: 0.6, duration: 0.6, type: "spring" }}
             style={{ transformOrigin: "left" }}
-            className="block h-1 w-16 mt-6 rounded-full bg-brand-accent"
+            className="block h-1 w-16 mt-6 rounded-full bg-brand-accent ml-auto"
           />
         </motion.h1>
 
@@ -45,9 +44,12 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onScrollToAbout }) => {
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7, duration: 0.7 }}
-            className="flex flex-col items-start"
+            className="flex flex-col items-end"
           >
-            <p className="text-xl sm:text-2xl text-brand-dark/80 dark:text-gray-300 font-inter font-light leading-relaxed">
+            <p
+              // Ajustes: Reduzimos o tamanho base para lg, mantendo xl em sm e 2xl em md
+              className="text-lg sm:text-xl md:text-2xl text-brand-dark/80 dark:text-gray-300 font-inter font-light leading-relaxed text-right"
+            >
               {t("heroSubtitle")}
             </p>
             <motion.div
@@ -55,7 +57,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onScrollToAbout }) => {
               animate={{ scaleX: 1 }}
               transition={{ delay: 1, duration: 0.6, type: "spring" }}
               style={{ transformOrigin: "left" }}
-              className="mt-6 h-1 w-32 bg-brand-accent/80 rounded-full"
+              className="mt-6 h-1 w-32 bg-brand-accent/80 rounded-full self-end"
             />
           </motion.div>
         </AnimatePresence>

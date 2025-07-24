@@ -30,6 +30,7 @@ const Index = () => {
   }, {
     component: projects && projects.length > 0 ? <div key="featured-projects" className="w-full h-full">
           <FeaturedProjectsSection projects={projects} />
+          
         </div> : <div key="no-projects" className="w-full h-full flex items-center justify-center bg-[hsl(var(--projects-bg))]">
           <div className="text-center py-20">
             <h3 className="text-2xl font-playfair text-foreground mb-4">Projetos em breve</h3>
@@ -43,7 +44,7 @@ const Index = () => {
         </div>,
     bgClass: "bg-[hsl(var(--portfolio-bg))]"
   }, {
-    component: <div key="skills" className="w-full h-full">
+    component: <div key="skills" className="w-full h-full pt-10">
           <TechnicalSkillsSection />
         </div>,
     bgClass: "bg-[hsl(var(--skills-bg))]"
