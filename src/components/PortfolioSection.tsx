@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/contexts/LanguageContext";
+
 
 type PortfolioItem = {
   id: string;
@@ -28,6 +30,7 @@ async function fetchPortfolioItems(): Promise<PortfolioItem[]> {
 }
 
 const PortfolioSection = () => {
+  const { t } = useLanguage();
   const { data: portfolioItems, isLoading, error } = useQuery({
     queryKey: ["portfolio_items"],
     queryFn: fetchPortfolioItems,
@@ -50,11 +53,11 @@ const PortfolioSection = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold font-playfair text-brand-dark dark:text-white mb-4">
-            Portfólio
+            {t('portfolioTitle')}:
           </h2>
           <div className="w-24 h-1 bg-brand-accent mx-auto rounded-full mb-6"></div>
           <p className="text-lg text-brand-dark/70 dark:text-gray-300 leading-relaxed max-w-2xl mx-auto">
-            Uma seleção dos meus trabalhos de design e projetos criativos
+              {t('portfolioSubtitle')}:
           </p>
         </motion.div>
 
@@ -117,7 +120,7 @@ const PortfolioSection = () => {
             className="px-8 py-4 rounded-full text-lg font-semibold bg-brand-accent text-white hover:bg-orange-600 transition-all shadow-lg hover:shadow-xl transform hover:scale-105 hover:-translate-y-1"
           >
             <a href={behanceLink} target="_blank" rel="noopener noreferrer">
-              Veja meu Behance
+             {t('CompletePortfolioText')}:
             </a>
           </Button>
         </motion.div>

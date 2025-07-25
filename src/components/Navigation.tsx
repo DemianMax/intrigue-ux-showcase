@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 // Remover esse import se LanguageSelector não for mais usado
@@ -7,14 +7,13 @@ import LanguageSelector from "@/components/LanguageSelector";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const NAV_ITEMS = [
-  { labelKey: "navHome", fallback: "Home", sectionIndex: 0 },       // Hero/About
-  { labelKey: "navProjects", fallback: "Projetos", sectionIndex: 1 }, // FeaturedProjects
-  { labelKey: null, fallback: "Portfólio", sectionIndex: 2 },       // PortfolioSection
-  { labelKey: null, fallback: "Skills", sectionIndex: 3 },          // TechnicalSkills
-  { labelKey: "navContact", fallback: "Contato", sectionIndex: 4 }, // Footer/Contato
-  { labelKey: null, fallback: "Currículo", href: "/curriculo" }     // Página separada
+  { labelKey: "navHome",    fallback: "Home",      sectionIndex: 0, hash: "#hero" },     // Hero/About
+  { labelKey: "navProjects",fallback: "Projetos",  sectionIndex: 1, hash: "#projects" }, // FeaturedProjects
+  { labelKey: null,         fallback: "Portfólio", sectionIndex: 2, hash: "#portfolio" },// PortfolioSection
+  { labelKey: null,         fallback: "Skills",    sectionIndex: 3, hash: "#skills" },   // TechnicalSkills
+  { labelKey: "navContact", fallback: "Contato",   sectionIndex: 4, hash: "#contact" },  // Footer/Contato
+  { labelKey: null,         fallback: "Currículo", href: "/curriculo" }                  // Página separada
 ];
-
 
 interface NavigationProps {
   onSectionScroll?: (sectionIndex: number) => void;
@@ -24,17 +23,22 @@ const Navigation: React.FC<NavigationProps> = ({ onSectionScroll }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { t } = useLanguage();
   const navigate = useNavigate();
+  const location = useLocation();
 
-const handleNavClick = (item: typeof NAV_ITEMS[0]) => {
-  if (typeof item.sectionIndex === "number" && onSectionScroll) {
-    onSectionScroll(item.sectionIndex);
-    setMobileMenuOpen(false);
-  } else if (item.href === "/curriculo") {
-    navigate("/curriculo");
-    setMobileMenuOpen(false);
-  }
-};
-
+  const handleNavClick = (item: typeof NAV_ITEMS[0]) => {
+    const isHome = location.pathname === "/";
+    if (typeof item.sectionIndex === "number") {
+      if (isHome && onSectionScroll) {
+        onSectionScroll(item.sectionIndex);
+      } else {
+        navigate("/", { state: { sectionIndex: item.sectionIndex } });
+      }
+      setMobileMenuOpen(false);
+    } else if (item.href === "/curriculo") {
+      navigate("/curriculo");
+      setMobileMenuOpen(false);
+    }
+  };
 
   const scrollToTop = () => {
     if (onSectionScroll) {
@@ -63,26 +67,26 @@ const handleNavClick = (item: typeof NAV_ITEMS[0]) => {
           <div className="flex items-center gap-4">
             {/* Menu Desktop */}
             <ul className="hidden lg:flex items-center gap-6 text-brand-dark dark:text-white font-medium text-sm">
-             {NAV_ITEMS.map((item, idx) => (
-    <li key={idx}>
-      {item.href === "/curriculo" ? (
-        <Link
-          to={item.href}
-          className="cursor-pointer hover:text-brand-accent transition"
-        >
-          {item.labelKey ? (t ? t(item.labelKey) : item.fallback) : item.fallback}
-        </Link>
-      ) : (
-        <div
-          className="cursor-pointer hover:text-brand-accent transition"
-          onClick={() => handleNavClick(item)}
-        >
-          {item.labelKey ? (t ? t(item.labelKey) : item.fallback) : item.fallback}
-        </div>
-      )}
-    </li>
-  ))}
-</ul>
+              {NAV_ITEMS.map((item, idx) => (
+                <li key={idx}>
+                  {item.href === "/curriculo" ? (
+                    <Link
+                      to={item.href}
+                      className="cursor-pointer hover:text-brand-accent transition"
+                    >
+                      {item.labelKey ? (t ? t(item.labelKey) : item.fallback) : item.fallback}
+                    </Link>
+                  ) : (
+                    <div
+                      className="cursor-pointer hover:text-brand-accent transition"
+                      onClick={() => handleNavClick(item)}
+                    >
+                      {item.labelKey ? (t ? t(item.labelKey) : item.fallback) : item.fallback}
+                    </div>
+                  )}
+                </li>
+              ))}
+            </ul>
 
             {/* Botão hamburguer mobile */}
             <button
@@ -125,12 +129,8 @@ const handleNavClick = (item: typeof NAV_ITEMS[0]) => {
           <ul className="flex flex-col gap-6 text-brand-dark dark:text-white font-medium text-lg mt-8">
             {NAV_ITEMS.map((item, idx) => (
               <li key={idx}>
-                {item.href === "/curriculo" ? (
-                  <Link
-                    to={item.href}
-                    className="cursor-pointer hover:text-brand-accent transition"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
+                {item.href ? (
+                  <Link to={item.href} className="cursor-pointer hover:text-brand-accent transition">
                     {item.labelKey ? (t ? t(item.labelKey) : item.fallback) : item.fallback}
                   </Link>
                 ) : (

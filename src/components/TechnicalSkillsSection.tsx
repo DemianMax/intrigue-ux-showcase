@@ -2,6 +2,7 @@
 import { useHabilidadesTecnicas, type HabilidadeTecnica } from "@/hooks/useHabilidadesTecnicas";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
+  
 
 function normalizeKey(str: string) {
   return str
@@ -33,12 +34,12 @@ export default function TechnicalSkillsSection() {
       <motion.div
         key={habilidade.id}
         className="flex flex-col items-center mb-4"
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 0 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.4 }}
       >
-        <div className="w-10 h-10 mb-2 flex items-center justify-center bg-gray-50 dark:bg-gray-700 rounded-lg shadow-sm">
+        <div className="w-10 h-10 mb-2 flex items-center justify-center bg-gray-50 dark:bg-gray-700 rounded-lg">
           <img
             src={getIconUrl(habilidade.icone)}
             alt={habilidade.nome}
@@ -83,7 +84,7 @@ export default function TechnicalSkillsSection() {
           </h2>
           <div className="w-16 h-1 bg-brand-accent mx-auto rounded-full mb-4"></div>
           <p className="text-base text-brand-dark/70 dark:text-gray-300 leading-relaxed max-w-xl mx-auto">
-            Ferramentas e conhecimentos que utilizo no meu dia a dia profissional
+            {t("skillsSubtitle")} 
           </p>
         </motion.div>
 

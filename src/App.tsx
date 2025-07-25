@@ -11,6 +11,8 @@ import ProjectCasePage from "./pages/ProjectCasePage";
 import Resume from "./pages/Resume";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import ScrollToTop from "@/components/ScrollToTop";
+
 
 const queryClient = new QueryClient();
 
@@ -22,6 +24,7 @@ const App = () => (
           <Toaster />
           <Sonner />
           <BrowserRouter>
+          <ScrollToTop />
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/curriculo" element={<Resume />} />

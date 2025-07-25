@@ -34,7 +34,7 @@ const FooterSection = React.forwardRef<HTMLDivElement>((props, ref) => {
           </h4>
           <div className="w-24 h-1 bg-brand-accent mx-auto rounded-full mb-6"></div>
           <p className="text-lg text-white/70 leading-relaxed max-w-2xl mx-auto">
-            Estou sempre aberto para novos projetos e oportunidades de colaboração
+            {t('footerSubTitle')}
           </p>
         </motion.div>
 
