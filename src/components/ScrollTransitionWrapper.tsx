@@ -66,30 +66,37 @@ const ScrollTransitionWrapper: React.FC<ScrollTransitionWrapperProps> = ({ onScr
 
           {/* Left Side - Text Content */}
           <div className="flex-1 w-full md:pr-16 order-2 md:order-1 flex flex-col items-center md:items-end text-center md:text-right pt-12 md:pt-0">
-            {/* Hero Content */}
-            <motion.div className="relative z-10" style={{ y: heroY }}>
-              <motion.h1
-                className="text-3xl xs:text-4xl lg:text-5xl xl:text-6xl font-playfair font-bold text-brand-dark dark:text-white leading-tight mb-4 xs:mb-8"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-              >
-                <span className="text-brand-accent block mb-2 text-3x1 l xs:text-5xl lg:text-6xl xl:text-7xl">
-                  {t("heroAccentText")}
-                </span>
-                <span className="block max-w-2xl md:max-w-xl mx-auto md:mx-0 text-center md:text-right text-2xl xs:text-3xl lg:text-3xl">
-                  {t("heroTitlePart")}
-                </span>
-              </motion.h1>
-              <motion.p
-                className="text-base xs:text-lg md:text-xl text-brand-dark/80 dark:text-gray-300 font-inter font-light leading-relaxed max-w-full xs:max-w-xl mx-auto md:mx-0"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-              >
-                {t("heroSubtitle")}
-              </motion.p>
-            </motion.div>
+            
+      {/* Hero Content */}
+      <motion.div className="relative z-10 w-full" style={{ y: heroY }}>
+      <motion.h1 className=" font-playfair font-bold text-brand-dark dark:text-white leading-tight text-3xl xs:text-4xl lg:text-5xl xl:text-6xl w-full max-w-lg md:max-w-xl lg:max-w-2xl mx-auto md:mx-0"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+      >
+        <span className="text-brand-accent text-5xl xs:text-5xl lg:text-6xl xl:text-7xl mb-2 max-w-xs xs:max-w-sm lg:max-w-md mx-auto">
+          {t("heroAccentTextLine1")}
+          <br />
+          {t("heroAccentTextLine2")}
+        </span>
+        <span className="block mt-4 mb-4 w-full max-w-md md:max-w-lg lg:max-w-xl mx-auto md:mx-0 text-center md:text-right text-2xl xs:text-3xl lg:text-3xl">
+          {t("heroTitlePartLine1")}
+          <br />
+          {t("heroTitlePartLine2")}
+        </span>
+      </motion.h1>
+      <motion.p
+        className="text-base xs:text-lg md:text-xl text-brand-dark/80 dark:text-gray-300 font-inter font-light leading-relaxed max-w-full xs:max-w-xl mx-auto md:mx-0 mt-6"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+      >
+        {t("heroSubtitleLine1")}
+        <br />
+        {t("heroSubtitleLine2")}
+      </motion.p>
+    </motion.div>
+
             
             {/* About Content */}
             <motion.div className="relative z-20 mt-16 md:mt-0" style={{ y: aboutY }}>
@@ -132,11 +139,11 @@ const ScrollTransitionWrapper: React.FC<ScrollTransitionWrapperProps> = ({ onScr
             <motion.div
               className="
                 relative
-                w-60 h-78                 // mobile: bem horizontal
-                xs:w-72 xs:h-120           // xs: pouco mais largo
-                md:w-80 md:h-240           // tablet: ainda mais largo
-                lg:w-80 lg:h-200           // desktop: quadrada
-                xl:w-96 xl:h-120           // desktop grande: quadrada
+                w-60 h-78
+                xs:w-72 xs:h-120
+                md:w-80 md:h-240
+                lg:w-80 lg:h-200
+                xl:w-96 xl:h-120
               "
               style={{ y: aboutImageY }}
               initial={{ opacity: 0, x: 0, scale: 1.1 }}
@@ -166,7 +173,6 @@ const ScrollTransitionWrapper: React.FC<ScrollTransitionWrapperProps> = ({ onScr
           >
             <ChevronDown size={24} className="text-brand-accent" />
           </motion.button>
-
         </div>
       </div>
     </div>

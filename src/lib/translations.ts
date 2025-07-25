@@ -22,9 +22,12 @@ export const translations = {
     portuguese: 'Português',
     english: 'Inglês',
 
-    heroAccentText: "Muito prazer, Max Demian",
-    heroTitlePart: 'UX Designer há 20 anos criando o invisível.',
-    heroSubtitle: 'Meu trabalho é chegar onde a resposta ainda não existe.',
+    heroAccentTextLine1: "Muito prazer,",
+    heroAccentTextLine2: 'Max Demian',
+    heroTitlePartLine1: 'UX Designer há 20 anos',
+    heroTitlePartLine2: 'criando o invisível.',
+    heroSubtitleLine1: 'Meu trabalho é chegar onde',
+    heroSubtitleLine2: 'a resposta ainda não existe.',
     ariaScrollDown: 'Role para baixo',
 
     projectsTitle: 'Projetos em Destaque',
@@ -103,9 +106,13 @@ export const translations = {
     selectLanguage: 'Change language',
     portuguese: 'Portuguese',
     english: 'English',
-    heroAccentText: "Good to meet you, Max Demian",
-    heroTitlePart: 'Ux Designer for 20 years creating the invisible.',
-    heroSubtitle: 'My job is to get where the answer does not yet exist.',
+
+    heroAccentTextLine1: "N2MU,",
+    heroAccentTextLine2: 'Max Demian',
+    heroTitlePartLine1: 'Ux Designer for 20 years ',
+    heroTitlePartLine2: 'creating the invisible.',
+    heroSubtitleLine1: 'My job is to get where',
+    heroSubtitleLine2: 'the answer does not yet exist.',
     ariaScrollDown: 'Scroll down',
 
     projectCaseStudyButton: 'View More',

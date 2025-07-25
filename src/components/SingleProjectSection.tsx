@@ -1,4 +1,3 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 import { Project } from "@/types/project";
@@ -14,14 +13,11 @@ const SingleProjectSection: React.FC<SingleProjectSectionProps> = ({ project, in
   const { t } = useLanguage();
   const navigate = useNavigate();
 
-  // Função para converter texto separado por vírgulas em array
+  // Função para converter texto separado por vírgula em array
   const parseTextToArray = (text: string | null): string[] => {
     if (!text) return [];
     return text.split(',').map(item => item.trim()).filter(item => item.length > 0);
   };
-
-  // Alternar layout: par = imagem à esquerda, ímpar = imagem à direita
-  const isImageLeft = index % 2 === 0;
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-center py-8 px-4">
@@ -30,9 +26,9 @@ const SingleProjectSection: React.FC<SingleProjectSectionProps> = ({ project, in
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className={`flex flex-col ${isImageLeft ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-8 items-center max-w-5xl w-full`}
+        className="flex flex-col lg:flex-row-reverse gap-8 items-center max-w-5xl w-full"
       >
-        {/* Imagem do projeto */}
+        {/* Imagem do projeto (sempre à direita no desktop) */}
         <motion.div className="w-full lg:w-1/2 relative">
           <div className="relative overflow-hidden rounded-xl shadow-lg">
             <img
@@ -43,11 +39,11 @@ const SingleProjectSection: React.FC<SingleProjectSectionProps> = ({ project, in
           </div>
         </motion.div>
 
-        {/* Conteúdo do projeto */}
+        {/* Conteúdo do projeto (sempre à esquerda no desktop) */}
         <div className="w-full lg:w-1/2 space-y-6">
           <div className="space-y-3">
             <motion.h4 
-              initial={{ opacity: 0, x: isImageLeft ? 20 : -20 }}
+              initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -55,9 +51,8 @@ const SingleProjectSection: React.FC<SingleProjectSectionProps> = ({ project, in
             >
               {project.title}
             </motion.h4>
-            
             <motion.div 
-              initial={{ opacity: 0, x: isImageLeft ? 20 : -20 }}
+              initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
@@ -68,7 +63,7 @@ const SingleProjectSection: React.FC<SingleProjectSectionProps> = ({ project, in
           </div>
 
           <motion.div 
-            initial={{ opacity: 0, x: isImageLeft ? 20 : -20 }}
+            initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
@@ -78,7 +73,6 @@ const SingleProjectSection: React.FC<SingleProjectSectionProps> = ({ project, in
               <h5 className="font-semibold text-brand-dark mb-2">{t('projectProblem')}:</h5>
               <p className="leading-relaxed">{project.problem}</p>
             </div>
-            
             <div>
               <h5 className="font-semibold text-brand-dark mb-2">{t('projectSolution')}:</h5>
               <p className="leading-relaxed">{project.solution}</p>
@@ -86,7 +80,7 @@ const SingleProjectSection: React.FC<SingleProjectSectionProps> = ({ project, in
           </motion.div>
           
           <motion.div 
-            initial={{ opacity: 0, x: isImageLeft ? 20 : -20 }}
+            initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.5 }}
@@ -103,7 +97,7 @@ const SingleProjectSection: React.FC<SingleProjectSectionProps> = ({ project, in
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: isImageLeft ? 20 : -20 }}
+            initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.6 }}

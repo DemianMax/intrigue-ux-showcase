@@ -92,17 +92,35 @@ const ProjectCasePage = () => {
           </button>
         </div>
 
-        <div className="max-w-4xl w-full mx-auto">
-          <h2 className="text-4xl sm:text-5xl font-playfair text-brand-dark dark:text-white font-bold mb-3 text-left">
-            {project.title}
-          </h2>
-          <div className="text-lg text-brand-accent font-inter font-semibold mb-1 text-left">
-            {project.role}
+        {/* Bloco principal: Imagem à direita e texto à esquerda (desktop) */}
+        <div className="max-w-4xl w-full mx-auto mb-10">
+          <div className="flex flex-col lg:flex-row-reverse items-center gap-8">
+            {/* Imagem do projeto: à direita no desktop */}
+            <div className="w-full lg:w-1/2 flex justify-center">
+              <img
+                src={project.image}
+                alt={`Projeto ${project.title}`}
+                className="w-full max-w-xs h-auto object-cover rounded-2xl border border-border shadow-lg"
+                style={{ minWidth: 220, maxHeight: 340 }}
+              />
+            </div>
+            {/* Texto do projeto: à esquerda */}
+            <div className="w-full lg:w-1/2">
+              <h2 className="text-4xl sm:text-5xl font-playfair text-brand-dark dark:text-white font-bold mb-3 text-left">
+                {project.title}
+              </h2>
+              <div className="text-lg text-brand-accent font-inter font-semibold mb-1 text-left">
+                {project.role}
+              </div>
+              <div className="text-xl text-brand-dark/70 dark:text-gray-300 font-inter mb-8 text-left">
+                {project.solution}
+              </div>
+            </div>
           </div>
-          <div className="text-xl text-brand-dark/70 dark:text-gray-300 font-inter mb-8 text-left">
-            {project.solution}
-          </div>
+        </div>
 
+        {/* Demais seções da página seguem como estavam */}
+        <div className="max-w-4xl w-full mx-auto">
           {project.challenge && (
             <section className="mb-12">
               <h3 className="text-2xl font-playfair text-brand-dark dark:text-white mb-2 text-left">
@@ -117,53 +135,53 @@ const ProjectCasePage = () => {
           {(project.process_images_data ? 
            (Array.isArray(project.process_images_data) ? project.process_images_data.length : 0) : 
            processImages.length) > 0 && (
-  <section className="mb-12">
-    <h3 className="text-2xl font-playfair text-brand-dark mb-5 text-left">
-      {t("caseStudyProcess")}
-    </h3>
-    <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-      {project.process_images_data && Array.isArray(project.process_images_data) ? (
-        project.process_images_data.map((item, index) => (
-          <div
-            key={`process-jsonb-${index}`}
-            className="bg-card rounded-xl shadow-md p-4 flex flex-col items-center"
-          >
-            <img
-              src={item.url}
-              alt={item.caption ?? `Process image ${index + 1}`}
-              className="w-full h-40 object-cover rounded-md mb-3 border border-border"
-              onError={(e) => {
-                e.currentTarget.style.display = "none";
-              }}
-            />
-            <div className="text-sm text-brand-dark/80 font-inter text-center">
-              {item.caption ?? `Processo ${index + 1}`}
-            </div>
-          </div>
-        ))
-      ) : (
-        processImages.map((img, index) => (
-          <div
-            key={`process-legacy-${index}`}
-            className="bg-card rounded-xl shadow-md p-4 flex flex-col items-center"
-          >
-            <img
-              src={img}
-              alt={processLegends[index] ?? `Process image ${index + 1}`}
-              className="w-full h-40 object-cover rounded-md mb-3 border border-border"
-              onError={(e) => {
-                e.currentTarget.style.display = "none";
-              }}
-            />
-            <div className="text-sm text-brand-dark/80 font-inter text-center">
-              {processLegends[index] ?? `Processo ${index + 1}`}
-            </div>
-          </div>
-        ))
-      )}
-    </div>
-  </section>
-)}
+            <section className="mb-12">
+              <h3 className="text-2xl font-playfair text-brand-dark mb-5 text-left">
+                {t("caseStudyProcess")}
+              </h3>
+              <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                {project.process_images_data && Array.isArray(project.process_images_data) ? (
+                  project.process_images_data.map((item, index) => (
+                    <div
+                      key={`process-jsonb-${index}`}
+                      className="bg-card rounded-xl shadow-md p-4 flex flex-col items-center"
+                    >
+                      <img
+                        src={item.url}
+                        alt={item.caption ?? `Process image ${index + 1}`}
+                        className="w-full h-40 object-cover rounded-md mb-3 border border-border"
+                        onError={(e) => {
+                          e.currentTarget.style.display = "none";
+                        }}
+                      />
+                      <div className="text-sm text-brand-dark/80 font-inter text-center">
+                        {item.caption ?? `Processo ${index + 1}`}
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  processImages.map((img, index) => (
+                    <div
+                      key={`process-legacy-${index}`}
+                      className="bg-card rounded-xl shadow-md p-4 flex flex-col items-center"
+                    >
+                      <img
+                        src={img}
+                        alt={processLegends[index] ?? `Process image ${index + 1}`}
+                        className="w-full h-40 object-cover rounded-md mb-3 border border-border"
+                        onError={(e) => {
+                          e.currentTarget.style.display = "none";
+                        }}
+                      />
+                      <div className="text-sm text-brand-dark/80 font-inter text-center">
+                        {processLegends[index] ?? `Processo ${index + 1}`}
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
+            </section>
+          )}
 
           {solutionImages.length > 0 && (
             <section className="mb-12">
