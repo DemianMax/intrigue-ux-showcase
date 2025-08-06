@@ -48,7 +48,7 @@ const FeaturedProjectsSection: React.FC<FeaturedProjectsSectionProps> = ({ proje
           >
             <div className="flex flex-col lg:flex-row">
               {/* Conteúdo */}
-              <div className="xs: text-center sm:text-left w-full lg:w-1/2 p-6 space-y-4">
+              <div className="text-center sm:text-left w-full lg:w-1/2 p-6 space-y-4 lg:order-1">
                 <div className="space-y-2">
                   <h4 className="lg:text-right text-2xl font-playfair font-bold text-brand-dark dark:text-white">
                     {project.title}
@@ -96,7 +96,7 @@ const FeaturedProjectsSection: React.FC<FeaturedProjectsSectionProps> = ({ proje
               </div>
 
               {/* Imagem */}
-              <div className="w-full lg:w-1/2 relative overflow-hidden">
+              <div className="w-full lg:w-1/2 relative overflow-hidden lg:order-2">
                 <img
                   src={project.image}
                   alt={`Projeto ${project.title}`}

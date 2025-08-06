@@ -6,7 +6,15 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import LanguageSelector from "@/components/LanguageSelector";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-const NAV_ITEMS = [
+type NavItem = {
+  labelKey: string | null;
+  fallback: string;
+  sectionIndex?: number;
+  hash?: string;
+  href?: string;
+};
+
+const NAV_ITEMS: NavItem[] = [
   { labelKey: "navHome",    fallback: "Home",      sectionIndex: 0, hash: "#hero" },     // Hero/About
   { labelKey: "navProjects",fallback: "Projetos",  sectionIndex: 1, hash: "#projects" }, // FeaturedProjects
   { labelKey: null,         fallback: "Portfólio", sectionIndex: 2, hash: "#portfolio" },// PortfolioSection
@@ -25,7 +33,7 @@ const Navigation: React.FC<NavigationProps> = ({ onSectionScroll }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const handleNavClick = (item: typeof NAV_ITEMS[0]) => {
+  const handleNavClick = (item: NavItem) => {
     const isHome = location.pathname === "/";
     if (typeof item.sectionIndex === "number") {
       if (isHome && onSectionScroll) {
@@ -129,7 +137,7 @@ const Navigation: React.FC<NavigationProps> = ({ onSectionScroll }) => {
           <ul className="flex flex-col gap-6 text-brand-dark dark:text-white font-medium text-lg mt-8">
             {NAV_ITEMS.map((item, idx) => (
               <li key={idx}>
-                {item.href ? (
+                {item.href === "/curriculo" ? (
                   <Link to={item.href} className="cursor-pointer hover:text-brand-accent transition">
                     {item.labelKey ? (t ? t(item.labelKey) : item.fallback) : item.fallback}
                   </Link>
