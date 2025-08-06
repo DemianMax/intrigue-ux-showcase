@@ -20,6 +20,7 @@ const NAV_ITEMS: NavItem[] = [
   { labelKey: null,         fallback: "Portfólio", sectionIndex: 2, hash: "#portfolio" },// PortfolioSection
   { labelKey: null,         fallback: "Skills",    sectionIndex: 3, hash: "#skills" },   // TechnicalSkills
   { labelKey: "navContact", fallback: "Contato",   sectionIndex: 4, hash: "#contact" },  // Footer/Contato
+  { labelKey: null,         fallback: "Playground", href: "/playground" },               // Página Playground
   { labelKey: null,         fallback: "Currículo", href: "/curriculo" }                  // Página separada
 ];
 
@@ -42,8 +43,8 @@ const Navigation: React.FC<NavigationProps> = ({ onSectionScroll }) => {
         navigate("/", { state: { sectionIndex: item.sectionIndex } });
       }
       setMobileMenuOpen(false);
-    } else if (item.href === "/curriculo") {
-      navigate("/curriculo");
+    } else if (item.href) {
+      navigate(item.href);
       setMobileMenuOpen(false);
     }
   };
@@ -77,7 +78,7 @@ const Navigation: React.FC<NavigationProps> = ({ onSectionScroll }) => {
             <ul className="hidden lg:flex items-center gap-6 text-brand-dark dark:text-white font-medium text-sm">
               {NAV_ITEMS.map((item, idx) => (
                 <li key={idx}>
-                  {item.href === "/curriculo" ? (
+                  {item.href ? (
                     <Link
                       to={item.href}
                       className="cursor-pointer hover:text-brand-accent transition"
@@ -137,7 +138,7 @@ const Navigation: React.FC<NavigationProps> = ({ onSectionScroll }) => {
           <ul className="flex flex-col gap-6 text-brand-dark dark:text-white font-medium text-lg mt-8">
             {NAV_ITEMS.map((item, idx) => (
               <li key={idx}>
-                {item.href === "/curriculo" ? (
+                {item.href ? (
                   <Link to={item.href} className="cursor-pointer hover:text-brand-accent transition">
                     {item.labelKey ? (t ? t(item.labelKey) : item.fallback) : item.fallback}
                   </Link>

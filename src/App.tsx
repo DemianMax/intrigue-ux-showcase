@@ -9,6 +9,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import ProjectCasePage from "./pages/ProjectCasePage";
 import Resume from "./pages/Resume";
+import Playground from "./pages/Playground";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import ScrollToTop from "@/components/ScrollToTop";
@@ -28,6 +29,7 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/curriculo" element={<Resume />} />
+              <Route path="/playground" element={<Playground />} />
               <Route path="/projeto/:projectId" element={<ProjectCasePage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
