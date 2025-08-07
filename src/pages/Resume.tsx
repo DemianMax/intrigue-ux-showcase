@@ -30,7 +30,7 @@ const Resume = () => {
         <button onClick={() => irParaSessao(4)} className="underline text-brand-accent">{t("navContact")}</button>
       </nav>
 
-      <main className="max-w-4xl mx-auto p-6 md:p-10 pt-24">
+      <main className="max-w-7xl mx-auto p-6 md:p-4 pt-24">
         <div className="flex justify-between items-center mb-8">
           <Link to="/">
             <Button variant="ghost">

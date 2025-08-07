@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Project } from "@/types/project";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useNavigate } from "react-router-dom";
+import { useBreakpoint } from "@/hooks/useBreakpoint";
 
 interface FeaturedProjectsSectionProps {
   projects: Project[];
@@ -12,10 +13,12 @@ const FeaturedProjectsSection: React.FC<FeaturedProjectsSectionProps> = ({ proje
   const { t } = useLanguage();
   const navigate = useNavigate();
   const containerRef = useRef<HTMLDivElement>(null);
-  
+  const breakpoint = useBreakpoint();
+  const isMobile = breakpoint === "xs" || breakpoint === "sm";
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start end", "end start"]
+    offset: ["start end", "end start"],
   });
 
   const parseTextToArray = (text: string | null): string[] => {
@@ -24,20 +27,20 @@ const FeaturedProjectsSection: React.FC<FeaturedProjectsSectionProps> = ({ proje
   };
 
   return (
-    <div ref={containerRef} className="relative w-full min-h-[400vh] bg-gray-50 dark:bg-gray-800">
+    <div ref={containerRef} className="relative w-full min-h-[300vh] bg-slate-400 dark:bg-gray-800">
       {/* Título da seção - fixo no topo */}
-      <div className="sticky top-0 z-10 bg-gray-50 dark:bg-gray-800 py-20 px-6">
+      <div className="sticky top-6 z-3 bg-slate-400 dark:bg-gray-800 py-20 px-12">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 0 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.1 }}
           className="text-center max-w-4xl mx-auto"
         >
           <h2 className="text-4xl md:text-5xl font-playfair font-bold text-brand-dark dark:text-white mb-4">
             {t("projectsTitle")}
           </h2>
-          <div className="w-24 h-1 bg-brand-accent mx-auto rounded-full mb-6"></div>
+         {/*<div className="w-34 h-1 bg-brand-accent mx-auto rounded-full mb-6"></div>*/}
           <p className="text-lg text-brand-dark/70 dark:text-gray-300 leading-relaxed">
             {t("projectsSubTitle")}
           </p>
@@ -48,11 +51,14 @@ const FeaturedProjectsSection: React.FC<FeaturedProjectsSectionProps> = ({ proje
       <div className="sticky top-0 h-screen overflow-hidden">
         {projects.slice(0, 3).map((project, index) => {
           const start = index / 3;
-          const end = (index + 1) / 3;
-          
-          const y = useTransform(scrollYProgress, [start, end], ["100vh", "0vh"]);
-          const scale = useTransform(scrollYProgress, [start, end], [0.8, 1]);
-          const opacity = useTransform(scrollYProgress, [start, end], [0, 1]);
+          const total = 4;
+          const end = (index + 1) / total;
+          const yInitial = isMobile ? "120vh" : "90vh";
+          const yFinal = isMobile ? "22vh" : "10vh";
+
+          const y = useTransform(scrollYProgress, [start, end], [yInitial, yFinal]);
+          const scale = useTransform(scrollYProgress, [start, end], [1, 1]);
+          const opacity = useTransform(scrollYProgress, [start, end], [1, 1]);
 
           return (
             <motion.div
@@ -60,8 +66,10 @@ const FeaturedProjectsSection: React.FC<FeaturedProjectsSectionProps> = ({ proje
               style={{ y, scale, opacity }}
               className="absolute inset-0 flex items-center justify-center px-6"
             >
-              <div className="w-full max-w-7xl bg-white dark:bg-gray-900 rounded-2xl shadow-2xl overflow-hidden">
-                <div className="flex flex-col lg:flex-row min-h-[500px]">
+              <div className="w-full max-w-7xl bg-white dark:bg-gray-900 rounded-2xl  overflow-hidden">
+
+                <div className="flex flex-col xs:min-h-[100px] sm:flex-row min-h-[200px] 2xl:min-h-[500px]">
+
                   {/* Conteúdo - Esquerda */}
                   <div className="w-full lg:w-1/2 p-8 lg:p-12 flex flex-col justify-center space-y-6">
                     <div className="space-y-3">
@@ -80,7 +88,7 @@ const FeaturedProjectsSection: React.FC<FeaturedProjectsSectionProps> = ({ proje
                         </h5>
                         <p className="leading-relaxed">{project.problem}</p>
                       </div>
-                      
+
                       <div>
                         <h5 className="font-semibold text-brand-dark dark:text-white mb-3 text-sm uppercase tracking-wide">
                           {t('projectSolution')}:
@@ -88,7 +96,7 @@ const FeaturedProjectsSection: React.FC<FeaturedProjectsSectionProps> = ({ proje
                         <p className="leading-relaxed">{project.solution}</p>
                       </div>
                     </div>
-                    
+
                     <div className="flex flex-wrap gap-2 pt-2">
                       {parseTextToArray(project.hashtags_text).slice(0, 3).map((tag, idx) => (
                         <span
@@ -110,15 +118,16 @@ const FeaturedProjectsSection: React.FC<FeaturedProjectsSectionProps> = ({ proje
                     </div>
                   </div>
 
-                  {/* Imagem - Direita */}
-                  <div className="w-full lg:w-1/2 relative overflow-hidden">
-                    <img
-                      src={project.image}
-                      alt={`Projeto ${project.title}`}
-                      className="w-full h-64 lg:h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-l from-transparent to-black/10"></div>
-                  </div>
+            {/* Imagem - direita com tamanho responsivo */}
+              <div className="w-full lg:w-1/2 relative overflow-hidden flex items-center justify-center">
+                <img
+                  src={project.image}
+                  alt={`Projeto ${project.title}`}
+                  className="w-full  object-contain"
+                />
+                <div className="absolute inset-0 bg-gradient-to-l from-transparent to-black/10"></div>
+              </div>
+
                 </div>
               </div>
             </motion.div>

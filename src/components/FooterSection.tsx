@@ -51,8 +51,8 @@ const FooterSection = React.forwardRef<HTMLDivElement>((props, ref) => {
             whileHover={{ scale: 1.05 }}
           >
             <Mail className="size-5" />
-            <a href="mailto:max3demian@gmail.com" className="hover:underline">
-              max3demian@gmail.com
+            <a href="mailto:maxdemian.lab@gmail.com" className="hover:underline">
+              maxdemian.lab@gmail.com
             </a>
           </motion.div>
 
