@@ -41,9 +41,9 @@ const PortfolioSection = () => {
   return (
     <section
       id="portfolio"
-      className="w-full flex flex-col items-center bg-white dark:bg-gray-900 py-20 px-6"
+      className="w-full flex flex-col items-center bg-white dark:bg-gray-900 py-20 px-10"
     >
-      <div className="max-w-6xl mx-auto w-full">
+      <div className="max-w-1xl md:max-w-1xl lg:max-w-6xl mx-auto w-full">
         {/* Título da seção */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -52,12 +52,12 @@ const PortfolioSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold font-playfair text-brand-dark dark:text-white mb-4">
-            {t('portfolioTitle')}:
-          </h2>
-          <div className="w-24 h-1 bg-brand-accent mx-auto rounded-full mb-6"></div>
-          <p className="text-lg text-brand-dark/70 dark:text-gray-300 leading-relaxed max-w-2xl mx-auto">
-              {t('portfolioSubtitle')}:
+  <h2 className="text-4xl font-bold font-playfair text-brand-dark dark:text-white mb-4 md:mb-0 md:max-w-[300px] break-words">
+    {t('portfolioTitle')}:
+  </h2>
+  <div className="w-24 h-1 bg-brand-accent mx-auto md:mx-0 rounded-full mb-6 md:mb-0"></div>
+  <p className="text-lg text-brand-dark/70 dark:text-gray-300 leading-relaxed max-w-2xl mx-auto md:mx-0 max-w-[400px] break-words">
+    {t('portfolioSubtitle')}:
           </p>
         </motion.div>
 

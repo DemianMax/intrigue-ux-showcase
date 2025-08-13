@@ -2,8 +2,13 @@ export const translations = {
   pt: {
     navHome: 'Início',
     navAbout: 'Sobre',
-    navProjects: 'Projetos',
+    navProjects: 'Destaques',
     navContact: 'Contato',
+    navPortifolio: 'Portfólio',
+    navSkills: 'Habilidades',
+    navPlayground: 'Playground',
+    navResume: 'Currículo',
+    navCurriculum: 'Currículo',
     openMenu: 'Abrir menu',
 
     aboutGreeting: 'Designer de interação antes mesmo do “UX” virar assunto pelas bandas de cá.',
@@ -15,6 +20,7 @@ export const translations = {
     aboutParagraph2Cont: 'aprimorando meus projetos de UX.',
 
     aboutButton: 'Veja meu currículo',
+    aboutBtnPlayground: 'Veja meu Playground',
     footerTitle: 'Vamos conversar!',
     footerRights: 'Todos os direitos reservados.',
     footerSubTitle: 'Estou sempre aberto para novos projetos e oportunidades de colaboração',
@@ -86,8 +92,14 @@ export const translations = {
   en: {
     navHome: 'Home',
     navAbout: 'About',
-    navProjects: 'Projects',
+    navProjects: 'Featured',
     navContact: 'Contact',
+    navPortifolio: 'Portfolio',
+    navSkills: 'Skills',
+    navPlayground: 'Playground',
+    navResume: 'Resume',
+    navCurriculum: 'Curriculum',
+
     openMenu: 'Open menu',
 
     aboutGreeting: "Designer of interaction even before 'UX' became a topic around here.",
@@ -98,6 +110,7 @@ export const translations = {
     aboutParagraph2Highlight: 'make the complex visibly simple',
     aboutParagraph2Cont: ', enhancing my UX projects.',
     aboutButton: 'See my resume',
+    aboutBtnPlayground: 'See my Playground',
 
     footerTitle: "Let's talk!",
     footerSubTitle: 'I am always open to new projects and collaboration opportunities',

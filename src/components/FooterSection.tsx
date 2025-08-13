@@ -93,7 +93,7 @@ const FooterSection = React.forwardRef<HTMLDivElement>((props, ref) => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="pt-8 border-t border-white/10"
+          className="pt-9 border-t border-white/10"
         >
           <p className="text-sm text-white/50 text-center">
             &copy; {new Date().getFullYear()} Max Demian. {t('footerRights')}

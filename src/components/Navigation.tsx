@@ -17,11 +17,11 @@ type NavItem = {
 const NAV_ITEMS: NavItem[] = [
   { labelKey: "navHome",    fallback: "Home",      sectionIndex: 0, hash: "#hero" },     // Hero/About
   { labelKey: "navProjects",fallback: "Projetos",  sectionIndex: 1, hash: "#projects" }, // FeaturedProjects
-  { labelKey: null,         fallback: "Portfólio", sectionIndex: 2, hash: "#portfolio" },// PortfolioSection
-  { labelKey: null,         fallback: "Skills",    sectionIndex: 3, hash: "#skills" },   // TechnicalSkills
-  { labelKey: "navContact", fallback: "Contato",   sectionIndex: 4, hash: "#contact" },  // Footer/Contato
-  { labelKey: null,         fallback: "Playground", href: "/playground" },               // Página Playground
-  { labelKey: null,         fallback: "Currículo", href: "/curriculo" }                  // Página separada
+  { labelKey: "navPortifolio",fallback: "Portfólio", sectionIndex: 2, hash: "#portfolio" },// PortfolioSection
+  { labelKey: "navSkills",         fallback: "Skills",    sectionIndex: 3, hash: "#skills" },   // TechnicalSkills
+  { labelKey: "navPlayground",         fallback: "Playground", href: "/playground" },               // Página Playground
+  { labelKey: "navCurriculum",         fallback: "Currículo", href: "/curriculo" },                  // Página separada
+   { labelKey: "navContact", fallback: "Contato",   sectionIndex: 4, hash: "#contact" }  // Footer/Contato
 ];
 
 interface NavigationProps {
@@ -60,7 +60,7 @@ const Navigation: React.FC<NavigationProps> = ({ onSectionScroll }) => {
 
   return (
     <nav
-      className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border shadow-sm"
+      className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm  shadow-sm"
       role="navigation"
       aria-label="Main Navigation"
     >
