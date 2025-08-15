@@ -16,6 +16,17 @@ export interface Project {
   next_steps?: string;
   image?: string;
   created_at?: string;
-  // Corrigindo o tipo para corresponder ao banco de dados
+  // Novos campos baseados no wireframe
+  topPageimg?: string;
   process_images_data?: any; // Json type from Supabase
+  prototyping_title?: string;
+  prototyping_text?: string;
+  prototyping_images?: string;
+  final_solution_title?: string;
+  final_solution_text?: string;
+  final_solution_video?: string;
+  final_solution_images?: string;
+  learning_conclusion_title?: string;
+  learning_conclusion_text?: string;
+  additional_images_grid?: string;
 }
