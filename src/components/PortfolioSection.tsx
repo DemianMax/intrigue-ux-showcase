@@ -39,93 +39,97 @@ const PortfolioSection = () => {
   const previewItems = portfolioItems ? portfolioItems.slice(0, 6) : [];
 
   return (
-    <section
-      id="portfolio"
-      className="w-full flex flex-col items-center bg-white dark:bg-gray-900 py-20 px-10"
+  <section
+  id="portfolio"
+  className="w-full flex flex-col items-center bg-white dark:bg-gray-900 py-20 px-6"
+>
+  <div className="max-w-7xl mx-auto w-full flex flex-col">
+
+    {/* Título da seção */}
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+      className="flex flex-col md:flex-row items-start md:items-center justify-start gap-4 mb-16"
     >
-      <div className="max-w-1xl md:max-w-1xl lg:max-w-6xl mx-auto w-full">
-        {/* Título da seção */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-  <h2 className="text-4xl font-bold font-playfair text-brand-dark dark:text-white mb-4 md:mb-0 md:max-w-[300px] break-words">
-    {t('portfolioTitle')}:
-  </h2>
-  <div className="w-24 h-1 bg-brand-accent mx-auto md:mx-0 rounded-full mb-6 md:mb-0"></div>
-  <p className="text-lg text-brand-dark/70 dark:text-gray-300 leading-relaxed max-w-2xl mx-auto md:mx-0 max-w-[400px] break-words">
-    {t('portfolioSubtitle')}:
-          </p>
-        </motion.div>
+      <h2 className="text-5xl font-bold font-playfair text-brand-dark dark:text-white whitespace-nowrap">
+        {t('portfolioTitle')}
+      </h2>
+      <p className="text-lg text-brand-dark/70 dark:text-gray-300 leading-relaxed whitespace-normal">
+        {t('portfolioSubtitle')}:
+      </p>
+    </motion.div>
 
-        {isLoading ? (
-          <div className="w-full py-20 flex justify-center items-center">
-            <span className="text-muted-foreground text-lg">Carregando...</span>
-          </div>
-        ) : error ? (
-          <div className="w-full py-20 flex justify-center items-center">
-            <span className="text-destructive">Falha ao carregar portfólio.</span>
-          </div>
-        ) : (
-          <motion.div 
-            className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6 w-full mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            {previewItems && previewItems.length > 0 ? (
-              previewItems.map((item, index) => (
-                <motion.a
-                  key={item.id}
-                  href={item.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block rounded-xl overflow-hidden shadow-lg group hover:shadow-xl transition-all duration-300"
-                  aria-label={item.alt}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
-                  whileHover={{ y: -4 }}
-                >
-                  <img
-                    src={item.img}
-                    alt={item.alt}
-                    className="w-full h-40 object-cover group-hover:scale-110 transition-transform duration-300"
-                    loading="lazy"
-                  />
-                </motion.a>
-              ))
-            ) : (
-              <div className="col-span-full text-center text-muted-foreground py-8">
-                Nenhum item de portfólio cadastrado.
-              </div>
-            )}
-          </motion.div>
-        )}
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-center"
-        >
-          <Button
-            asChild
-            className="px-8 py-4 rounded-full text-lg font-semibold bg-brand-accent text-white hover:bg-orange-600 transition-all shadow-lg hover:shadow-xl transform hover:scale-105 hover:-translate-y-1"
-          >
-            <a href={behanceLink} target="_blank" rel="noopener noreferrer">
-             {t('CompletePortfolioText')}:
-            </a>
-          </Button>
-        </motion.div>
+    {/* Grade de itens */}
+    {isLoading ? (
+      <div className="w-full py-20 flex justify-center items-center">
+        <span className="text-muted-foreground text-lg">Carregando...</span>
       </div>
-    </section>
+    ) : error ? (
+      <div className="w-full py-20 flex justify-center items-center">
+        <span className="text-destructive">Falha ao carregar portfólio.</span>
+      </div>
+    ) : (
+      <motion.div 
+        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6 w-full mb-12"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      >
+        {previewItems && previewItems.length > 0 ? (
+          previewItems.map((item, index) => (
+            <motion.a
+              key={item.id}
+              href={item.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block rounded-xl overflow-hidden shadow-lg group hover:shadow-xl transition-all duration-300"
+              aria-label={item.alt}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
+              whileHover={{ y: -4 }}
+            >
+              <img
+                src={item.img}
+                alt={item.alt}
+                className="w-full h-40 object-cover group-hover:scale-110 transition-transform duration-300"
+                loading="lazy"
+              />
+            </motion.a>
+          ))
+        ) : (
+          <div className="col-span-full text-center text-muted-foreground py-8">
+            Nenhum item de portfólio cadastrado.
+          </div>
+        )}
+      </motion.div>
+    )}
+
+    {/* Botão */}
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay: 0.4 }}
+      className="text-center"
+    >
+      <Button
+        asChild
+        className="px-8 py-4 rounded-full text-lg font-semibold bg-brand-accent text-white hover:bg-orange-600 transition-all shadow-lg hover:shadow-xl transform hover:scale-105 hover:-translate-y-1"
+      >
+        <a href={behanceLink} target="_blank" rel="noopener noreferrer">
+          {t('CompletePortfolioText')}:
+        </a>
+      </Button>
+    </motion.div>
+
+  </div>
+</section>
+
   );
 };
 

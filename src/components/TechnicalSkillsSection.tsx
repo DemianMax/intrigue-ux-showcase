@@ -37,11 +37,11 @@ export default function TechnicalSkillsSection() {
         viewport={{ once: true }}
         transition={{ duration: 0.4 }}
       >
-        <div className="w-10 h-10 mb-2 flex items-center justify-center bg-gray-50 dark:bg-gray-700 rounded-lg">
+        <div className="w-10 h-10 mb-2 flex items-center justify-center ">
           <img
             src={getIconUrl(habilidade.icone)}
             alt={habilidade.nome}
-            className="w-6 h-6"
+            className="w-8 h-8"
             style={{
               filter:
                 "brightness(0) saturate(100%) invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(97%)",
@@ -60,7 +60,7 @@ export default function TechnicalSkillsSection() {
 
   function renderLoadingSkeletons(count: number) {
     return Array.from({ length: count }, (_, i) => (
-      <div key={i} className="flex flex-col items-center mb-4">
+      <div key={i} className="flex flex-col items-center mb-4 ">
         <div className="h-10 w-10 mb-2 rounded-lg bg-gray-200 dark:bg-gray-600 animate-pulse" />
         <div className="h-3 w-12 bg-gray-200 dark:bg-gray-600 animate-pulse rounded" />
       </div>
@@ -68,35 +68,40 @@ export default function TechnicalSkillsSection() {
   }
 
   return (
-    <section className="w-full bg-gray-150 dark:bg-gray-800 py-32 px-6 pt-20">
-   <div className="max-w-7xl mx-auto flex flex-col items-center">
+<section className="w-full bg-gray-150 dark:bg-gray-800 py-40 px-6 pt-20">
+  {/* Container alinhado com o menu */}
+  <div className="max-w-7xl mx-auto flex flex-col">
 
-        {/* Bloco do título e subtítulo alinhados e responsivos */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="
-            flex flex-col
-            items-center
-            justify-center
-            gap-3
-            lg:flex-row
-            lg:items-center
-            lg:justify-center
-            lg:gap-16
-            mb-24
-            text-center
-          "
-        >
-          <h2 className=" font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-brand-dark dark:text-white mb-1 lg:text-right lg:text-rigth lg:mb-0 lg:max-w-80">
-            {t("skillsTitle")}
-          </h2>
-          <p className="lg:text-left text-base text-brand-dark/70 dark:text-gray-300 leading-relaxed max-w-xl mb-0 lg:ml-0 lg:mb-0 lg:max-w-80">
-            {t("skillsSubtitle")}
-          </p>
-        </motion.div>
+    {/* Bloco do título e subtítulo alinhados à esquerda */}
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+      className="
+        flex flex-col
+        items-start
+        justify-start
+        gap-3
+        lg:flex-row
+        lg:items-center
+        lg:justify-start
+        lg:gap-16
+        mb-24
+        text-left
+      "
+    >
+      <h2 className="text-3xl font-playfair font-bold text-brand-dark dark:text-white mb-0 md:text-5xl lg:text-5xl lg:mb-3 whitespace-nowrap overflow-hidden text-ellipsis">
+        {t("skillsTitle")}
+      </h2>
+      <p className=" lg:text-left text-base text-brand-dark/70 dark:text-gray-300 leading-relaxed max-w-xl mb-0 lg:ml-0 lg:mb-0 lg:max-w-80">
+        {t("skillsSubtitle")}
+      </p>
+    </motion.div>
+
+    {/* Aqui segue o resto do conteúdo da seção */}
+
+
 
         {/* Sessões empilhadas */}
         <div className="flex flex-col gap-12 md:gap-16 lg:gap-6">

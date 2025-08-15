@@ -1,8 +1,8 @@
-
 import { Mail, Linkedin, ExternalLink } from "lucide-react";
 import React from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
+
 
 const FooterSection = React.forwardRef<HTMLDivElement>((props, ref) => {
   const { t } = useLanguage();
@@ -14,7 +14,7 @@ const FooterSection = React.forwardRef<HTMLDivElement>((props, ref) => {
   return (
     <motion.footer
       ref={ref}
-      className="w-full h-full bg-brand-dark py-8 px-6 flex flex-col items-center justify-center"
+      className="w-full h-full bg-brand-dark py-32 px-10 flex flex-col items-center justify-center"
       id="contato"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -22,18 +22,19 @@ const FooterSection = React.forwardRef<HTMLDivElement>((props, ref) => {
       viewport={{ once: true }}
     >
       <div className="max-w-4xl mx-auto text-center space-y-12">
-        {/* Título da seção */}
+
+        {/* Título da seção ajustado */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
+          className="flex flex-col md:flex-row items-center justify-center gap-8"
         >
-          <h4 className="text-4xl md:text-5xl font-playfair text-white font-bold mb-4">
+          <h4 className=" whitespace-nowrap text-4xl md:text-5xl font-playfair text-white font-bold mb-0">
             {t('footerTitle')}
           </h4>
-          <div className="w-24 h-1 bg-brand-accent mx-auto rounded-full mb-6"></div>
-          <p className="text-lg text-white/70 leading-relaxed max-w-2xl mx-auto">
+          <p className=" whitespace-nowrap text-lg text-white/70 leading-relaxed max-w-xl m-0">
             {t('footerSubTitle')}
           </p>
         </motion.div>
@@ -99,6 +100,7 @@ const FooterSection = React.forwardRef<HTMLDivElement>((props, ref) => {
             &copy; {new Date().getFullYear()} Max Demian. {t('footerRights')}
           </p>
         </motion.div>
+        
       </div>
     </motion.footer>
   );

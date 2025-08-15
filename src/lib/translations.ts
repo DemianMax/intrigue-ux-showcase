@@ -37,8 +37,8 @@ export const translations = {
     ariaScrollDown: 'Role para baixo',
 
     projectsTitle: 'Projetos em Destaque',
-    projectsSubTitle: 'Conheça alguns dos projetos que desenvolvi, desde a pesquisa até a implementação',
-    projectCaseStudyButton: 'Veja +',
+    projectsSubTitle: 'veja alguns dos projetos que desenvolvi, desde a pesquisa até a implementação',
+    casesStudySummary: 'Sumario do projeto',
     caseStudyChallenge: 'O Desafio',
     caseStudyProcess: 'Processo UX',
     caseStudySolution: 'Solução Final',
@@ -46,7 +46,7 @@ export const translations = {
     caseStudyNextSteps: 'Próximos passos:',
     caseStudyClose: 'Fechar',
     projectProblem: 'Problema',
-    projectSolution: 'Solução',
+    projectSolution: 'Desafio',
 
     portfolioTitle: 'Portfólio',
     portfolioSubtitle: 'Uma seleção dos meus trabalhos de design e projetos criativos',
@@ -128,7 +128,7 @@ export const translations = {
     heroSubtitleLine2: 'the answer does not yet exist.',
     ariaScrollDown: 'Scroll down',
 
-    projectCaseStudyButton: 'View More',
+    casesStudySummary: 'Project Summary',
     caseStudyChallenge: 'The Challenge',
     caseStudyProcess: 'UX Process',
     caseStudySolution: 'Final Solution',
@@ -138,7 +138,7 @@ export const translations = {
     projectsTitle: 'Featured Projects',
     projectsSubTitle: 'Discover some of the projects I have developed, from research to implementation',
     projectProblem: 'Problem',
-    projectSolution: 'Solution',
+    projectSolution: 'Challenge',
 
 
     portfolioTitle: 'Portfolio',
