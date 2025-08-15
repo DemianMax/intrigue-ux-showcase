@@ -6,6 +6,7 @@ export interface Project {
   problem: string;
   solution: string;
   challenge?: string;
+  challenge_images?: string;
   hashtags_text?: string;
   process_text?: string;
   process_images_text?: string;

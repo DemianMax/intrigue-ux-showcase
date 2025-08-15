@@ -4,6 +4,7 @@ import NotFound from "./NotFound";
 import { ChevronRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import Navigation from "@/components/Navigation";
 import { useProjectById } from "@/hooks/useProjectById";
 import FooterSection from "@/components/FooterSection";
@@ -133,9 +134,40 @@ const ProjectCasePage = () => {
             <h3 className="text-3xl font-playfair text-brand-dark dark:text-white mb-6 text-left">
               {t("caseStudyChallenge")}
             </h3>
-            <p className="text-lg text-brand-dark/70 dark:text-gray-300 font-inter leading-relaxed text-left">
-              {project.challenge}
-            </p>
+            <div className="flex flex-col lg:flex-row items-start gap-8">
+              {/* Texto à esquerda */}
+              <div className="w-full lg:w-2/3">
+                <p className="text-lg text-brand-dark/70 dark:text-gray-300 font-inter leading-relaxed text-left">
+                  {project.challenge}
+                </p>
+              </div>
+              
+              {/* Carrossel de imagens à direita */}
+              {project.challenge_images && (
+                <div className="w-full lg:w-1/3">
+                  <Carousel className="w-full max-w-xs mx-auto" opts={{ align: "start", loop: true }}>
+                    <CarouselContent>
+                      {parseTextToArray(project.challenge_images).map((img, index) => (
+                        <CarouselItem key={`challenge-${index}`}>
+                          <div className="p-1">
+                            <img
+                              src={img}
+                              alt={`Challenge image ${index + 1}`}
+                              className="w-full h-48 object-cover rounded-xl border border-border shadow-md"
+                              onError={(e) => {
+                                e.currentTarget.style.display = "none";
+                              }}
+                            />
+                          </div>
+                        </CarouselItem>
+                      ))}
+                    </CarouselContent>
+                    <CarouselPrevious />
+                    <CarouselNext />
+                  </Carousel>
+                </div>
+              )}
+            </div>
           </div>
         )}
 

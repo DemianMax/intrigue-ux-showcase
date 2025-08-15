@@ -204,6 +204,7 @@ export type Database = {
         Row: {
           additional_images_grid: string | null
           challenge: string | null
+          challenge_images: string | null
           created_at: string
           final_solution_images: string | null
           final_solution_text: string | null
@@ -235,6 +236,7 @@ export type Database = {
         Insert: {
           additional_images_grid?: string | null
           challenge?: string | null
+          challenge_images?: string | null
           created_at?: string
           final_solution_images?: string | null
           final_solution_text?: string | null
@@ -266,6 +268,7 @@ export type Database = {
         Update: {
           additional_images_grid?: string | null
           challenge?: string | null
+          challenge_images?: string | null
           created_at?: string
           final_solution_images?: string | null
           final_solution_text?: string | null
@@ -300,6 +303,7 @@ export type Database = {
         Row: {
           additional_images_grid: string | null
           challenge: string | null
+          challenge_images: string | null
           created_at: string
           final_solution_images: string | null
           final_solution_text: string | null
@@ -336,6 +340,7 @@ export type Database = {
         Insert: {
           additional_images_grid?: string | null
           challenge?: string | null
+          challenge_images?: string | null
           created_at?: string
           final_solution_images?: string | null
           final_solution_text?: string | null
@@ -372,6 +377,7 @@ export type Database = {
         Update: {
           additional_images_grid?: string | null
           challenge?: string | null
+          challenge_images?: string | null
           created_at?: string
           final_solution_images?: string | null
           final_solution_text?: string | null
