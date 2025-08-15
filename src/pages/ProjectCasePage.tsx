@@ -18,7 +18,7 @@ const ProjectCasePage = () => {
   const parseTextToArray = (text: string | null | undefined): string[] => {
     if (!text) return [];
     return text
-      .split(/[,\n]/)
+      .split(/[,\\n]/)
       .map((item) => item.trim())
       .filter((item) => item.length > 0)
       .filter((item) => {
@@ -26,7 +26,7 @@ const ProjectCasePage = () => {
           new URL(item);
           return true;
         } catch {
-          return /\.(jpg|jpeg|png|gif|webp|svg)$/i.test(item);
+          return /\\.(jpg|jpeg|png|gif|webp|svg)$/i.test(item);
         }
       });
   };
@@ -80,36 +80,36 @@ const ProjectCasePage = () => {
     <div className="bg-background min-h-screen relative font-inter">
       <Navigation />
 
-      {/* Conteúdo com padding para navbar fixa */}
-      <div className="py-10 px-5 lg:px-32 flex flex-col items-start pt-24">
-        <div className="self-start mb-8 w-full max-w-4xl mx-auto">
-          <button
-            className="flex items-center text-brand-accent font-inter font-medium hover:underline hover:text-brand-dark transition"
-            onClick={() => navigate("/")}
-          >
-            <ChevronRight size={18} className="rotate-180 mr-1" />
-            Voltar
-          </button>
+      {/* Imagem topo fora a fora da janela */}
+
+      {(project.topPageimg || project.image) && (
+        <div className="w-screen h-[60vh] overflow-hidden relative z-0">
+          <img
+            src={project.topPageimg ?? project.image}
+            alt={`Imagem destaque do projeto ${project.title}`}
+            className="w-full h-full object-cover object-top"
+          />
         </div>
+      )}
+
+
+      {/* Conteúdo com padding para navbar fixa e para não sobrepor a imagem topo */}
+
+      <div className="py-10 px-5 lg:px-32 flex flex-col items-start pt-[calc(24px+5vh)] relative z-10">
+
+      
 
         {/* Bloco principal: Imagem à direita e texto à esquerda (desktop) */}
         <div className="max-w-4xl w-full mx-auto mb-10">
           <div className="flex flex-col lg:flex-row-reverse items-center gap-8">
-            {/* Imagem do projeto: à direita no desktop */}
-            <div className="w-full lg:w-1/2 flex justify-center">
-              <img
-                src={project.image}
-                alt={`Projeto ${project.title}`}
-                className="w-full max-w-xs h-auto object-cover rounded-2xl border border-border shadow-lg"
-                style={{ minWidth: 220, maxHeight: 340 }}
-              />
-            </div>
+            
+         
             {/* Texto do projeto: à esquerda */}
             <div className="w-full lg:w-1/2">
-              <h2 className="text-4xl sm:text-5xl font-playfair text-brand-dark dark:text-white font-bold mb-3 text-left">
-                {project.title}
+              <h2 className="text-4xl sm:text-2xl font-playfair text-brand-dark dark:text-white font-bold mb-3 text-left">
+              {t("casesStudySummary")}
               </h2>
-              <div className="text-lg text-brand-accent font-inter font-semibold mb-1 text-left">
+              <div className="text-lg text-brand-accent font-inter font-semibold mb-3 text-left">
                 {project.role}
               </div>
               <div className="text-xl text-brand-dark/70 dark:text-gray-300 font-inter mb-8 text-left">
@@ -120,6 +120,7 @@ const ProjectCasePage = () => {
         </div>
 
         {/* Demais seções da página seguem como estavam */}
+
         <div className="max-w-4xl w-full mx-auto">
           {project.challenge && (
             <section className="mb-12">
@@ -132,9 +133,11 @@ const ProjectCasePage = () => {
             </section>
           )}
 
-          {(project.process_images_data ? 
-           (Array.isArray(project.process_images_data) ? project.process_images_data.length : 0) : 
-           processImages.length) > 0 && (
+          {(project.process_images_data
+            ? Array.isArray(project.process_images_data)
+              ? project.process_images_data.length
+              : 0
+            : processImages.length) > 0 && (
             <section className="mb-12">
               <h3 className="text-2xl font-playfair text-brand-dark mb-5 text-left">
                 {t("caseStudyProcess")}
