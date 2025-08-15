@@ -7,7 +7,7 @@ export type Json =
   | Json[]
 
 export type Database = {
-  // Allows to automatically instanciate createClient with right options
+  // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
     PostgrestVersion: "12.2.3 (519615d)"
@@ -47,6 +47,42 @@ export type Database = {
           resumo_profissional?: string
           titulo?: string
           updated_at?: string | null
+        }
+        Relationships: []
+      }
+      curriculo_en: {
+        Row: {
+          created_at: string
+          educacao: Json
+          experiencias: Json
+          id: number
+          nome: string
+          resumo: string
+          resumo_profissional: string
+          titulo: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          educacao: Json
+          experiencias: Json
+          id?: number
+          nome: string
+          resumo: string
+          resumo_profissional: string
+          titulo: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          educacao?: Json
+          experiencias?: Json
+          id?: number
+          nome?: string
+          resumo?: string
+          resumo_profissional?: string
+          titulo?: string
+          updated_at?: string
         }
         Relationships: []
       }
@@ -166,120 +202,201 @@ export type Database = {
       }
       projects_en: {
         Row: {
+          additional_images_grid: string | null
           challenge: string | null
           created_at: string
+          final_solution_images: string | null
+          final_solution_text: string | null
+          final_solution_title: string | null
+          final_solution_video: string | null
           hashtags_text: string | null
           id: string
           image: string
+          learning_conclusion_text: string | null
+          learning_conclusion_title: string | null
           next_steps: string | null
           problem: string
           process_images_data: Json | null
           process_images_text: string | null
           process_legends_text: string | null
+          prototyping_images: string | null
+          prototyping_text: string | null
+          prototyping_title: string | null
           results_text: string | null
           role: string
           solution: string
           solution_images_legends_text: string | null
           solution_images_text: string | null
           title: string
+          topPageimg: string | null
           ui_note: string | null
         }
         Insert: {
+          additional_images_grid?: string | null
           challenge?: string | null
           created_at?: string
+          final_solution_images?: string | null
+          final_solution_text?: string | null
+          final_solution_title?: string | null
+          final_solution_video?: string | null
           hashtags_text?: string | null
           id?: string
           image: string
+          learning_conclusion_text?: string | null
+          learning_conclusion_title?: string | null
           next_steps?: string | null
           problem: string
           process_images_data?: Json | null
           process_images_text?: string | null
           process_legends_text?: string | null
+          prototyping_images?: string | null
+          prototyping_text?: string | null
+          prototyping_title?: string | null
           results_text?: string | null
           role: string
           solution: string
           solution_images_legends_text?: string | null
           solution_images_text?: string | null
           title: string
+          topPageimg?: string | null
           ui_note?: string | null
         }
         Update: {
+          additional_images_grid?: string | null
           challenge?: string | null
           created_at?: string
+          final_solution_images?: string | null
+          final_solution_text?: string | null
+          final_solution_title?: string | null
+          final_solution_video?: string | null
           hashtags_text?: string | null
           id?: string
           image?: string
+          learning_conclusion_text?: string | null
+          learning_conclusion_title?: string | null
           next_steps?: string | null
           problem?: string
           process_images_data?: Json | null
           process_images_text?: string | null
           process_legends_text?: string | null
+          prototyping_images?: string | null
+          prototyping_text?: string | null
+          prototyping_title?: string | null
           results_text?: string | null
           role?: string
           solution?: string
           solution_images_legends_text?: string | null
           solution_images_text?: string | null
           title?: string
+          topPageimg?: string | null
           ui_note?: string | null
         }
         Relationships: []
       }
       projects_pt: {
         Row: {
+          additional_images_grid: string | null
           challenge: string | null
           created_at: string
+          final_solution_images: string | null
+          final_solution_text: string | null
+          final_solution_title: string | null
+          final_solution_video: string | null
           hashtags_text: string | null
           id: string
           image: string
+          image_m: string | null
+          image_t: string | null
+          imageCardDesktop: string | null
+          imageCardMobile: string | null
+          imageCardTablet: string | null
+          learning_conclusion_text: string | null
+          learning_conclusion_title: string | null
           next_steps: string | null
           problem: string
           process_images_data: Json | null
           process_images_text: string | null
           process_legends_text: string | null
+          prototyping_images: string | null
+          prototyping_text: string | null
+          prototyping_title: string | null
           results_text: string | null
           role: string
           solution: string
           solution_images_legends_text: string | null
           solution_images_text: string | null
           title: string
+          topPageimg: string | null
           ui_note: string | null
         }
         Insert: {
+          additional_images_grid?: string | null
           challenge?: string | null
           created_at?: string
+          final_solution_images?: string | null
+          final_solution_text?: string | null
+          final_solution_title?: string | null
+          final_solution_video?: string | null
           hashtags_text?: string | null
           id?: string
           image: string
+          image_m?: string | null
+          image_t?: string | null
+          imageCardDesktop?: string | null
+          imageCardMobile?: string | null
+          imageCardTablet?: string | null
+          learning_conclusion_text?: string | null
+          learning_conclusion_title?: string | null
           next_steps?: string | null
           problem: string
           process_images_data?: Json | null
           process_images_text?: string | null
           process_legends_text?: string | null
+          prototyping_images?: string | null
+          prototyping_text?: string | null
+          prototyping_title?: string | null
           results_text?: string | null
           role: string
           solution: string
           solution_images_legends_text?: string | null
           solution_images_text?: string | null
           title: string
+          topPageimg?: string | null
           ui_note?: string | null
         }
         Update: {
+          additional_images_grid?: string | null
           challenge?: string | null
           created_at?: string
+          final_solution_images?: string | null
+          final_solution_text?: string | null
+          final_solution_title?: string | null
+          final_solution_video?: string | null
           hashtags_text?: string | null
           id?: string
           image?: string
+          image_m?: string | null
+          image_t?: string | null
+          imageCardDesktop?: string | null
+          imageCardMobile?: string | null
+          imageCardTablet?: string | null
+          learning_conclusion_text?: string | null
+          learning_conclusion_title?: string | null
           next_steps?: string | null
           problem?: string
           process_images_data?: Json | null
           process_images_text?: string | null
           process_legends_text?: string | null
+          prototyping_images?: string | null
+          prototyping_text?: string | null
+          prototyping_title?: string | null
           results_text?: string | null
           role?: string
           solution?: string
           solution_images_legends_text?: string | null
           solution_images_text?: string | null
           title?: string
+          topPageimg?: string | null
           ui_note?: string | null
         }
         Relationships: []
