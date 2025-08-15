@@ -219,6 +219,7 @@ export type Database = {
           process_images_data: Json | null
           process_images_text: string | null
           process_legends_text: string | null
+          process_text: string | null
           prototyping_images: string | null
           prototyping_text: string | null
           prototyping_title: string | null
@@ -249,6 +250,7 @@ export type Database = {
           process_images_data?: Json | null
           process_images_text?: string | null
           process_legends_text?: string | null
+          process_text?: string | null
           prototyping_images?: string | null
           prototyping_text?: string | null
           prototyping_title?: string | null
@@ -279,6 +281,7 @@ export type Database = {
           process_images_data?: Json | null
           process_images_text?: string | null
           process_legends_text?: string | null
+          process_text?: string | null
           prototyping_images?: string | null
           prototyping_text?: string | null
           prototyping_title?: string | null
@@ -317,6 +320,7 @@ export type Database = {
           process_images_data: Json | null
           process_images_text: string | null
           process_legends_text: string | null
+          process_text: string | null
           prototyping_images: string | null
           prototyping_text: string | null
           prototyping_title: string | null
@@ -352,6 +356,7 @@ export type Database = {
           process_images_data?: Json | null
           process_images_text?: string | null
           process_legends_text?: string | null
+          process_text?: string | null
           prototyping_images?: string | null
           prototyping_text?: string | null
           prototyping_title?: string | null
@@ -387,6 +392,7 @@ export type Database = {
           process_images_data?: Json | null
           process_images_text?: string | null
           process_legends_text?: string | null
+          process_text?: string | null
           prototyping_images?: string | null
           prototyping_text?: string | null
           prototyping_title?: string | null

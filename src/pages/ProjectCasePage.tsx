@@ -146,9 +146,14 @@ const ProjectCasePage = () => {
             : 0
           : processImages.length) > 0 && (
           <div className="max-w-4xl w-full mx-auto mb-16">
-            <h3 className="text-3xl font-playfair text-brand-dark dark:text-white mb-8 text-left">
+            <h3 className="text-3xl font-playfair text-brand-dark dark:text-white mb-6 text-left">
               {t("caseStudyProcess")}
             </h3>
+            {project.process_text && (
+              <p className="text-lg text-brand-dark/70 dark:text-gray-300 font-inter leading-relaxed mb-8 text-left">
+                {project.process_text}
+              </p>
+            )}
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {project.process_images_data && Array.isArray(project.process_images_data) ? (
                 project.process_images_data.map((item, index) => (
