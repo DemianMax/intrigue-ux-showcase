@@ -31,10 +31,10 @@ const FooterSection = React.forwardRef<HTMLDivElement>((props, ref) => {
           transition={{ duration: 0.6 }}
           className="flex flex-col md:flex-row items-center justify-center gap-8"
         >
-          <h4 className=" whitespace-nowrap text-4xl md:text-5xl font-playfair text-white font-bold mb-0">
+          <h4 className=" lg:whitespace-nowrap text-4xl md:text-5xl font-playfair text-white font-bold mb-0">
             {t('footerTitle')}
           </h4>
-          <p className=" whitespace-nowrap text-lg text-white/70 leading-relaxed max-w-xl m-0">
+          <p className=" lg:whitespace-nowrap text-lg text-white/70 leading-relaxed max-w-xl m-0">
             {t('footerSubTitle')}
           </p>
         </motion.div>
