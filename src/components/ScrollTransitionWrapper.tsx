@@ -28,11 +28,11 @@ const ScrollTransitionWrapper: React.FC<ScrollTransitionWrapperProps> = ({ onScr
 
   const aboutYValues =
     breakpoint === "xs"
-      ? [200, -300, -700]
+      ? [90, -390, -700]
       : breakpoint === "md"
-      ? [500, -100, -100]
+      ? [600, -50, -100]
       : breakpoint === "lg" || breakpoint === "xl" || breakpoint === "2xl"
-      ? [500, -160, -200]
+      ? [500, -140, -200]
       : [500, -160, -200];
 
   const aboutY = useTransform(
@@ -49,9 +49,9 @@ const ScrollTransitionWrapper: React.FC<ScrollTransitionWrapperProps> = ({ onScr
 
   const heroYValues =
     breakpoint === "xs"
-      ? [0, -700]
+      ? [-10, -700]
       : breakpoint === "md"
-      ? [190, -1100]
+      ? [280, -1100]
       : breakpoint === "lg" || breakpoint === "xl" || breakpoint === "2xl"
       ? [200, -500]
       : [100, -500];
@@ -121,16 +121,33 @@ const ScrollTransitionWrapper: React.FC<ScrollTransitionWrapperProps> = ({ onScr
                   {t("aboutParagraph2Cont")}
                 </p>
               </div>
-              <motion.a
-                href="https://maxdemian.vercel.app/curriculo"
-                target="_self"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-brand-accent to-orange-400 text-white font-semibold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 mt-8"
-                whileHover={{ y: -2 }}
-              >
-                {t("aboutButton")}
-                <ArrowRight className="w-5 h-5" />
-              </motion.a>
+
+              {/* Botão para seção Sobre */}
+             <div className="flex flex-col gap-4 lg:flex-row md:gap-4 mt-8  md:justify-end">
+                <motion.a
+                  href="https://maxdemian.vercel.app/curriculo"
+                  target="_self"
+                  rel="noopener noreferrer"
+             className="flex-2 inline-flex items-center justify-end gap-3 px-6 py-3 bg-gradient-to-r from-brand-accent to-orange-400 text-white font-semibold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+                  whileHover={{ y: -2 }}
+                >
+                  {t("aboutButton")}
+                  <ArrowRight className="w-5 h-5" />
+                </motion.a>
+                <motion.a
+                  href="/playground"
+                  target="_self"
+                  rel="noopener noreferrer"
+                className="flex-2 inline-flex items-center justify-end gap-3 px-6 py-3 bg-gradient-to-r from-purple-500 to-indigo-400 text-white font-semibold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+                  whileHover={{ y: -2 }}
+                >
+                  {t("aboutBtnPlayground")}
+                  <ArrowRight className="w-5 h-5" />
+                </motion.a>
+              </div>
+
+
+
             </motion.div>
           </div>
 
@@ -144,6 +161,7 @@ const ScrollTransitionWrapper: React.FC<ScrollTransitionWrapperProps> = ({ onScr
                 md:w-80 md:h-240
                 lg:w-80 lg:h-200
                 xl:w-96 xl:h-120
+                mt-40 md:mt-0   /* margem maior no topo só no mobile */
               "
               style={{ y: aboutImageY }}
               initial={{ opacity: 0, x: 0, scale: 1.1 }}
