@@ -6,6 +6,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { Skeleton } from "@/components/ui/skeleton";
 import Navigation from "@/components/Navigation";
 import { useProjectById } from "@/hooks/useProjectById";
+import FooterSection from "@/components/FooterSection";
 
 const ProjectCasePage = () => {
   const { projectId } = useParams<{ projectId: string }>();
@@ -378,6 +379,9 @@ const ProjectCasePage = () => {
           </div>
         </div>
       </div>
+      
+      {/* Footer */}
+      <FooterSection />
     </div>
   );
 };
