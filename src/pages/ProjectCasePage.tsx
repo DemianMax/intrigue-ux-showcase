@@ -241,18 +241,21 @@ const ProjectCasePage = () => {
                 {project.prototyping_text}
               </p>
             )}
-            {project.prototyping_images && (
+            {project.prototyping_images && Array.isArray(project.prototyping_images) && (
               <div className="grid gap-6 md:grid-cols-2">
-                {parseTextToArray(project.prototyping_images).map((img, index) => (
-                  <div key={`prototyping-${index}`} className="rounded-xl overflow-hidden shadow-lg">
+                {project.prototyping_images.map((item, index) => (
+                  <div key={`prototyping-${index}`} className="bg-card rounded-xl shadow-md p-4 flex flex-col items-center">
                     <img
-                      src={img}
-                      alt={`Prototyping image ${index + 1}`}
-                      className="w-full h-64 object-cover"
+                      src={item.url}
+                      alt={item.caption ?? `Prototyping image ${index + 1}`}
+                      className="w-full h-64 object-cover rounded-md mb-3 border border-border"
                       onError={(e) => {
                         e.currentTarget.style.display = "none";
                       }}
                     />
+                    <div className="text-sm text-brand-dark/80 dark:text-gray-300 font-inter text-center">
+                      {item.caption ?? `Protótipo ${index + 1}`}
+                    </div>
                   </div>
                 ))}
               </div>

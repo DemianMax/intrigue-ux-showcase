@@ -221,7 +221,7 @@ export type Database = {
           process_images_text: string | null
           process_legends_text: string | null
           process_text: string | null
-          prototyping_images: string | null
+          prototyping_images: Json | null
           prototyping_text: string | null
           prototyping_title: string | null
           results_text: string | null
@@ -253,7 +253,7 @@ export type Database = {
           process_images_text?: string | null
           process_legends_text?: string | null
           process_text?: string | null
-          prototyping_images?: string | null
+          prototyping_images?: Json | null
           prototyping_text?: string | null
           prototyping_title?: string | null
           results_text?: string | null
@@ -285,7 +285,7 @@ export type Database = {
           process_images_text?: string | null
           process_legends_text?: string | null
           process_text?: string | null
-          prototyping_images?: string | null
+          prototyping_images?: Json | null
           prototyping_text?: string | null
           prototyping_title?: string | null
           results_text?: string | null
@@ -325,7 +325,7 @@ export type Database = {
           process_images_text: string | null
           process_legends_text: string | null
           process_text: string | null
-          prototyping_images: string | null
+          prototyping_images: Json | null
           prototyping_text: string | null
           prototyping_title: string | null
           results_text: string | null
@@ -362,7 +362,7 @@ export type Database = {
           process_images_text?: string | null
           process_legends_text?: string | null
           process_text?: string | null
-          prototyping_images?: string | null
+          prototyping_images?: Json | null
           prototyping_text?: string | null
           prototyping_title?: string | null
           results_text?: string | null
@@ -399,7 +399,7 @@ export type Database = {
           process_images_text?: string | null
           process_legends_text?: string | null
           process_text?: string | null
-          prototyping_images?: string | null
+          prototyping_images?: Json | null
           prototyping_text?: string | null
           prototyping_title?: string | null
           results_text?: string | null

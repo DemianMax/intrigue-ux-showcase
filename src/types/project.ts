@@ -23,7 +23,7 @@ export interface Project {
   process_images_data?: any; // Json type from Supabase
   prototyping_title?: string;
   prototyping_text?: string;
-  prototyping_images?: string;
+  prototyping_images?: Array<{url: string; caption: string}>;
   final_solution_title?: string;
   final_solution_text?: string;
   final_solution_video?: string;
