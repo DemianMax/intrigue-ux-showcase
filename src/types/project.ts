@@ -35,4 +35,8 @@ export interface Project {
   tools_used?: string;
   project_period?: string;
   project_role_detail?: string;
+  hero_title?: string;
+  hero_subtitle?: string;
+  hero_description?: string;
+  hero_image?: string;
 }

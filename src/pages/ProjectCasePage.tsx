@@ -83,17 +83,42 @@ const ProjectCasePage = () => {
     <div className="bg-background min-h-screen relative font-inter">
       <Navigation />
 
-      {/* Imagem topo fora a fora da janela */}
-
-      {(project.topPageimg || project.image) && (
-        <div className="w-screen h-[60vh] overflow-hidden relative z-0">
-          <img
-            src={project.topPageimg ?? project.image}
-            alt={`Imagem destaque do projeto ${project.title}`}
-            className="w-full h-full object-cover object-top"
-          />
+      {/* Hero Section Dinâmica */}
+      <div className="w-screen h-[60vh] bg-blue-600 relative z-0 flex items-center">
+        <div className="container mx-auto px-5 lg:px-32">
+          <div className="flex flex-col lg:flex-row items-center gap-8 h-full">
+            {/* Conteúdo à esquerda */}
+            <div className="w-full lg:w-1/2 text-white">
+              {project.hero_title && (
+                <h1 className="text-4xl lg:text-6xl font-playfair font-bold mb-4">
+                  {project.hero_title}
+                </h1>
+              )}
+              {project.hero_subtitle && (
+                <h2 className="text-xl lg:text-2xl font-inter font-medium mb-6 opacity-90">
+                  {project.hero_subtitle}
+                </h2>
+              )}
+              {project.hero_description && (
+                <p className="text-lg font-inter leading-relaxed opacity-80">
+                  {project.hero_description}
+                </p>
+              )}
+            </div>
+            
+            {/* Imagem à direita */}
+            {project.hero_image && (
+              <div className="w-full lg:w-1/2">
+                <img
+                  src={project.hero_image}
+                  alt={project.hero_title || `Hero image for ${project.title}`}
+                  className="w-full h-auto max-h-[40vh] object-cover rounded-lg shadow-lg"
+                />
+              </div>
+            )}
+          </div>
         </div>
-      )}
+      </div>
 
 
       {/* Conteúdo com padding para navbar fixa e para não sobrepor a imagem topo */}

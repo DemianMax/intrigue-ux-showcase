@@ -211,6 +211,10 @@ export type Database = {
           final_solution_title: string | null
           final_solution_video: string | null
           hashtags_text: string | null
+          hero_description: string | null
+          hero_image: string | null
+          hero_subtitle: string | null
+          hero_title: string | null
           id: string
           image: string
           learning_conclusion_text: string | null
@@ -247,6 +251,10 @@ export type Database = {
           final_solution_title?: string | null
           final_solution_video?: string | null
           hashtags_text?: string | null
+          hero_description?: string | null
+          hero_image?: string | null
+          hero_subtitle?: string | null
+          hero_title?: string | null
           id?: string
           image: string
           learning_conclusion_text?: string | null
@@ -283,6 +291,10 @@ export type Database = {
           final_solution_title?: string | null
           final_solution_video?: string | null
           hashtags_text?: string | null
+          hero_description?: string | null
+          hero_image?: string | null
+          hero_subtitle?: string | null
+          hero_title?: string | null
           id?: string
           image?: string
           learning_conclusion_text?: string | null
@@ -322,6 +334,10 @@ export type Database = {
           final_solution_title: string | null
           final_solution_video: string | null
           hashtags_text: string | null
+          hero_description: string | null
+          hero_image: string | null
+          hero_subtitle: string | null
+          hero_title: string | null
           id: string
           image: string
           image_m: string | null
@@ -363,6 +379,10 @@ export type Database = {
           final_solution_title?: string | null
           final_solution_video?: string | null
           hashtags_text?: string | null
+          hero_description?: string | null
+          hero_image?: string | null
+          hero_subtitle?: string | null
+          hero_title?: string | null
           id?: string
           image: string
           image_m?: string | null
@@ -404,6 +424,10 @@ export type Database = {
           final_solution_title?: string | null
           final_solution_video?: string | null
           hashtags_text?: string | null
+          hero_description?: string | null
+          hero_image?: string | null
+          hero_subtitle?: string | null
+          hero_title?: string | null
           id?: string
           image?: string
           image_m?: string | null
