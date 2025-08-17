@@ -221,6 +221,9 @@ export type Database = {
           process_images_text: string | null
           process_legends_text: string | null
           process_text: string | null
+          project_period: string | null
+          project_role_detail: string | null
+          project_type: string | null
           prototyping_images: Json | null
           prototyping_text: string | null
           prototyping_title: string | null
@@ -230,6 +233,7 @@ export type Database = {
           solution_images_legends_text: string | null
           solution_images_text: string | null
           title: string
+          tools_used: string | null
           topPageimg: string | null
           ui_note: string | null
         }
@@ -253,6 +257,9 @@ export type Database = {
           process_images_text?: string | null
           process_legends_text?: string | null
           process_text?: string | null
+          project_period?: string | null
+          project_role_detail?: string | null
+          project_type?: string | null
           prototyping_images?: Json | null
           prototyping_text?: string | null
           prototyping_title?: string | null
@@ -262,6 +269,7 @@ export type Database = {
           solution_images_legends_text?: string | null
           solution_images_text?: string | null
           title: string
+          tools_used?: string | null
           topPageimg?: string | null
           ui_note?: string | null
         }
@@ -285,6 +293,9 @@ export type Database = {
           process_images_text?: string | null
           process_legends_text?: string | null
           process_text?: string | null
+          project_period?: string | null
+          project_role_detail?: string | null
+          project_type?: string | null
           prototyping_images?: Json | null
           prototyping_text?: string | null
           prototyping_title?: string | null
@@ -294,6 +305,7 @@ export type Database = {
           solution_images_legends_text?: string | null
           solution_images_text?: string | null
           title?: string
+          tools_used?: string | null
           topPageimg?: string | null
           ui_note?: string | null
         }
@@ -325,6 +337,9 @@ export type Database = {
           process_images_text: string | null
           process_legends_text: string | null
           process_text: string | null
+          project_period: string | null
+          project_role_detail: string | null
+          project_type: string | null
           prototyping_images: Json | null
           prototyping_text: string | null
           prototyping_title: string | null
@@ -334,6 +349,7 @@ export type Database = {
           solution_images_legends_text: string | null
           solution_images_text: string | null
           title: string
+          tools_used: string | null
           topPageimg: string | null
           ui_note: string | null
         }
@@ -362,6 +378,9 @@ export type Database = {
           process_images_text?: string | null
           process_legends_text?: string | null
           process_text?: string | null
+          project_period?: string | null
+          project_role_detail?: string | null
+          project_type?: string | null
           prototyping_images?: Json | null
           prototyping_text?: string | null
           prototyping_title?: string | null
@@ -371,6 +390,7 @@ export type Database = {
           solution_images_legends_text?: string | null
           solution_images_text?: string | null
           title: string
+          tools_used?: string | null
           topPageimg?: string | null
           ui_note?: string | null
         }
@@ -399,6 +419,9 @@ export type Database = {
           process_images_text?: string | null
           process_legends_text?: string | null
           process_text?: string | null
+          project_period?: string | null
+          project_role_detail?: string | null
+          project_type?: string | null
           prototyping_images?: Json | null
           prototyping_text?: string | null
           prototyping_title?: string | null
@@ -408,6 +431,7 @@ export type Database = {
           solution_images_legends_text?: string | null
           solution_images_text?: string | null
           title?: string
+          tools_used?: string | null
           topPageimg?: string | null
           ui_note?: string | null
         }

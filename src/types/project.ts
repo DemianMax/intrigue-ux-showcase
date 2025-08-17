@@ -31,4 +31,8 @@ export interface Project {
   learning_conclusion_title?: string;
   learning_conclusion_text?: string;
   additional_images_grid?: string;
+  project_type?: string;
+  tools_used?: string;
+  project_period?: string;
+  project_role_detail?: string;
 }

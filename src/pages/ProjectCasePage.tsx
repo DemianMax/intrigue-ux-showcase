@@ -1,13 +1,14 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import NotFound from "./NotFound";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Briefcase, Wrench, Calendar, User } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import Navigation from "@/components/Navigation";
 import { useProjectById } from "@/hooks/useProjectById";
 import FooterSection from "@/components/FooterSection";
+import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 
 const ProjectCasePage = () => {
   const { projectId } = useParams<{ projectId: string }>();
@@ -117,13 +118,70 @@ const ProjectCasePage = () => {
               </div>
             </div>
             
-            {/* Imagem à direita */}
-            <div className="w-full lg:w-1/3 flex justify-center">
-              <img
-                src={project.image}
-                alt={`Projeto ${project.title}`}
-                className="w-full max-w-xs h-auto object-cover rounded-2xl border border-border shadow-lg"
-              />
+            {/* Tabela de detalhes à direita */}
+            <div className="w-full lg:w-1/3">
+              <Table className="mb-6">
+                <TableBody>
+                  {project.project_type && (
+                    <TableRow>
+                      <TableCell className="flex items-center gap-3 py-3">
+                        <Briefcase className="h-5 w-5 text-brand-accent" />
+                        <span className="text-brand-dark dark:text-white font-inter">Projeto</span>
+                      </TableCell>
+                      <TableCell className="text-brand-dark/70 dark:text-gray-300 font-inter">
+                        {project.project_type}
+                      </TableCell>
+                    </TableRow>
+                  )}
+                  {project.tools_used && (
+                    <TableRow>
+                      <TableCell className="flex items-center gap-3 py-3">
+                        <Wrench className="h-5 w-5 text-brand-accent" />
+                        <span className="text-brand-dark dark:text-white font-inter">Ferramenta</span>
+                      </TableCell>
+                      <TableCell className="text-brand-dark/70 dark:text-gray-300 font-inter">
+                        {project.tools_used}
+                      </TableCell>
+                    </TableRow>
+                  )}
+                  {project.project_period && (
+                    <TableRow>
+                      <TableCell className="flex items-center gap-3 py-3">
+                        <Calendar className="h-5 w-5 text-brand-accent" />
+                        <span className="text-brand-dark dark:text-white font-inter">Período</span>
+                      </TableCell>
+                      <TableCell className="text-brand-dark/70 dark:text-gray-300 font-inter">
+                        {project.project_period}
+                      </TableCell>
+                    </TableRow>
+                  )}
+                  {project.project_role_detail && (
+                    <TableRow>
+                      <TableCell className="flex items-center gap-3 py-3">
+                        <User className="h-5 w-5 text-brand-accent" />
+                        <span className="text-brand-dark dark:text-white font-inter">Cargo</span>
+                      </TableCell>
+                      <TableCell className="text-brand-dark/70 dark:text-gray-300 font-inter">
+                        {project.project_role_detail}
+                      </TableCell>
+                    </TableRow>
+                  )}
+                </TableBody>
+              </Table>
+
+              {/* Hashtags */}
+              {project.hashtags_text && (
+                <div className="flex flex-wrap gap-2">
+                  {parseLegendsToArray(project.hashtags_text).slice(0, 6).map((tag, index) => (
+                    <span
+                      key={`hashtag-${index}`}
+                      className="px-3 py-1 bg-brand-accent/10 text-brand-accent text-sm font-inter rounded-full border border-brand-accent/20"
+                    >
+                      #{tag.trim()}
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
