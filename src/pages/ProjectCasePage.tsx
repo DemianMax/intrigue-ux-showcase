@@ -153,7 +153,7 @@ const ProjectCasePage = () => {
                             <img
                               src={img}
                               alt={`Challenge image ${index + 1}`}
-                              className="w-full h-48 object-cover rounded-xl border border-border shadow-md"
+                              className="w-full h-48 object-cover border border-border shadow-md"
                               onError={(e) => {
                                 e.currentTarget.style.display = "none";
                               }}
