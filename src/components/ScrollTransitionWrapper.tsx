@@ -128,7 +128,7 @@ const ScrollTransitionWrapper: React.FC<ScrollTransitionWrapperProps> = ({ onScr
                   href="https://maxdemian.vercel.app/curriculo"
                   target="_self"
                   rel="noopener noreferrer"
-             className="flex-2 inline-flex items-center justify-end gap-3 px-6 py-3 bg-gradient-to-r from-brand-accent to-orange-400 text-white font-semibold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+             className="flex-2 inline-flex items-center justify-end gap-3 px-6 py-3 bg-gradient-to-r from-orange-600 to-orange-700 text-white font-semibold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
                   whileHover={{ y: -2 }}
                 >
                   {t("aboutButton")}
@@ -138,7 +138,7 @@ const ScrollTransitionWrapper: React.FC<ScrollTransitionWrapperProps> = ({ onScr
                   href="/playground"
                   target="_self"
                   rel="noopener noreferrer"
-                className="flex-2 inline-flex items-center justify-end gap-3 px-6 py-3 bg-gradient-to-r from-purple-500 to-indigo-400 text-white font-semibold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+                className="flex-2 inline-flex items-center justify-end gap-3 px-6 py-3 bg-gradient-to-r from-cyan-600 to-cyan-700 text-white font-semibold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
                   whileHover={{ y: -2 }}
                 >
                   {t("aboutBtnPlayground")}

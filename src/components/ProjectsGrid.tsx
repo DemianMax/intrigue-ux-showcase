@@ -41,7 +41,7 @@ const ProjectsGrid: React.FC = () => {
       {!isLoading && !isError && (
         <>
           {projects && projects.length > 0 ? (
-            <div className="space-y-12 w-full max-w-5xl overflow-y-auto max-h-[70vh]">
+            <div className="space-y-12 w-full">
               {projects.map((project, index) => (
                 <ProjectCard 
                   key={project.id} 
@@ -50,6 +50,7 @@ const ProjectsGrid: React.FC = () => {
                 />
               ))}
             </div>
+
           ) : (
             <div className="text-center p-6 bg-sky-50 border border-sky-200 text-sky-700 rounded-2xl max-w-md">
               Nenhum projeto encontrado. Adicione projetos no seu painel Supabase.

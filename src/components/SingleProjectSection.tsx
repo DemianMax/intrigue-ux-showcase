@@ -20,7 +20,7 @@ const SingleProjectSection: React.FC<SingleProjectSectionProps> = ({ project, in
   };
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center py-8 px-4">
+    <div className="w-full flex flex-col items-center justify-center py-8 px-4">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -80,21 +80,22 @@ const SingleProjectSection: React.FC<SingleProjectSectionProps> = ({ project, in
           </motion.div>
           
           <motion.div 
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="flex flex-wrap gap-2"
-          >
-            {parseTextToArray(project.hashtags_text).slice(0, 5).map((tag, idx) => (
-              <span
-                key={idx}
-                className="text-sm font-medium text-brand-accent bg-brand-accent/10 rounded-full px-3 py-1 border border-brand-accent/20"
-              >
-                {tag}
-              </span>
-            ))}
-          </motion.div>
+          initial={{ opacity: 0, x: 20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="flex flex-wrap gap-4"
+        >
+          {parseTextToArray(project.hashtags_text).map((tag, idx) => (
+            <span
+              key={idx}
+              className="text-sm font-medium text-brand-accent bg-white dark:bg-gray-800 rounded-lg px-4 py-1 border-2 border-brand-accent shadow-sm"
+            >
+              {tag}
+            </span>
+          ))}
+        </motion.div>
+
 
           <motion.div
             initial={{ opacity: 0, x: 20 }}

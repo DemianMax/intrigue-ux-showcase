@@ -24,7 +24,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
-      className="bg-white dark:bg-gray-700 rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
+      className="w-full bg-white dark:bg-gray-700 rounded-2xl shadow-lg 
+      overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
     >
       {/* RESPONSIVO: coluna no mobile, linha reversa no desktop */}
       <div className="flex flex-col lg:flex-row-reverse">
@@ -59,16 +60,21 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
               <p className="leading-relaxed">{project.solution}</p>
             </div>
           </div>
-          <div className="flex flex-wrap gap-2 pt-2">
-            {parseTextToArray(project.hashtags_text).slice(0, 3).map((tag, idx) => (
-              <span
-                key={idx}
-                className="text-xs font-medium text-brand-accent bg-brand-accent/10 rounded-full px-3 py-1 border border-brand-accent/20"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
+
+        {/* HASHTAGS */}
+
+            <div className="flex flex-wrap gap-2 mt-2">
+              {parseTextToArray(project.hashtags_text).map((tag, idx) => (
+                <span
+                  key={idx}
+                  className="text-sm font-semibold text-brand-accent bg-orange-100 rounded-xl 
+                  px-4 py-2 border-2 border-orange-300 shadow-sm"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+
           <button
             className="w-full mt-6 px-4 py-3 rounded-xl bg-brand-accent text-white font-semibold hover:bg-orange-600 transition-all duration-300 text-sm shadow-md hover:shadow-lg transform hover:scale-[1.02]"
             onClick={() => navigate(`/projeto/${project.id}`)}
