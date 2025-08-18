@@ -28,15 +28,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
     >
       {/* RESPONSIVO: coluna no mobile, linha reversa no desktop */}
       <div className="flex flex-col lg:flex-row-reverse">
+
         {/* Imagem, fica à direita no desktop */}
         <div className="w-full lg:w-1/2 relative overflow-hidden"style={{background:'red'}}>
-          <img
-            src={project.image}
-            alt={`Projeto ${project.title}`}
-            className="w-full h-48 lg:h-full object-cover transition-transform duration-300 hover:scale-105"
-          />
+         
           <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
         </div>
+
         {/* Conteúdo, fica à esquerda no desktop */}
         <div className="w-full lg:w-1/2 p-6 space-y-4">
           <div className="space-y-2">

@@ -1,3 +1,13 @@
+.bg-custom-featured {
+  background-color: #21e22d; /* cor clara (light theme) */
+}
+
+@media (prefers-color-scheme: dark) {
+  .bg-custom-featured {
+    background-color: #17191d; /* cor escura (dark theme) */
+  }
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
