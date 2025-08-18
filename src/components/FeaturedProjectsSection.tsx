@@ -132,14 +132,21 @@ const FeaturedProjectsSection: React.FC<FeaturedProjectsSectionProps> = ({ proje
           const scale = useTransform(scrollYProgress, [start, end], [1, 1]);
           const opacity = useTransform(scrollYProgress, [start, end], [1, 1]);
 
+          // Cores de fundo alternadas para cada projeto
+          const getBackgroundColor = (projectIndex: number) => {
+            const colors = ["#3B82F6", "#10B981", "#F59E0B", "#EF4444", "#8B5CF6"];
+            return project.background_color || colors[projectIndex % colors.length];
+          };
+
           return (
             <motion.div
               key={project.id}
               style={{ y, scale, opacity }}
-              className="absolute inset-0 flex items-center justify-center px-6"
+              className="absolute inset-0 w-full h-full"
             >
               <div
-                className="w-full max-w-7xl bg-gray-100 dark:bg-gray-900 rounded-2xl overflow-hidden shadow relative cursor-pointer"
+                className="w-full h-full cursor-pointer relative overflow-hidden"
+                style={{ backgroundColor: getBackgroundColor(index) }}
                 onClick={() => navigate(`/projeto/${project.id}`)}
                 onMouseEnter={() => setHover(true)}
                 onMouseLeave={() => setHover(false)}
@@ -153,54 +160,59 @@ const FeaturedProjectsSection: React.FC<FeaturedProjectsSectionProps> = ({ proje
               >
                 {hover && (
                   <div
-                    className="absolute top-10 right-10 z-20 bg-brand-accent 
-                      text-white text-3xl font-semibold rounded-full px-3 py-1 select-none pointer-events-none user-select-none"
+                    className="absolute top-10 right-10 z-20 bg-white/20 backdrop-blur-sm
+                      text-white text-3xl font-semibold rounded-full w-12 h-12 flex items-center justify-center 
+                      select-none pointer-events-none user-select-none"
                   >
                     +
                   </div>
                 )}
 
-                <div className="flex flex-col xs:min-h-[100px] xl:flex-row min-h-[200px] 2xl:min-h-[500px]">
-                  {/* Conteúdo esquerda */}
-                  <div className="w-full lg:w-1/2 p-8 lg:p-12 flex flex-col justify-top space-y-6">
-                    <div className="space-y-3">
-                      <h4 className="text-2xl lg:text-2xl xl:text-2xl font-playfair font-bold text-brand-dark dark:text-white">
-                        {project.title}
-                      </h4>
-                      <div className="text-brand-accent lg:text-2xl xl:text-2xl font-semibold text-sm tracking-wide">
-                        {project.role}
+                <div className="flex flex-col xl:flex-row h-full">
+                  {/* Conteúdo esquerda com box para o texto */}
+                  <div className="w-full xl:w-1/2 p-6 md:p-8 lg:p-12 flex flex-col justify-center space-y-6">
+                    <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 md:p-8 lg:p-10 space-y-6">
+                      <div className="space-y-3">
+                        <h4 className="text-2xl md:text-3xl lg:text-4xl xl:text-3xl font-playfair font-bold text-white">
+                          {project.title}
+                        </h4>
+                        <div className="text-white/90 text-base md:text-lg lg:text-xl xl:text-lg font-medium tracking-wide">
+                          {project.role}
+                        </div>
                       </div>
-                    </div>
 
-                    <div className="space-y-6 text-gray-700 dark:text-gray-300 text-base lg:text-lg">
-                      <div>
-                        <h5 className="font-semibold text-brand-dark dark:text-white mb-3 text-sm uppercase tracking-wide">
-                          {t("projectSolution")}:
-                        </h5>
-                        <p className="leading-relaxed">{project.solution}</p>
+                      <div className="space-y-4 text-white/80 text-sm md:text-base lg:text-lg">
+                        <div>
+                          <h5 className="font-semibold text-white mb-2 text-xs md:text-sm uppercase tracking-wide">
+                            {t("projectSolution")}:
+                          </h5>
+                          <p className="leading-relaxed">{project.solution}</p>
+                        </div>
                       </div>
-                    </div>
 
-                    <div className="flex flex-wrap gap-2 pt-2">
-                      {parseTextToArray(project.hashtags_text).slice(0, 3).map((tag, idx) => (
-                        <span
-                          key={idx}
-                          className="text-xs font-medium text-brand-accent bg-brand-accent/10 rounded-full px-3 py-1 border border-brand-accent/20"
-                        >
-                          {tag}
-                        </span>
-                      ))}
+                      <div className="flex flex-wrap gap-2 pt-2">
+                        {parseTextToArray(project.hashtags_text).slice(0, 3).map((tag, idx) => (
+                          <span
+                            key={idx}
+                            className="text-xs font-medium text-white bg-white/20 rounded-full px-3 py-1 border border-white/30"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
 
                   {/* Imagem direita */}
-                  <div className="w-full lg:w-1/2 relative overflow-hidden flex items-center justify-center">
-                    <img
-                      src={project.image}
-                      alt={`Projeto ${project.title}`}
-                      className="w-full object-contain"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-l from-transparent to-black/10"></div>
+                  <div className="w-full xl:w-1/2 relative overflow-hidden flex items-center justify-center p-6 md:p-8 lg:p-12">
+                    <div className="relative w-full h-full max-h-[400px] xl:max-h-none">
+                      <img
+                        src={project.image}
+                        alt={`Projeto ${project.title}`}
+                        className="w-full h-full object-contain rounded-lg"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-l from-transparent to-black/10 rounded-lg"></div>
+                    </div>
                   </div>
                 </div>
               </div>

@@ -203,6 +203,7 @@ export type Database = {
       projects_en: {
         Row: {
           additional_images_grid: string | null
+          background_color: string | null
           challenge: string | null
           challenge_images: string | null
           created_at: string
@@ -217,6 +218,9 @@ export type Database = {
           hero_title: string | null
           id: string
           image: string
+          imageCardDesktop: string | null
+          imageCardMobile: string | null
+          imageCardTablet: string | null
           learning_conclusion_text: string | null
           learning_conclusion_title: string | null
           next_steps: string | null
@@ -243,6 +247,7 @@ export type Database = {
         }
         Insert: {
           additional_images_grid?: string | null
+          background_color?: string | null
           challenge?: string | null
           challenge_images?: string | null
           created_at?: string
@@ -257,6 +262,9 @@ export type Database = {
           hero_title?: string | null
           id?: string
           image: string
+          imageCardDesktop?: string | null
+          imageCardMobile?: string | null
+          imageCardTablet?: string | null
           learning_conclusion_text?: string | null
           learning_conclusion_title?: string | null
           next_steps?: string | null
@@ -283,6 +291,7 @@ export type Database = {
         }
         Update: {
           additional_images_grid?: string | null
+          background_color?: string | null
           challenge?: string | null
           challenge_images?: string | null
           created_at?: string
@@ -297,6 +306,9 @@ export type Database = {
           hero_title?: string | null
           id?: string
           image?: string
+          imageCardDesktop?: string | null
+          imageCardMobile?: string | null
+          imageCardTablet?: string | null
           learning_conclusion_text?: string | null
           learning_conclusion_title?: string | null
           next_steps?: string | null
@@ -326,6 +338,7 @@ export type Database = {
       projects_pt: {
         Row: {
           additional_images_grid: string | null
+          background_color: string | null
           challenge: string | null
           challenge_images: string | null
           created_at: string
@@ -371,6 +384,7 @@ export type Database = {
         }
         Insert: {
           additional_images_grid?: string | null
+          background_color?: string | null
           challenge?: string | null
           challenge_images?: string | null
           created_at?: string
@@ -416,6 +430,7 @@ export type Database = {
         }
         Update: {
           additional_images_grid?: string | null
+          background_color?: string | null
           challenge?: string | null
           challenge_images?: string | null
           created_at?: string
