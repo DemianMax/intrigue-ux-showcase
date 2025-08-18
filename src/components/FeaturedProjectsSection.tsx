@@ -193,16 +193,10 @@ const FeaturedProjectsSection: React.FC<FeaturedProjectsSectionProps> = ({ proje
                     </div>
                   </div>
 
-                  {/* Imagem direita, com seleção da imagem por breakpoint */}
+                  {/* Imagem direita */}
                   <div className="w-full lg:w-1/2 relative overflow-hidden flex items-center justify-center">
                     <img
-                      src={
-                        isMobile
-                          ? project.imageCardMobile || project.imageCardDesktop || project.image
-                          : isTablet
-                          ? project.imageCardTablet || project.imageCardDesktop || project.image
-                          : project.imageCardDesktop || project.image
-                      }
+                      src={project.image}
                       alt={`Projeto ${project.title}`}
                       className="w-full object-contain"
                     />
