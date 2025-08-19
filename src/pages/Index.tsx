@@ -1,5 +1,3 @@
-// src/pages/Index.tsx
-
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import ScrollTransitionWrapper from "@/components/ScrollTransitionWrapper";
@@ -10,12 +8,10 @@ import TechnicalSkillsSection from "@/components/TechnicalSkillsSection";
 import Navigation from "@/components/Navigation";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useProjectsIndividual } from "@/hooks/useProjectsIndividual";
-
 const Index = () => {
   const { t } = useLanguage();
   const { data: projects, isLoading, error } = useProjectsIndividual();
   const location = useLocation();
-
   // Função para rolar até uma seção específica
   const scrollToSection = (sectionIndex: number) => {
     // Aguarda renderização usando setTimeout para garantir o DOM das seções
@@ -28,7 +24,6 @@ const Index = () => {
       }
     }, 0);
   };
-
   // Detecta solicitação de scroll via state ao chegar pela navegação
   useEffect(() => {
     if (location.state && typeof location.state.sectionIndex === "number") {
@@ -37,7 +32,6 @@ const Index = () => {
       window.history.replaceState({}, document.title, window.location.pathname);
     }
   }, [location.state]);
-
   // Mapeamento das seções principais do site, mantendo id único e ordem
   const sections = [
     {
@@ -69,7 +63,7 @@ const Index = () => {
     },
     {
       component: (
-        <div key="skills" className="w-full h-full pt-10">
+        <div key="skills" className="w-full h-full">
           <TechnicalSkillsSection />
         </div>
       ),
@@ -84,7 +78,6 @@ const Index = () => {
       bgClass: "bg-[hsl(var(--contact-bg))]"
     }
   ];
-
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-screen bg-background">
@@ -112,5 +105,4 @@ const Index = () => {
     </div>
   );
 };
-
 export default Index;

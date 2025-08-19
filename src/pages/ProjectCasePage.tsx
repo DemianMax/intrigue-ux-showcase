@@ -10,12 +10,15 @@ import { useProjectById } from "@/hooks/useProjectById";
 import FooterSection from "@/components/FooterSection";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 
+
 const ProjectCasePage = () => {
   const { projectId } = useParams<{ projectId: string }>();
   const navigate = useNavigate();
   const { t } = useLanguage();
 
+
   const { data: project, isLoading, isError } = useProjectById(projectId!);
+
 
   // Função para converter texto separado por vírgulas ou quebras de linha em array
   const parseTextToArray = (text: string | null | undefined): string[] => {
@@ -34,6 +37,7 @@ const ProjectCasePage = () => {
       });
   };
 
+
   // Função para converter texto separado por vírgulas em array (legendas)
   const parseLegendsToArray = (text: string | null | undefined): string[] => {
     if (!text) return [];
@@ -43,9 +47,11 @@ const ProjectCasePage = () => {
       .filter((item) => item.length > 0);
   };
 
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
 
   if (isLoading) {
     return (
@@ -69,9 +75,11 @@ const ProjectCasePage = () => {
     );
   }
 
+
   if (isError || !project) {
     return <NotFound />;
   }
+
 
   const processImages = parseTextToArray(project.process_images_text);
   const processLegends = parseLegendsToArray(project.process_legends_text);
@@ -79,23 +87,32 @@ const ProjectCasePage = () => {
   const solutionLegends = parseLegendsToArray(project.solution_images_legends_text);
   const results = parseLegendsToArray(project.results_text);
 
+  // Definindo cor de fundo dinâmica para o Hero (usa cor hexadecimal armazenada)
+  const heroBgColor = project.background_color || "#2563eb"; // fallback azul
+
+
   return (
     <div className="bg-background min-h-screen relative font-inter">
       <Navigation />
 
+
       {/* Hero Section Dinâmica */}
-      <div className="w-screen h-[60vh] bg-blue-600 relative z-0 flex items-center">
+      <div
+        className="w-screen h-[100vh] sm:h-[80vh] lg:h-[60vh] relative z-0 flex items-center sm:pt-20 lg:pt-20"
+        style={{ backgroundColor: heroBgColor }}
+      >
         <div className="container mx-auto px-5 lg:px-32">
           <div className="flex flex-col lg:flex-row items-center gap-8 h-full">
+            
             {/* Conteúdo à esquerda */}
             <div className="w-full lg:w-1/2 text-white">
               {project.hero_title && (
-                <h1 className="text-4xl lg:text-6xl font-playfair font-bold mb-4">
+                <h1 className="text-3xl lg:text-3xl font-playfair font-mediun mb-4">
                   {project.hero_title}
                 </h1>
               )}
               {project.hero_subtitle && (
-                <h2 className="text-xl lg:text-2xl font-inter font-medium mb-6 opacity-90">
+                <h2 className="text-7xl font-inter font-bold  mb-6 opacity-90">
                   {project.hero_subtitle}
                 </h2>
               )}
@@ -105,7 +122,7 @@ const ProjectCasePage = () => {
                 </p>
               )}
             </div>
-            
+
             {/* Imagem à direita */}
             {project.hero_image && (
               <div className="w-full lg:w-1/2">
@@ -121,18 +138,20 @@ const ProjectCasePage = () => {
       </div>
 
 
+
       {/* Conteúdo com padding para navbar fixa e para não sobrepor a imagem topo */}
-      <div className="py-10 px-5 lg:px-32 flex flex-col items-start pt-[calc(24px+5vh)] relative z-10">
+      <div className="py-10 px-5 lg:px-32 flex flex-col items-start pt-[calc(56px+5vh)] lg:pt-[calc(24px+5vh)] relative z-10">
+
 
         {/* Seção resumo do caso de estudo */}
         <div className="max-w-4xl w-full mx-auto mb-16">
           <div className="flex flex-col lg:flex-row items-start gap-8">
             {/* Texto à esquerda */}
             <div className="w-full lg:w-2/3">
-              <h2 className="text-4xl sm:text-5xl font-playfair text-brand-dark dark:text-white font-bold mb-4 text-left">
+              <h2 className="text-2xl sm:text-3xl font-playfair text-brand-dark dark:text-white font-bold mb-4 text-left">
                 {project.title}
               </h2>
-              <div className="text-lg text-brand-accent font-inter font-semibold mb-4 text-left">
+              <div className="text-2xl text-brand-accent font-inter font-semibold mb-4 text-left">
                 {project.role}
               </div>
               <div className="text-xl text-brand-dark/70 dark:text-gray-300 font-inter mb-6 text-left">
@@ -142,24 +161,24 @@ const ProjectCasePage = () => {
                 {project.problem}
               </div>
             </div>
-            
+
             {/* Tabela de detalhes à direita */}
-            <div className="w-full lg:w-1/3">
+            <div className="w-full lg:w-1/3 ">
               <Table className="mb-6">
                 <TableBody>
                   {project.project_type && (
-                    <TableRow>
+                    <TableRow className="border-b border-gray-300">
                       <TableCell className="flex items-center gap-3 py-3">
                         <Briefcase className="h-5 w-5 text-brand-accent" />
                         <span className="text-brand-dark dark:text-white font-inter">Projeto</span>
                       </TableCell>
-                      <TableCell className="text-brand-dark/70 dark:text-gray-300 font-inter">
+                      <TableCell className="text-brand-dark/70 dark:text-gray-100 font-inter">
                         {project.project_type}
                       </TableCell>
                     </TableRow>
                   )}
                   {project.tools_used && (
-                    <TableRow>
+                    <TableRow className="border-b border-gray-300">
                       <TableCell className="flex items-center gap-3 py-3">
                         <Wrench className="h-5 w-5 text-brand-accent" />
                         <span className="text-brand-dark dark:text-white font-inter">Ferramenta</span>
@@ -170,7 +189,7 @@ const ProjectCasePage = () => {
                     </TableRow>
                   )}
                   {project.project_period && (
-                    <TableRow>
+                    <TableRow className="border-b border-gray-300">
                       <TableCell className="flex items-center gap-3 py-3">
                         <Calendar className="h-5 w-5 text-brand-accent" />
                         <span className="text-brand-dark dark:text-white font-inter">Período</span>
@@ -194,6 +213,7 @@ const ProjectCasePage = () => {
                 </TableBody>
               </Table>
 
+
               {/* Hashtags */}
               {project.hashtags_text && (
                 <div className="flex flex-wrap gap-2">
@@ -211,6 +231,7 @@ const ProjectCasePage = () => {
           </div>
         </div>
 
+
         {/* Seção O Desafio */}
         {project.challenge && (
           <div className="max-w-4xl w-full mx-auto mb-16">
@@ -224,7 +245,7 @@ const ProjectCasePage = () => {
                   {project.challenge}
                 </p>
               </div>
-              
+
               {/* Carrossel de imagens à direita */}
               {project.challenge_images && (
                 <div className="w-full lg:w-1/3">
@@ -253,6 +274,7 @@ const ProjectCasePage = () => {
             </div>
           </div>
         )}
+
 
         {/* Seção Processo - Grid de imagens */}
         {(project.process_images_data
@@ -313,6 +335,7 @@ const ProjectCasePage = () => {
           </div>
         )}
 
+
         {/* Seção Prototyping & Interaction */}
         {(project.prototyping_title || project.prototyping_text || project.prototyping_images) && (
           <div className="max-w-4xl w-full mx-auto mb-16">
@@ -346,6 +369,7 @@ const ProjectCasePage = () => {
           </div>
         )}
 
+
         {/* Seção Solução Final */}
         {(project.final_solution_title || project.final_solution_text || project.final_solution_video || project.final_solution_images) && (
           <div className="max-w-4xl w-full mx-auto mb-16">
@@ -357,7 +381,7 @@ const ProjectCasePage = () => {
                 {project.final_solution_text}
               </p>
             )}
-            
+
             {/* Vídeo da solução final */}
             {project.final_solution_video && (
               <div className="mb-8 rounded-xl overflow-hidden shadow-lg">
@@ -371,6 +395,7 @@ const ProjectCasePage = () => {
                 </video>
               </div>
             )}
+
 
             {/* Imagens da solução final */}
             {project.final_solution_images && (
@@ -392,6 +417,7 @@ const ProjectCasePage = () => {
           </div>
         )}
 
+
         {/* Grid adicional de imagens */}
         {project.additional_images_grid && (
           <div className="max-w-4xl w-full mx-auto mb-16">
@@ -411,6 +437,7 @@ const ProjectCasePage = () => {
             </div>
           </div>
         )}
+
 
         {/* Seção Solução (legacy) */}
         {solutionImages.length > 0 && (
@@ -448,6 +475,7 @@ const ProjectCasePage = () => {
           </div>
         )}
 
+
         {/* Seção Aprendizado e Conclusão */}
         {(project.learning_conclusion_title || project.learning_conclusion_text) && (
           <div className="max-w-4xl w-full mx-auto mb-16">
@@ -461,6 +489,7 @@ const ProjectCasePage = () => {
             )}
           </div>
         )}
+
 
         {/* Seção Resultados e Próximos Passos */}
         {(results.length > 0 || project.next_steps) && (
@@ -485,6 +514,7 @@ const ProjectCasePage = () => {
           </div>
         )}
 
+
         {/* Seção Veja outros projetos (placeholder) */}
         <div className="max-w-4xl w-full mx-auto">
           <h3 className="text-3xl font-playfair text-brand-dark dark:text-white mb-8 text-center">
@@ -508,5 +538,6 @@ const ProjectCasePage = () => {
     </div>
   );
 };
+
 
 export default ProjectCasePage;

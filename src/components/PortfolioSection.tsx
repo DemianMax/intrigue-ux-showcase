@@ -39,13 +39,17 @@ const PortfolioSection = () => {
   const previewItems = portfolioItems ? portfolioItems.slice(0, 6) : [];
 
   return (
-  <section
-  id="portfolio"
-  className="w-full flex flex-col items-center bg-white dark:bg-gray-900 py-20 px-6"
->
+    
+  <section id="portfolio" className="w-full flex flex-col items-center bg-white dark:bg-gray-800 py-20 px-6">
+    
+         {/* Linha divisoria */}
+      <div className="w-full max-w-7xl border-b border-black dark:border-gray-700 mx-auto mb-20" />
+
+
   <div className="max-w-7xl mx-auto w-full flex flex-col">
 
     {/* Título da seção */}
+
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -53,12 +57,34 @@ const PortfolioSection = () => {
       transition={{ duration: 0.6 }}
       className="flex flex-col md:flex-row items-start md:items-center justify-start gap-4 mb-16"
     >
+      
       <h2 className="text-5xl font-bold font-playfair text-brand-dark dark:text-white whitespace-nowrap">
         {t('portfolioTitle')}
       </h2>
+      
       <p className="text-lg text-brand-dark/70 dark:text-gray-300 leading-relaxed whitespace-normal">
-        {t('portfolioSubtitle')}:
+        {t('portfolioSubtitle')}
       </p>
+
+        {/* Botão */}
+   <motion.div
+  initial={{ opacity: 0, y: 20 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.6, delay: 0.4 }}
+  className="text-center mt-4 md:mt-0"
+>
+  <Button
+    asChild
+    className="flex-2 inline-flex items-center justify-end gap-3 px-6 py-3 bg-gradient-to-r from-orange-600 to-orange-700 text-white font-semibold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+  >
+    <a href={behanceLink} target="_blank" rel="noopener noreferrer">
+      {t('CompletePortfolioText')}
+    </a>
+  </Button>
+</motion.div>
+
+
     </motion.div>
 
     {/* Grade de itens */}
@@ -109,23 +135,7 @@ const PortfolioSection = () => {
       </motion.div>
     )}
 
-    {/* Botão */}
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: 0.4 }}
-      className="text-center"
-    >
-      <Button
-        asChild
-        className="px-8 py-4 rounded-full text-lg font-semibold bg-brand-accent text-white hover:bg-orange-600 transition-all shadow-lg hover:shadow-xl transform hover:scale-105 hover:-translate-y-1"
-      >
-        <a href={behanceLink} target="_blank" rel="noopener noreferrer">
-          {t('CompletePortfolioText')}:
-        </a>
-      </Button>
-    </motion.div>
+  
 
   </div>
 </section>

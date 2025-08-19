@@ -29,6 +29,7 @@ export default function TechnicalSkillsSection() {
     const label = t(`skills.${normalizedKey}`) || habilidade.nome;
 
     return (
+      
       <motion.div
         key={habilidade.id}
         className="flex flex-col items-center mb-4"
@@ -37,6 +38,7 @@ export default function TechnicalSkillsSection() {
         viewport={{ once: true }}
         transition={{ duration: 0.4 }}
       >
+        
         <div className="w-10 h-10 mb-2 flex items-center justify-center ">
           <img
             src={getIconUrl(habilidade.icone)}
@@ -68,11 +70,16 @@ export default function TechnicalSkillsSection() {
   }
 
   return (
-<section className="w-full bg-gray-150 dark:bg-gray-800 py-40 px-6 pt-20">
+<section className="w-full bg-white dark:bg-gray-800 py-40 px-6 pt-20">
+  
   {/* Container alinhado com o menu */}
   <div className="max-w-7xl mx-auto flex flex-col">
 
     {/* Bloco do título e subtítulo alinhados à esquerda */}
+
+     {/* Linha divisoria */}
+     <div className="w-full max-w-7xl border-b border-black dark:border-gray-700 mx-auto mb-20" />
+
     <motion.div
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}

@@ -10,14 +10,15 @@ export const translations = {
     navResume: 'Currículo',
     navCurriculum: 'Currículo',
     openMenu: 'Abrir menu',
+    btVejaMais: 'Veja mais',
 
-    aboutGreeting: 'Designer de interação antes mesmo do “UX” virar assunto pelas bandas de cá.',
+    aboutGreeting: 'Designer de interação antes do “UX” virar assunto pelas bandas de cá.',
     aboutParagraph1: 'Quando comecei, nem todo mundo usava a sigla, mas a busca por melhorar experiências já movia meu trabalho.',
     aboutParagraph1Highlight: '“Projetar o invisível” virou minha marca: ',
     aboutParagraph1Cont: 'lá no começo, a brincadeira entre os colegas era que eu encontrava soluções onde ninguém via nem problema.  ',
     aboutParagraph2: 'Minhas habilidades em ',
     aboutParagraph2Highlight: 'ilustração/infografia tornam o complexo visivelmente simples, ',
-    aboutParagraph2Cont: 'aprimorando meus projetos de UX.',
+    aboutParagraph2Cont: 'aprimorando meus projetos de UX. Morei por 2 anos na estrada de forma nomade e você pode me conhecer melhor no meu Playgroud',
 
     aboutButton: 'Veja meu currículo',
     aboutBtnPlayground: 'Veja meu Playground',
@@ -101,6 +102,7 @@ export const translations = {
     navCurriculum: 'Curriculum',
 
     openMenu: 'Open menu',
+    btVejaMais: 'See more',
 
     aboutGreeting: "Designer of interaction even before 'UX' became a topic around here.",
     aboutParagraph1: 'when I started, not everyone used the acronym, but the search for improving experiences already drove my work.',

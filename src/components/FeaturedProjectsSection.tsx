@@ -15,7 +15,7 @@ const FeaturedProjectsSection: React.FC<FeaturedProjectsSectionProps> = ({ proje
   const containerRef = useRef<HTMLDivElement>(null);
   const breakpoint = useBreakpoint();
 
-  // Define os três principais breakpoints
+  // Breakpoints
   const isMobile = breakpoint === "xs" || breakpoint === "sm";
   const isTablet = breakpoint === "md";
   const isDesktop = breakpoint === "lg" || breakpoint === "xl" || breakpoint === "2xl";
@@ -48,10 +48,32 @@ const FeaturedProjectsSection: React.FC<FeaturedProjectsSectionProps> = ({ proje
       .filter((item) => item.length > 0);
   };
 
+  // --- Custom hook para controlar o mouse sobre todos os cards ---
+  const [hover, setHover] = useState(false);
+  const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
+  // Para perfomance não criar N listeners, mova o mouse handler para cá
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setCursorPos({ x: e.clientX, y: e.clientY });
+    };
+    if (hover) {
+      window.addEventListener("mousemove", handleMouseMove);
+    } else {
+      setCursorPos({ x: 0, y: 0 });
+    }
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, [hover]);
+
   return (
-    <div ref={containerRef} className="relative w-full min-h-[300vh] bg-custom-featured">
-      {/* Cabeçalho com título, subtítulo e bolinhas */}
-      <div className="sticky top-3 z-3 bg-custom-featured py-12 px-6 pt-24">
+    <div ref={containerRef} className="relative w-full min-h-[300vh] bg-white dark:bg-gray-800">
+
+      {/* Linha divisoria */}
+      <div className="w-full max-w-7xl border-b border-black dark:border-gray-700 mx-auto" />
+
+      {/* Cabeçalho */}
+      <div className="sticky top-3 z-3 bg-white dark:bg-gray-800 py-12 px-6 pt-24">
         <motion.div
           initial={{ opacity: 0, y: 0 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -66,11 +88,9 @@ const FeaturedProjectsSection: React.FC<FeaturedProjectsSectionProps> = ({ proje
             mx-auto
             text-center
             px-6
-            
             md:items-center
             md:justify-center
             md:gap-8
-            
             xl:flex-row
             xl:items-center
             xl:justify-start
@@ -83,56 +103,41 @@ const FeaturedProjectsSection: React.FC<FeaturedProjectsSectionProps> = ({ proje
           <p className="text-md md:text-lg text-brand-dark/70 dark:text-gray-300 leading-relaxed text-center lg:text-left">
             {t("projectsSubTitle")}
           </p>
-          <div
-            className="
-              flex flex-row
-              gap-2
-              mt-2
-              lg:flex-col
-              lg:space-x-0
-              lg:space-y-0
-              lg:mt-0
-              lg:ml-6
-            "
-          >
-            {projects.slice(0, 3).map((_, idx) => (
-              <div
-                key={idx}
-                className={`w-3 h-3 rounded-full transition-colors cursor-pointer ${
-                  idx === activeProject ? "bg-brand-accent" : "bg-gray-100 dark:bg-gray-600"
-                }`}
-                aria-label={`Projeto ${idx + 1}`}
-                role="button"
-                tabIndex={0}
-                onClick={() => {
-                  if (containerRef.current) {
-                    containerRef.current.scrollIntoView({ behavior: "smooth" });
-                  }
-                }}
-              />
-            ))}
-          </div>
         </motion.div>
       </div>
+
+      {/* btVejamais Tooltip texto no cursor (desktop apenas) */}
+      {hover && isDesktop && (
+        <div
+          style={{
+            position: "fixed",
+            left: cursorPos.x + 16,
+            top: cursorPos.y + 16,
+            pointerEvents: "none",
+            zIndex: 9999,
+            transition: "left 0.02s, top 0.02s",
+          }}
+          className="px-4 py-2 rounded-xl bg-black-300 text-white font-semibold shadow-lg select-none text-base"
+        >
+          {t("btVejaMais")}
+        </div>
+      )}
 
       {/* Container dos cards com efeito parallax */}
       <div className="sticky top-0 h-screen overflow-hidden">
         {projects.slice(0, 3).map((project, index) => {
-          const [hover, setHover] = useState(false);
-
+          // Parallax etc.
           const start = index / 3;
           const total = 4;
           const end = (index + 1) / total;
 
-          // Ajustes de altura para parallax por breakpoint
           const yInitial = isMobile ? "120vh" : isTablet ? "100vh" : "100vh";
-          const yFinal = isMobile ? "15vh" : isTablet ? "12vh" : "9vh";
+          const yFinal = isMobile ? "10vh" : isTablet ? "7vh" : "7vh";
 
           const y = useTransform(scrollYProgress, [start, end], [yInitial, yFinal]);
           const scale = useTransform(scrollYProgress, [start, end], [1, 1]);
           const opacity = useTransform(scrollYProgress, [start, end], [1, 1]);
 
-          // Cores de fundo alternadas para cada projeto
           const getBackgroundColor = (projectIndex: number) => {
             const colors = ["#3B82F6", "#10B981", "#F59E0B", "#EF4444", "#8B5CF6"];
             return project.background_color || colors[projectIndex % colors.length];
@@ -158,18 +163,10 @@ const FeaturedProjectsSection: React.FC<FeaturedProjectsSectionProps> = ({ proje
                   }
                 }}
               >
-                {hover && (
-                  <div
-                    className="absolute top-10 right-10 z-20 bg-white/20 backdrop-blur-sm
-                      text-white text-3xl font-semibold rounded-full w-12 h-12 flex items-center justify-center 
-                      select-none pointer-events-none user-select-none"
-                  >
-                    +
-                  </div>
-                )}
+                {/* REMOVIDO O CIRCULO COM O + */}
 
-                <div className="flex flex-col xl:flex-row h-full">
-                  {/* Conteúdo esquerda com box para o texto */}
+                <div className="flex flex-col xl:flex-row h-full max-w-7xl mx-auto">
+                  {/* Conteúdo texto */}
                   <div className="w-full xl:w-1/2 p-6 md:p-8 lg:p-12 flex flex-col justify-center space-y-6">
                     <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 md:p-8 lg:p-10 space-y-6">
                       <div className="space-y-3">
@@ -202,16 +199,27 @@ const FeaturedProjectsSection: React.FC<FeaturedProjectsSectionProps> = ({ proje
                       </div>
                     </div>
                   </div>
-
                   {/* Imagem direita */}
                   <div className="w-full xl:w-1/2 relative overflow-hidden flex items-center justify-center p-6 md:p-8 lg:p-12">
-                    <div className="relative w-full h-full max-h-[400px] xl:max-h-none">
+                    <div className="relative w-full rounded-lg overflow-hidden ">
                       <img
                         src={project.image}
                         alt={`Projeto ${project.title}`}
                         className="w-full h-full object-contain rounded-lg"
+                        style={{ maxHeight: "100%" }}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-l from-transparent to-black/10 rounded-lg"></div>
+                      <div className="absolute inset-0 rounded-lg"></div>
+
+                      {/* Botão visível só em mobile e tablet */}
+                      {(isMobile || isTablet) && (
+                        <button
+                          type="button"
+                          className="absolute top-4 right-4 bg-orange-900 text-white px-3 py-1 rounded-3xl font-semibold shadow-md hover:bg-orange-700 transition duration-300 md:block lg:hidden xl:hidden "
+                          onClick={() => navigate(`/projeto/${project.id}`)}
+                        >
+                          {t("btVejaMais")}
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>
