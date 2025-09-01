@@ -1,5 +1,10 @@
 
 export interface Project {
+
+  titleHOME: string;
+  roleHOME: string;
+  imageHOME: string;
+
   id: string;
   title: string;
   role: string;
@@ -18,6 +23,7 @@ export interface Project {
   next_steps?: string;
   image?: string;
   created_at?: string;
+
   // Novos campos baseados no wireframe
   topPageimg?: string;
   process_images_data?: any; // Json type from Supabase
