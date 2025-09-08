@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 interface InstagramPost {
   id: string;
@@ -14,6 +16,7 @@ const InstagramFeed = () => {
   const [posts, setPosts] = useState<InstagramPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [hoveredPost, setHoveredPost] = useState<string | null>(null);
+  const { toast } = useToast();
 
   // Placeholder posts para demonstração
   const placeholderPosts: InstagramPost[] = [
@@ -75,14 +78,47 @@ const InstagramFeed = () => {
     }
   ];
 
-  useEffect(() => {
-    // Simula carregamento da API do Instagram
-    const timer = setTimeout(() => {
-      setPosts(placeholderPosts);
-      setLoading(false);
-    }, 1000);
+  // Fetch real Instagram posts
+  const fetchInstagramPosts = async () => {
+    try {
+      setLoading(true);
+      console.log('Calling Instagram feed function...');
+      
+      const { data, error } = await supabase.functions.invoke('instagram-feed');
+      
+      if (error) {
+        console.error('Supabase function error:', error);
+        throw error;
+      }
 
-    return () => clearTimeout(timer);
+      console.log('Instagram feed response:', data);
+
+      if (data?.success && data?.posts) {
+        setPosts(data.posts);
+      } else {
+        console.warn('No posts received from Instagram API, using placeholders');
+        setPosts(placeholderPosts);
+        toast({
+          title: "Instagram Feed",
+          description: "Usando posts de demonstração. Configure o token do Instagram para posts reais.",
+          variant: "default",
+        });
+      }
+    } catch (error) {
+      console.error('Error fetching Instagram posts:', error);
+      setPosts(placeholderPosts);
+      toast({
+        title: "Erro no Instagram Feed",
+        description: "Não foi possível carregar posts do Instagram. Mostrando posts de demonstração.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchInstagramPosts();
   }, []);
 
   if (loading) {
