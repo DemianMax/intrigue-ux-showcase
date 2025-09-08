@@ -83,7 +83,7 @@ const FeaturedProjectsSection: React.FC<FeaturedProjectsSectionProps> = ({ proje
     const interval = setInterval(() => {
       setCurrentImageIndexes((prevIndexes) =>
         prevIndexes.map((index, i) => {
-          const projectImages = parseImagesString(projects[i]?.imageHOME || null);
+          const projectImages = parseImagesString(projects[i]?.topPageimg || projects[i]?.image || null);
           const totalImages = projectImages.length || 1;
           return (index + 1) % totalImages;
         })
@@ -185,10 +185,10 @@ const FeaturedProjectsSection: React.FC<FeaturedProjectsSectionProps> = ({ proje
           };
 
           // Pegando imagens do projeto como array
-          const projectImages = parseImagesString(project.imageHOME || null);
+          const projectImages = parseImagesString(project.topPageimg || project.image || null);
           const currentImageIndex = currentImageIndexes[index] || 0;
           const currentImageSrc =
-            projectImages.length > 0 ? projectImages[currentImageIndex] : project.imageHOME;
+            projectImages.length > 0 ? projectImages[currentImageIndex] : (project.topPageimg || project.image);
 
           /*----------------------------
           ─── Renderização do card individual com animações ───────────────
@@ -221,10 +221,10 @@ const FeaturedProjectsSection: React.FC<FeaturedProjectsSectionProps> = ({ proje
                     <div className="bg-white dark:bg-black backdrop-blur-sm rounded-2xl p-6 md:p-8 lg:p-10 space-y-6">
                       <div className="space-y-3">
                         <h4 className="text-xl md:text-3xl lg:text-3xl xl:text-2xl font-playfair font-medium text-blue-900 dark:text-white">
-                          {project.titleHOME}
+                          {project.title}
                         </h4>
                         <div className="text-cyan/90 text-3xl md:text-2xlg lg:text-4xl xl:text-3xl font-bold tracking-wide">
-                          {project.roleHOME}
+                          {project.role}
                         </div>
                       </div>
 
@@ -254,7 +254,7 @@ const FeaturedProjectsSection: React.FC<FeaturedProjectsSectionProps> = ({ proje
                         <motion.img
                           key={currentImageIndex} // Importante para disparar a animação ao trocar imagem
                           src={currentImageSrc}
-                          alt={`Projeto ${project.titleHOME} imagem ${currentImageIndex + 1}`}
+                          alt={`Projeto ${project.title} imagem ${currentImageIndex + 1}`}
                           className="absolute inset-0 w-full h-full object-cover rounded-3xl"
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}

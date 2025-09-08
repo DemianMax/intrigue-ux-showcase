@@ -128,7 +128,7 @@ const ProjectCasePage = () => {
               <div className="w-full lg:w-1/2">
                 <img
                   src={project.hero_image}
-                  alt={project.hero_title || `Hero image for ${project.titleHOME}`}
+                  alt={project.hero_title || `Hero image for ${project.title}`}
                   className="w-full h-auto max-h-[50vh] object-cover rounded-lg shadow-lg"
                 />
               </div>

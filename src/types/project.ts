@@ -1,10 +1,6 @@
 
 export interface Project {
 
-  titleHOME: string;
-  roleHOME: string;
-  imageHOME: string;
-
   id: string;
   title: string;
   role: string;
